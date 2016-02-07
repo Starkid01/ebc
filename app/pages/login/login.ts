@@ -18,6 +18,7 @@ export class LoginPage {
   }
 
   loggedIn(){
-    this.nav.setRoot(SideMenu);
+    let nav = this.nav;
+    nav.setPages([{page: SideMenu}], {animate: true});
   }
 }
