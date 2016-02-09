@@ -8,6 +8,7 @@ import {Type} from 'angular2/core';
   template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
+
 export class MyApp {
   rootPage: Type = LoginPage;
 
