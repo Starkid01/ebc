@@ -11,13 +11,19 @@ import {DropMenu, MenuItem} from '../../parts/dropmenu/dropmenu';
 
 export class LoginPage {
   signUp: Type = CreatePage;
+  show: boolean;
 
   constructor(private nav: NavController) {
     this.nav = nav;
+    this.show = true;
   }
 
   openPage(page){
     this.nav.push(page);
+  }
+
+  menu(){
+    this.show = !this.show;
   }
 
   loggedIn(){

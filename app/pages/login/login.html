@@ -30,7 +30,8 @@
       </form>
     </ion-card-content>
   </ion-card>
-  <drop-menu title="Something">
+  <button (click)="menu()">Show</button>
+  <drop-menu [hidden]="show" title="Bob">
     <menu-item>One</menu-item>
     <menu-item>Two</menu-item>
   </drop-menu>
