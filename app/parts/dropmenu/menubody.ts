@@ -5,7 +5,7 @@ import {Component, Input, Attribute} from 'angular2/core';
   template: `
     <div class="menu enter">
       <div [hidden]="header" class="menu-title">{{title}}</div>
-      <div (click)="post()" class="menu-item">
+      <div class="menu-item">
         <ng-content></ng-content>
       </div>
     </div>`,
@@ -42,7 +42,7 @@ import {Component, Input, Attribute} from 'angular2/core';
     }
     .enter {
       animation-name: grow;
-      animation-duration: 1s;
+      animation-duration: .5s;
     }
   `]
 })
@@ -51,11 +51,9 @@ export class DropMenu {
   @Input() title: string;
   header: boolean;
 
-constructor(@Attribute('title') private menuTitle:string) {
-    this.menuTitle = menuTitle;
-  }
-
-  post(event){
-    console.log('here');
+  ngOnInit(){
+    if(this.title == null){
+      this.header = true;
+    }
   }
 }
