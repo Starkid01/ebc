@@ -31,8 +31,7 @@
     </ion-card-content>
   </ion-card>
   <button (click)="menu()">Show</button>
-  <drop-menu [hidden]="show" title="Menu">
-    <menu-item>One</menu-item>
-    <menu-item>Two</menu-item>
-  </drop-menu>
+  <drop-menu [hidden]="show" (toggle)=hide($event) [settings]="drop">
+    <menu-item *ngFor="#i of moreMenu">{{i.name}}</menu-item>
+    </drop-menu>
 </ion-content>

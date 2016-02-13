@@ -1,10 +1,14 @@
-import {Component, Input, Attribute} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 
 @Component({
   selector: 'drop-menu',
-  template: `
-    <div class="menu enter">
-      <div [hidden]="header" class="menu-title">{{title}}</div>
+  host: {
+    '(mouseleave)': 'exit()',
+    '(click)': 'exit()'
+  },
+  template:
+  `<div class="menu enter" [style.transform-origin]="settings.origin">
+      <div [hidden]="header" class="menu-title">{{settings.title}}</div>
       <div class="menu-item">
         <ng-content></ng-content>
       </div>
@@ -12,9 +16,8 @@ import {Component, Input, Attribute} from 'angular2/core';
   styles: [`
     .menu {
       display: flex;
-      flex-direction: column;
       position: absolute;
-      left: 4rem;
+      flex-direction: column;
       background: #fff;
       min-height: 13rem;
       min-width: 17rem;
@@ -22,9 +25,9 @@ import {Component, Input, Attribute} from 'angular2/core';
       max-width: max-content;
       box-shadow: 0px 1px 5px rgba(11, 11, 11, .3);
       border-radius: .2em;
-      transform-origin: top right;
       transition: all .2s ease-in-out;
     }
+    _:-ms-lang(x), .menu { max-width: 15em; }
     .menu-title {
       font-weight: 600;
       text-align: center;
@@ -42,18 +45,32 @@ import {Component, Input, Attribute} from 'angular2/core';
     }
     .enter {
       animation-name: grow;
-      animation-duration: .5s;
+      animation-duration: .6s;
     }
   `]
 })
 
 export class DropMenu {
-  @Input() title: string;
+  @Input() settings: Object;
+  @Output() toggle: EventEmitter<boolean> = new EventEmitter();
   header: boolean;
+  leave: boolean;
 
   ngOnInit(){
-    if(this.title == null){
+    this.settings = {};
+
+    console.log();
+
+    if(!this.settings.hasOwnProperty('title')){
       this.header = true;
     }
+
+    if(!this.settings.hasOwnProperty('origin')){
+      Object.defineProperty(this.settings, 'origin', { value: 'top right' });
+    }
+  }
+
+  exit(){
+    this.toggle.next(true);
   }
 }

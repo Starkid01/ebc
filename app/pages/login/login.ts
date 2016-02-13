@@ -12,10 +12,19 @@ import {DropMenu, MenuItem} from '../../parts/dropmenu/dropmenu';
 export class LoginPage {
   signUp: Type = CreatePage;
   show: boolean;
+  moreMenu: Array<any>;
+  drop: Object;
 
   constructor(private nav: NavController) {
     this.nav = nav;
     this.show = true;
+    this.drop = {
+
+    };
+    this.moreMenu = [
+      {name: 'One'},
+      {name: 'Two'}
+    ]
   }
 
   openPage(page){
@@ -24,6 +33,10 @@ export class LoginPage {
 
   menu(){
     this.show = !this.show;
+  }
+
+  hide(g){
+    this.show = g;
   }
 
   loggedIn(){
