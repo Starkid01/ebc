@@ -17,6 +17,8 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
     .menu {
       display: flex;
       position: absolute;
+      top: 1rem;
+      right: 1rem;
       flex-direction: column;
       background: #fff;
       min-height: 13rem;
@@ -26,6 +28,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
       box-shadow: 0px 1px 5px rgba(11, 11, 11, .3);
       border-radius: .2em;
       transition: all .2s ease-in-out;
+      z-index: 9999;
     }
     _:-ms-lang(x), .menu { max-width: 15em; }
     .menu-title {
