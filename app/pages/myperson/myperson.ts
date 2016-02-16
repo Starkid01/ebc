@@ -5,7 +5,9 @@ import {Page} from 'ionic-framework/ionic';
 })
 
 export class PersonPage {
-  constructor() {
+  page: string;
 
+  constructor() {
+    this.page = 'My Profile';
   }
 }

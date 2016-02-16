@@ -1,4 +1,21 @@
+<ion-navbar primary *navbar>
+  <ion-buttons left>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>
+    {{title}}
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="More()" class="more">
+      <ion-icon name="md-more"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+<more-menu [visible]="hide" (more)="HideMore()"></more-menu>
+
 <ion-tabs tabbarPlacement="bottom" primary>
-  <ion-tab [root]="cardTab" tabTitle="My Profile" tabIcon="person"></ion-tab>
-  <ion-tab [root]="flyerTab" tabTitle="Edit Profile" tabIcon="options"></ion-tab>
+  <ion-tab (select)="GetTitle(personTab)"  [root]="personTab" tabTitle="My Profile" tabIcon="person"></ion-tab>
+  <ion-tab (select)="GetTitle(editTab)"  [root]="editTab" tabTitle="Edit Profile" tabIcon="options"></ion-tab>
 </ion-tabs>

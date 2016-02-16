@@ -5,12 +5,12 @@ import {Samples} from '../samples/samples';
 import {Profile} from '../profile/profile';
 
 @Page({
-  templateUrl: 'build/pages/sidemenu/sidemenu.html',
+  templateUrl: 'build/pages/sidemenu/sidemenu.html'
 })
 
 export class SideMenu {
   homePage: Type = MyStuff;
-  pages: Array<{title: string, component: Type}>
+  pages: Array<{title: string, component: Type}>;
 
   constructor(private app: IonicApp) {
     this.pages = [

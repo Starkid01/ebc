@@ -18,7 +18,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
       display: flex;
       position: absolute;
       top: 1rem;
-      right: 1rem;
+      right: 2rem;
       flex-direction: column;
       background: #fff;
       min-height: 13rem;
@@ -64,7 +64,7 @@ export class DropMenu {
 
     console.log();
 
-    if(!this.settings.hasOwnProperty('title')){
+    if(!this.settings.hasOwnProperty('visible')){
       this.header = true;
     }
 

@@ -10,7 +10,7 @@ import {SideMenu} from '../sidemenu/sidemenu';
 export class LoginPage {
   signUp: Type = CreatePage;
 
-  constructor(private nav: NavController) {
+constructor(private nav: NavController) {
     this.nav = nav;
   }
 
