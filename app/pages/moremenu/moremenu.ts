@@ -1,5 +1,5 @@
 import {Component, Input, SimpleChange, Output, EventEmitter} from 'angular2/core';
-import {DropMenu, MenuItem} from '../../parts/dropmenu/dropmenu';
+import {DropMenu, MenuItem} from '../../components/dropmenu/dropmenu';
 
 @Component({
   selector: 'more-menu',
