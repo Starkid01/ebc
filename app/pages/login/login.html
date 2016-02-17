@@ -10,19 +10,19 @@
       <h2 favorite>Login</h2>
     </ion-card-header>
     <ion-card-content>
-      <form>
+      <form [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
           <ion-item>
             <ion-label mygray for="username">Username</ion-label>
-            <ion-input id="username" type="text"></ion-input>
+            <ion-input ngControl="username" id="username" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label mygray for="username">Password</ion-label>
-            <ion-input id="password" type="password"></ion-input>
+            <ion-input ngControl="password" id="password" type="password"></ion-input>
           </ion-item>
         </ion-list>
         <div>
-          <button block (click)="loggedIn()">Sign In</button>
+          <button block [disabled]="!loginForm.valid" type="submit">Sign In</button>
         </div>
         <div>
           <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
