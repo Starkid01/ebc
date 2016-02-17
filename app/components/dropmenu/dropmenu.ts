@@ -1,2 +1,2 @@
-export * from '../../parts/dropmenu/menubody';
-export * from '../../parts/dropmenu/menuitem';
+export * from './menubody';
+export * from './menuitem';
