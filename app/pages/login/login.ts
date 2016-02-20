@@ -1,7 +1,7 @@
 import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
-import {Http, Headers} from 'angular2/http';
-import {Page, NavController} from 'ionic-framework/ionic';
 import {Type} from 'angular2/core';
+import {Page, NavController} from 'ionic-framework/ionic';
+import {Backand} from '../../components/backand/backand';
 import {CreatePage} from '../create/create';
 import {SideMenu} from '../sidemenu/sidemenu';
 
@@ -24,7 +24,7 @@ export class LoginPage {
 
   openPage(page){
     this.nav.push(page);
-  }
+  }ioni
 
   loggedIn(){
     let nav = this.nav;
@@ -32,6 +32,10 @@ export class LoginPage {
   }
 
   signIn(login){
+    let auth = login.value;
 
+    for(let i in auth){
+      console.log(Backand.prototype);
+    }
   }
 }
