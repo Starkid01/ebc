@@ -7,14 +7,17 @@ import {SideMenu} from '../sidemenu/sidemenu';
 
 @Page({
   templateUrl: 'build/pages/login/login.html',
-  directives: [FORM_DIRECTIVES]
+  directives: [FORM_DIRECTIVES],
+  providers: [Backand]
 })
 
 export class LoginPage {
   signUp: Type = CreatePage;
   loginForm: ControlGroup;
+  signed: boolean;
+  
 
-  constructor(private nav: NavController) {
+  constructor(private nav: NavController, public backand: Backand) {
     this.nav = nav;
     this.loginForm = new ControlGroup({
       username: new Control('', Validators.required),
@@ -24,18 +27,16 @@ export class LoginPage {
 
   openPage(page){
     this.nav.push(page);
-  }ioni
+  }
 
   loggedIn(){
     let nav = this.nav;
     nav.setPages([{page: SideMenu}], {animate: true});
   }
-
+  
   signIn(login){
     let auth = login.value;
-
-    for(let i in auth){
-      console.log(Backand.prototype);
-    }
+    
+    this.backand.signIn(auth.username, auth.password);
   }
 }
