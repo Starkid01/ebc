@@ -37,6 +37,22 @@ export class LoginPage {
   signIn(login){
     let auth = login.value;
     
-    this.backand.signIn(auth.username, auth.password);
+    this.backand.signIn(auth.username, auth.password).subscribe(
+      data => {
+        this.backand.auth_status = 'OK';
+        this.backand.is_auth_error = false;
+        this.backand.setTokenHeader(data);
+      },
+      err => {
+        var errorMessage = this.backand.extractErrorMessage(err);
+
+        this.backand.auth_status = `Error: ${errorMessage}`;
+        this.backand.is_auth_error = true;
+        this.backand.logError(err);
+      },
+      () => {
+        console.log('Finish Auth');
+        this.loggedIn();
+      });
   }
 }
