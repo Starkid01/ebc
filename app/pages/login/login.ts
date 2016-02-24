@@ -2,12 +2,13 @@ import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'a
 import {Type} from 'angular2/core';
 import {Page, NavController} from 'ionic-framework/ionic';
 import {Backand} from '../../components/backand/backand';
+import {ClearField} from '../../components/clearfield/clearfield';
 import {CreatePage} from '../create/create';
 import {SideMenu} from '../sidemenu/sidemenu';
 
 @Page({
   templateUrl: 'build/pages/login/login.html',
-  directives: [FORM_DIRECTIVES],
+  directives: [FORM_DIRECTIVES, ClearField],
   providers: [Backand]
 })
 
