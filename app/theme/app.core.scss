@@ -17,15 +17,15 @@ ion-title {
 }
 
 .more {
-   padding-right: 1em;
+  padding-right: 1em;
 }
 
 @mixin page-body {
-  background-color:  rgba(250, 250, 250, 1);
+  background-color: rgba(250, 250, 250, 1);
 }
 
 @mixin heading {
-   h2 {
+  h2 {
     font-weight: 600;
     font-size: 2rem;
   }
@@ -36,10 +36,18 @@ ion-title {
     background: $light-gray;
     padding: .5em;
     z-index: 0;
-
     &:focus {
       border-bottom: map-get($colors, primary) 1px solid;
     }
+  }
+}
+
+@mixin clearBtn {
+  .clearBtn {
+    position: absolute;
+    padding-top: .45em;
+    right: 2.5em;
+    z-index: 999;
   }
 }
 

@@ -2,14 +2,14 @@ import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'a
 import {Type} from 'angular2/core';
 import {Page, NavController} from 'ionic-framework/ionic';
 import {Backand} from '../../components/backand/backand';
-import {ClearField} from '../../components/clearfield/clearfield';
+import {Services} from '../../components/services/services';
 import {CreatePage} from '../create/create';
 import {SideMenu} from '../sidemenu/sidemenu';
 
 @Page({
   templateUrl: 'build/pages/login/login.html',
-  directives: [FORM_DIRECTIVES, ClearField],
-  providers: [Backand]
+  directives: [FORM_DIRECTIVES],
+  providers: [Backand, Services]
 })
 
 export class LoginPage {
@@ -18,7 +18,7 @@ export class LoginPage {
   signed: boolean;
   
 
-  constructor(private nav: NavController, public backand: Backand) {
+  constructor(private nav: NavController, public backand: Backand, public services: Services) {
     this.nav = nav;
     this.loginForm = new ControlGroup({
       username: new Control('', Validators.required),
@@ -28,6 +28,16 @@ export class LoginPage {
 
   openPage(page){
     this.nav.push(page);
+  }
+
+  clear(c: string) {
+    let input = <Control>this.loginForm.find(c);
+
+    this.services.clearField(input);
+  }
+
+  clearAll() {
+    this.services.clearForm(this.loginForm);
   }
 
   loggedIn(){

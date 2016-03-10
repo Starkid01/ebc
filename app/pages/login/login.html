@@ -12,18 +12,26 @@
     <ion-card-content>
       <form [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
+          <button mygray clear *ngIf="loginForm.find('username').dirty" type="button" class="clearBtn" (click)="clear('username')">
+            <ion-icon name="close"></ion-icon>
+          </button>
           <ion-item>
             <ion-label mygray for="username">Username</ion-label>
             <ion-input ngControl="username" id="username" type="text" clear-field></ion-input>
           </ion-item>
+          <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="clear('password')">
+            <ion-icon name="close"></ion-icon>
+          </button>
           <ion-item>
             <ion-label mygray for="username">Password</ion-label>
             <ion-input ngControl="password" id="password" type="password"></ion-input>
           </ion-item>
+          <p danger *ngIf="backand.is_auth_error">Something</p>
+          <div>
+            <button block [disabled]="!loginForm.valid" type="submit">Sign In</button>
+          </div>
         </ion-list>
-        <div>
-          <button block [disabled]="!loginForm.valid" type="submit">Sign In</button>
-        </div>
+        &nbsp;
         <div>
           <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
         </div>
