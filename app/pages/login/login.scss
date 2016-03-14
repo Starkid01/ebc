@@ -3,4 +3,9 @@
   @include heading;
   @include inputs;
   @include clearBtn;
+
+  .passErr {
+    margin-top: -.6em;
+    margin-bottom: 1.5em;
+  }
 }

@@ -36,8 +36,17 @@ ion-title {
     background: $light-gray;
     padding: .5em;
     z-index: 0;
+
     &:focus {
       border-bottom: map-get($colors, primary) 1px solid;
+    }
+  }
+  .error {
+    color: map-get($colors, light);
+
+    input {
+       border: map-get($colors, danger) 1px solid;
+      background: rgba(map-get($colors, danger), .35);
     }
   }
 }

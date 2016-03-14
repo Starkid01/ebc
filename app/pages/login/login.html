@@ -15,26 +15,25 @@
           <button mygray clear *ngIf="loginForm.find('username').dirty" type="button" class="clearBtn" (click)="clear('username')">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item>
+          <ion-item [class.error]="error">
             <ion-label mygray for="username">Username</ion-label>
             <ion-input ngControl="username" id="username" type="text" clear-field></ion-input>
           </ion-item>
           <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="clear('password')">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item>
+          <ion-item [class.error]="error">
             <ion-label mygray for="username">Password</ion-label>
             <ion-input ngControl="password" id="password" type="password"></ion-input>
           </ion-item>
-          <p danger *ngIf="backand.is_auth_error">Something</p>
-          <div>
-            <button block [disabled]="!loginForm.valid" type="submit">Sign In</button>
-          </div>
+          <ion-col offset-25 class="passErr">
+            <p danger *ngIf="backand.is_auth_error">Username or Password is Incorrect</p>
+          </ion-col>
+          <button block [disabled]="!loginForm.valid" type="submit">Sign In</button>
         </ion-list>
-        &nbsp;
-        <div>
+        <ion-item>
           <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
-        </div>
+        </ion-item>
       </form>
     </ion-card-content>
   </ion-card>

@@ -1,4 +1,4 @@
-import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
+import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
 import {Type} from 'angular2/core';
 import {Page, NavController} from 'ionic-framework/ionic';
 import {Backand} from '../../components/backand/backand';
@@ -16,6 +16,8 @@ export class LoginPage {
   signUp: Type = CreatePage;
   loginForm: ControlGroup;
   signed: boolean;
+  error: boolean;
+  attempts: number = 0;
   
 
   constructor(private nav: NavController, public backand: Backand, public services: Services) {
@@ -56,14 +58,17 @@ export class LoginPage {
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
-
         this.backand.auth_status = `Error: ${errorMessage}`;
         this.backand.is_auth_error = true;
+        this.error = this.backand.is_auth_error;
         this.backand.logError(err);
+        this.attempts = this.attempts+1;
+        this.clearAll();
       },
       () => {
         console.log('Finish Auth');
         this.loggedIn();
+        this.clearAll();
       });
   }
 }
