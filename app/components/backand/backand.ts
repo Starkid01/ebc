@@ -21,7 +21,6 @@ export class Backand {
 
   public signIn(user:string, pass:string){
     this.auth_type = 'Token';
-    let http = Http;
     let creds = `username=${user}` +
       `&password=${pass}` +
       `&appName=${this.app_name}` +
@@ -58,5 +57,20 @@ export class Backand {
 
   logError(err) {
     console.error('Error: ' + err);
+  }
+  
+  public requestReset (email: string) {
+    let header = new Headers();
+    let reset = this.api_url + '/1/user/requestResetPassword';
+    let resetData = JSON.stringify({
+      appName: this.app_name,
+      username: email
+    });
+    
+    header.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(reset, resetData, {
+      headers: header
+    })
+    .map(res => this.getToken(res))
   }
 }

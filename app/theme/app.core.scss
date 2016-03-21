@@ -45,7 +45,7 @@ ion-title {
     color: map-get($colors, light);
 
     input {
-       border: map-get($colors, danger) 1px solid;
+      border: map-get($colors, danger) 1px solid;
       background: rgba(map-get($colors, danger), .35);
     }
   }

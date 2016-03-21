@@ -1,6 +1,6 @@
 import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
 import {Type} from 'angular2/core';
-import {Page, NavController} from 'ionic-framework/ionic';
+import {Page, NavController, Alert} from 'ionic-framework/ionic';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 import {CreatePage} from '../create/create';
@@ -17,8 +17,8 @@ export class LoginPage {
   loginForm: ControlGroup;
   signed: boolean;
   error: boolean;
+  reset: boolean;
   attempts: number = 0;
-  
 
   constructor(private nav: NavController, public backand: Backand, public services: Services) {
     this.nav = nav;
@@ -26,6 +26,12 @@ export class LoginPage {
       username: new Control('', Validators.required),
       password: new Control('', Validators.required)
     });
+  }
+  
+  ngDoCheck(){
+    if(this.attempts >= 5){
+      this.reset = true;
+    }
   }
 
   openPage(page){
@@ -42,9 +48,44 @@ export class LoginPage {
     this.services.clearForm(this.loginForm);
   }
 
-  loggedIn(){
+  loggedIn() {
     let nav = this.nav;
     nav.setPages([{page: SideMenu}], {animate: true});
+  }
+  
+  resetPass() {
+    let sets = Alert.create({
+      title: 'Reset Password',
+      message: 'Enter Email to Recieve a Password Reset Link',
+      inputs: [
+        {
+          name: 'username',
+          placeholder: 'Email',
+          type: 'email'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Submit',
+          handler: data => {
+            let e = data.username;
+            console.log(e);
+            this.backand.requestReset(e).subscribe(
+              data => console.log('Reset Request Sent'),
+              err => {
+                console.log(err)
+              },
+              () => {
+                console.log('Check Your Email')
+              });
+          }
+        }
+      ]
+    });
+    this.nav.present(sets);
   }
   
   signIn(login){

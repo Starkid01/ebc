@@ -12,8 +12,9 @@ export class Services {
   clearField(c: Control) {
     let field = c;
 
-    field.updateValue('');
-    field.setErrors(null);
+    field.updateValue(null);
+    field.updateValueAndValidity();
+    //field.setErrors(null);
     field._pristine = true;
   }
 
@@ -23,6 +24,7 @@ export class Services {
     for(let i in g.controls){
       let input = <Control>g.find(i);
       input.updateValue('');
+      input.updateValueAndValidity();
       input._pristine = true;
     }
   }

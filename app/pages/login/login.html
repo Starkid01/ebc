@@ -17,7 +17,7 @@
           </button>
           <ion-item [class.error]="error">
             <ion-label mygray for="username">Username</ion-label>
-            <ion-input ngControl="username" id="username" type="text" clear-field></ion-input>
+            <ion-input ngControl="username" id="username" type="email" clear-field></ion-input>
           </ion-item>
           <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="clear('password')">
             <ion-icon name="close"></ion-icon>
@@ -29,16 +29,23 @@
           <ion-col offset-25 class="passErr">
             <p danger *ngIf="backand.is_auth_error">Username or Password is Incorrect</p>
           </ion-col>
-          <button block [disabled]="!loginForm.valid" type="submit">Sign In</button>
+          <button block [disabled]="!loginForm.valid" type="submit">Sign In
+            <ion-icon name="log-in"></ion-icon>
+          </button>
         </ion-list>
         <ion-item>
           <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
         </ion-item>
       </form>
+      <ion-note *ngIf="reset">
+        <button clear danger (click)="resetPass()">
+          <ion-icon name="unlock"></ion-icon>
+          Reset</button>
+      </ion-note>
     </ion-card-content>
   </ion-card>
 </ion-content>
 
 <ion-toolbar position="bottom">
-  <ion-title>&copy;2016 by EBC</ion-title>
+  <ion-note padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
 </ion-toolbar>
