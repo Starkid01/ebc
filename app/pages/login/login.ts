@@ -79,7 +79,8 @@ export class LoginPage {
                 console.log(err)
               },
               () => {
-                console.log('Check Your Email')
+                console.log('Check Your Email');
+                checkEmail();
               });
           }
         }
@@ -87,7 +88,7 @@ export class LoginPage {
     });
     this.nav.present(sets);
   }
-  
+
   signIn(login){
     let auth = login.value;
     

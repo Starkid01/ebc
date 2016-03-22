@@ -6,7 +6,9 @@ import {Type} from 'angular2/core';
 
 @App({
   template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {
+    mode: 'md'
+  } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 
 export class MyApp {
