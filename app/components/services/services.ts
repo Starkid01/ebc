@@ -14,7 +14,7 @@ export class Services {
 
     field.updateValue(null);
     field.updateValueAndValidity();
-    //field.setErrors(null);
+    field.setErrors(null);
     field._pristine = true;
   }
 

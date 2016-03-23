@@ -79,8 +79,7 @@ export class LoginPage {
                 console.log(err)
               },
               () => {
-                console.log('Check Your Email');
-                checkEmail();
+                console.log('Check Your Email')
               });
           }
         }

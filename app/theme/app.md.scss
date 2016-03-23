@@ -29,3 +29,6 @@
 // App Material Design Only Sass
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
+ion-input.ng-invalid.ng-touched:after {
+  border: 0 !important;
+}

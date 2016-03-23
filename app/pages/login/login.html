@@ -15,16 +15,16 @@
           <button mygray clear *ngIf="loginForm.find('username').dirty" type="button" class="clearBtn" (click)="clear('username')">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item [class.error]="error">
-            <ion-label mygray for="username">Username</ion-label>
-            <ion-input ngControl="username" id="username" type="email" clear-field></ion-input>
+          <ion-item [class.myError]="error">
+            <ion-label stacked for="username">Username</ion-label>
+            <ion-input ngControl="username" id="username" name="username" placeholder="email" type="email" clear-field></ion-input>
           </ion-item>
           <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="clear('password')">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item [class.error]="error">
-            <ion-label mygray for="username">Password</ion-label>
-            <ion-input ngControl="password" id="password" type="password"></ion-input>
+          <ion-item [class.myError]="error">
+            <ion-label stacked for="password">Password</ion-label>
+            <ion-input ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
           </ion-item>
           <ion-col offset-25 class="passErr">
             <p danger *ngIf="backand.is_auth_error">Username or Password is Incorrect</p>
@@ -33,10 +33,10 @@
             <ion-icon name="log-in"></ion-icon>
           </button>
         </ion-list>
-        <ion-item>
-          <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
-        </ion-item>
       </form>
+      <ion-item>
+        <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
+      </ion-item>
       <ion-note *ngIf="reset">
         <button clear danger (click)="resetPass()">
           <ion-icon name="unlock"></ion-icon>

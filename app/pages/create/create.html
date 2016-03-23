@@ -10,19 +10,50 @@
       <h2 favorite>Create New Account</h2>
     </ion-card-header>
     <ion-card-content>
-      <form>
+      <form [ngFormModel]="createForm" (ngSubmit)="createUser(createForm)">
         <ion-list no-lines>
+          <button mygray clear *ngIf="createForm.find('email').dirty" type="button" class="clearBtn" (click)="clear('email')">
+            <ion-icon name="close"></ion-icon>
+          </button>
           <ion-item>
-            <ion-label mygray for="username">Username</ion-label>
-            <ion-input id="username" type="text"></ion-input>
+            <ion-label stacked for="username">Username</ion-label>
+            <ion-input ngControl="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
           </ion-item>
+          <button mygray clear *ngIf="createForm.find('lastName').dirty" type="button" class="clearBtn" (click)="clear('lastName')">
+            <ion-icon name="close"></ion-icon>
+          </button>
+          <div class="myName">
+            <ion-item>
+              <ion-label stacked for="firstName">First Name</ion-label>
+              <ion-input ngControl="firstName" id="firstName" name="name" placeholder="John/Jane" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked for="lastName">Last Name</ion-label>
+              <ion-input ngControl="lastName" id="lastName" name="name" placeholder="Doe" type="text"></ion-input>
+            </ion-item>
+          </div>
+          <button mygray clear *ngIf="createForm.find('firstName').dirty" type="button" class="clearNameBtn" (click)="clear('firstName')">
+            <ion-icon name="close"></ion-icon>
+          </button>
+          <button mygray clear *ngIf="createForm.find('password').dirty" type="button" class="clearBtn" (click)="clear('password')">
+            <ion-icon name="close"></ion-icon>
+          </button>
           <ion-item>
-            <ion-label mygray for="username">Password</ion-label>
-            <ion-input id="password" type="password"></ion-input>
+            <ion-label stacked for="password">Password</ion-label>
+            <ion-input ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+          </ion-item>
+          <button mygray clear *ngIf="createForm.find('confirmPassword').dirty" type="button" class="clearBtn" (click)="clear('confirmPassword')">
+            <ion-icon name="close"></ion-icon>
+          </button>
+          <ion-item>
+            <ion-label stacked for="confirmPassword">Confirm Password</ion-label>
+            <ion-input ngControl="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
           </ion-item>
         </ion-list>
-        <div>
-          <button block>Create Account</button>
+        <div padding>
+          <button block [disabled]="!createForm.valid" type="submit">
+            <ion-icon name="create"></ion-icon>
+            Create Account</button>
         </div>
       </form>
     </ion-card-content>
