@@ -11,7 +11,6 @@ import {Services} from '../../components/services/services';
 
 export class CreatePage {
   createForm: ControlGroup;
-  confirm: Control;
 
   constructor(private nav: NavController, public backand: Backand, public services: Services) {
     this.nav = nav;
@@ -19,16 +18,13 @@ export class CreatePage {
       email: new Control('', Validators.required),
       firstName: new Control('', Validators.required),
       lastName: new Control('', Validators.required),
-      password: new Control('', Validators.required, this.passwordMatch),
+      password: new Control('', Validators.required),
       confirmPassword: new Control('', Validators.required)
     });
   }
 
-
-  passwordMatch(c: Control) {
-    let field = c;
-
-    console.log();
+  ngDoCheck() {
+    console.log(this.createForm);
   }
 
   clear(c: string) {
