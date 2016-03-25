@@ -5,7 +5,6 @@ module.exports = {
   entry: [
     path.normalize('es6-shim/es6-shim.min'),
     'reflect-metadata',
-    'web-animations.min',
     path.normalize('zone.js/dist/zone-microtask'),
     path.resolve('app/app')
   ],
@@ -20,7 +19,9 @@ module.exports = {
         test: /\.ts$/,
         loader: 'awesome-typescript',
         query: {
-          'doTypeCheck': true
+          doTypeCheck: true,
+          resolveGlobs: false,
+          externals: ['typings/browser.d.ts']
         },
         include: path.resolve('app'),
         exclude: /node_modules/
@@ -34,17 +35,13 @@ module.exports = {
     noParse: [
       /es6-shim/,
       /reflect-metadata/,
-      /web-animations/,
       /zone\.js(\/|\\)dist(\/|\\)zone-microtask/
     ]
   },
   resolve: {
-    root: [
-      'app'
-    ],
+    root: ['app'],
     alias: {
-      'angular2': path.resolve('node_modules/angular2'),
-      'web-animations.min': path.normalize('ionic-framework/js/web-animations.min')
+      'angular2': path.resolve('node_modules/angular2')
     },
     extensions: ["", ".js", ".ts"]
   }

@@ -1,6 +1,6 @@
 import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
 import {Type} from 'angular2/core';
-import {Page, NavController, Alert} from 'ionic-framework/ionic';
+import {Page, NavController, Alert} from 'ionic-angular';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 import {CreatePage} from '../create/create';

@@ -1,4 +1,4 @@
-import {Page, IonicApp} from 'ionic-framework/ionic';
+import {Page, IonicApp} from 'ionic-angular';
 import {Type} from 'angular2/core';
 import {MyStuff} from '../mystuff/mystuff';
 import {Samples} from '../samples/samples';

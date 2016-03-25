@@ -1,4 +1,4 @@
-import {Page} from 'ionic-framework/ionic';
+import {Page} from 'ionic-angular';
 import {Type} from 'angular2/core';
 import {MoreMenu} from '../moremenu/moremenu';
 import {SCardsPage} from '../scards/scards';
