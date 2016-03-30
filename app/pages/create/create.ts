@@ -11,26 +11,35 @@ import {Services} from '../../components/services/services';
 
 export class CreatePage {
   createForm: ControlGroup;
+  verify: ControlGroup;
+  email: Control = new Control('', Validators.required);
+  firstName: Control = new Control('', Validators.required);
+  lastName: Control = new Control('', Validators.required);
+  password: Control  = new Control('', Validators.required);
+  confirmPassword: Control = new Control('', Validators.required);
 
   constructor(private nav: NavController, public backand: Backand, public services: Services) {
     this.nav = nav;
     this.createForm = new ControlGroup({
-      email: new Control('', Validators.required),
-      firstName: new Control('', Validators.required),
-      lastName: new Control('', Validators.required),
-      password: new Control('', Validators.required),
-      confirmPassword: new Control('', Validators.required)
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      verify: new ControlGroup({
+        password: this.password,
+        confirmPassword: this.confirmPassword
+        }, {}, this.areEqual)
     });
   }
 
-  ngDoCheck() {
-    console.log(this.createForm);
-  }
-
-  clear(c: string) {
-    let input = <Control>this.createForm.find(c);
-
-    this.services.clearField(input);
+  areEqual(g: ControlGroup) {
+    let equal = g.value;
+    const vals = Object.keys(equal).map(key => equal[key]);
+    if(vals[0] != vals[1]){
+      return {notEqual: true};
+    }
+    else{
+      return null;
+    }
   }
 
   clearAll() {
