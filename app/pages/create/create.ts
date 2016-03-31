@@ -20,26 +20,16 @@ export class CreatePage {
 
   constructor(private nav: NavController, public backand: Backand, public services: Services) {
     this.nav = nav;
+    this.verify = new ControlGroup({
+        password: this.password,
+        confirmPassword: this.confirmPassword
+        }, {}, services.areEqual);
     this.createForm = new ControlGroup({
       email: this.email,
       firstName: this.firstName,
       lastName: this.lastName,
-      verify: new ControlGroup({
-        password: this.password,
-        confirmPassword: this.confirmPassword
-        }, {}, this.areEqual)
+      verify: this.verify
     });
-  }
-
-  areEqual(g: ControlGroup) {
-    let equal = g.value;
-    const vals = Object.keys(equal).map(key => equal[key]);
-    if(vals[0] != vals[1]){
-      return {notEqual: true};
-    }
-    else{
-      return null;
-    }
   }
 
   clearAll() {

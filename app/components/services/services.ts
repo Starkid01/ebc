@@ -9,6 +9,17 @@ export class Services {
 
   }
 
+  areEqual(g: Control) {
+    let equal = g.value;
+    const vals = Object.keys(equal).map(key => equal[key]);
+    if(vals[0] != vals[1]){
+      return {notEqual: true};
+    }
+    else{
+      return null;
+    }
+  }
+
   clearField(c: Control) {
     let field = c;
 

@@ -15,6 +15,8 @@ import {SideMenu} from '../sidemenu/sidemenu';
 export class LoginPage {
   signUp: Type = CreatePage;
   loginForm: ControlGroup;
+  username: Control = new Control('', Validators.required);
+  password: Control = new Control('', Validators.required);
   signed: boolean;
   error: boolean;
   reset: boolean;
@@ -23,8 +25,8 @@ export class LoginPage {
   constructor(private nav: NavController, public backand: Backand, public services: Services) {
     this.nav = nav;
     this.loginForm = new ControlGroup({
-      username: new Control('', Validators.required),
-      password: new Control('', Validators.required)
+      username: this.username,
+      password: this.password
     });
   }
   

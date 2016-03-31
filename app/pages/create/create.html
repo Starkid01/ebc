@@ -12,12 +12,12 @@
     <ion-card-content>
       <form [ngFormModel]="createForm" (ngSubmit)="createUser(createForm)">
         <ion-list no-lines>
-          <button mygray clear *ngIf="createForm.find('email').dirty" type="button" class="clearBtn" (click)="services.clearField(email)">
+          <button mygray clear *ngIf="email.dirty" type="button" class="clearBtn" (click)="services.clearField(email)">
             <ion-icon name="close"></ion-icon>
           </button>
           <ion-item>
             <ion-label stacked for="username">Username</ion-label>
-            <ion-input [ngFormControl]="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
+            <ion-input ngControl="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
           </ion-item>
           <button mygray clear *ngIf="lastName.dirty" type="button" class="clearBtn" (click)="services.clearField(lastName)">
             <ion-icon name="close"></ion-icon>
@@ -25,30 +25,35 @@
           <div class="myName">
             <ion-item>
               <ion-label stacked for="firstName">First Name</ion-label>
-              <ion-input [ngFormControl]="firstName" id="firstName" name="name" placeholder="John/Jane" type="text"></ion-input>
+              <ion-input ngControl="firstName" id="firstName" name="name" placeholder="John/Jane" type="text"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked for="lastName">Last Name</ion-label>
-              <ion-input [ngFormControl]="lastName" id="lastName" name="name" placeholder="Doe" type="text"></ion-input>
+              <ion-input ngControl="lastName" id="lastName" name="name" placeholder="Doe" type="text"></ion-input>
             </ion-item>
           </div>
           <button mygray clear *ngIf="firstName.dirty" type="button" class="clearNameBtn" (click)="services.clearField(firstName)">
             <ion-icon name="close"></ion-icon>
           </button>
-          <button mygray clear *ngIf="password.dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
-            <ion-icon name="close"></ion-icon>
-          </button>
-          <ion-item>
-            <ion-label stacked for="password">Password</ion-label>
-            <ion-input [ngFormControl]="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
-          </ion-item>
-          <button mygray clear *ngIf="confirmPassword.dirty" type="button" class="clearBtn" (click)="services.clearField(confirmPassword)">
-            <ion-icon name="close"></ion-icon>
-          </button>
-          <ion-item>
-            <ion-label stacked for="confirm">Confirm Password</ion-label>
-            <ion-input [ngFormControl]="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
-          </ion-item>
+          <div ngControlGroup="verify" [class.myError]="verify.errors">
+            <button mygray clear *ngIf="password.dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
+              <ion-icon name="close"></ion-icon>
+            </button>
+            <ion-item>
+              <ion-label stacked for="password">Password</ion-label>
+              <ion-input ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            </ion-item>
+            <button mygray clear *ngIf="confirmPassword.dirty" type="button" class="clearBtn" (click)="services.clearField(confirmPassword)">
+              <ion-icon name="close"></ion-icon>
+            </button>
+            <ion-item>
+              <ion-label stacked for="confirm">Confirm Password</ion-label>
+              <ion-input ngControl="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            </ion-item>
+            <div class="passErr">
+              <p danger *ngIf="verify.errors">Passwords Don't Match</p>
+            </div>
+          </div>
         </ion-list>
         <div padding>
           <button block [disabled]="!createForm.valid" type="submit">

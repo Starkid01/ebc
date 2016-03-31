@@ -12,14 +12,14 @@
     <ion-card-content>
       <form [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
-          <button mygray clear *ngIf="loginForm.find('username').dirty" type="button" class="clearBtn" (click)="clear('username')">
+          <button mygray clear *ngIf="loginForm.find('username').dirty" type="button" class="clearBtn" (click)="services.clearField(username)">
             <ion-icon name="close"></ion-icon>
           </button>
           <ion-item [class.myError]="error">
             <ion-label stacked for="username">Username</ion-label>
             <ion-input ngControl="username" id="username" name="username" placeholder="email" type="email" clear-field></ion-input>
           </ion-item>
-          <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="clear('password')">
+          <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
             <ion-icon name="close"></ion-icon>
           </button>
           <ion-item [class.myError]="error">
