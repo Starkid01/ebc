@@ -40,12 +40,6 @@ export class LoginPage {
     this.nav.push(page);
   }
 
-  clear(c: string) {
-    let input = <Control>this.loginForm.find(c);
-
-    this.services.clearField(input);
-  }
-
   clearAll() {
     this.services.clearForm(this.loginForm);
   }
