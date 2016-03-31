@@ -10,28 +10,33 @@
       <h2 favorite>Login</h2>
     </ion-card-header>
     <ion-card-content>
-      <form [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
+      <form [class.myError]="error" [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
-          <button mygray clear *ngIf="loginForm.find('username').dirty" type="button" class="clearBtn" (click)="services.clearField(username)">
+          <button mygray clear *ngIf="username.dirty" type="button" class="clearBtn" (click)="services.clearField(username)">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item [class.myError]="error">
+          <ion-item [class.myError]="username.errors && username.dirty">
             <ion-label stacked for="username">Username</ion-label>
             <ion-input ngControl="username" id="username" name="username" placeholder="email" type="email" clear-field></ion-input>
           </ion-item>
-          <button mygray clear *ngIf="loginForm.find('password').dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
+          <div class="passErr">
+            <p danger *ngIf="username.errors && username.dirty">Please Provide a Valid Email</p>
+          </div>
+          <button mygray clear *ngIf="password.dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item [class.myError]="error">
+          <ion-item>
             <ion-label stacked for="password">Password</ion-label>
             <ion-input ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
           </ion-item>
-          <ion-col offset-25 class="passErr">
+          <div class="passErr">
             <p danger *ngIf="backand.is_auth_error">Username or Password is Incorrect</p>
-          </ion-col>
-          <button block [disabled]="!loginForm.valid" type="submit">Sign In
-            <ion-icon name="log-in"></ion-icon>
-          </button>
+          </div>
+          <span padding>
+            <button block [disabled]="!loginForm.valid" type="submit">Sign In
+              <ion-icon name="log-in"></ion-icon>
+            </button>
+          </span>
         </ion-list>
       </form>
       <ion-item>

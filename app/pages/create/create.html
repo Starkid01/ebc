@@ -15,10 +15,13 @@
           <button mygray clear *ngIf="email.dirty" type="button" class="clearBtn" (click)="services.clearField(email)">
             <ion-icon name="close"></ion-icon>
           </button>
-          <ion-item>
+          <ion-item [class.myError]="email.errors && email.dirty">
             <ion-label stacked for="username">Username</ion-label>
             <ion-input ngControl="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
           </ion-item>
+          <div class="passErr">
+            <p danger *ngIf="email.errors && email.dirty">Please Provide a Valid Email</p>
+          </div>
           <button mygray clear *ngIf="lastName.dirty" type="button" class="clearBtn" (click)="services.clearField(lastName)">
             <ion-icon name="close"></ion-icon>
           </button>

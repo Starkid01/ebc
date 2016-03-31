@@ -12,7 +12,7 @@ import {Services} from '../../components/services/services';
 export class CreatePage {
   createForm: ControlGroup;
   verify: ControlGroup;
-  email: Control = new Control('', Validators.required);
+  email: Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
   firstName: Control = new Control('', Validators.required);
   lastName: Control = new Control('', Validators.required);
   password: Control  = new Control('', Validators.required);

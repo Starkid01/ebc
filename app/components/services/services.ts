@@ -20,12 +20,21 @@ export class Services {
     }
   }
 
+  emailValidator(c: Control) {
+    if (!c.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
+      return { 'invalidEmailAddress': true };
+
+    } else {
+      return null;
+    }
+  }
+
   clearField(c: Control) {
     let field = c;
 
-    field.updateValue(null);
+    field.updateValue('');
     field.updateValueAndValidity();
-    field.setErrors(null);
+    //field.setErrors(null);
     field._pristine = true;
   }
 

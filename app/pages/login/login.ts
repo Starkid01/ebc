@@ -15,7 +15,7 @@ import {SideMenu} from '../sidemenu/sidemenu';
 export class LoginPage {
   signUp: Type = CreatePage;
   loginForm: ControlGroup;
-  username: Control = new Control('', Validators.required);
+  username: Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
   password: Control = new Control('', Validators.required);
   signed: boolean;
   error: boolean;
