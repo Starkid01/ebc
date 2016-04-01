@@ -46,7 +46,7 @@ export class CreatePage {
       password: pass.password,
       confirm: pass.confirmPassword
     }
-    this.backand.signUp(user).subscribe(
+    /*this.backand.signUp(user).subscribe(
         data => console.log(data),
         err => {
           console.log(err);
@@ -55,6 +55,6 @@ export class CreatePage {
         () => {
           console.log('User Created');
           //this.clearAll();
-        });
+        });*/
   }
 }
