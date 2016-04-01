@@ -37,6 +37,24 @@ export class CreatePage {
   }
 
   createUser(create){
-
+    let dets = create.value;
+    let pass = dets.verify;
+    let user = {
+      email: dets.email,
+      firstName: dets.firstName,
+      lastName: dets.lastName,
+      password: pass.password,
+      confirm: pass.confirmPassword
+    }
+    this.backand.signUp(user).subscribe(
+        data => console.log(data),
+        err => {
+          console.log(err);
+          //this.clearAll();
+        },
+        () => {
+          console.log('User Created');
+          //this.clearAll();
+        });
   }
 }

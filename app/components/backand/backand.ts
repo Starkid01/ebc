@@ -5,11 +5,13 @@ import 'rxjs/Rx';
 @Injectable()
 export class Backand {
   auth_token:{ header_name : string, header_value: string} = {header_name: '', header_value: ''};
-  api_url:string = "https://api.backand.com";
-  app_name:string = "ebc2";
-  auth_type:string = "N/A";
-  auth_status:string = "";
+  signUp_token:{ header_name : string, header_value: string} = {header_name: '', header_value: ''};
+  api_url:string = 'https://api.backand.com';
+  app_name:string = 'ebc2';
+  auth_type:string = 'N/A';
+  auth_status:string = '';
   is_auth_error:boolean = false;
+  signuUp_token:string = 'dbaea0da-730d-4039-8f8a-77a507a3e908';
 
   constructor(public http:Http){
 
@@ -37,10 +39,21 @@ export class Backand {
     return JSON.parse(err._body).error_description;
   }
 
-  public setTokenHeader(jwt) {
+  public signUp(newUser:Object) {
+    let userCreds = JSON.stringify(newUser);
+    let header = new Headers();
+    let signUpUrl = this.api_url + '/user/signup';
+    //header.append('SignUpToken', this.signuUp_token);
+    header.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(signUpUrl, userCreds, {
+      headers: header
+      }).map(res => res.json())
+  }
+
+   public setSignUpHeader() {
     if (jwt) {
-      this.auth_token.header_name = "Authorization";
-      this.auth_token.header_value = "Bearer " + jwt;
+      this.signUp_.header_name = "Authorization";
+      this.signUp_.header_value = "Bearer " + jwt;
     }
   }
 
