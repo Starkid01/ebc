@@ -11,7 +11,7 @@
     </ion-card-header>
     <ion-card-content>
       <form [ngFormModel]="createForm" (ngSubmit)="createUser(createForm)">
-        <ion-list no-lines>
+        <ion-list no-lines [class.myError]="createError">
           <button mygray clear *ngIf="email.dirty" type="button" class="clearBtn" (click)="services.clearField(email)">
             <ion-icon name="close"></ion-icon>
           </button>
@@ -55,6 +55,9 @@
             </ion-item>
             <div class="passErr">
               <p danger *ngIf="verify.errors">Passwords Don't Match</p>
+            </div>
+            <div class="passErr">
+              <p danger *ngIf="createError">User Already Taken Please Try Again</p>
             </div>
           </div>
         </ion-list>

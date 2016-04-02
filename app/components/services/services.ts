@@ -34,7 +34,7 @@ export class Services {
 
     field.updateValue('');
     field.updateValueAndValidity();
-    //field.setErrors(null);
+    field.setErrors(null);
     field._pristine = true;
   }
 

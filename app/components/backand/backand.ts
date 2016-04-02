@@ -50,9 +50,14 @@ export class Backand {
   }
 
   private get authHeader() {
-    var authHeader = new Headers();
+    let authHeader = new Headers();
     authHeader.append(this.auth_token.header_name, this.auth_token.header_value);
     return authHeader;
+  }
+
+  public setSignUpHeader() {
+    let signUpHeader = new Headers();
+    signUpHeader.append('SignUpToken', 'dbaea0da-730d-4039-8f8a-77a507a3e908');
   }
 
   logError(err) {
@@ -69,6 +74,18 @@ export class Backand {
     
     header.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(reset, resetData, {
+      headers: header
+    })
+    .map(res => this.getToken(res))
+  }
+
+  public signUp(value:Object){
+    let newUser = JSON.stringify(value);
+    const sigUpUrl = this.api_url + '/1/user/signup';
+
+    let header = new Headers();
+    header.append('SignUpToken', 'dbaea0da-730d-4039-8f8a-77a507a3e908');
+    return this.http.post(sigUpUrl, newUser, {
       headers: header
     })
     .map(res => this.getToken(res))
