@@ -1,6 +1,6 @@
 import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
 import {Type} from 'angular2/core';
-import {Page, NavController, Alert} from 'ionic-angular';
+import {Page, NavController, Alert, LocalStorage, Storage} from 'ionic-angular';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 import {CreatePage} from '../create/create';
@@ -14,6 +14,7 @@ import {SideMenu} from '../sidemenu/sidemenu';
 
 export class LoginPage {
   signUp: Type = CreatePage;
+  local: Storage = new Storage(LocalStorage);
   loginForm: ControlGroup;
   username: Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
   password: Control = new Control('', Validators.required);
@@ -34,6 +35,7 @@ export class LoginPage {
     if(this.attempts >= 5){
       this.reset = true;
     }
+    console.log();
   }
 
   openPage(page){
@@ -92,6 +94,7 @@ export class LoginPage {
         this.backand.auth_status = 'OK';
         this.backand.is_auth_error = false;
         this.backand.setTokenHeader(data);
+        this.local.set('jwt', data);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);

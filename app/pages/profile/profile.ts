@@ -1,4 +1,4 @@
-import {Page} from 'ionic-angular';
+import {Page, Storage, SqlStorage} from 'ionic-angular';
 import {Type} from 'angular2/core';
 import {MoreMenu} from '../moremenu/moremenu';
 import {PersonPage} from '../myperson/myperson';

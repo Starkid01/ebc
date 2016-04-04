@@ -1,12 +1,19 @@
+import {LocalStorage, Storage} from 'ionic-angular';
 import {Validators, ControlGroup, Control} from 'angular2/common';
+import {Backand} from '../../components/backand/backand';
 import {Injectable} from 'angular2/core';
-
 
 @Injectable()
 export class Services {
+  local: Storage = new Storage(LocalStorage);
 
-  constructor() {
+  constructor(public backand:Backand) {
 
+  }
+
+  getAuth(){
+    let auth = this.local.get('jwt')._result;
+    this.backand.setTokenHeader(auth);
   }
 
   areEqual(g: Control) {

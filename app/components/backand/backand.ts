@@ -39,8 +39,8 @@ export class Backand {
 
   public setTokenHeader(jwt) {
     if (jwt) {
-      this.auth_token.header_name = "Authorization";
-      this.auth_token.header_value = "Bearer " + jwt;
+      this.auth_token.header_name = 'Authorization';
+      this.auth_token.header_value = 'Bearer ' + jwt;
     }
   }
 
@@ -53,11 +53,6 @@ export class Backand {
     let authHeader = new Headers();
     authHeader.append(this.auth_token.header_name, this.auth_token.header_value);
     return authHeader;
-  }
-
-  public setSignUpHeader() {
-    let signUpHeader = new Headers();
-    signUpHeader.append('SignUpToken', 'dbaea0da-730d-4039-8f8a-77a507a3e908');
   }
 
   logError(err) {
@@ -89,5 +84,12 @@ export class Backand {
       headers: header
     })
     .map(res => this.getToken(res))
+  }
+
+  public currentUser(){
+    const userQuery = this.api_url + '/1/query/data/CurrentUser';
+    return this.http.get(userQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
   }
 }

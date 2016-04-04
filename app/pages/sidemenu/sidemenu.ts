@@ -1,18 +1,21 @@
 import {Page, IonicApp} from 'ionic-angular';
 import {Type} from 'angular2/core';
+import {Backand} from '../../components/backand/backand';
 import {MyStuff} from '../mystuff/mystuff';
 import {Samples} from '../samples/samples';
 import {Profile} from '../profile/profile';
 
 @Page({
-  templateUrl: 'build/pages/sidemenu/sidemenu.html'
+  templateUrl: 'build/pages/sidemenu/sidemenu.html',
+  providers: [Backand]
 })
 
 export class SideMenu {
+  pages: Array<{title: string, component: Type}>;;
   homePage: Type = MyStuff;
-  pages: Array<{title: string, component: Type}>;
 
-  constructor(private app: IonicApp) {
+
+  constructor(private app: IonicApp, public backand: Backand) {
     this.pages = [
       {title: 'EBC Samples', component: Samples},
       {title: 'My Stuff', component: MyStuff},
@@ -21,7 +24,6 @@ export class SideMenu {
   }
 
   toPages(page){
-    let nav = this.app.getComponent('page');
-    nav.setRoot(page.component);
+    this.homePage = page.component;
   }
 }
