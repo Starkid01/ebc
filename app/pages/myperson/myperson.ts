@@ -8,25 +8,9 @@ import {Services} from '../../components/services/services';
 })
 
 export class PersonPage {
-  myUser: Object;
-  page: string;
 
-constructor(public backand: Backand, public services: Services) {
-    this.page = 'My Profile';
+  constructor(public backand: Backand, public services: Services) {
     this.services.getAuth();
-    this.getUser();
-  }
-
-  getUser(){
-    this.backand.currentUser().subscribe(
-      data => {
-        this.backand.auth_status = 'OK';
-        this.myUser = data[0];
-      },
-      err => {
-        var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.auth_status = `Error: ${errorMessage}`;
-        this.backand.logError(err);
-      });
+    this.services.getUser();
   }
 }

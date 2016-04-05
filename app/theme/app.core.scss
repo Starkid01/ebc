@@ -28,6 +28,7 @@ ion-title {
   h2 {
     font-weight: 600;
     font-size: 2rem;
+    margin-bottom: -1rem;
   }
 }
 
@@ -67,3 +68,4 @@ ion-title {
 @import '../pages/scards/scards';
 @import '../pages/myperson/myperson';
 @import '../pages/editperson/editperson';
+@import '../pages/detail/detail';

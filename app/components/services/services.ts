@@ -6,9 +6,23 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 export class Services {
   local: Storage = new Storage(LocalStorage);
+  myUser: Object;
 
   constructor(public backand:Backand) {
 
+  }
+
+  getUser(){
+    this.backand.currentUser().subscribe(
+      data => {
+        this.backand.auth_status = 'OK';
+        this.myUser = data[0];
+      },
+      err => {
+        var errorMessage = this.backand.extractErrorMessage(err);
+        this.backand.auth_status = `Error: ${errorMessage}`;
+        this.backand.logError(err);
+      });
   }
 
   getAuth(){

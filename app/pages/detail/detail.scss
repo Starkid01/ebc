@@ -1,0 +1,14 @@
+.detail {
+  @include page-body;
+  @include heading;
+
+  .desc {
+    margin-top: 1rem;
+  }
+
+  .media {
+    width: 100%;
+    min-height: 35vh;
+    border: 0;
+  }
+}

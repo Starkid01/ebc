@@ -92,4 +92,18 @@ export class Backand {
       headers: this.authHeader
     }).map(res => res.json())
   }
+
+  public getItems(name:string){
+    let itemQuery = this.api_url + '/1/query/data/' + name;
+    return this.http.get(itemQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
+  }
+
+  public getItem(name:string, id:number){
+    let itemQuery = this.api_url + '/1/objects/' + name + '/' + id;
+    return this.http.get(itemQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
+  }
 }
