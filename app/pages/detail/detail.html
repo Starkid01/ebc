@@ -2,7 +2,14 @@
   <ion-title>
     {{item?.name}}
   </ion-title>
+  <ion-buttons end>
+    <button (click)="More()" class="more">
+      <ion-icon name="md-more"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
+
+<more-menu [visible]="hide" (more)="HideMore()"></more-menu>
 
 <ion-content class="detail">
   <ion-card>

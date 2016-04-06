@@ -1,10 +1,22 @@
 <ion-content class="myflys">
-  <ion-card>
+  <div *ngIf="none" padding>
+    <h2 favorite>Sorry You haven't Added</h2>
+    <p>Please Submit a New Flyer</p>
+  </div>
+  <ion-card *ngFor="#f of flyers">
     <ion-card-header>
-      <h2 favorite>My Flyers</h2>
+      <h2 favorite>{{f?.name}}</h2>
     </ion-card-header>
     <ion-card-content>
-      Somthing
+      <ion-list>
+        <button ion-item (click)="goTo(f?.id)">
+          <ion-thumbnail item-left>
+            <img [src]="f?.pic">
+          </ion-thumbnail>
+          <p>{{f?.desc}}</p>
+          <span item-right primary>View</span>
+        </button>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
