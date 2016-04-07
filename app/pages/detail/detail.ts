@@ -5,7 +5,8 @@ import {Services} from '../../components/services/services';
 
 @Page({
   templateUrl: 'build/pages/detail/detail.html',
-  providers: [Backand, Services, MoreMenu]
+  providers: [Backand, Services],
+  directives: [MoreMenu]
 })
 export class DetailPage {
   item:Object;

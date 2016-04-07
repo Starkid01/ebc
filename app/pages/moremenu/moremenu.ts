@@ -1,4 +1,6 @@
-import {Component, Input, SimpleChange, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, SimpleChange, Output, EventEmitter, Type} from 'angular2/core';
+import {NavController, LocalStorage, Storage} from 'ionic-angular';
+import {LoginPage} from '../login/login';
 import {DropMenu, MenuItem} from '../../components/dropmenu/dropmenu';
 
 @Component({
@@ -13,6 +15,13 @@ export class MoreMenu {
 
   show: boolean;
   ch: Object;
+  login:Type = LoginPage;
+  local:any = new Storage(LocalStorage);
+
+  constructor(public nav:NavController){
+    this.nav = nav;
+    this.local;
+  }
 
   ngOnChanges(c: SimpleChange){
     let ch = c;
@@ -24,5 +33,10 @@ export class MoreMenu {
   myToggle(h: boolean){
     this.show = h;
     this.visibleChange.emit(h);
+  }
+
+  signOut() {
+    this.local.remove('jwt');
+    this.nav.setRoot(this.login);
   }
 }
