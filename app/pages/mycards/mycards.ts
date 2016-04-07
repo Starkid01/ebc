@@ -11,11 +11,21 @@ import {Services} from '../../components/services/services';
 export class MyCardsPage {
   cards:Array<any>;
   detail:Type = DetailPage;
+  none:boolean;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
     this.nav = nav;
     this.services.getAuth();
     this.myCards();
+  }
+
+  ngDoCheck(){
+    if(this.cards = []){
+      console.log('Nothing Here');
+      this.none = true;
+    } else{
+      this.none = false;
+    }
   }
 
   myCards(){

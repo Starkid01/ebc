@@ -13,7 +13,7 @@
 
 <ion-content class="detail">
   <ion-card>
-    <iframe class="media" [src]="item?.media"></iframe>
+    <object [attr.data]="item?.media"></object>
     <ion-card-content>
       <ion-card-title>
         <h2 favorite>{{item?.name}}</h2>
