@@ -5,8 +5,9 @@ import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class Services {
-  local: Storage = new Storage(LocalStorage);
-  myUser: Object;
+  local:Storage = new Storage(LocalStorage);
+  myUser:Object;
+  hide:boolean = true;
 
   constructor(public backand:Backand) {
 
@@ -68,5 +69,13 @@ export class Services {
       input.updateValueAndValidity();
       input._pristine = true;
     }
+  }
+
+  more(){
+    this.hide = !this.hide;
+  }
+
+  hideMore(){
+    this.hide = true;
   }
 }

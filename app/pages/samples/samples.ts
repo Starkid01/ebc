@@ -1,11 +1,14 @@
 import {Page} from 'ionic-angular';
 import {Type} from 'angular2/core';
 import {MoreMenu} from '../moremenu/moremenu';
+import {Backand} from '../../components/backand/backand';
+import {Services} from '../../components/services/services';
 import {SCardsPage} from '../scards/scards';
 import {SFlysPage} from '../sflyers/sflyers';
 
 @Page({
   templateUrl: 'build/pages/samples/samples.html',
+  providers: [Services, Backand],
   directives: [MoreMenu]
 })
 
@@ -13,13 +16,11 @@ export class Samples {
   cardTab: Type = SCardsPage;
   flyerTab: Type = SFlysPage;
   title: string;
-  hide: boolean;
 
-  constructor(){
-    this.hide = true;
+  constructor(public services: Services){
   }
 
-  GetTitle(Type) {
+  getTitle(Type) {
     let tab = Type;
 
     if(tab == SCardsPage){
@@ -28,13 +29,5 @@ export class Samples {
     if(tab == SFlysPage){
       this.title = 'Sample Flyers';
     }
-  }
-
-  More(){
-    this.hide = !this.hide;
-  }
-
-  HideMore(){
-    this.hide = true;
   }
 }

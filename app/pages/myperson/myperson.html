@@ -1,10 +1,36 @@
+<ion-navbar primary *navbar>
+  <ion-buttons left>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>
+    My Profile
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="services.more()" class="more">
+      <ion-icon name="more"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<more-menu [visible]="services.hide" (more)="services.hideMore()"></more-menu>
+
 <ion-content class="person">
   <ion-card>
-    <img class="userImg" [src]="services?.myUser?.pic" />
+    <div class="userImg" [ngStyle]="{'background-image': userPic}">
+      <img [src]="services.myUser?.pic" />
+    </div>
     <ion-card-content>
       <ion-card-title>
-        <h2 favorite>{{services?.myUser?.firstName}} {{services?.myUser?.lastName}}</h2>
+        <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>
       </ion-card-title>
     </ion-card-content>
+    <ion-item>
+      <button clear item-right (click)="editInfo()">
+        Edit
+        <ion-icon name="build"></ion-icon>
+      </button>
+    </ion-item>
   </ion-card>
 </ion-content>

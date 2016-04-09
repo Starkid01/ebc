@@ -8,6 +8,7 @@ import {Services} from '../../components/services/services';
   templateUrl: 'build/pages/mycards/mycards.html',
   providers: [Backand, Services]
 })
+
 export class MyCardsPage {
   cards:Array<any>;
   detail:Type = DetailPage;
@@ -21,9 +22,8 @@ export class MyCardsPage {
 
   ngDoCheck(){
     if(this.cards = []){
-      console.log('Nothing Here');
       this.none = true;
-    } else{
+    } else {
       this.none = false;
     }
   }

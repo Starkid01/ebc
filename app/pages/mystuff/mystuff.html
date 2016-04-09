@@ -8,14 +8,15 @@
     {{title}}
   </ion-title>
   <ion-buttons end>
-    <button (click)="More()" class="more">
+    <button (click)="services.more()" class="more">
       <ion-icon name="more"></ion-icon>
     </button>
   </ion-buttons>
 </ion-navbar>
-<more-menu [visible]="hide" (more)="HideMore()"></more-menu>
+
+<more-menu [visible]="services.hide" (more)="services.hideMore()"></more-menu>
 
 <ion-tabs tabbarPlacement="bottom" primary>
-  <ion-tab (select)="GetTitle(cardTab)" [root]="cardTab" tabTitle="My Cards" tabIcon="card"></ion-tab>
-  <ion-tab (select)="GetTitle(flyerTab)"[root]="flyerTab" tabTitle="My Flyers" tabIcon="document"></ion-tab>
+  <ion-tab (select)="getTitle(cardTab)" [root]="cardTab" tabTitle="My Cards" tabIcon="card"></ion-tab>
+  <ion-tab (select)="getTitle(flyerTab)"[root]="flyerTab" tabTitle="My Flyers" tabIcon="document"></ion-tab>
 </ion-tabs>

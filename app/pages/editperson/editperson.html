@@ -1,10 +1,53 @@
+<ion-navbar primary *navbar>
+  <ion-buttons left>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>
+    Edit Profile
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="services.more()" class="more">
+      <ion-icon name="more"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<more-menu [visible]="services.hide" (more)="services.hideMore()"></more-menu>
+
 <ion-content class="edit">
   <ion-card>
-    <img class="userImg" [src]="services?.myUser?.pic" />
+    <div class="userImg">
+      <img [src]="services.myUser?.pic" />
+    </div>
     <ion-card-content>
       <ion-card-title>
-        <h2 favorite>{{services?.myUser?.firstName}} {{services?.myUser?.lastName}}</h2>
+        <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>
       </ion-card-title>
     </ion-card-content>
+    <ion-segment [(ngModel)]="section">
+      <ion-segment-button value="user">
+        Edit Info
+      </ion-segment-button>
+      <ion-segment-button value="password">
+        Change Password
+      </ion-segment-button>
+    </ion-segment>
   </ion-card>
+  {{section}}
+
+  <div [ngSwitch]="section">
+    <ion-list *ngSwitchWhen="'user'">
+      <ion-item>
+        User Edit
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchWhen="'password'">
+      <ion-item>
+        Password Edit
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -22,7 +22,6 @@ export class MyFlysPage {
 
   ngDoCheck(){
     if(this.flyers = []){
-      console.log('Nothing Here');
       this.none = true;
     } else{
       this.none = false;
