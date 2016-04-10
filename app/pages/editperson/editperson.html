@@ -37,12 +37,40 @@
   </ion-card>
 
   <div [ngSwitch]="section">
-    <div padding *ngSwitchWhen="'user'">
-      User Edit
+    <div *ngSwitchWhen="'user'">
+      <form>
+        <ion-list class="editForm" no-lines>
+          <ion-item>
+            <ion-label stacked for="firstName">First Name</ion-label>
+            <ion-input id="firstName" name="firstName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked for="lastName">Last Name</ion-label>
+            <ion-input id="firstName" name="firstName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button block type="submit">Confirm Change</button>
+          </ion-item>
+        </ion-list>
+      </form>
     </div>
 
-    <div padding *ngSwitchWhen="'password'">
-      Password Edit
+    <div *ngSwitchWhen="'password'">
+      <form>
+        <ion-list class="editForm" no-lines>
+          <ion-item>
+            <ion-label stacked for="password">Password</ion-label>
+            <ion-input id="password" name="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked for="confirm">Confirm Password</ion-label>
+            <ion-input id="confirm" name="confirm"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button block type="submit">Confirm Change</button>
+          </ion-item>
+        </ion-list>
+      </form>
     </div>
   </div>
 </ion-content>
