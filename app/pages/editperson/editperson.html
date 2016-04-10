@@ -35,19 +35,14 @@
       </ion-segment-button>
     </ion-segment>
   </ion-card>
-  {{section}}
 
   <div [ngSwitch]="section">
-    <ion-list *ngSwitchWhen="'user'">
-      <ion-item>
-        User Edit
-      </ion-item>
-    </ion-list>
+    <div padding *ngSwitchWhen="'user'">
+      User Edit
+    </div>
 
-    <ion-list *ngSwitchWhen="'password'">
-      <ion-item>
-        Password Edit
-      </ion-item>
-    </ion-list>
+    <div padding *ngSwitchWhen="'password'">
+      Password Edit
+    </div>
   </div>
 </ion-content>
