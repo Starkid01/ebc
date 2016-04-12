@@ -93,6 +93,15 @@ export class Backand {
     }).map(res => res.json())
   }
 
+public updatePass(pass:Object){
+    let passwordChange = this.api_url + '/1/objects/user/changePassword';
+    let changePass = JSON.stringify(pass);
+    this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded')
+    return this.http.post(passwordChange, changePass, {
+      headers: this.authHeader
+    }).map(res => res.json())
+  }
+
   public getItems(name:string){
     let itemQuery = this.api_url + '/1/query/data/' + name;
     return this.http.get(itemQuery, {
@@ -103,6 +112,14 @@ export class Backand {
   public getItem(name:string, id:number){
     let itemQuery = this.api_url + '/1/objects/' + name + '/' + id;
     return this.http.get(itemQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
+  }
+
+  public updateItem(name:string, id:number, data:Object){
+    let itemQuery = this.api_url + '/1/objects/' + name + '/' + id;
+    let info = JSON.stringify(data);
+    return this.http.put(itemQuery, info, {
       headers: this.authHeader
     }).map(res => res.json())
   }

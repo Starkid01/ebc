@@ -3,8 +3,16 @@
   @include heading;
   @include inputs;
 
-  h2{
+  h2 {
     text-align: center;
+  }
+
+  .clearBtn {
+    position: absolute;
+    margin-top: 2.5em;
+    right: .9em;
+    z-index: 999;
+    padding: 0 !important;
   }
 
   .userImg {
@@ -13,13 +21,13 @@
     background: rgba(0, 0, 0, 0.6);
     overflow-y: hidden;
   }
-
   .editForm {
 
     ion-item {
-       background: rgba(250, 250, 250, 1);
+      background: rgba(250, 250, 250, 1);
     }
-    button {
+
+    .formBtn {
       padding: 1.5em;
     }
   }

@@ -13,17 +13,17 @@ import {SideMenu} from '../sidemenu/sidemenu';
 })
 
 export class LoginPage {
-  signUp: Type = CreatePage;
-  local: Storage = new Storage(LocalStorage);
-  loginForm: ControlGroup;
-  username: Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
-  password: Control = new Control('', Validators.required);
-  signed: boolean;
-  error: boolean;
-  reset: boolean;
-  attempts: number = 0;
+  signUp:Type = CreatePage;
+  local:Storage = new Storage(LocalStorage);
+  loginForm:ControlGroup;
+  username:Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
+  password:Control = new Control('', Validators.required);
+  signed:boolean;
+  error:boolean;
+  reset:boolean;
+  attempts:number = 0;
 
-  constructor(private nav: NavController, public backand: Backand, public services: Services) {
+  constructor(private nav:NavController, public backand:Backand, public services:Services) {
     this.nav = nav;
     this.loginForm = new ControlGroup({
       username: this.username,

@@ -11,16 +11,58 @@ import {Services} from '../../components/services/services';
 })
 
 export class EditPage {
-  section:string;
+  section:string = 'user';
+  passwordForm:ControlGroup;
+  oldPass:Control = new Control('', Validators.required);
+  verify:ControlGroup;
+  password:Control = new Control('', Validators.required);
+  confirm:Control = new Control('', Validators.required);
+  editForm:ControlGroup;
+  firstName:Control = new Control('');
+  lastName:Control = new Control('');
 
   constructor(public backand: Backand, public services: Services) {
     this.services.getAuth();
     this.services.getUser();
-    this.section = 'user';
+    this.editForm = new ControlGroup({
+      firstName: this.firstName,
+      lastName:  this.lastName
+    });
+
+    this.verify = new ControlGroup({
+      password: this.password,
+      confirm: this.confirm
+    }, {}, services.areEqual);
+
+    this.passwordForm = new ControlGroup({
+      oldPass: this.oldPass,
+      verify: this.verify
+    });
   }
 
-  ngDoChange(){
-    console.log(this.section);
-    console.log('change');
+  editPass(pass){
+    let newPass = {
+      oldPassword: pass.value.oldPass,
+      newPassword: pass.value.verify.password
+    };
+
+    this.backand.signUp(newPass).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+        this.services.clearForm(pass.controls.verify);
+        this.services.clearField(pass.controls.oldPass);
+      },
+      () => {
+        console.log('Password Changed');
+        this.services.clearForm(pass.controls.verify);
+        this.services.clearField(pass.controls.oldPass);
+      });
+  }
+
+  editInfo(info){
+
   }
 }
