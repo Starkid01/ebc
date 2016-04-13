@@ -94,12 +94,12 @@ export class Backand {
   }
 
 public updatePass(pass:Object){
-    let passwordChange = this.api_url + '/1/objects/user/changePassword';
+    let passwordChange = this.api_url + '/1/user/changePassword';
     let changePass = JSON.stringify(pass);
-    this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded')
+    this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(passwordChange, changePass, {
       headers: this.authHeader
-    }).map(res => res.json())
+    }).map(res => res)
   }
 
   public getItems(name:string){
@@ -119,8 +119,9 @@ public updatePass(pass:Object){
   public updateItem(name:string, id:number, data:Object){
     let itemQuery = this.api_url + '/1/objects/' + name + '/' + id;
     let info = JSON.stringify(data);
+    this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.put(itemQuery, info, {
       headers: this.authHeader
-    }).map(res => res.json())
+    }).map(res => res)
   }
 }

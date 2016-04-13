@@ -86,6 +86,9 @@
               <ion-label stacked for="confirm">Confirm Password</ion-label>
               <ion-input ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
             </ion-item>
+            <div class="passErr">
+              <p danger *ngIf="verify.errors">Passwords Don't Match</p>
+            </div>
           </div>
           <ion-item>
             <button block [disabled]="!passwordForm.valid" class="formBtn" type="submit">Confirm Change</button>

@@ -46,7 +46,7 @@ export class EditPage {
       newPassword: pass.value.verify.password
     };
 
-    this.backand.signUp(newPass).subscribe(
+    this.backand.updatePass(newPass).subscribe(
       data => {
         console.log(data);
       },
@@ -63,6 +63,29 @@ export class EditPage {
   }
 
   editInfo(info){
+    let name = 'users';
+    let id = this.services.myUser['id'];
+    let input = info.value;
+    for(let i in input){
+      if(input[i] === ''){
+        delete input[i];
 
+        console.log(input);
+
+        this.backand.updateItem(name, id, input).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+            this.services.clearForm(info);
+          },
+          () => {
+            console.log('Info has Changed');
+            this.services.clearForm(info);
+            this.services.getUser();
+          });
+      }
+    }
   }
 }
