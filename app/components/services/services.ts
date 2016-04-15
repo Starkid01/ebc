@@ -57,7 +57,7 @@ export class Services {
     field.updateValue('');
     field.updateValueAndValidity();
     field.setErrors(null);
-    field._pristine = true;
+    //field._pristine = true;
   }
 
   clearForm(g: ControlGroup){
@@ -67,7 +67,7 @@ export class Services {
       let input = <Control>g.find(i);
       input.updateValue('');
       input.updateValueAndValidity();
-      input._pristine = true;
+    //input._pristine = true;
     }
   }
 
