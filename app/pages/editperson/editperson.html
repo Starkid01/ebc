@@ -40,19 +40,13 @@
     <div *ngSwitchWhen="'user'">
       <form [ngFormModel]="editForm" (ngSubmit)="editInfo(editForm)">
         <ion-list class="editForm" no-lines>
-          <button mygray clear *ngIf="firstName.dirty" type="button" class="clearBtn" (click)="services.clearField(firstName)">
-            <ion-icon name="close"></ion-icon>
-          </button>
           <ion-item>
             <ion-label stacked for="firstName">First Name</ion-label>
-            <ion-input ngControl="firstName" id="firstName" name="firstName" [placeholder]="services.myUser?.firstName" type="text"></ion-input>
+            <ion-input clearInput ngControl="firstName" id="firstName" name="firstName" [placeholder]="services.myUser?.firstName" type="text"></ion-input>
           </ion-item>
-          <button mygray clear *ngIf="lastName.dirty" type="button" class="clearBtn" (click)="services.clearField(lastName)">
-            <ion-icon name="close"></ion-icon>
-          </button>
           <ion-item>
             <ion-label stacked for="lastName">Last Name</ion-label>
-            <ion-input ngControl="lastName" id="firstName" name="firstName" [placeholder]="services.myUser?.lastName" type="text"></ion-input>
+            <ion-input clearInput ngControl="lastName" id="firstName" name="firstName" [placeholder]="services.myUser?.lastName" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <button block class="formBtn" type="submit">Confirm Change</button>
@@ -64,27 +58,18 @@
     <div *ngSwitchWhen="'password'">
       <form [ngFormModel]="passwordForm" (ngSubmit)="editPass(passwordForm)">
         <ion-list no-lines class="editForm">
-          <button mygray clear *ngIf="oldPass.dirty" type="button" class="clearBtn" (click)="services.clearField(oldPass)">
-            <ion-icon name="close"></ion-icon>
-          </button>
-          <ion-item>
+          <ion-item clearInput>
             <ion-label stacked for="oldPass">Current Password</ion-label>
-            <ion-input ngControl="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            <ion-input clearInput ngControl="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
           </ion-item>
           <div ngControlGroup="verify" [class.myError]="verify.errors">
-            <button mygray clear *ngIf="password.dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
-              <ion-icon name="close"></ion-icon>
-            </button>
             <ion-item>
               <ion-label stacked for="password">Password</ion-label>
-              <ion-input ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
             </ion-item>
-            <button mygray clear *ngIf="confirm.dirty" type="button" class="clearBtn" (click)="services.clearField(confirm)">
-              <ion-icon name="close"></ion-icon>
-            </button>
             <ion-item>
               <ion-label stacked for="confirm">Confirm Password</ion-label>
-              <ion-input ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+              <ion-input clearInput ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
             </ion-item>
             <div class="passErr">
               <p danger *ngIf="verify.errors">Passwords Don't Match</p>
@@ -94,7 +79,7 @@
             <button block [disabled]="!passwordForm.valid" class="formBtn" type="submit">Confirm Change</button>
           </ion-item>
         </ion-list>
-      </form>
+        </form>
     </div>
   </div>
 </ion-content>

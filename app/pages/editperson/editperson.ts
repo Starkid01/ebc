@@ -69,9 +69,6 @@ export class EditPage {
     for(let i in input){
       if(input[i] === ''){
         delete input[i];
-
-        console.log(input);
-
         this.backand.updateItem(name, id, input).subscribe(
           data => {
             console.log(data);

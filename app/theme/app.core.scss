@@ -42,6 +42,11 @@ ion-title {
       border-bottom: map-get($colors, primary) 1px solid;
     }
   }
+  ion-button-effect {
+  }
+  .text-input-clear-icon {
+
+  }
   .myError {
     input {
       color: map-get($colors, light);

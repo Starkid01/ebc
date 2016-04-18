@@ -45,4 +45,5 @@
   <preference name="android-maxSdkVersion" value="14" />
   <preference name="android-targetSdkVersion" value="15" />
   <plugin name="cordova-plugin-whitelist" version="1.2.1" />
+  <plugin name="cordova-plugin-device" version="1.1.1" />
 </widget>

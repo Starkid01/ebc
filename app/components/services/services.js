@@ -28,7 +28,7 @@ var Services = (function () {
         });
     };
     Services.prototype.getAuth = function () {
-        var auth = this.local.get('jwt')._result;
+        var auth = this.local.get('jwt')['__zone_symbol__value'];
         this.backand.setTokenHeader(auth);
     };
     Services.prototype.areEqual = function (g) {

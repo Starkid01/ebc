@@ -63,7 +63,6 @@ var EditPage = (function () {
         for (var i in input) {
             if (input[i] === '') {
                 delete input[i];
-                console.log(input);
                 this.backand.updateItem(name, id, input).subscribe(function (data) {
                     console.log(data);
                 }, function (err) {

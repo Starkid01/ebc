@@ -10,9 +10,9 @@ import {Services} from '../../components/services/services';
 })
 export class DetailPage {
   item:Object;
-  hide: boolean;
+  hide:boolean;
 
-  constructor(public backand: Backand, public services: Services, public params:NavParams) {
+  constructor(public backand:Backand, public services:Services, public params:NavParams) {
     this.hide = true;
     this.params = params;
     this.services.getAuth();

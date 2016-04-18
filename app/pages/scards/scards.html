@@ -4,7 +4,8 @@
       <h2 favorite>{{c?.name}}</h2>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
+      <hr>
+      <ion-item>
         <button ion-item (click)="goTo(c?.id)">
           <ion-thumbnail item-left>
             <img [src]="c?.pic">
@@ -12,7 +13,7 @@
           <p>{{c?.desc}}</p>
           <span item-right primary>View</span>
         </button>
-      </ion-list>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

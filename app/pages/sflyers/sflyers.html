@@ -1,10 +1,11 @@
 <ion-content class="scards">
-<ion-card *ngFor="#f of flyers">
+  <ion-card *ngFor="#f of flyers">
     <ion-card-header>
       <h2 favorite>{{f?.name}}</h2>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
+      <hr>
+      <ion-item>
         <button ion-item (click)="goTo(f?.id)">
           <ion-thumbnail item-left>
             <img [src]="f?.pic">
@@ -12,7 +13,7 @@
           <p>{{f?.desc}}</p>
           <span item-right primary>View</span>
         </button>
-      </ion-list>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

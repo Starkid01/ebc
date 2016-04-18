@@ -36,7 +36,16 @@ export class MoreMenu {
   }
 
   signOut() {
-    this.local.remove('jwt');
-    this.nav.setRoot(this.login);
+    let nav = this.nav;
+    let sub = nav.canGoBack();
+    //this.local.remove('jwt');
+    //nav.insert(0, LoginPage);
+    if(sub) {
+      console.log('Sub Page');
+      nav.popToRoot();
+    }
+    if(!sub) {
+      nav.setRoot(LoginPage);
+    }
   }
 }

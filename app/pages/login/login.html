@@ -12,22 +12,16 @@
     <ion-card-content>
       <form [class.myError]="error" [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
-          <button mygray clear *ngIf="username.dirty" type="button" class="clearBtn" (click)="services.clearField(username)">
-            <ion-icon name="close"></ion-icon>
-          </button>
           <ion-item [class.myError]="username.errors && username.dirty">
             <ion-label stacked for="username">Username</ion-label>
-            <ion-input ngControl="username" id="username" name="username" placeholder="email" type="email" clear-field></ion-input>
+            <ion-input clearInput ngControl="username" id="username" name="username" placeholder="email" type="email"></ion-input>
           </ion-item>
           <div class="passErr">
             <p danger *ngIf="username.errors && username.dirty">Please Provide a Valid Email</p>
           </div>
-          <button mygray clear *ngIf="password.dirty" type="button" class="clearBtn" (click)="services.clearField(password)">
-            <ion-icon name="close"></ion-icon>
-          </button>
           <ion-item>
             <ion-label stacked for="password">Password</ion-label>
-            <ion-input ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
           </ion-item>
           <div class="passErr">
             <p danger *ngIf="backand.is_auth_error">Username or Password is Incorrect</p>

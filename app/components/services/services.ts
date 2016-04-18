@@ -27,7 +27,7 @@ export class Services {
   }
 
   getAuth(){
-    let auth = this.local.get('jwt')._result;
+    let auth = this.local.get('jwt')['__zone_symbol__value'];
     this.backand.setTokenHeader(auth);
   }
 
@@ -67,7 +67,7 @@ export class Services {
       let input = <Control>g.find(i);
       input.updateValue('');
       input.updateValueAndValidity();
-    //input._pristine = true;
+      //input._pristine = true;
     }
   }
 
