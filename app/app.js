@@ -11,6 +11,7 @@ var ionic_angular_1 = require('ionic-angular');
 var login_1 = require('./pages/login/login');
 var MyApp = (function () {
     function MyApp(platform) {
+        this.platform = platform;
         this.rootPage = login_1.LoginPage;
         platform.ready().then(function () {
             // The platform is now ready. Note: if this callback fails to fire, follow
@@ -33,7 +34,8 @@ var MyApp = (function () {
         ionic_angular_1.App({
             template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',
             config: {
-                mode: 'md'
+                mode: 'md',
+                scrollAssist: false
             } // http://ionicframework.com/docs/v2/api/config/Config/
         }),
         __metadata('design:paramtypes', [ionic_angular_1.Platform])

@@ -2,7 +2,6 @@
   @include page-body;
   @include heading;
   @include inputs;
-  @include clearBtn;
 
   .myName {
     display: flex;
@@ -13,12 +12,5 @@
     margin-top: -.3em;
     margin-left: 1.1em;
     margin-bottom: .2em;
-  }
-
-  .clearNameBtn {
-    position: absolute;
-    left: 12em;
-    margin-top: -3em;
-    z-index: 99999;
   }
 }

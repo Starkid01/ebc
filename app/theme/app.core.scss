@@ -42,26 +42,17 @@ ion-title {
       border-bottom: map-get($colors, primary) 1px solid;
     }
   }
-  ion-button-effect {
-  }
-  .text-input-clear-icon {
 
+  .text-input-clear-icon {
+    bottom: .55em !important;
   }
+
   .myError {
     input {
       color: map-get($colors, light);
       border: map-get($colors, danger) 1px solid;
       background: rgba(map-get($colors, danger), .35);
     }
-  }
-}
-
-@mixin clearBtn {
-  .clearBtn {
-    position: absolute;
-    margin-top: 2.5em;
-    right: 3.9em;
-    z-index: 999;
   }
 }
 

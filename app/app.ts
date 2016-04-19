@@ -8,14 +8,15 @@ import {Type} from 'angular2/core';
 @App({
   template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',
   config: {
-    mode: 'md'
+    mode: 'md',
+    scrollAssist: false
   } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 
 export class MyApp {
-  rootPage: Type = LoginPage;
+  rootPage:Type = LoginPage;
 
-  constructor(platform: Platform) {
+  constructor(public platform:Platform){
     platform.ready().then(() => {
       // The platform is now ready. Note: if this callback fails to fire, follow
       // the Troubleshooting guide for a number of possible solutions:

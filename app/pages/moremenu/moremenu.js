@@ -32,16 +32,8 @@ var MoreMenu = (function () {
     };
     MoreMenu.prototype.signOut = function () {
         var nav = this.nav;
-        var sub = nav.canGoBack();
-        //this.local.remove('jwt');
-        //nav.insert(0, LoginPage);
-        if (sub) {
-            console.log('Sub Page');
-            nav.popToRoot();
-        }
-        if (!sub) {
-            nav.setRoot(login_1.LoginPage);
-        }
+        this.local.remove('jwt');
+        nav.rootNav.setRoot(login_1.LoginPage);
     };
     __decorate([
         core_1.Input(),

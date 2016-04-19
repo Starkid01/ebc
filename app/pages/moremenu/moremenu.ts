@@ -37,15 +37,7 @@ export class MoreMenu {
 
   signOut() {
     let nav = this.nav;
-    let sub = nav.canGoBack();
-    //this.local.remove('jwt');
-    //nav.insert(0, LoginPage);
-    if(sub) {
-      console.log('Sub Page');
-      nav.popToRoot();
-    }
-    if(!sub) {
-      nav.setRoot(LoginPage);
-    }
+    this.local.remove('jwt');
+    nav.rootNav.setRoot(LoginPage);
   }
 }
