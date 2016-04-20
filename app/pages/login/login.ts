@@ -25,17 +25,19 @@ export class LoginPage {
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {
     this.nav = nav;
+    this.el = el;
     this.loginForm = new ControlGroup({
       username: this.username,
       password: this.password
     });
+    this.clearOne();
   }
   
   ngDoCheck(){
     if(this.attempts >= 5){
       this.reset = true;
     }
-    console.log();
+    this.clearOne();
   }
 
   openPage(page){
