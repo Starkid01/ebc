@@ -30,7 +30,6 @@ export class LoginPage {
       username: this.username,
       password: this.password
     });
-    this.clearOne();
   }
   
   ngDoCheck(){
