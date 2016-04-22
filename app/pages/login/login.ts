@@ -1,6 +1,6 @@
 import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
 import {Type} from 'angular2/core';
-import {Page, NavController, Alert, LocalStorage, Storage, ViewController} from 'ionic-angular';
+import {Page, NavController, Alert, LocalStorage, Storage, Toast} from 'ionic-angular';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 import {CreatePage} from '../create/create';
@@ -25,7 +25,6 @@ export class LoginPage {
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {
     this.nav = nav;
-    this.el = el;
     this.loginForm = new ControlGroup({
       username: this.username,
       password: this.password
@@ -36,7 +35,19 @@ export class LoginPage {
     if(this.attempts >= 5){
       this.reset = true;
     }
-    this.clearOne();
+  }
+
+  resetVerify() {
+    let resVerify = Toast.create({
+      message: 'Check Your Email for Password Reset',
+      duration: 3000
+    });
+
+    resVerify.onDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    this.nav.present(resVerify);
   }
 
   openPage(page){
@@ -78,6 +89,7 @@ export class LoginPage {
                 console.log(err)
               },
               () => {
+                this.resetVerify();
                 console.log('Check Your Email')
               });
           }

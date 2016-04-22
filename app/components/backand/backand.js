@@ -67,7 +67,6 @@ var Backand = (function () {
         console.error('Error: ' + err);
     };
     Backand.prototype.requestReset = function (email) {
-        var _this = this;
         var header = new http_1.Headers();
         var reset = this.api_url + '/1/user/requestResetPassword';
         var resetData = JSON.stringify({
@@ -78,7 +77,7 @@ var Backand = (function () {
         return this.http.post(reset, resetData, {
             headers: header
         })
-            .map(function (res) { return _this.getToken(res); });
+            .map(function (res) { return res; });
     };
     Backand.prototype.signUp = function (value) {
         var _this = this;

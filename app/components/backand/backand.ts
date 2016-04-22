@@ -71,7 +71,7 @@ export class Backand {
     return this.http.post(reset, resetData, {
       headers: header
     })
-    .map(res => this.getToken(res))
+    .map(res => res)
   }
 
   public signUp(value:Object){

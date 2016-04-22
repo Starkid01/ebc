@@ -33,7 +33,16 @@ var LoginPage = (function () {
         if (this.attempts >= 5) {
             this.reset = true;
         }
-        console.log();
+    };
+    LoginPage.prototype.resetVerify = function () {
+        var resVerify = ionic_angular_1.Toast.create({
+            message: 'Check Your Email for Password Reset',
+            duration: 3000
+        });
+        resVerify.onDismiss(function () {
+            console.log('Dismissed toast');
+        });
+        this.nav.present(resVerify);
     };
     LoginPage.prototype.openPage = function (page) {
         this.nav.push(page);
@@ -69,6 +78,7 @@ var LoginPage = (function () {
                         _this.backand.requestReset(e).subscribe(function (data) { return console.log('Reset Request Sent'); }, function (err) {
                             console.log(err);
                         }, function () {
+                            _this.resetVerify();
                             console.log('Check Your Email');
                         });
                     }
