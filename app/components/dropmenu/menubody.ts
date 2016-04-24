@@ -87,16 +87,13 @@ export class DropMenu {
       }
       if(click === document.getElementsByClassName('more')[0] || click === document.getElementsByClassName('more')[1]) {
         toggle = true;
-        console.log(toggle);
       }
       click = click.parentNode;
     } while (click);
     if(inside) {
       this.toggle.next(true);
-      console.log('inside');
     } else if(!toggle && !self.hasAttribute('hidden')) {
       this.toggle.next(true);
-      console.log('outside');
     }
   }
 }

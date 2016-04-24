@@ -10,6 +10,8 @@ export class Services {
   local:Storage = new Storage(LocalStorage);
   myUser:Object;
   hide:boolean = true;
+  newPic:boolean = false;
+  picFile:string;
 
   constructor(public backand:Backand, public nav:NavController) {
     this.nav = nav;
@@ -24,14 +26,13 @@ export class Services {
           icon: 'camera',
           handler: () => {
             let opts = {
-              quality: 90,
+              quality: 100,
               allowEdit: true
             }
             Camera.getPicture(opts).then((imageData) => {
-              // imageData is either a base64 encoded string or a file URI
-              // If it's base64:
-              let file = imageData;
-              console.log(file);
+              this.picFile = imageData;
+              this.newPic = true;
+              return this.picFile;
             }, (err) => {
               console.log(err);
             });
@@ -42,6 +43,18 @@ export class Services {
           text: 'Get Picture',
           icon: 'images',
           handler: () => {
+            let opts = {
+              quality: 100,
+              sourceType: 0,
+              allowEdit: true
+            }
+            Camera.getPicture(opts).then((imageData) => {
+              this.picFile = imageData;
+              this.newPic = true;
+              return this.picFile;
+            }, (err) => {
+              console.log(err);
+            });
             console.log('Gallery Open');
           }
         },

@@ -37,6 +37,14 @@ var EditPage = (function () {
             verify: this.verify
         });
     }
+    EditPage.prototype.ngDoCheck = function () {
+        console.log(this.services.newPic);
+        if (this.services.newPic) {
+            console.log(this.services['picFile'], 'New Picture');
+            this.services.myUser['pic'] = this.services['picFile'];
+            this.services.newPic = false;
+        }
+    };
     EditPage.prototype.editPass = function (pass) {
         var _this = this;
         var newPass = {

@@ -40,6 +40,13 @@ export class EditPage {
     });
   }
 
+  ngDoCheck() {
+    if(this.services.newPic) {
+      this.services.myUser['pic'] = this.services['picFile'];
+      this.services.newPic = false;
+    }
+  }
+
   editPass(pass){
     let newPass = {
       oldPassword: pass.value.oldPass,

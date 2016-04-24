@@ -17,9 +17,11 @@ var Services = (function () {
         this.nav = nav;
         this.local = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
         this.hide = true;
+        this.newPic = false;
         this.nav = nav;
     }
     Services.prototype.getPics = function () {
+        var _this = this;
         var actionPics = ionic_angular_1.ActionSheet.create({
             title: 'Get Pictures',
             buttons: [
@@ -28,14 +30,13 @@ var Services = (function () {
                     icon: 'camera',
                     handler: function () {
                         var opts = {
-                            quality: 90,
+                            quality: 100,
                             allowEdit: true
                         };
                         ionic_native_1.Camera.getPicture(opts).then(function (imageData) {
-                            // imageData is either a base64 encoded string or a file URI
-                            // If it's base64:
-                            var file = imageData;
-                            console.log(file);
+                            _this.picFile = imageData;
+                            _this.newPic = true;
+                            return _this.picFile;
                         }, function (err) {
                             console.log(err);
                         });
@@ -46,6 +47,18 @@ var Services = (function () {
                     text: 'Get Picture',
                     icon: 'images',
                     handler: function () {
+                        var opts = {
+                            quality: 100,
+                            sourceType: 0,
+                            allowEdit: true
+                        };
+                        ionic_native_1.Camera.getPicture(opts).then(function (imageData) {
+                            _this.picFile = imageData;
+                            _this.newPic = true;
+                            return _this.picFile;
+                        }, function (err) {
+                            console.log(err);
+                        });
                         console.log('Gallery Open');
                     }
                 },
