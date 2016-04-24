@@ -20,6 +20,10 @@ ion-title {
   padding-right: 1rem;
 }
 
+.cancel {
+  color: map-get($colors, danger);
+}
+
 @mixin page-body {
   background-color: rgba(250, 250, 250, 1);
 }

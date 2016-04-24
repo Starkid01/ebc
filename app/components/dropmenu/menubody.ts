@@ -1,10 +1,9 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, ElementRef} from 'angular2/core';
 
 @Component({
   selector: 'drop-menu',
   host: {
-    '(mouseleave)': 'exit()',
-    '(click)': 'exit()'
+    '(document:click)': 'click($event)'
   },
   template:
   `<div class="menu enter" [style.transform-origin]="settings.origin">
@@ -20,9 +19,10 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
       top: 1rem;
       right: 2rem;
       flex-direction: column;
+      align-item: center;
       background: #fff;
       min-height: 13rem;
-      min-width: 17rem;
+      min-width: 12rem;
       width: 100%;
       max-width: max-content;
       box-shadow: 0px 1px 5px rgba(11, 11, 11, .3);
@@ -57,7 +57,10 @@ export class DropMenu {
   @Input() settings: Object;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter();
   header: boolean;
-  leave: boolean;
+
+  constructor(private el:ElementRef) {
+    this.el = el;
+  }
 
   ngOnInit(){
     this.settings = {};
@@ -73,7 +76,27 @@ export class DropMenu {
     }
   }
 
-  exit(){
-    this.toggle.next(true);
+  click(e) {
+    let self = this.el.nativeElement;
+    let click = e.target;
+    let inside = false;
+    let toggle = false;
+    do {
+      if(click === self) {
+        inside = true;
+      }
+      if(click === document.getElementsByClassName('more')[0] || click === document.getElementsByClassName('more')[1]) {
+        toggle = true;
+        console.log(toggle);
+      }
+      click = click.parentNode;
+    } while (click);
+    if(inside) {
+      this.toggle.next(true);
+      console.log('inside');
+    } else if(!toggle && !self.hasAttribute('hidden')) {
+      this.toggle.next(true);
+      console.log('outside');
+    }
   }
 }

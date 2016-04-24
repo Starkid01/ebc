@@ -18,9 +18,7 @@
 
 <ion-content class="person">
   <ion-card>
-    <div class="userImg" [ngStyle]="{'background-image': userPic}">
-      <img [src]="services.myUser?.pic" />
-    </div>
+    <ion-img class="userImg" [src]="services.myUser?.pic"></ion-img>
     <ion-card-content>
       <ion-card-title>
         <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>

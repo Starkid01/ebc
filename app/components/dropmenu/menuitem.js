@@ -14,7 +14,8 @@ var MenuItem = (function () {
     MenuItem = __decorate([
         core_1.Component({
             selector: 'menu-item',
-            template: "\n    <button class=\"item\">\n      <ng-content></ng-content>\n    </button>"
+            template: "\n    <button class=\"item\">\n      <ng-content></ng-content>\n    </button>",
+            styles: ["\n    .item {\n      text-align: center;\n      width: 100%;\n    }  \n  "]
         }),
         __metadata('design:paramtypes', [])
     ], MenuItem);

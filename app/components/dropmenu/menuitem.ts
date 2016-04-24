@@ -5,7 +5,13 @@ import {Component, Input} from 'angular2/core';
   template: `
     <button class="item">
       <ng-content></ng-content>
-    </button>`
+    </button>`,
+  styles: [`
+    .item {
+      text-align: center;
+      width: 100%;
+    }
+  `]
 })
 
 export class MenuItem {

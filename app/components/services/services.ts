@@ -1,7 +1,9 @@
-import {LocalStorage, Storage} from 'ionic-angular';
+import {LocalStorage, Storage, NavController, ActionSheet} from 'ionic-angular';
 import {Validators, ControlGroup, Control} from 'angular2/common';
-import {Backand} from '../../components/backand/backand';
 import {Injectable} from 'angular2/core';
+import {Camera} from 'ionic-native';
+import {Backand} from '../../components/backand/backand';
+
 
 @Injectable()
 export class Services {
@@ -9,8 +11,52 @@ export class Services {
   myUser:Object;
   hide:boolean = true;
 
-  constructor(public backand:Backand) {
+  constructor(public backand:Backand, public nav:NavController) {
+    this.nav = nav;
+  }
 
+  getPics() {
+    let actionPics = ActionSheet.create({
+      title: 'Get Pictures',
+      buttons: [
+        {
+          text: 'Take Picture',
+          icon: 'camera',
+          handler: () => {
+            let opts = {
+              quality: 90,
+              allowEdit: true
+            }
+            Camera.getPicture(opts).then((imageData) => {
+              // imageData is either a base64 encoded string or a file URI
+              // If it's base64:
+              let file = imageData;
+              console.log(file);
+            }, (err) => {
+              console.log(err);
+            });
+            console.log('Camera Open');
+          }
+        },
+        {
+          text: 'Get Picture',
+          icon: 'images',
+          handler: () => {
+            console.log('Gallery Open');
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close-circle',
+          role: 'cancel',
+          cssClass: 'cancel',
+          handler: () => {
+            console.log('Cancel');
+          }
+        },
+      ]
+    });
+    this.nav.present(actionPics);
   }
 
   getUser(){

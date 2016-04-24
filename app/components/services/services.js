@@ -8,14 +8,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var backand_1 = require('../../components/backand/backand');
 var core_1 = require('angular2/core');
+var ionic_native_1 = require('ionic-native');
+var backand_1 = require('../../components/backand/backand');
 var Services = (function () {
-    function Services(backand) {
+    function Services(backand, nav) {
         this.backand = backand;
+        this.nav = nav;
         this.local = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
         this.hide = true;
+        this.nav = nav;
     }
+    Services.prototype.getPics = function () {
+        var actionPics = ionic_angular_1.ActionSheet.create({
+            title: 'Get Pictures',
+            buttons: [
+                {
+                    text: 'Take Picture',
+                    icon: 'camera',
+                    handler: function () {
+                        var opts = {
+                            quality: 90,
+                            allowEdit: true
+                        };
+                        ionic_native_1.Camera.getPicture(opts).then(function (imageData) {
+                            // imageData is either a base64 encoded string or a file URI
+                            // If it's base64:
+                            var file = imageData;
+                            console.log(file);
+                        }, function (err) {
+                            console.log(err);
+                        });
+                        console.log('Camera Open');
+                    }
+                },
+                {
+                    text: 'Get Picture',
+                    icon: 'images',
+                    handler: function () {
+                        console.log('Gallery Open');
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    icon: 'close-circle',
+                    role: 'cancel',
+                    cssClass: 'cancel',
+                    handler: function () {
+                        console.log('Cancel');
+                    }
+                },
+            ]
+        });
+        this.nav.present(actionPics);
+    };
     Services.prototype.getUser = function () {
         var _this = this;
         this.backand.currentUser().subscribe(function (data) {
@@ -72,7 +118,7 @@ var Services = (function () {
     };
     Services = __decorate([
         core_1.Injectable(),
-        __metadata('design:paramtypes', [backand_1.Backand])
+        __metadata('design:paramtypes', [backand_1.Backand, ionic_angular_1.NavController])
     ], Services);
     return Services;
 })();

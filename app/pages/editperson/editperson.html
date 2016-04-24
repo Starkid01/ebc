@@ -17,10 +17,11 @@
 <more-menu [visible]="services.hide" (more)="services.hideMore()"></more-menu>
 
 <ion-content class="edit">
+  <button secondary fab fab-top fab-right (click)="services.getPics()" class="action">
+    <ion-icon name="image"></ion-icon>
+  </button>
   <ion-card>
-    <div class="userImg">
-      <img [src]="services.myUser?.pic" />
-    </div>
+    <ion-img class="userImg" [src]="services.myUser?.pic"></ion-img>
     <ion-card-content>
       <ion-card-title>
         <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>
@@ -79,7 +80,7 @@
             <button block [disabled]="!passwordForm.valid" class="formBtn" type="submit">Confirm Change</button>
           </ion-item>
         </ion-list>
-        </form>
+      </form>
     </div>
   </div>
 </ion-content>
