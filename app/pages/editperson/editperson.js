@@ -17,6 +17,7 @@ var EditPage = (function () {
         this.backand = backand;
         this.services = services;
         this.section = 'user';
+        this.upFile = false;
         this.oldPass = new common_1.Control('', common_1.Validators.required);
         this.password = new common_1.Control('', common_1.Validators.required);
         this.confirm = new common_1.Control('', common_1.Validators.required);
@@ -38,11 +39,10 @@ var EditPage = (function () {
         });
     }
     EditPage.prototype.ngDoCheck = function () {
-        console.log(this.services.newPic);
         if (this.services.newPic) {
-            console.log(this.services['picFile'], 'New Picture');
             this.services.myUser['pic'] = this.services['picFile'];
             this.services.newPic = false;
+            this.upFile = true;
         }
     };
     EditPage.prototype.editPass = function (pass) {

@@ -1,6 +1,7 @@
-import {LocalStorage, Storage, NavController, ActionSheet} from 'ionic-angular';
+import {LocalStorage, Platform, Storage, NavController, ActionSheet} from 'ionic-angular';
 import {Validators, ControlGroup, Control} from 'angular2/common';
 import {Injectable} from 'angular2/core';
+import {Http, Headers} from 'angular2/http';
 import {Camera} from 'ionic-native';
 import {Backand} from '../../components/backand/backand';
 
@@ -13,8 +14,9 @@ export class Services {
   newPic:boolean = false;
   picFile:string;
 
-  constructor(public backand:Backand, public nav:NavController) {
+  constructor(public backand:Backand, public nav:NavController, public http:Http) {
     this.nav = nav;
+    this.http = http;
   }
 
   getPics() {
@@ -70,6 +72,34 @@ export class Services {
       ]
     });
     this.nav.present(actionPics);
+  }
+
+  getSigned(preset:string) {
+    let signed = {};
+    let opt = JSON.stringify({
+      preset: preset,
+      tag: this.myUser['firstName'] + ' ' + this.myUser['firstName']
+    });
+    let header = new Headers();
+    header.append('Content-Type', 'application/x-www-form-urlencoded');
+    this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
+      headers: header
+      }).map(res => res)
+      .subscribe(
+        data => {
+          signed = data['_body'];
+          console.log(data, signed);
+        },
+        err => {
+          console.log(err);
+        },
+        () => {
+          console.log('Cool');
+        });
+  }
+
+  upload(tags:string) {
+    this.getSigned(tags);
   }
 
   getUser(){

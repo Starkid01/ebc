@@ -12,6 +12,7 @@ import {Services} from '../../components/services/services';
 
 export class EditPage {
   section:string = 'user';
+  upFile:boolean = false;
   passwordForm:ControlGroup;
   oldPass:Control = new Control('', Validators.required);
   verify:ControlGroup;
@@ -44,6 +45,7 @@ export class EditPage {
     if(this.services.newPic) {
       this.services.myUser['pic'] = this.services['picFile'];
       this.services.newPic = false;
+      this.upFile = true;
     }
   }
 

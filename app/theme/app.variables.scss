@@ -27,7 +27,8 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
   favorite:   #703869,
-  mygray:     #999
+  mygray:     #999,
+  save:       #ffff33
 );
 
 $light-gray: rgba(map-get($colors, mygray), .1);

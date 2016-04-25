@@ -9,16 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var ionic_angular_1 = require('ionic-angular');
 var core_1 = require('angular2/core');
+var http_1 = require('angular2/http');
 var ionic_native_1 = require('ionic-native');
 var backand_1 = require('../../components/backand/backand');
 var Services = (function () {
-    function Services(backand, nav) {
+    function Services(backand, nav, http) {
         this.backand = backand;
         this.nav = nav;
+        this.http = http;
         this.local = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
         this.hide = true;
         this.newPic = false;
         this.nav = nav;
+        this.http = http;
     }
     Services.prototype.getPics = function () {
         var _this = this;
@@ -74,6 +77,29 @@ var Services = (function () {
             ]
         });
         this.nav.present(actionPics);
+    };
+    Services.prototype.getSigned = function (preset) {
+        var signed = {};
+        var opt = JSON.stringify({
+            preset: preset,
+            tag: this.myUser['firstName'] + ' ' + this.myUser['firstName']
+        });
+        var header = new http_1.Headers();
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
+            headers: header
+        }).map(function (res) { return res; })
+            .subscribe(function (data) {
+            signed = data['_body'];
+            console.log(data, signed);
+        }, function (err) {
+            console.log(err);
+        }, function () {
+            console.log('Cool');
+        });
+    };
+    Services.prototype.upload = function (tags) {
+        this.getSigned(tags);
     };
     Services.prototype.getUser = function () {
         var _this = this;
@@ -131,7 +157,7 @@ var Services = (function () {
     };
     Services = __decorate([
         core_1.Injectable(),
-        __metadata('design:paramtypes', [backand_1.Backand, ionic_angular_1.NavController])
+        __metadata('design:paramtypes', [backand_1.Backand, ionic_angular_1.NavController, http_1.Http])
     ], Services);
     return Services;
 })();
