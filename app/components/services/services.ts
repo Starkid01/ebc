@@ -53,7 +53,8 @@ export class Services {
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
-              return this.picFile;
+              //return
+              this.picFile;
             }, (err) => {
               console.log(err);
             });
@@ -75,31 +76,20 @@ export class Services {
   }
 
   getSigned(preset:string) {
-    let signed = {};
     let opt = JSON.stringify({
       preset: preset,
-      tag: this.myUser['firstName'] + ' ' + this.myUser['firstName']
+      tag: this.myUser['firstName'] + ' ' + this.myUser['lastName']
     });
     let header = new Headers();
     header.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
+    return this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
       headers: header
       }).map(res => res)
-      .subscribe(
-        data => {
-          signed = data['_body'];
-          console.log(data, signed);
-        },
-        err => {
-          console.log(err);
-        },
-        () => {
-          console.log('Cool');
-        });
   }
 
   upload(tags:string) {
     this.getSigned(tags);
+
   }
 
   getUser(){

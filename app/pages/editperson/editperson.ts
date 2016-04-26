@@ -12,7 +12,8 @@ import {Services} from '../../components/services/services';
 
 export class EditPage {
   section:string = 'user';
-  upFile:boolean = false;
+  signed:Object;
+  upFile:boolean = true;
   passwordForm:ControlGroup;
   oldPass:Control = new Control('', Validators.required);
   verify:ControlGroup;
@@ -69,6 +70,20 @@ export class EditPage {
         this.services.clearForm(pass.controls.verify);
         this.services.clearField(pass.controls.oldPass);
       });
+  }
+
+  savePic() {
+    this.services.getSigned('userPic')
+      .subscribe(
+        data => {
+          this.signed = JSON.parse(data['_body']);
+        },
+        err => {
+          console.log(err);
+        },
+        () => {
+          console.log(this.signed);
+    });
   }
 
   editInfo(info){
