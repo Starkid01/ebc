@@ -3,6 +3,8 @@
   "devDependencies": {},
   "ambientDependencies": {
     "cordova": "registry:dt/cordova#0.0.0+20160316155526",
+    "cordova/plugins/filesystem": "registry:dt/cordova/plugins/filesystem#0.0.0+20160316155526",
+    "cordova/plugins/filetransfer": "registry:dt/cordova/plugins/filetransfer#0.0.0+20160329171220",
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c"
   }
 }

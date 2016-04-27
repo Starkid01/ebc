@@ -13,7 +13,7 @@ import {Services} from '../../components/services/services';
 export class EditPage {
   section:string = 'user';
   signed:Object;
-  upFile:boolean = true;
+  upFile:boolean = false;
   passwordForm:ControlGroup;
   oldPass:Control = new Control('', Validators.required);
   verify:ControlGroup;
@@ -73,7 +73,7 @@ export class EditPage {
   }
 
   savePic() {
-    this.services.getSigned('userPic')
+    this.services.getSigned('usersPic')
       .subscribe(
         data => {
           this.signed = JSON.parse(data['_body']);
@@ -83,6 +83,7 @@ export class EditPage {
         },
         () => {
           console.log(this.signed);
+          this.services.upload(this.signed, this.services.success);
     });
   }
 

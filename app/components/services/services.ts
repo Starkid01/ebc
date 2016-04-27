@@ -34,7 +34,7 @@ export class Services {
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
-              return this.picFile;
+              this.picFile;
             }, (err) => {
               console.log(err);
             });
@@ -53,7 +53,6 @@ export class Services {
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
-              //return
               this.picFile;
             }, (err) => {
               console.log(err);
@@ -87,9 +86,38 @@ export class Services {
       }).map(res => res)
   }
 
-  upload(tags:string) {
-    this.getSigned(tags);
+  upload(signed:Object, onSuccess:any) {
+    let ft = new FileTransfer();
+    let options = new FileUploadOptions();
+    let filename = this.picFile.substring(this.picFile.lastIndexOf('/')+1);
+    let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
 
+    options.fileKey = 'file';
+    options.fileName = filename;
+    options.mimeType = 'image/jpeg';
+    options.chunkedMode = false;
+    options.headers = {
+        'Content-Type' : undefined
+    }
+    options.params = signed;
+
+    ft.onprogress = (e: ProgressEvent) => this.progress(e);
+    ft.upload(this.picFile, url, onSuccess, this.failed, options);
+  }
+
+  progress(prog:ProgressEvent) {
+    let myProg = prog;
+      console.log(myProg);
+  }
+
+  failed(err:any) {
+    let code = err.code;
+    console.log(code, err);
+  }
+
+  success(result:any) {
+    let finish = result;
+    console.log(finish);
   }
 
   getUser(){
