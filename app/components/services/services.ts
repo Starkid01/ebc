@@ -1,4 +1,4 @@
-import {LocalStorage, Platform, Storage, NavController, ActionSheet} from 'ionic-angular';
+import {LocalStorage, Loading, Platform, Storage, NavController, ActionSheet} from 'ionic-angular';
 import {Validators, ControlGroup, Control} from 'angular2/common';
 import {Injectable} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
@@ -106,8 +106,19 @@ export class Services {
   }
 
   progress(prog:ProgressEvent) {
-    let myProg = prog;
+    let load = Loading.create({
+      content: 'Uploading...'
+    });
+
+    load.onDismiss(() => {
+      console.log('Done');
+    });
+    this.nav.present(load);
+    if(prog.lengthComputable){
+      let myProg = Math.round((prog.loaded / prog.total) * 100);
       console.log(myProg);
+      load.dismiss();
+    }
   }
 
   failed(err:any) {
