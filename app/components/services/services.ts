@@ -1,4 +1,4 @@
-import {LocalStorage, Loading, Platform, Storage, NavController, ActionSheet} from 'ionic-angular';
+import {LocalStorage, Toast, Platform, Storage, NavController, ActionSheet} from 'ionic-angular';
 import {Validators, ControlGroup, Control} from 'angular2/common';
 import {Injectable} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
@@ -17,6 +17,14 @@ export class Services {
   constructor(public backand:Backand, public nav:NavController, public http:Http) {
     this.nav = nav;
     this.http = http;
+  }
+
+  uploading() {
+  let loading = Toast.create({
+      message: 'Your Image is being Uploaded',
+      duration: 5000
+     });
+  this.nav.present(loading);
   }
 
   getPics() {
@@ -101,34 +109,19 @@ export class Services {
     }
     options.params = signed;
 
-    ft.onprogress = (e: ProgressEvent) => this.progress(e);
+    ft.onprogress = (e:ProgressEvent) => this.progress(e);
     ft.upload(this.picFile, url, onSuccess, this.failed, options);
   }
 
   progress(prog:ProgressEvent) {
-    let load = Loading.create({
-      content: 'Uploading...'
-    });
-
-    load.onDismiss(() => {
-      console.log('Done');
-    });
-    this.nav.present(load);
-    if(prog.lengthComputable){
-      let myProg = Math.round((prog.loaded / prog.total) * 100);
-      console.log(myProg);
-      load.dismiss();
-    }
+    let myProg = Math.round((prog.loaded / prog.total) * 100);
+    this.uploading();
+    console.log(myProg);
   }
 
   failed(err:any) {
     let code = err.code;
     console.log(code, err);
-  }
-
-  success(result:any) {
-    let finish = result;
-    console.log(finish);
   }
 
   getUser(){
@@ -138,7 +131,7 @@ export class Services {
         this.myUser = data[0];
       },
       err => {
-        var errorMessage = this.backand.extractErrorMessage(err);
+        let errorMessage = this.backand.extractErrorMessage(err);
         this.backand.auth_status = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });

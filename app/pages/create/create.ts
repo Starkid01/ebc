@@ -1,5 +1,5 @@
 import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
-import {Page, NavController, Alert} from 'ionic-angular';
+import {Page, NavController, Toast} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -20,7 +20,7 @@ export class CreatePage {
   password: Control  = new Control('', Validators.required);
   confirmPassword: Control = new Control('', Validators.required);
 
-  constructor(private nav: NavController, public backand: Backand, public services: Services) {
+  constructor(private nav:NavController, public backand:Backand, public services:Services) {
     this.nav = nav;
     this.verify = new ControlGroup({
         password: this.password,
@@ -42,14 +42,13 @@ export class CreatePage {
   }
 
   accountMade() {
-    let made = Alert.create({
-      title: 'Account Created',
+    let made = Toast.create({
       message: 'Your account has been Created Please SignIn',
-      buttons: [
-        {
-          text: 'Okay'
-        }
-      ]
+      duration: 3000
+    });
+
+    made.onDismiss(() =>{
+      this.nav.pop();
     });
     this.nav.present(made);
   }
@@ -64,7 +63,6 @@ export class CreatePage {
       password: pass.password,
       confirmPassword: pass.confirmPassword
     };
-
 
     this.backand.signUp(user).subscribe(
       data => {

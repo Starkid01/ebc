@@ -1,5 +1,5 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from 'angular2/common';
-import {Page} from 'ionic-angular';
+import {Page, Toast} from 'ionic-angular';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -23,7 +23,7 @@ export class EditPage {
   firstName:Control = new Control('');
   lastName:Control = new Control('');
 
-  constructor(public backand: Backand, public services: Services) {
+  constructor(public backand:Backand, public services:Services) {
     this.services.getAuth();
     this.services.getUser();
     this.editForm = new ControlGroup({
@@ -83,8 +83,27 @@ export class EditPage {
         },
         () => {
           console.log(this.signed);
-          this.services.upload(this.signed, this.services.success);
+          this.services.upload(this.signed, this.success);
     });
+  }
+
+  success(result:any) {
+    let finish = result;
+    console.log(finish);
+    let image = [];
+    image['value'] = {
+      pic: finish['url']
+    };
+    this.editInfo(image);
+    this.picSaved();
+  }
+
+  picSaved() {
+    let myImg = Toast.create({
+        message: 'Your Profile Pic has been Saved',
+        duration: 3000
+      });
+    this.nav.present(myImg);
   }
 
   editInfo(info){

@@ -17,8 +17,8 @@
 <more-menu [visible]="services.hide" (more)="services.hideMore()"></more-menu>
 
 <ion-content class="edit">
-  <button *ngIf="upFile" save fab fab-top fab-left (click)="savePic()" class="action">
-    <ion-icon name="sync"></ion-icon>
+  <button *ngIf="upFile" light fab fab-top fab-left (click)="savePic()" class="action">
+    <ion-icon name="cloud-upload"></ion-icon>
   </button>
   <button secondary fab fab-top fab-right (click)="services.getPics()" class="action">
     <ion-icon name="image"></ion-icon>
