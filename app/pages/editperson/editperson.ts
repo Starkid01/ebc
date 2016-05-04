@@ -1,5 +1,5 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from 'angular2/common';
-import {Page, Toast} from 'ionic-angular';
+import {Page, Toast, NavController} from 'ionic-angular';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -23,8 +23,9 @@ export class EditPage {
   firstName:Control = new Control('');
   lastName:Control = new Control('');
 
-  constructor(public backand:Backand, public services:Services) {
-    this.services.getAuth();
+constructor(public nav:NavController, public backand:Backand, public services:Services) {
+  this.nav = nav;
+  this.services.getAuth();
     this.services.getUser();
     this.editForm = new ControlGroup({
       firstName: this.firstName,
