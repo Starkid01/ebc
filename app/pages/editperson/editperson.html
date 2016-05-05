@@ -16,6 +16,8 @@
 
 <more-menu [visible]="services.hide" (more)="services.hideMore()"></more-menu>
 
+<up-loader *ngIf="services.myLoader" [value]="services.myProg"></up-loader>
+
 <ion-content class="edit">
   <button *ngIf="upFile" light fab fab-top fab-left (click)="savePic()" class="action">
     <ion-icon name="cloud-upload"></ion-icon>

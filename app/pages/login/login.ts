@@ -21,7 +21,6 @@ export class LoginPage {
   signed:boolean;
   error:boolean;
   reset:boolean;
-  upload:number = 0;
   attempts:number = 0;
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {

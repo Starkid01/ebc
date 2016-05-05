@@ -62,7 +62,7 @@ export class DropMenu {
     this.el = el;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.settings = {};
 
     console.log();

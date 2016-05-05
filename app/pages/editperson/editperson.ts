@@ -3,11 +3,12 @@ import {Page, Toast, NavController} from 'ionic-angular';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
+import {MyLoader} from '../../components/myloader/myloader';
 
 @Page({
   templateUrl: 'build/pages/editperson/editperson.html',
   providers: [Backand, Services],
-  directives: [FORM_DIRECTIVES, MoreMenu]
+  directives: [FORM_DIRECTIVES, MoreMenu, MyLoader]
 })
 
 export class EditPage {
@@ -88,45 +89,57 @@ constructor(public nav:NavController, public backand:Backand, public services:Se
     });
   }
 
-  success(result:any) {
-    let finish = result;
+  success = (result:any) => {
+    let finish = JSON.parse(result.response);
     console.log(finish);
-    let image = [];
-    image['value'] = {
+    let image = {
       pic: finish['url']
     };
-    this.editInfo(image);
+    console.log(image);
+    this.saveUpdate(image);
     this.picSaved();
   }
 
   picSaved() {
     let myImg = Toast.create({
         message: 'Your Profile Pic has been Saved',
-        duration: 3000
-      });
+        duration: 2000
+    });
+    myImg.onDismiss(() => {
+      this.services.myLoader = false;
+      this.upFile = false;
+    });
     this.nav.present(myImg);
   }
 
-  editInfo(info){
+  saveUpdate(value, form?) {
     let name = 'users';
     let id = this.services.myUser['id'];
+    this.backand.updateItem(name, id, value).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+        if(form){
+          this.services.clearForm(form);
+        }
+      },
+      () => {
+        console.log('Info has Changed');
+        this.services.getUser();
+        if(form){
+          this.services.clearForm(form);
+        }
+      });
+  }
+
+  editInfo(info) {
     let input = info.value;
     for(let i in input){
       if(input[i] === ''){
         delete input[i];
-        this.backand.updateItem(name, id, input).subscribe(
-          data => {
-            console.log(data);
-          },
-          err => {
-            console.log(err);
-            this.services.clearForm(info);
-          },
-          () => {
-            console.log('Info has Changed');
-            this.services.clearForm(info);
-            this.services.getUser();
-          });
+        this.saveUpdate(input, info);
       }
     }
   }

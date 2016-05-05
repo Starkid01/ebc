@@ -13,18 +13,12 @@ export class Services {
   hide:boolean = true;
   newPic:boolean = false;
   picFile:string;
+  myLoader:boolean = false;
+  myProg:number;
 
   constructor(public backand:Backand, public nav:NavController, public http:Http) {
     this.nav = nav;
     this.http = http;
-  }
-
-  uploading() {
-  let loading = Toast.create({
-      message: 'Your Image is being Uploaded',
-      duration: 5000
-     });
-  this.nav.present(loading);
   }
 
   getPics() {
@@ -113,13 +107,13 @@ export class Services {
     ft.upload(this.picFile, url, onSuccess, this.failed, options);
   }
 
-  progress(prog:ProgressEvent) {
-    let myProg = Math.round((prog.loaded / prog.total) * 100);
-    this.uploading();
-    console.log(myProg);
+  progress = (prog:ProgressEvent) => {
+    this.myLoader = true;
+    this.myProg = Math.round((prog.loaded / prog.total) * 100);
+    console.log(this.myProg);
   }
 
-  failed(err:any) {
+  failed = (err:any) => {
     let code = err.code;
     console.log(code, err);
   }
