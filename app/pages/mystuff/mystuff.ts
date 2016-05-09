@@ -8,7 +8,6 @@ import {MyFlysPage} from '../myflys/myflys';
 
 @Page({
   templateUrl: 'build/pages/mystuff/mystuff.html',
-  providers: [Services, Backand],
   directives: [MoreMenu]
 })
 

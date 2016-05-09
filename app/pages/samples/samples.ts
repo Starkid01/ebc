@@ -8,7 +8,6 @@ import {SFlysPage} from '../sflyers/sflyers';
 
 @Page({
   templateUrl: 'build/pages/samples/samples.html',
-  providers: [Services, Backand],
   directives: [MoreMenu]
 })
 

@@ -3,6 +3,8 @@ import {Type} from 'angular2/core';
 import {MyStuff} from '../mystuff/mystuff';
 import {Samples} from '../samples/samples';
 import {PersonPage} from '../myperson/myperson';
+import {Backand} from '../../components/backand/backand';
+import {Services} from '../../components/services/services';
 
 @Page({
   templateUrl: 'build/pages/sidemenu/sidemenu.html'
@@ -13,7 +15,8 @@ export class SideMenu {
   homePage: Type = MyStuff;
 
 
-  constructor(private app: IonicApp) {
+  constructor(private app: IonicApp, public backand:Backand, public services:Services) {
+    this.services.getUser();
     this.pages = [
       {title: 'EBC Samples', component: Samples},
       {title: 'My Stuff', component: MyStuff},

@@ -15,7 +15,6 @@ export class MyFlysPage {
   none:boolean;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.nav = nav;
     this.services.getAuth();
     this.myFlyers();
   }

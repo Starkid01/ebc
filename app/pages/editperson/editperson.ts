@@ -7,7 +7,6 @@ import {MyLoader} from '../../components/myloader/myloader';
 
 @Page({
   templateUrl: 'build/pages/editperson/editperson.html',
-  providers: [Backand, Services],
   directives: [FORM_DIRECTIVES, MoreMenu, MyLoader]
 })
 
@@ -24,10 +23,8 @@ export class EditPage {
   firstName:Control = new Control('');
   lastName:Control = new Control('');
 
-constructor(public nav:NavController, public backand:Backand, public services:Services) {
-  this.nav = nav;
-  this.services.getAuth();
-    this.services.getUser();
+  constructor(public nav:NavController, public backand:Backand, public services:Services) {
+    this.services.getAuth();
     this.editForm = new ControlGroup({
       firstName: this.firstName,
       lastName:  this.lastName

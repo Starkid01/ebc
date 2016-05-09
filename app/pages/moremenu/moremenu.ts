@@ -19,7 +19,6 @@ export class MoreMenu {
   local:any = new Storage(LocalStorage);
 
   constructor(public nav:NavController){
-    this.nav = nav;
     this.local;
   }
 

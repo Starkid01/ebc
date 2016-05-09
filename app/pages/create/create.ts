@@ -6,8 +6,7 @@ import {Services} from '../../components/services/services';
 
 @Page({
   templateUrl: 'build/pages/create/create.html',
-  directives: [FORM_DIRECTIVES],
-  providers: [Backand, Services]
+  directives: [FORM_DIRECTIVES]
 })
 
 export class CreatePage {
@@ -21,7 +20,6 @@ export class CreatePage {
   confirmPassword: Control = new Control('', Validators.required);
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {
-    this.nav = nav;
     this.verify = new ControlGroup({
         password: this.password,
         confirmPassword: this.confirmPassword

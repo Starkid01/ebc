@@ -6,7 +6,6 @@ import {Services} from '../../components/services/services';
 
 @Page({
   templateUrl: 'build/pages/scards/scards.html',
-  providers: [Backand, Services]
 })
 
 export class SCardsPage {
@@ -14,7 +13,6 @@ export class SCardsPage {
   detail:Type = DetailPage;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.nav = nav;
     this.services.getAuth();
     this.sampleCards();
   }

@@ -8,8 +8,7 @@ import {SideMenu} from '../sidemenu/sidemenu';
 
 @Page({
   templateUrl: 'build/pages/login/login.html',
-  directives: [FORM_DIRECTIVES],
-  providers: [Backand, Services]
+  directives: [FORM_DIRECTIVES]
 })
 
 export class LoginPage {
@@ -24,7 +23,6 @@ export class LoginPage {
   attempts:number = 0;
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {
-    this.nav = nav;
     this.loginForm = new ControlGroup({
       username: this.username,
       password: this.password

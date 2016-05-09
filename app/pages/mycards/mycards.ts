@@ -5,8 +5,7 @@ import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 
 @Page({
-  templateUrl: 'build/pages/mycards/mycards.html',
-  providers: [Backand, Services]
+  templateUrl: 'build/pages/mycards/mycards.html'
 })
 
 export class MyCardsPage {
@@ -15,7 +14,6 @@ export class MyCardsPage {
   none:boolean;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.nav = nav;
     this.services.getAuth();
     this.myCards();
   }

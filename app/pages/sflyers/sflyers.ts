@@ -5,8 +5,7 @@ import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 
 @Page({
-  templateUrl: 'build/pages/sflyers/sflyers.html',
-  providers: [Backand, Services]
+  templateUrl: 'build/pages/sflyers/sflyers.html'
 })
 
 export class SFlysPage {
@@ -14,7 +13,6 @@ export class SFlysPage {
   detail:Type = DetailPage;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.nav = nav;
     this.services.getAuth();
     this.sampleCards();
   }

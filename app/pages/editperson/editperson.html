@@ -26,7 +26,8 @@
     <ion-icon name="image"></ion-icon>
   </button>
   <ion-card>
-    <ion-img class="userImg" [src]="services.myUser?.pic"></ion-img>
+    <!--<ion-img class="userImg" [src]="services.myUser?.pic"></ion-img>-->
+    <div class="userImg"> <img [src]="services.myUser?.pic" /></div>
     <ion-card-content>
       <ion-card-title>
         <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>

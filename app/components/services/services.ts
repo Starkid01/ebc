@@ -1,4 +1,4 @@
-import {LocalStorage, Toast, Platform, Storage, NavController, ActionSheet} from 'ionic-angular';
+import {LocalStorage, Toast, Platform, Storage, ActionSheet, Events, IonicApp} from 'ionic-angular';
 import {Validators, ControlGroup, Control} from 'angular2/common';
 import {Injectable} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
@@ -15,9 +15,9 @@ export class Services {
   picFile:string;
   myLoader:boolean = false;
   myProg:number;
+  nav:any;
 
-  constructor(public backand:Backand, public nav:NavController, public http:Http) {
-    this.nav = nav;
+constructor(public app: IonicApp, public backand:Backand, public http:Http, public events:Events) {
     this.http = http;
   }
 
@@ -73,6 +73,7 @@ export class Services {
         },
       ]
     });
+    this.nav = this.app.getActiveNav();
     this.nav.present(actionPics);
   }
 
@@ -118,11 +119,24 @@ export class Services {
     console.log(code, err);
   }
 
+  setUser(user) {
+    this.events.publish('myUser', user);
+  }
+
+  userData() {
+    this.events.subscribe('myUser', (user) => {
+      this.myUser = user[0];
+      console.log(user);
+    })
+  }
+
   getUser(){
     this.backand.currentUser().subscribe(
       data => {
         this.backand.auth_status = 'OK';
-        this.myUser = data[0];
+        //this.myUser = data[0];
+        let user = data[0];
+        this.setUser(user);
       },
       err => {
         let errorMessage = this.backand.extractErrorMessage(err);
