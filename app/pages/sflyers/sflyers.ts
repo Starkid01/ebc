@@ -13,7 +13,6 @@ export class SFlysPage {
   detail:Type = DetailPage;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.services.getAuth();
     this.sampleCards();
   }
 
@@ -21,8 +20,6 @@ export class SFlysPage {
     let samples = 'SampleFlyer';
     this.backand.getItems(samples).subscribe(
       data => {
-        console.log('Sample Flyers');
-        console.log(data);
         this.flyers = data;
       },
       err => {

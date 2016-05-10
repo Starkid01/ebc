@@ -13,7 +13,6 @@ export class SCardsPage {
   detail:Type = DetailPage;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.services.getAuth();
     this.sampleCards();
   }
 
@@ -21,8 +20,6 @@ export class SCardsPage {
     let samples = 'SampleCard';
     this.backand.getItems(samples).subscribe(
       data => {
-        console.log('Sample Cards');
-        console.log(data);
         this.cards = data;
       },
       err => {

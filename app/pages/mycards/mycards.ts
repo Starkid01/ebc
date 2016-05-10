@@ -14,7 +14,7 @@ export class MyCardsPage {
   none:boolean;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.services.getAuth();
+    //this.services.getAuth();
     this.myCards();
   }
 

@@ -14,8 +14,6 @@ export class PersonPage {
   edit:Type = EditPage;
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {
-    this.services.getAuth();
-    //this.services.getUser();
   }
 
   editInfo() {

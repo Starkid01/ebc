@@ -14,7 +14,6 @@ export class DetailPage {
   constructor(public backand:Backand, public services:Services, public params:NavParams) {
     this.hide = true;
     this.params = params;
-    this.services.getAuth();
     this.itemDetail();
   }
 
@@ -24,8 +23,6 @@ export class DetailPage {
 
     this.backand.getItem(obj, id).subscribe(
       data => {
-        console.log('Sample Card');
-        console.log(data);
         this.item = data;
       },
       err => {

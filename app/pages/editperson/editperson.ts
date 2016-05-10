@@ -24,7 +24,6 @@ export class EditPage {
   lastName:Control = new Control('');
 
   constructor(public nav:NavController, public backand:Backand, public services:Services) {
-    this.services.getAuth();
     this.editForm = new ControlGroup({
       firstName: this.firstName,
       lastName:  this.lastName

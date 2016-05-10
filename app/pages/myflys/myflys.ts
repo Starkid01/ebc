@@ -5,8 +5,7 @@ import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 
 @Page({
-  templateUrl: 'build/pages/myflys/myflys.html',
-  providers: [Backand, Services]
+  templateUrl: 'build/pages/myflys/myflys.html'
 })
 
 export class MyFlysPage {
@@ -15,7 +14,6 @@ export class MyFlysPage {
   none:boolean;
 
   constructor(public backand:Backand, public services: Services, public nav:NavController) {
-    this.services.getAuth();
     this.myFlyers();
   }
 
@@ -31,8 +29,6 @@ export class MyFlysPage {
     let items = 'MyFlyer';
     this.backand.getItems(items).subscribe(
       data => {
-        console.log('My Flyers');
-        console.log(data);
         this.flyers = data;
       },
       err => {
