@@ -33,14 +33,16 @@
         <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>
       </ion-card-title>
     </ion-card-content>
-    <ion-segment [(ngModel)]="section">
-      <ion-segment-button value="user">
-        Edit Info
-      </ion-segment-button>
-      <ion-segment-button value="password">
-        Change Password
-      </ion-segment-button>
-    </ion-segment>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="section">
+        <ion-segment-button value="user">
+          Edit Info
+        </ion-segment-button>
+        <ion-segment-button value="password">
+          Change Password
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
   </ion-card>
 
   <div [ngSwitch]="section">

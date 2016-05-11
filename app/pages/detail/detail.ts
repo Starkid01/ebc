@@ -10,6 +10,7 @@ import {Services} from '../../components/services/services';
 export class DetailPage {
   item:Object;
   hide:boolean;
+  message:string = '';
 
   constructor(public backand:Backand, public services:Services, public params:NavParams) {
     this.hide = true;
@@ -30,6 +31,10 @@ export class DetailPage {
         this.backand.auth_status = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });
+  }
+
+  GetContact() {
+    console.log('Working at it');
   }
 
   More() {

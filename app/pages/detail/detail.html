@@ -20,5 +20,43 @@
         <p class="desc">{{item?.desc}}</p>
       </ion-card-title>
     </ion-card-content>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="message">
+        <ion-segment-button value="text">
+          <ion-icon name="text"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="contact" (select)="GetContact()">
+          <ion-icon name="contact"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="mail">
+          <ion-icon name="mail"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
   </ion-card>
+  <div padding [ngSwitch]="message" class="messForm">
+    <div *ngSwitchWhen="'text'">
+      <ion-list radio-group no-lines>
+        <ion-item>
+          <ion-label>Text</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchWhen="'mail'">
+     <ion-list radio-group no-lines>
+        <ion-item>
+          <ion-label>Mail</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
