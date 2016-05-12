@@ -3,13 +3,13 @@
     {{item?.name}}
   </ion-title>
   <ion-buttons end>
-    <button (click)="More()" class="more">
+    <button (click)="more()" class="more">
       <ion-icon name="md-more"></ion-icon>
     </button>
   </ion-buttons>
 </ion-navbar>
 
-<more-menu [visible]="hide" (more)="HideMore()"></more-menu>
+<more-menu [visible]="hide" (more)="hideMore()"></more-menu>
 
 <ion-content class="detail">
   <ion-card>
@@ -25,7 +25,7 @@
         <ion-segment-button value="text">
           <ion-icon name="text"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="contact" (select)="GetContact()">
+        <ion-segment-button value="contact" (select)="getContact()">
           <ion-icon name="contact"></ion-icon>
         </ion-segment-button>
         <ion-segment-button value="mail">
@@ -36,27 +36,49 @@
   </ion-card>
   <div padding [ngSwitch]="message" class="messForm">
     <div *ngSwitchWhen="'text'">
-      <ion-list radio-group no-lines>
-        <ion-item>
-          <ion-label>Text</ion-label>
-          <ion-radio></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-list>
+      <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
+        <ion-list no-lines>
+          <div radio-group ngControl="phone">
+            <ion-item>
+              <ion-label for="manual">Other Number</ion-label>
+              <ion-radio id="manual" name="manual" [value]="customField"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-input id="custom" name="custom" type="tel" (keyup)="userAdded(self)" placeholder="Manual Selected Number"></ion-input>
+            </ion-item>
+          </div>
+          <ion-item>
+            <ion-label for="text" stacked>Message</ion-label>
+            <ion-input ngControl="text" id="text" name="text" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button block class="formBtn" type="submit">Send Message</button>
+          </ion-item>
+        </ion-list>
+      </form>
     </div>
 
     <div *ngSwitchWhen="'mail'">
-     <ion-list radio-group no-lines>
-        <ion-item>
-          <ion-label>Mail</ion-label>
-          <ion-radio></ion-radio>
-        </ion-item>
-        <ion-item>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-list>
+      <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
+        <ion-list no-lines>
+          <div radio-group ngControl="phone">
+            <ion-item>
+              <ion-label for="manual">Other Email</ion-label>
+              <ion-radio id="manual" name="manual" [value]="customField"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-input id="custom" name="custom" type="email" (keyup)="userAdded(self)" placeholder="Manual Selected Number"></ion-input>
+            </ion-item>
+          </div>
+          <ion-item>
+            <ion-label for="text" stacked>Message</ion-label>
+            <ion-input ngControl="text" id="text" name="text" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button block class="formBtn" type="submit">Send Message</button>
+          </ion-item>
+        </ion-list>
+      </form>
     </div>
   </div>
 </ion-content>

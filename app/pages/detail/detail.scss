@@ -8,13 +8,16 @@
   }
 
   .toolbar-background {
-    background: rgba(255,255,255, 0);
+    background: rgba(255, 255, 255, 0);
   }
 }
 
 .messForm {
-
   ion-item {
-    background: rgba(255,255,255, 0);
+    background: rgba(255, 255, 255, 0);
+  }
+
+  .formBtn {
+    padding: 2rem;
   }
 }
