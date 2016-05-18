@@ -1,5 +1,5 @@
 import {Page} from 'ionic-angular';
-import {Type} from 'angular2/core';
+import {Type, ViewChild} from 'angular2/core';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -12,6 +12,7 @@ import {SFlysPage} from '../sflyers/sflyers';
 })
 
 export class Samples {
+  @ViewChild(MoreMenu) more:MoreMenu;
   cardTab: Type = SCardsPage;
   flyerTab: Type = SFlysPage;
   title: string;

@@ -21,7 +21,6 @@ var CreatePage = (function () {
         this.lastName = new common_1.Control('', common_1.Validators.required);
         this.password = new common_1.Control('', common_1.Validators.required);
         this.confirmPassword = new common_1.Control('', common_1.Validators.required);
-        this.nav = nav;
         this.verify = new common_1.ControlGroup({
             password: this.password,
             confirmPassword: this.confirmPassword
@@ -40,14 +39,13 @@ var CreatePage = (function () {
         this.services.clearField(this.email);
     };
     CreatePage.prototype.accountMade = function () {
-        var made = ionic_angular_1.Alert.create({
-            title: 'Account Created',
+        var _this = this;
+        var made = ionic_angular_1.Toast.create({
             message: 'Your account has been Created Please SignIn',
-            buttons: [
-                {
-                    text: 'Okay'
-                }
-            ]
+            duration: 3000
+        });
+        made.onDismiss(function () {
+            _this.nav.pop();
         });
         this.nav.present(made);
     };
@@ -78,8 +76,7 @@ var CreatePage = (function () {
     CreatePage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/create/create.html',
-            directives: [common_1.FORM_DIRECTIVES],
-            providers: [backand_1.Backand, services_1.Services]
+            directives: [common_1.FORM_DIRECTIVES]
         }),
         __metadata('design:paramtypes', [ionic_angular_1.NavController, backand_1.Backand, services_1.Services])
     ], CreatePage);

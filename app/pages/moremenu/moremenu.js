@@ -17,7 +17,6 @@ var MoreMenu = (function () {
         this.visibleChange = new core_1.EventEmitter();
         this.login = login_1.LoginPage;
         this.local = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
-        this.nav = nav;
         this.local;
     }
     MoreMenu.prototype.ngOnChanges = function (c) {
@@ -26,9 +25,8 @@ var MoreMenu = (function () {
             this.show = ch[i].currentValue;
         }
     };
-    MoreMenu.prototype.myToggle = function (h) {
-        this.show = h;
-        this.visibleChange.emit(h);
+    MoreMenu.prototype.myToggle = function () {
+        this.drop.close = !this.drop.close;
     };
     MoreMenu.prototype.signOut = function () {
         var nav = this.nav;
@@ -43,6 +41,10 @@ var MoreMenu = (function () {
         core_1.Output('more'),
         __metadata('design:type', core_1.EventEmitter)
     ], MoreMenu.prototype, "visibleChange", void 0);
+    __decorate([
+        core_1.ViewChild(dropmenu_1.DropMenu),
+        __metadata('design:type', dropmenu_1.DropMenu)
+    ], MoreMenu.prototype, "drop", void 0);
     MoreMenu = __decorate([
         core_1.Component({
             selector: 'more-menu',

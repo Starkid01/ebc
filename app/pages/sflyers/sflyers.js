@@ -17,16 +17,12 @@ var SFlysPage = (function () {
         this.services = services;
         this.nav = nav;
         this.detail = detail_1.DetailPage;
-        this.nav = nav;
-        this.services.getAuth();
         this.sampleCards();
     }
     SFlysPage.prototype.sampleCards = function () {
         var _this = this;
         var samples = 'SampleFlyer';
         this.backand.getItems(samples).subscribe(function (data) {
-            console.log('Sample Flyers');
-            console.log(data);
             _this.flyers = data;
         }, function (err) {
             var errorMessage = _this.backand.extractErrorMessage(err);
@@ -43,8 +39,7 @@ var SFlysPage = (function () {
     };
     SFlysPage = __decorate([
         ionic_angular_1.Page({
-            templateUrl: 'build/pages/sflyers/sflyers.html',
-            providers: [backand_1.Backand, services_1.Services]
+            templateUrl: 'build/pages/sflyers/sflyers.html'
         }),
         __metadata('design:paramtypes', [backand_1.Backand, services_1.Services, ionic_angular_1.NavController])
     ], SFlysPage);

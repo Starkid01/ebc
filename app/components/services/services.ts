@@ -4,7 +4,7 @@ import {Injectable} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import {Camera} from 'ionic-native';
 import {Backand} from '../../components/backand/backand';
-
+declare var FileUploadOptions:any;
 
 @Injectable()
 export class Services {
@@ -188,13 +188,5 @@ constructor(public app: IonicApp, public backand:Backand, public http:Http, publ
       input.updateValueAndValidity();
       //input._pristine = true;
     }
-  }
-
-  more(){
-    this.hide = !this.hide;
-  }
-
-  hideMore(){
-    this.hide = true;
   }
 }

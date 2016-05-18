@@ -17,8 +17,6 @@ var MyFlysPage = (function () {
         this.services = services;
         this.nav = nav;
         this.detail = detail_1.DetailPage;
-        this.nav = nav;
-        this.services.getAuth();
         this.myFlyers();
     }
     MyFlysPage.prototype.ngDoCheck = function () {
@@ -33,8 +31,6 @@ var MyFlysPage = (function () {
         var _this = this;
         var items = 'MyFlyer';
         this.backand.getItems(items).subscribe(function (data) {
-            console.log('My Flyers');
-            console.log(data);
             _this.flyers = data;
         }, function (err) {
             var errorMessage = _this.backand.extractErrorMessage(err);
@@ -51,8 +47,7 @@ var MyFlysPage = (function () {
     };
     MyFlysPage = __decorate([
         ionic_angular_1.Page({
-            templateUrl: 'build/pages/myflys/myflys.html',
-            providers: [backand_1.Backand, services_1.Services]
+            templateUrl: 'build/pages/myflys/myflys.html'
         }),
         __metadata('design:paramtypes', [backand_1.Backand, services_1.Services, ionic_angular_1.NavController])
     ], MyFlysPage);

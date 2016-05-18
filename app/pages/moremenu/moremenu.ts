@@ -1,4 +1,4 @@
-import {Component, Input, SimpleChange, Output, EventEmitter, Type} from 'angular2/core';
+import {Component, Input, SimpleChange, Output, EventEmitter, Type, ViewChild} from 'angular2/core';
 import {NavController, LocalStorage, Storage} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {DropMenu, MenuItem} from '../../components/dropmenu/dropmenu';
@@ -12,6 +12,7 @@ import {DropMenu, MenuItem} from '../../components/dropmenu/dropmenu';
 export class MoreMenu {
   @Input() visible: boolean;
   @Output('more') visibleChange: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild(DropMenu) drop:DropMenu;
 
   show: boolean;
   ch: Object;
@@ -29,9 +30,8 @@ export class MoreMenu {
     }
   }
 
-  myToggle(h: boolean){
-    this.show = h;
-    this.visibleChange.emit(h);
+  myToggle() {
+    this.drop.close = !this.drop.close;
   }
 
   signOut() {

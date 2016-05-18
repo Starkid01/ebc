@@ -3,13 +3,13 @@
     {{item?.name}}
   </ion-title>
   <ion-buttons end>
-    <button (click)="more()" class="more">
+    <button (click)="more.myToggle()" class="more">
       <ion-icon name="md-more"></ion-icon>
     </button>
   </ion-buttons>
 </ion-navbar>
 
-<more-menu [visible]="hide" (more)="hideMore()"></more-menu>
+<more-menu></more-menu>
 
 <ion-content class="detail">
   <ion-card>
@@ -38,10 +38,15 @@
     <div *ngSwitchWhen="'text'">
       <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
         <ion-list no-lines>
+          <h3 favorite>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div radio-group ngControl="phone">
+            <ion-item *ngFor="#number of picked?.phoneNumbers">
+              <ion-label for="number.id">{{number.type}}: {{number.value}}</ion-label>
+              <ion-radio [id]="number.id" name="sms" [value]="number.value"></ion-radio>
+            </ion-item>
             <ion-item>
               <ion-label for="manual">Other Number</ion-label>
-              <ion-radio id="manual" name="manual" [value]="customField"></ion-radio>
+              <ion-radio id="manual" name="sms" [value]="customField" checked></ion-radio>
             </ion-item>
             <ion-item>
               <ion-input id="custom" name="custom" type="tel" (keyup)="userAdded(self)" placeholder="Manual Selected Number"></ion-input>
@@ -59,15 +64,20 @@
     </div>
 
     <div *ngSwitchWhen="'mail'">
-      <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
+      <form [ngFormModel]="emailForm" (ngSubmit)="sendSms(emailForm)">
         <ion-list no-lines>
-          <div radio-group ngControl="phone">
-            <ion-item>
-              <ion-label for="manual">Other Email</ion-label>
-              <ion-radio id="manual" name="manual" [value]="customField"></ion-radio>
+          <h3 favorite>Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
+          <div radio-group ngControl="email">
+            <ion-item *ngFor="#email of picked?.emails">
+              <ion-label for="email.id">{{email.type}}: {{email.value}}</ion-label>
+              <ion-radio [id]="email.id" name="email" [value]="email.value"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-input id="custom" name="custom" type="email" (keyup)="userAdded(self)" placeholder="Manual Selected Number"></ion-input>
+              <ion-label for="manual">Other Email</ion-label>
+              <ion-radio id="manual" name="email" [value]="customField" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-input id="custom" name="custom" type="email" (keyup)="userAdded(self)" placeholder="Manual Selected Email"></ion-input>
             </ion-item>
           </div>
           <ion-item>

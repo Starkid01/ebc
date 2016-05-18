@@ -1,5 +1,5 @@
 import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
-import {Type} from 'angular2/core';
+import {Type, DoCheck} from 'angular2/core';
 import {Page, NavController, Alert, LocalStorage, Storage, Toast} from 'ionic-angular';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -11,7 +11,7 @@ import {SideMenu} from '../sidemenu/sidemenu';
   directives: [FORM_DIRECTIVES]
 })
 
-export class LoginPage {
+export class LoginPage implements DoCheck {
   signUp:Type = CreatePage;
   local:Storage = new Storage(LocalStorage);
   loginForm:ControlGroup;

@@ -8,8 +8,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
+var core_1 = require('angular2/core');
 var moremenu_1 = require('../moremenu/moremenu');
-var backand_1 = require('../../components/backand/backand');
 var services_1 = require('../../components/services/services');
 var scards_1 = require('../scards/scards');
 var sflyers_1 = require('../sflyers/sflyers');
@@ -28,10 +28,13 @@ var Samples = (function () {
             this.title = 'Sample Flyers';
         }
     };
+    __decorate([
+        core_1.ViewChild(moremenu_1.MoreMenu),
+        __metadata('design:type', moremenu_1.MoreMenu)
+    ], Samples.prototype, "more", void 0);
     Samples = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/samples/samples.html',
-            providers: [services_1.Services, backand_1.Backand],
             directives: [moremenu_1.MoreMenu]
         }),
         __metadata('design:paramtypes', [services_1.Services])

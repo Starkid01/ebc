@@ -17,16 +17,12 @@ var SCardsPage = (function () {
         this.services = services;
         this.nav = nav;
         this.detail = detail_1.DetailPage;
-        this.nav = nav;
-        this.services.getAuth();
         this.sampleCards();
     }
     SCardsPage.prototype.sampleCards = function () {
         var _this = this;
         var samples = 'SampleCard';
         this.backand.getItems(samples).subscribe(function (data) {
-            console.log('Sample Cards');
-            console.log(data);
             _this.cards = data;
         }, function (err) {
             var errorMessage = _this.backand.extractErrorMessage(err);
@@ -44,7 +40,6 @@ var SCardsPage = (function () {
     SCardsPage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/scards/scards.html',
-            providers: [backand_1.Backand, services_1.Services]
         }),
         __metadata('design:paramtypes', [backand_1.Backand, services_1.Services, ionic_angular_1.NavController])
     ], SCardsPage);

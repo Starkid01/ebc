@@ -17,8 +17,7 @@ var MyCardsPage = (function () {
         this.services = services;
         this.nav = nav;
         this.detail = detail_1.DetailPage;
-        this.nav = nav;
-        this.services.getAuth();
+        //this.services.getAuth();
         this.myCards();
     }
     MyCardsPage.prototype.ngDoCheck = function () {
@@ -51,8 +50,7 @@ var MyCardsPage = (function () {
     };
     MyCardsPage = __decorate([
         ionic_angular_1.Page({
-            templateUrl: 'build/pages/mycards/mycards.html',
-            providers: [backand_1.Backand, services_1.Services]
+            templateUrl: 'build/pages/mycards/mycards.html'
         }),
         __metadata('design:paramtypes', [backand_1.Backand, services_1.Services, ionic_angular_1.NavController])
     ], MyCardsPage);

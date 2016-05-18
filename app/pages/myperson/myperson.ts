@@ -1,5 +1,5 @@
 import {Page, NavController} from 'ionic-angular';
-import {Type} from 'angular2/core';
+import {Type, ViewChild} from 'angular2/core';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
 import {MoreMenu} from '../moremenu/moremenu';
@@ -11,6 +11,7 @@ import {EditPage} from '../editperson/editperson';
 })
 
 export class PersonPage {
+  @ViewChild(MoreMenu) more:MoreMenu;
   edit:Type = EditPage;
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {

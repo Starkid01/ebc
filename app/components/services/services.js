@@ -13,14 +13,25 @@ var http_1 = require('angular2/http');
 var ionic_native_1 = require('ionic-native');
 var backand_1 = require('../../components/backand/backand');
 var Services = (function () {
-    function Services(backand, nav, http) {
+    function Services(app, backand, http, events) {
+        var _this = this;
+        this.app = app;
         this.backand = backand;
-        this.nav = nav;
         this.http = http;
+        this.events = events;
         this.local = new ionic_angular_1.Storage(ionic_angular_1.LocalStorage);
         this.hide = true;
         this.newPic = false;
-        this.nav = nav;
+        this.myLoader = false;
+        this.progress = function (prog) {
+            _this.myLoader = true;
+            _this.myProg = Math.round((prog.loaded / prog.total) * 100);
+            console.log(_this.myProg);
+        };
+        this.failed = function (err) {
+            var code = err.code;
+            console.log(code, err);
+        };
         this.http = http;
     }
     Services.prototype.getPics = function () {
@@ -39,7 +50,7 @@ var Services = (function () {
                         ionic_native_1.Camera.getPicture(opts).then(function (imageData) {
                             _this.picFile = imageData;
                             _this.newPic = true;
-                            return _this.picFile;
+                            _this.picFile;
                         }, function (err) {
                             console.log(err);
                         });
@@ -58,7 +69,7 @@ var Services = (function () {
                         ionic_native_1.Camera.getPicture(opts).then(function (imageData) {
                             _this.picFile = imageData;
                             _this.newPic = true;
-                            return _this.picFile;
+                            _this.picFile;
                         }, function (err) {
                             console.log(err);
                         });
@@ -76,36 +87,54 @@ var Services = (function () {
                 },
             ]
         });
+        this.nav = this.app.getActiveNav();
         this.nav.present(actionPics);
     };
     Services.prototype.getSigned = function (preset) {
-        var signed = {};
         var opt = JSON.stringify({
             preset: preset,
-            tag: this.myUser['firstName'] + ' ' + this.myUser['firstName']
+            tag: this.myUser['firstName'] + ' ' + this.myUser['lastName']
         });
         var header = new http_1.Headers();
         header.append('Content-Type', 'application/x-www-form-urlencoded');
-        this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
+        return this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
             headers: header
-        }).map(function (res) { return res; })
-            .subscribe(function (data) {
-            signed = data['_body'];
-            console.log(data, signed);
-        }, function (err) {
-            console.log(err);
-        }, function () {
-            console.log('Cool');
-        });
+        }).map(function (res) { return res; });
     };
-    Services.prototype.upload = function (tags) {
-        this.getSigned(tags);
+    Services.prototype.upload = function (signed, onSuccess) {
+        var _this = this;
+        var ft = new FileTransfer();
+        var options = new FileUploadOptions();
+        var filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
+        var url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
+        options.fileKey = 'file';
+        options.fileName = filename;
+        options.mimeType = 'image/jpeg';
+        options.chunkedMode = false;
+        options.headers = {
+            'Content-Type': undefined
+        };
+        options.params = signed;
+        ft.onprogress = function (e) { return _this.progress(e); };
+        ft.upload(this.picFile, url, onSuccess, this.failed, options);
+    };
+    Services.prototype.setUser = function (user) {
+        this.events.publish('myUser', user);
+    };
+    Services.prototype.userData = function () {
+        var _this = this;
+        this.events.subscribe('myUser', function (user) {
+            _this.myUser = user[0];
+            console.log(user);
+        });
     };
     Services.prototype.getUser = function () {
         var _this = this;
         this.backand.currentUser().subscribe(function (data) {
             _this.backand.auth_status = 'OK';
-            _this.myUser = data[0];
+            //this.myUser = data[0];
+            var user = data[0];
+            _this.setUser(user);
         }, function (err) {
             var errorMessage = _this.backand.extractErrorMessage(err);
             _this.backand.auth_status = "Error: " + errorMessage;
@@ -149,15 +178,9 @@ var Services = (function () {
             input.updateValueAndValidity();
         }
     };
-    Services.prototype.more = function () {
-        this.hide = !this.hide;
-    };
-    Services.prototype.hideMore = function () {
-        this.hide = true;
-    };
     Services = __decorate([
         core_1.Injectable(),
-        __metadata('design:paramtypes', [backand_1.Backand, ionic_angular_1.NavController, http_1.Http])
+        __metadata('design:paramtypes', [ionic_angular_1.IonicApp, backand_1.Backand, http_1.Http, ionic_angular_1.Events])
     ], Services);
     return Services;
 })();

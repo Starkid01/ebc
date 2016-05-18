@@ -23,7 +23,6 @@ var LoginPage = (function () {
         this.username = new common_1.Control('', common_1.Validators.compose([common_1.Validators.required, this.services.emailValidator]));
         this.password = new common_1.Control('', common_1.Validators.required);
         this.attempts = 0;
-        this.nav = nav;
         this.loginForm = new common_1.ControlGroup({
             username: this.username,
             password: this.password
@@ -112,8 +111,7 @@ var LoginPage = (function () {
     LoginPage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/login/login.html',
-            directives: [common_1.FORM_DIRECTIVES],
-            providers: [backand_1.Backand, services_1.Services]
+            directives: [common_1.FORM_DIRECTIVES]
         }),
         __metadata('design:paramtypes', [ionic_angular_1.NavController, backand_1.Backand, services_1.Services])
     ], LoginPage);

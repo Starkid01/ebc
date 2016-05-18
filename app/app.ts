@@ -1,4 +1,3 @@
-import {ViewChild} from 'angular2/core';
 import {App, Platform, Nav, Events} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {Backand} from './components/backand/backand';
@@ -6,7 +5,7 @@ import {Services} from './components/services/services';
 import {LoginPage} from './pages/login/login';
 
 // https://angular.io/docs/ts/latest/api/core/Type-interface.html
-import {Type} from 'angular2/core';
+import {Type, ViewChild} from 'angular2/core';
 
 @App({
   template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',

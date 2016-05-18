@@ -1,5 +1,5 @@
 import {Page} from 'ionic-angular';
-import {Type} from 'angular2/core';
+import {Type, ViewChild} from 'angular2/core';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -12,11 +12,12 @@ import {MyFlysPage} from '../myflys/myflys';
 })
 
 export class MyStuff {
+  @ViewChild(MoreMenu) more:MoreMenu;
   cardTab: Type = MyCardsPage;
   flyerTab: Type = MyFlysPage;
   title: string;
 
-  constructor(public services: Services){
+  constructor(public services: Services) {
   }
 
   getTitle(Type) {

@@ -1,4 +1,5 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from 'angular2/common';
+import {ViewChild, DoCheck} from 'angular2/core';
 import {Page, Toast, NavController} from 'ionic-angular';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
@@ -10,7 +11,8 @@ import {MyLoader} from '../../components/myloader/myloader';
   directives: [FORM_DIRECTIVES, MoreMenu, MyLoader]
 })
 
-export class EditPage {
+export class EditPage implements DoCheck {
+  @ViewChild(MoreMenu) more:MoreMenu;
   section:string = 'user';
   signed:Object;
   upFile:boolean = false;

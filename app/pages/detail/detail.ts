@@ -1,5 +1,7 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from 'angular2/common';
+import {ViewChild} from 'angular2/core';
 import {Page, NavParams} from 'ionic-angular';
+import {Contacts} from 'ionic-native';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -9,25 +11,31 @@ import {Services} from '../../components/services/services';
   directives: [MoreMenu, FORM_DIRECTIVES]
 })
 export class DetailPage {
+  @ViewChild(MoreMenu) more:MoreMenu;
   emailForm:ControlGroup;
   smsForm:ControlGroup;
   phone:Control = new Control('');
   text:Control = new Control('');
   email:Control = new Control('', this.services.emailValidator);
   item:Object;
-  hide:boolean;
+  hide:boolean = false;
   message:string = '';
+  pickPhone:string = '';
   customField:string;
+  picked:Array<any>;
 
   constructor(public backand:Backand, public services:Services, public params:NavParams) {
-    this.hide = true;
     this.params = params;
     this.itemDetail();
+    this.text['_value'] = 'Something Cool';
     this.smsForm = new ControlGroup({
       phone: this.phone,
       text: this.text
     });
-
+    this.emailForm = new ControlGroup({
+      email: this.email,
+      text: this.text
+    })
   }
 
   itemDetail(){
@@ -52,7 +60,7 @@ export class DetailPage {
   sendSms(form) {
     let mySms = form.value;
 
-    console.log(mySms);
+    console.log(mySms, this.pickPhone);
   }
 
   sendEmail(form) {
@@ -63,13 +71,10 @@ export class DetailPage {
 
   getContact() {
     console.log('Working at it');
-  }
-
-  more() {
-    this.hide = !this.hide;
-  }
-
-   hideMore() {
-    this.hide = true;
+    Contacts.pickContact().then((contact) => {
+      this.picked = contact;
+      this.hide = true;
+      console.log(this.picked, this.picked['name'], this.picked['phoneNumbers'], this.picked['emails']);
+    })
   }
 }

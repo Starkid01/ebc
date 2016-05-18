@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ElementRef} from 'angular2/core';
+import {Component, Input, Output, OnInit} from 'angular2/core';
 
 @Component({
   selector: 'drop-menu',
@@ -6,7 +6,7 @@ import {Component, Input, Output, EventEmitter, ElementRef} from 'angular2/core'
     '(document:click)': 'click($event)'
   },
   template:
-  `<div class="menu enter" [style.transform-origin]="settings.origin">
+    `<div class="menu enter" *ngIf="close" [style.transform-origin]="settings.origin">
       <div [hidden]="header" class="menu-title">{{settings.title}}</div>
       <div class="menu-item">
         <ng-content></ng-content>
@@ -53,19 +53,13 @@ import {Component, Input, Output, EventEmitter, ElementRef} from 'angular2/core'
   `]
 })
 
-export class DropMenu {
-  @Input() settings: Object;
-  @Output() toggle: EventEmitter<boolean> = new EventEmitter();
-  header: boolean;
-
-  constructor(private el:ElementRef) {
-    this.el = el;
-  }
+export class DropMenu implements OnInit {
+  @Input() settings:Object;
+  header:boolean;
+  close:boolean = false;
 
   ngOnInit() {
     this.settings = {};
-
-    console.log();
 
     if(!this.settings.hasOwnProperty('visible')){
       this.header = true;
@@ -77,7 +71,6 @@ export class DropMenu {
   }
 
   click(e) {
-    let self = this.el.nativeElement;
     let click = e.target;
     let inside = false;
     let toggle = false;
@@ -91,9 +84,9 @@ export class DropMenu {
       click = click.parentNode;
     } while (click);
     if(inside) {
-      this.toggle.next(true);
-    } else if(!toggle && !self.hasAttribute('hidden')) {
-      this.toggle.next(true);
+      this.close = false;
+    } else if(!toggle) {
+      this.close = false;
     }
   }
 }

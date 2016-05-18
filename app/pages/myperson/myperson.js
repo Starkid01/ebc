@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var common_1 = require('angular2/common');
+var core_1 = require('angular2/core');
 var backand_1 = require('../../components/backand/backand');
 var services_1 = require('../../components/services/services');
 var moremenu_1 = require('../moremenu/moremenu');
@@ -19,18 +19,18 @@ var PersonPage = (function () {
         this.backand = backand;
         this.services = services;
         this.edit = editperson_1.EditPage;
-        this.nav = nav;
-        this.services.getAuth();
-        this.services.getUser();
     }
     PersonPage.prototype.editInfo = function () {
         this.nav.push(this.edit);
     };
+    __decorate([
+        core_1.ViewChild(moremenu_1.MoreMenu),
+        __metadata('design:type', moremenu_1.MoreMenu)
+    ], PersonPage.prototype, "more", void 0);
     PersonPage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/myperson/myperson.html',
-            providers: [backand_1.Backand, services_1.Services],
-            directives: [moremenu_1.MoreMenu, common_1.NgStyle]
+            directives: [moremenu_1.MoreMenu]
         }),
         __metadata('design:paramtypes', [ionic_angular_1.NavController, backand_1.Backand, services_1.Services])
     ], PersonPage);
