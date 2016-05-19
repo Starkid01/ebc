@@ -10,6 +10,7 @@ import {Services} from '../../components/services/services';
   templateUrl: 'build/pages/detail/detail.html',
   directives: [MoreMenu, FORM_DIRECTIVES]
 })
+
 export class DetailPage {
   @ViewChild(MoreMenu) more:MoreMenu;
   emailForm:ControlGroup;
@@ -21,7 +22,7 @@ export class DetailPage {
   hide:boolean = false;
   message:string = '';
   pickPhone:string = '';
-  customField:string;
+  field:string;
   picked:Array<any>;
 
   constructor(public backand:Backand, public services:Services, public params:NavParams) {
@@ -53,14 +54,10 @@ export class DetailPage {
       });
   }
 
-  userAdded(value) {
-    this.customField = value;
-  }
-
   sendSms(form) {
     let mySms = form.value;
 
-    console.log(mySms, this.pickPhone);
+    console.log(mySms);
   }
 
   sendEmail(form) {

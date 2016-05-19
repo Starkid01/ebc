@@ -49,12 +49,9 @@ var DetailPage = (function () {
             _this.backand.logError(err);
         });
     };
-    DetailPage.prototype.userAdded = function (value) {
-        this.customField = value;
-    };
     DetailPage.prototype.sendSms = function (form) {
         var mySms = form.value;
-        console.log(mySms, this.pickPhone);
+        console.log(mySms);
     };
     DetailPage.prototype.sendEmail = function (form) {
         var myEmail = form.value;

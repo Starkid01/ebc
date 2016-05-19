@@ -41,17 +41,17 @@
           <h3 favorite>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div radio-group ngControl="phone">
             <ion-item *ngFor="#number of picked?.phoneNumbers">
-              <ion-label for="number.id">{{number.type}}: {{number.value}}</ion-label>
+              <ion-label [for]="number.id">{{number.type}}: {{number.value}}</ion-label>
               <ion-radio [id]="number.id" name="sms" [value]="number.value"></ion-radio>
             </ion-item>
             <ion-item>
               <ion-label for="manual">Other Number</ion-label>
-              <ion-radio id="manual" name="sms" [value]="customField" checked></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-input id="custom" name="custom" type="tel" (keyup)="userAdded(self)" placeholder="Manual Selected Number"></ion-input>
+              <ion-radio id="manual" name="sms" [value]="field" checked></ion-radio>
             </ion-item>
           </div>
+          <ion-item>
+            <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number"></ion-input>
+          </ion-item>
           <ion-item>
             <ion-label for="text" stacked>Message</ion-label>
             <ion-input ngControl="text" id="text" name="text" type="text"></ion-input>
@@ -74,12 +74,12 @@
             </ion-item>
             <ion-item>
               <ion-label for="manual">Other Email</ion-label>
-              <ion-radio id="manual" name="email" [value]="customField" checked></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-input id="custom" name="custom" type="email" (keyup)="userAdded(self)" placeholder="Manual Selected Email"></ion-input>
+              <ion-radio id="manual" name="email" [value]="field"></ion-radio>
             </ion-item>
           </div>
+          <ion-item>
+            <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email"></ion-input>
+          </ion-item>
           <ion-item>
             <ion-label for="text" stacked>Message</ion-label>
             <ion-input ngControl="text" id="text" name="text" type="text"></ion-input>
