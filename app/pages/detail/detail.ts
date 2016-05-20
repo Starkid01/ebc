@@ -18,6 +18,7 @@ export class DetailPage {
   phone:Control = new Control('');
   text:Control = new Control('');
   email:Control = new Control('', this.services.emailValidator);
+  body:Control = new Control('');
   item:Object;
   hide:boolean = false;
   message:string = '';
@@ -35,7 +36,8 @@ export class DetailPage {
     });
     this.emailForm = new ControlGroup({
       email: this.email,
-      text: this.text
+      text: this.text,
+      body: this.body
     })
   }
 

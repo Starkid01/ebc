@@ -19,14 +19,15 @@ import {Component, Input, Output, OnInit} from 'angular2/core';
       top: 1rem;
       right: 2rem;
       flex-direction: column;
-      align-item: center;
+      justify-content: flex-start;
+      align-contents: center;
       background: #fff;
       min-height: 13rem;
       min-width: 12rem;
       width: 100%;
       max-width: max-content;
       box-shadow: 0px 1px 5px rgba(11, 11, 11, .3);
-      border-radius: .2em;
+      border-radius: .2rem;
       transition: all .2s ease-in-out;
       z-index: 9999;
     }

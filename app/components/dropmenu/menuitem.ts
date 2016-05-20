@@ -1,17 +1,11 @@
-import {Component, Input} from 'angular2/core';
+import {Component} from 'angular2/core';
 
 @Component({
   selector: 'menu-item',
   template: `
-    <button class="item">
+    <button block clear>
       <ng-content></ng-content>
-    </button>`,
-  styles: [`
-    .item {
-      text-align: center;
-      width: 100%;
-    }
-  `]
+    </button>`
 })
 
 export class MenuItem {

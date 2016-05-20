@@ -38,7 +38,7 @@
     <div *ngSwitchWhen="'text'">
       <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
         <ion-list no-lines>
-          <h3 favorite>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
+          <h3 secondary>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div radio-group ngControl="phone">
             <ion-item *ngFor="#number of picked?.phoneNumbers">
               <ion-label [for]="number.id">{{number.type}}: {{number.value}}</ion-label>
@@ -66,7 +66,7 @@
     <div *ngSwitchWhen="'mail'">
       <form [ngFormModel]="emailForm" (ngSubmit)="sendSms(emailForm)">
         <ion-list no-lines>
-          <h3 favorite>Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
+          <h3 secondary>Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div radio-group ngControl="email">
             <ion-item *ngFor="#email of picked?.emails">
               <ion-label for="email.id">{{email.type}}: {{email.value}}</ion-label>
@@ -81,11 +81,15 @@
             <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label for="text" stacked>Message</ion-label>
+            <ion-label for="text" stacked>Subject</ion-label>
             <ion-input ngControl="text" id="text" name="text" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <button block class="formBtn" type="submit">Send Message</button>
+            <ion-label for="body" stacked>Message</ion-label>
+            <ion-textarea ngControl="body" id="body" name="text" type="text"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <button block class="formBtn" type="submit">Send Email</button>
           </ion-item>
         </ion-list>
       </form>
