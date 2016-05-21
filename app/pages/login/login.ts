@@ -1,5 +1,5 @@
-import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
-import {Type, DoCheck} from 'angular2/core';
+import {FORM_DIRECTIVES, Validators, NgFormModel, ControlGroup, Control} from '@angular/common';
+import {Type, DoCheck} from '@angular/core';
 import {Page, NavController, Alert, LocalStorage, Storage, Toast} from 'ionic-angular';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';

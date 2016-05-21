@@ -1,4 +1,4 @@
-import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from 'angular2/common';
+import {FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control} from '@angular/common';
 import {Page, NavController, Toast} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {Backand} from '../../components/backand/backand';

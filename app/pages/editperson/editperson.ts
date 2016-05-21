@@ -1,5 +1,5 @@
-import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from 'angular2/common';
-import {ViewChild, DoCheck} from 'angular2/core';
+import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from '@angular/common';
+import {ViewChild, DoCheck} from '@angular/core';
 import {Page, Toast, NavController} from 'ionic-angular';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';

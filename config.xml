@@ -46,4 +46,6 @@
   <plugin name="cordova-plugin-splashscreen" spec="~3.2.1" />
   <plugin name="cordova-plugin-statusbar" spec="~2.1.2" />
   <plugin name="ionic-plugin-keyboard" spec="https://github.com/driftyco/ionic-plugin-keyboard.git" />
+  <plugin name="cordova-plugin-email-composer" version="0.8.3" />
+  <plugin name="com.cordova.plugins.sms" version="0.1.10" src="https://github.com/cordova-sms/cordova-sms-plugin" />
 </widget>

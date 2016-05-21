@@ -1,5 +1,5 @@
 import {IONIC_DIRECTIVES} from 'ionic-angular';
-import {Component, Input, ViewEncapsulation} from 'angular2/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'up-loader',

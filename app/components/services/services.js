@@ -8,8 +8,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var core_1 = require('angular2/core');
-var http_1 = require('angular2/http');
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
 var ionic_native_1 = require('ionic-native');
 var backand_1 = require('../../components/backand/backand');
 var Services = (function () {

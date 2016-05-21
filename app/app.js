@@ -12,7 +12,7 @@ var backand_1 = require('./components/backand/backand');
 var services_1 = require('./components/services/services');
 var login_1 = require('./pages/login/login');
 // https://angular.io/docs/ts/latest/api/core/Type-interface.html
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var MyApp = (function () {
     function MyApp(platform, events, backand, services) {
         this.platform = platform;

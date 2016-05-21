@@ -1,10 +1,10 @@
+declare var FileUploadOptions:any;
 import {LocalStorage, Toast, Platform, Storage, ActionSheet, Events, IonicApp} from 'ionic-angular';
-import {Validators, ControlGroup, Control} from 'angular2/common';
-import {Injectable} from 'angular2/core';
-import {Http, Headers} from 'angular2/http';
+import {Validators, ControlGroup, Control} from '@angular/common';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
 import {Camera} from 'ionic-native';
 import {Backand} from '../../components/backand/backand';
-declare var FileUploadOptions:any;
 
 @Injectable()
 export class Services {
@@ -17,7 +17,7 @@ export class Services {
   myProg:number;
   nav:any;
 
-constructor(public app: IonicApp, public backand:Backand, public http:Http, public events:Events) {
+  constructor(public app: IonicApp, public backand:Backand, public http:Http, public events:Events) {
     this.http = http;
   }
 
@@ -134,7 +134,6 @@ constructor(public app: IonicApp, public backand:Backand, public http:Http, publ
     this.backand.currentUser().subscribe(
       data => {
         this.backand.auth_status = 'OK';
-        //this.myUser = data[0];
         let user = data[0];
         this.setUser(user);
       },

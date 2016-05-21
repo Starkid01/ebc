@@ -1,5 +1,5 @@
 import {Page} from 'ionic-angular';
-import {Type, ViewChild} from 'angular2/core';
+import {Type, ViewChild} from '@angular/core';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';

@@ -1,5 +1,5 @@
 import {Page, IonicApp} from 'ionic-angular';
-import {Type} from 'angular2/core';
+import {Type} from '@angular/core';
 import {MyStuff} from '../mystuff/mystuff';
 import {Samples} from '../samples/samples';
 import {PersonPage} from '../myperson/myperson';

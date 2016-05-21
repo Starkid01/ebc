@@ -38,9 +38,9 @@
     <div *ngSwitchWhen="'text'">
       <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
         <ion-list no-lines>
-          <h3 secondary>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
+          <h3 mygray>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div radio-group ngControl="phone">
-            <ion-item *ngFor="#number of picked?.phoneNumbers">
+            <ion-item *ngFor="let number of picked?.phoneNumbers">
               <ion-label [for]="number.id">{{number.type}}: {{number.value}}</ion-label>
               <ion-radio [id]="number.id" name="sms" [value]="number.value"></ion-radio>
             </ion-item>
@@ -66,9 +66,9 @@
     <div *ngSwitchWhen="'mail'">
       <form [ngFormModel]="emailForm" (ngSubmit)="sendSms(emailForm)">
         <ion-list no-lines>
-          <h3 secondary>Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
+          <h3 mygray>Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div radio-group ngControl="email">
-            <ion-item *ngFor="#email of picked?.emails">
+            <ion-item *ngFor="let email of picked?.emails">
               <ion-label for="email.id">{{email.type}}: {{email.value}}</ion-label>
               <ion-radio [id]="email.id" name="email" [value]="email.value"></ion-radio>
             </ion-item>

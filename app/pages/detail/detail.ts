@@ -1,7 +1,7 @@
-import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from 'angular2/common';
-import {ViewChild} from 'angular2/core';
+import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from '@angular/common';
+import {ViewChild} from '@angular/core';
 import {Page, NavParams} from 'ionic-angular';
-import {Contacts} from 'ionic-native';
+import {Contacts, SMS, EmailComposer} from 'ionic-native';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -59,7 +59,7 @@ export class DetailPage {
   sendSms(form) {
     let mySms = form.value;
 
-    console.log(mySms);
+    SMS.send(mySms.phone, mySms.text + ' ' + this.item['media']);
   }
 
   sendEmail(form) {

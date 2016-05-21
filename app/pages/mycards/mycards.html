@@ -3,7 +3,7 @@
     <h2 favorite>Sorry You haven't Added Anything Here</h2>
     <p>Please Submit a New Card</p>
   </div>
- <ion-card *ngFor="#c of cards">
+ <ion-card *ngFor="let c of cards">
     <ion-card-header>
       <h2 favorite>{{c?.name}}</h2>
     </ion-card-header>

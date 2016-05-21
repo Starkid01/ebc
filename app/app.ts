@@ -5,7 +5,7 @@ import {Services} from './components/services/services';
 import {LoginPage} from './pages/login/login';
 
 // https://angular.io/docs/ts/latest/api/core/Type-interface.html
-import {Type, ViewChild} from 'angular2/core';
+import {Type, ViewChild} from '@angular/core';
 
 @App({
   template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',

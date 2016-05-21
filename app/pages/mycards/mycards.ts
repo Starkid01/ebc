@@ -1,5 +1,5 @@
 import {Page, NavController} from 'ionic-angular';
-import {Type} from 'angular2/core';
+import {Type} from '@angular/core';
 import {DetailPage} from '../../pages/detail/detail';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
