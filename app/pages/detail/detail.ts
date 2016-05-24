@@ -63,13 +63,20 @@ export class DetailPage {
   }
 
   sendEmail(form) {
-    let myEmail = form.value;
+    let myInput = form.value;
+    let myEmail = {
+      to: myInput.email,
+      subject: myInput.text,
+      body: myInput.body,
+      isHtml: true
+    };
 
-    console.log(myEmail);
+  EmailComposer.open(myEmail).then(() => {
+      console.log(myEmail);
+    });
   }
 
   getContact() {
-    console.log('Working at it');
     Contacts.pickContact().then((contact) => {
       this.picked = contact;
       this.hide = true;

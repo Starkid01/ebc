@@ -1,3 +1,4 @@
+/// <reference path="main/ambient/cordova-plugin-email-composer/index.d.ts" />
 /// <reference path="main/ambient/cordova/index.d.ts" />
 /// <reference path="main/ambient/cordova/plugins/filesystem/index.d.ts" />
 /// <reference path="main/ambient/cordova/plugins/filetransfer/index.d.ts" />
