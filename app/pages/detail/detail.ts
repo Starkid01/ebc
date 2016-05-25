@@ -71,9 +71,7 @@ export class DetailPage {
       isHtml: true
     };
 
-  EmailComposer.open(myEmail).then(() => {
-      console.log(myEmail);
-    });
+    EmailComposer.open(myEmail);
   }
 
   getContact() {
