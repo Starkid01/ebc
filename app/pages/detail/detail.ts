@@ -20,7 +20,7 @@ export class DetailPage {
   email:Control = new Control('', this.services.emailValidator);
   body:Control = new Control('');
   item:Object;
-  hide:boolean = false;
+  sample:boolean;
   message:string = '';
   pickPhone:string = '';
   field:string;
@@ -38,7 +38,21 @@ export class DetailPage {
       email: this.email,
       text: this.text,
       body: this.body
-    })
+    });
+    this.isSample();
+  }
+
+  isSample() {
+    let obj = this.params.get('table');
+
+    if(obj == 'samples'){
+      this.sample = true;
+      console.log(this.sample);
+    }
+    else {
+      this.sample = false;
+      console.log(this.sample);
+    }
   }
 
   itemDetail(){
@@ -67,7 +81,7 @@ export class DetailPage {
     let myEmail = {
       to: myInput.email,
       subject: myInput.text,
-      body: myInput.body,
+      body: '<p>' + myInput.body + '</p>' + this.item['media'],
       isHtml: true
     };
 
