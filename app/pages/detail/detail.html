@@ -13,7 +13,7 @@
 
 <ion-content class="detail">
   <ion-card>
-    <object [attr.data]="item?.media"></object>
+    <object id="myItem" [attr.data]="item?.media"></object>
     <ion-card-content>
       <ion-card-title>
         <h2 favorite>{{item?.name}}</h2>
@@ -34,12 +34,10 @@
       </ion-segment>
     </ion-toolbar>
   </ion-card>
-  <div class="notAvail" *ngIf="sample">
-    <div padding>
+  <div padding [ngSwitch]="message" class="messForm" [class.notAvail]="sample">
+    <div class="mess" *ngIf="sample" padding>
       <h3 danger>This Feature is not Available with Samples</h3>
     </div>
-  </div>
-  <div padding [ngSwitch]="message" class="messForm">
     <div *ngSwitchWhen="'text'">
       <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
         <ion-list no-lines>

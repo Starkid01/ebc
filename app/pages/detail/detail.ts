@@ -1,7 +1,7 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from '@angular/common';
-import {ViewChild} from '@angular/core';
-import {Page, NavParams} from 'ionic-angular';
-import {Contacts, SMS, EmailComposer} from 'ionic-native';
+import {ViewChild, OnInit, Renderer, ElementRef} from '@angular/core';
+import {Page, NavParams, Platform} from 'ionic-angular';
+import {Contacts, SMS, EmailComposer, AppAvailability} from 'ionic-native';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -11,7 +11,7 @@ import {Services} from '../../components/services/services';
   directives: [MoreMenu, FORM_DIRECTIVES]
 })
 
-export class DetailPage {
+export class DetailPage implements OnInit {
   @ViewChild(MoreMenu) more:MoreMenu;
   emailForm:ControlGroup;
   smsForm:ControlGroup;
@@ -20,14 +20,16 @@ export class DetailPage {
   email:Control = new Control('', this.services.emailValidator);
   body:Control = new Control('');
   item:Object;
+  hide:boolean = false;
   sample:boolean;
   message:string = '';
   pickPhone:string = '';
   field:string;
   picked:Array<any>;
 
-  constructor(public backand:Backand, public services:Services, public params:NavParams) {
+  constructor(public backand:Backand, public services:Services, public params:NavParams, private platform:Platform) {
     this.params = params;
+    this.platform = platform;
     this.itemDetail();
     this.text['_value'] = 'Something Cool';
     this.smsForm = new ControlGroup({
@@ -42,17 +44,39 @@ export class DetailPage {
     this.isSample();
   }
 
+  ngOnInit() {
+    this.isAvail();
+  }
+
   isSample() {
     let obj = this.params.get('table');
 
     if(obj == 'samples'){
       this.sample = true;
-      console.log(this.sample);
     }
     else {
       this.sample = false;
-      console.log(this.sample);
     }
+  }
+
+  isAvail() {
+    let os = this.platform;
+    let t;
+    let fb
+
+    if(os.is('ios')) {
+      t = 'twitter://';
+      fb = 'fb://'
+    } else if(os.is('android')) {
+      t = 'com.twitter.android';
+      fb ='com.facebook.katana';
+    }
+
+    AppAvailability.check(t)
+      .then(
+        yes => console.log(t + " is available"),
+        no => console.log(t + " is NOT available")
+      );
   }
 
   itemDetail(){

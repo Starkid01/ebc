@@ -22,8 +22,10 @@
   }
 
   .notAvail {
-    text-align: center;
     border: .4rem dashed map-get($colors, danger);
-    background: rgba(0,0,0,0);
+
+    .mess {
+      text-align: center;
+    }
   }
 }

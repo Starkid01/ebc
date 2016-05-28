@@ -48,4 +48,5 @@
   <plugin name="ionic-plugin-keyboard" spec="https://github.com/driftyco/ionic-plugin-keyboard.git" />
   <plugin name="com.cordova.plugins.sms" version="0.1.10" src="https://github.com/cordova-sms/cordova-sms-plugin" />
   <plugin name="cordova-plugin-email" version="1.1.0" />
+  <plugin name="cordova-plugin-appavailability" version="0.4.2" />
 </widget>
