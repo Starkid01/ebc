@@ -1,7 +1,7 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from '@angular/common';
-import {ViewChild, OnInit, Renderer, ElementRef} from '@angular/core';
+import {ViewChild, Renderer} from '@angular/core';
 import {Page, NavParams, Platform} from 'ionic-angular';
-import {Contacts, SMS, EmailComposer, AppAvailability} from 'ionic-native';
+import {Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser} from 'ionic-native';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -11,7 +11,7 @@ import {Services} from '../../components/services/services';
   directives: [MoreMenu, FORM_DIRECTIVES]
 })
 
-export class DetailPage implements OnInit {
+export class DetailPage {
   @ViewChild(MoreMenu) more:MoreMenu;
   emailForm:ControlGroup;
   smsForm:ControlGroup;
@@ -27,7 +27,7 @@ export class DetailPage implements OnInit {
   field:string;
   picked:Array<any>;
 
-  constructor(public backand:Backand, public services:Services, public params:NavParams, private platform:Platform) {
+  constructor(public backand:Backand, public services:Services, public params:NavParams, private platform:Platform, private render:Renderer) {
     this.params = params;
     this.platform = platform;
     this.itemDetail();
@@ -44,10 +44,6 @@ export class DetailPage implements OnInit {
     this.isSample();
   }
 
-  ngOnInit() {
-    this.isAvail();
-  }
-
   isSample() {
     let obj = this.params.get('table');
 
@@ -59,23 +55,38 @@ export class DetailPage implements OnInit {
     }
   }
 
-  isAvail() {
-    let os = this.platform;
-    let t;
-    let fb
+  clickCheck() {
+    let my = <SVGElement>document.getElementById('myItem')['contentDocument'];
 
-    if(os.is('ios')) {
+     this.render.listen(my, 'click', (e) => {
+      let clicked = e.target['parentNode'];
+      let link = clicked['href']['baseVal'];
+      if(link.includes('facebook')) {
+        let appLink = 'fb://facewebmodal/f?href=' + link;
+        e.preventDefault();
+        InAppBrowser.open(appLink, '_system');
+      };
+    });
+  }
+
+  isAvail() {
+    let t;
+    let fb;
+
+    if(this.platform.is('ios')) {
       t = 'twitter://';
       fb = 'fb://'
-    } else if(os.is('android')) {
+    } else if(this.platform.is('android')) {
       t = 'com.twitter.android';
       fb ='com.facebook.katana';
     }
 
-    AppAvailability.check(t)
+    AppAvailability.check(fb)
       .then(
-        yes => console.log(t + " is available"),
-        no => console.log(t + " is NOT available")
+        yes => {
+          console.log(fb + " is available");
+        },
+        no => console.log(fb + " is NOT available")
       );
   }
 
