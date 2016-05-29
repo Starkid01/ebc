@@ -57,36 +57,67 @@ export class DetailPage {
 
   clickCheck() {
     let my = <SVGElement>document.getElementById('myItem')['contentDocument'];
+    let app = {};
 
-     this.render.listen(my, 'click', (e) => {
+    this.render.listen(my, 'click', (e) => {
       let clicked = e.target['parentNode'];
       let link = clicked['href']['baseVal'];
       if(link.includes('facebook')) {
-        let appLink = 'fb://facewebmodal/f?href=' + link;
         e.preventDefault();
-        InAppBrowser.open(appLink, '_system');
+        app =
+          {
+            appName: 'fb',
+            url: link,
+            appLink: 'fb://facewebmodal/f?href=' + link
+          };
+        this.isAvail(app);
+      };
+      if(link.includes('instagram')) {
+        e.preventDefault();
+        app =
+          {
+            appName: 'dm',
+            url: link,
+            appLink: 'instagram://user?username=' + link.substr(link.search('com')+4)
+          };
+        this.isAvail(app);
       };
     });
   }
 
-  isAvail() {
-    let t;
+  isAvail(app:Object) {
+    let myApp = app;
     let fb;
+    let dm;
 
     if(this.platform.is('ios')) {
-      t = 'twitter://';
-      fb = 'fb://'
+      fb = 'fb://';
+      dm = 'instagram://';
     } else if(this.platform.is('android')) {
-      t = 'com.twitter.android';
       fb ='com.facebook.katana';
+      dm = 'com.instagram.android';
+    }
+    if(myApp['appName'] == 'fb') {
+      Object.defineProperty(myApp, 'check',{
+        value: fb
+      })
+    }
+    if(myApp['appName'] == 'dm') {
+      Object.defineProperty(myApp, 'check',{
+        value: dm
+      })
     }
 
-    AppAvailability.check(fb)
+    AppAvailability.check(myApp['check'])
       .then(
         yes => {
-          console.log(fb + " is available");
+          console.log(myApp['check'] + " is available");
+          InAppBrowser.open(myApp['appLink'], '_system');
         },
-        no => console.log(fb + " is NOT available")
+        no =>  {
+          console.log(myApp['check'] + " is NOT available");
+          InAppBrowser.open(myApp['url'], '_system');
+        }
       );
   }
 
