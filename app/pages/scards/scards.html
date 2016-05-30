@@ -1,19 +1,19 @@
 <ion-content class="scards">
-  <ion-card *ngFor="let c of cards">
-    <ion-card-header>
-      <h2 favorite>{{c?.name}}</h2>
-    </ion-card-header>
-    <ion-card-content>
-      <hr>
-      <ion-item>
-        <button ion-item (click)="goTo(c?.id)">
+  <ion-card *ngFor="let c of cards" (click)="goTo(c?.id)">
+    <button ion-item>
+      <ion-card-header>
+        <h2 favorite>{{c?.name}}</h2>
+      </ion-card-header>
+      <ion-card-content>
+        <hr>
+        <ion-item class="myItem">
           <ion-thumbnail item-left>
             <img [src]="c?.pic">
           </ion-thumbnail>
           <p>{{c?.desc}}</p>
           <span item-right primary>View</span>
-        </button>
-      </ion-item>
-    </ion-card-content>
+        </ion-item>
+      </ion-card-content>
+    </button>
   </ion-card>
 </ion-content>

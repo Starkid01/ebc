@@ -1,4 +1,8 @@
 .scards {
   @include page-body;
   @include heading;
+
+  .myItem {
+    background-color: rgba(0,0,0,0);
+  }
 }
