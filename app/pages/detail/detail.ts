@@ -1,7 +1,7 @@
 import {FORM_DIRECTIVES, Validators, ControlGroup, Control} from '@angular/common';
 import {ViewChild, Renderer} from '@angular/core';
 import {Page, NavParams, Platform} from 'ionic-angular';
-import {Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser} from 'ionic-native';
+import {Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator} from 'ionic-native';
 import {MoreMenu} from '../moremenu/moremenu';
 import {Backand} from '../../components/backand/backand';
 import {Services} from '../../components/services/services';
@@ -61,26 +61,37 @@ export class DetailPage {
 
     this.render.listen(my, 'click', (e) => {
       let clicked = e.target['parentNode'];
-      let link = clicked['href']['baseVal'];
-      if(link.includes('facebook')) {
-        e.preventDefault();
-        app =
-          {
-            appName: 'fb',
-            url: link,
-            appLink: 'fb://facewebmodal/f?href=' + link
-          };
-        this.isAvail(app);
-      };
-      if(link.includes('instagram')) {
-        e.preventDefault();
-        app =
-          {
-            appName: 'dm',
-            url: link,
-            appLink: 'instagram://user?username=' + link.substr(link.search('com')+4)
-          };
-        this.isAvail(app);
+      if(clicked['href']) {
+        let link = clicked['href']['baseVal'];
+        if(e.target['id'] == 'address') {
+          e.preventDefault();
+          let data = clicked['attributes'][2]['value'];
+          LaunchNavigator.navigate(data)
+            .then(
+              success => console.log('Launched navigator'),
+              error => console.log('Error launching navigator', error)
+            );
+        }
+        if(link.includes('facebook')) {
+          e.preventDefault();
+          app =
+            {
+              appName: 'fb',
+              url: link,
+              appLink: 'fb://facewebmodal/f?href=' + link
+            };
+          this.isAvail(app);
+        };
+        if(link.includes('instagram')) {
+          e.preventDefault();
+          app =
+            {
+              appName: 'dm',
+              url: link,
+              appLink: 'instagram://user?username=' + link.substr(link.search('com')+4)
+            };
+          this.isAvail(app);
+        };
       };
     });
   }
