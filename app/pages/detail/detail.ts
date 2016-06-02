@@ -56,44 +56,46 @@ export class DetailPage {
   }
 
   clickCheck() {
-    let my = <SVGElement>document.getElementById('myItem')['contentDocument'];
     let app = {};
+    if(this.platform.is('mobile')){
+      let my = <SVGElement>document.getElementById('myItem')['contentDocument'];
 
-    this.render.listen(my, 'click', (e) => {
-      let clicked = e.target['parentNode'];
-      if(clicked['href']) {
-        let link = clicked['href']['baseVal'];
-        if(e.target['id'] == 'address') {
-          e.preventDefault();
-          let data = clicked['attributes'][2]['value'];
-          LaunchNavigator.navigate(data)
-            .then(
-              success => console.log('Launched navigator'),
-              error => console.log('Error launching navigator', error)
-            );
-        }
-        if(link.includes('facebook')) {
-          e.preventDefault();
-          app =
-            {
-              appName: 'fb',
-              url: link,
-              appLink: 'fb://facewebmodal/f?href=' + link
-            };
-          this.isAvail(app);
+      this.render.listen(my, 'click', (e) => {
+        let clicked = e.target['parentNode'];
+        if(clicked['href']) {
+          let link = clicked['href']['baseVal'];
+          if(e.target['id'] == 'address') {
+            e.preventDefault();
+            let data = clicked['attributes'][2]['value'];
+            LaunchNavigator.navigate(data)
+              .then(
+                success => console.log('Launched navigator'),
+                error => console.log('Error launching navigator', error)
+              );
+          }
+          if(link.includes('facebook')) {
+            e.preventDefault();
+            app =
+              {
+                appName: 'fb',
+                url: link,
+                appLink: 'fb://facewebmodal/f?href=' + link
+              };
+            this.isAvail(app);
+          };
+          if(link.includes('instagram')) {
+            e.preventDefault();
+            app =
+              {
+                appName: 'dm',
+                url: link,
+                appLink: 'instagram://user?username=' + link.substr(link.search('com')+4)
+              };
+            this.isAvail(app);
+          };
         };
-        if(link.includes('instagram')) {
-          e.preventDefault();
-          app =
-            {
-              appName: 'dm',
-              url: link,
-              appLink: 'instagram://user?username=' + link.substr(link.search('com')+4)
-            };
-          this.isAvail(app);
-        };
-      };
-    });
+      });
+    }
   }
 
   isAvail(app:Object) {

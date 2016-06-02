@@ -36,6 +36,8 @@ constructor(public platform:Platform, public events:Events ,public backand:Backa
       // For example, we might change the StatusBar color. This one below is
       // good for dark backgrounds and light text:
       // StatusBar.setStyle(StatusBar.LIGHT_CONTENT)
+      StatusBar.overlaysWebView(false);
+      StatusBar.backgroundColorByHexString('#0d95bb');
     });
     this.myEvents();
   }
