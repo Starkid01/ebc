@@ -13,7 +13,13 @@
 
 <ion-content class="detail">
   <ion-card>
-    <object id="myItem" type="image/svg+xml" [attr.data]="item?.media" (load)="clickCheck()"></object>
+    <div *ngIf="item?.ready" class="notAvail">
+      <div class="notReady">
+        <h3 light>This {{type}} is not ready for use yet.</h3>
+      </div>
+      <img [src]="item?.pic" />
+    </div>
+    <object *ngIf="!item?.ready" id="myItem" type="image/svg+xml" [attr.data]="item?.media" (load)="clickCheck()"></object>
     <ion-card-content>
       <ion-card-title>
         <h2 favorite>{{item?.name}}</h2>
@@ -53,7 +59,7 @@
             </ion-item>
           </div>
           <ion-item>
-            <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" clearInputjh></ion-input>
+            <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" clearInput></ion-input>
           </ion-item>
           <ion-item>
             <ion-label for="text" stacked>Message</ion-label>

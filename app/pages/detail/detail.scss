@@ -27,5 +27,15 @@
     .mess {
       text-align: center;
     }
+    .notReady {
+      position: absolute;
+      display: flex;
+      width: 100vw;
+      justify-content: center;
+      h3 {
+        margin-left: -6vw;
+        background: rgba(0, 0, 0, .5);
+      }
+    }
   }
 }

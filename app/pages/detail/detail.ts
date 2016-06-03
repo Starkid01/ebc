@@ -26,6 +26,7 @@ export class DetailPage {
   pickPhone:string = '';
   field:string;
   picked:Array<any>;
+  type:string;
 
   constructor(public backand:Backand, public services:Services, public params:NavParams, private platform:Platform, private render:Renderer) {
     this.params = params;
@@ -52,6 +53,15 @@ export class DetailPage {
     }
     else {
       this.sample = false;
+    }
+  }
+
+  isType() {
+    if(this.item['flyer']) {
+      this.type = 'Flyer';
+    }
+    else {
+      this.type = 'Card';
     }
   }
 
@@ -141,6 +151,7 @@ export class DetailPage {
     this.backand.getItem(obj, id).subscribe(
       data => {
         this.item = data;
+        this.isType();
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
