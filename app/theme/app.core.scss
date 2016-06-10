@@ -30,7 +30,6 @@ ion-title {
     font-size: 2.2rem;
     margin-bottom: -1rem;
   }
-
   h3 {
     font-weight: 600;
     font-size: 1.75rem;
@@ -39,25 +38,19 @@ ion-title {
 }
 
 @mixin inputs {
-  input, textarea {
+  ion-input, ion-textarea {
     background: $light-gray;
-    padding: .5em;
-    z-index: 0;
+    padding: 0 0 0 .75rem;
 
-    &:focus {
-      border-bottom: map-get($colors, primary) 1px solid;
-    }
-    textarea {
+    ion-textarea {
       resize: both;
     }
   }
-
   /*.text-input-clear-icon {
     bottom: .75rem !important;
   }*/
-
   .myError {
-    input, textarea {
+    ion-input, ion-textarea {
       color: map-get($colors, light);
       border: map-get($colors, danger) 1px solid;
       background: rgba(map-get($colors, danger), .35);
@@ -65,12 +58,14 @@ ion-title {
   }
 }
 
-@import '../pages/login/login';
-@import '../pages/create/create';
-@import '../pages/mycards/mycards';
-@import '../pages/myflys/myflys';
-@import '../pages/sflyers/sflyers';
-@import '../pages/scards/scards';
-@import '../pages/myperson/myperson';
-@import '../pages/editperson/editperson';
-@import '../pages/detail/detail';
+@import '../pages/login/login.page';
+@import '../pages/create/create.page';
+@import '../pages/mystuff/mycards/mycards.page';
+@import '../pages/mystuff/myflys/myflys.page';
+@import '../pages/samples/sflyers/sflyers.page';
+@import '../pages/samples/scards/scards.page';
+@import '../pages/profile/myperson/myperson.page';
+@import '../pages/profile/editperson/editperson.page';
+@import '../pages/shared/detail/detail.page';
+@import '../pages/submit/submit.page';
+@import '../shared/myloader/myloader.component';

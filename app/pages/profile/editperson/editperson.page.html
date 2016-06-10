@@ -1,0 +1,78 @@
+<ebc-navbar>Edit Profile</ebc-navbar>
+
+<ebc-uploader *ngIf="services.myLoader" [value]="services.myProg"></ebc-uploader>
+
+<ion-content class="edit">
+  <button *ngIf="upFile" light fab fab-top fab-left (click)="savePic()" class="action">
+    <ion-icon name="cloud-upload"></ion-icon>
+  </button>
+  <button secondary fab fab-top fab-right (click)="services.getPics()" class="action">
+    <ion-icon name="image"></ion-icon>
+  </button>
+  <ion-card>
+    <!--<ion-img class="userImg" [src]="services.myUser?.pic"></ion-img>-->
+    <div class="userImg"> <img [src]="services.myUser?.pic" /></div>
+    <ion-card-content>
+      <ion-card-title>
+        <h2 favorite>{{services.myUser?.firstName}} {{services.myUser?.lastName}}</h2>
+      </ion-card-title>
+    </ion-card-content>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="section">
+        <ion-segment-button value="user">
+          Edit Info
+        </ion-segment-button>
+        <ion-segment-button value="password">
+          Change Password
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-card>
+
+  <div [ngSwitch]="section">
+    <div *ngSwitchWhen="'user'">
+      <form [ngFormModel]="editForm" (ngSubmit)="editInfo(editForm)">
+        <ion-list class="editForm" no-lines>
+          <ion-item>
+            <ion-label stacked for="firstName">First Name</ion-label>
+            <ion-input clearInput ngControl="firstName" id="firstName" name="firstName" [placeholder]="services.myUser?.firstName" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked for="lastName">Last Name</ion-label>
+            <ion-input clearInput ngControl="lastName" id="firstName" name="firstName" [placeholder]="services.myUser?.lastName" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button block class="formBtn" type="submit">Confirm Change</button>
+          </ion-item>
+        </ion-list>
+      </form>
+    </div>
+
+    <div *ngSwitchWhen="'password'">
+      <form [ngFormModel]="passwordForm" (ngSubmit)="editPass(passwordForm)">
+        <ion-list no-lines class="editForm">
+          <ion-item clearInput>
+            <ion-label stacked for="oldPass">Current Password</ion-label>
+            <ion-input clearInput ngControl="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+          </ion-item>
+          <div ngControlGroup="verify" [class.myError]="verify.errors">
+            <ion-item>
+              <ion-label stacked for="password">Password</ion-label>
+              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked for="confirm">Confirm Password</ion-label>
+              <ion-input clearInput ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            </ion-item>
+            <div class="passErr">
+              <p danger *ngIf="verify.errors">Passwords Don't Match</p>
+            </div>
+          </div>
+          <ion-item>
+            <button block [disabled]="!passwordForm.valid" class="formBtn" type="submit">Confirm Change</button>
+          </ion-item>
+        </ion-list>
+      </form>
+    </div>
+  </div>
+</ion-content>

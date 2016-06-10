@@ -1,0 +1,1 @@
+export * from './sflyers.page';

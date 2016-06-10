@@ -1,19 +1,12 @@
-import {App, Platform, Nav, Events} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
-import {Backand} from './components/backand/backand';
-import {Services} from './components/services/services';
-import {LoginPage} from './pages/login/login';
+import { Component, Type, ViewChild } from "@angular/core";
+import { Platform, ionicBootstrap, Nav, Events } from 'ionic-angular';
+import { StatusBar } from 'ionic-native';
 
-// https://angular.io/docs/ts/latest/api/core/Type-interface.html
-import {Type, ViewChild} from '@angular/core';
+import { Backand, Services } from './shared';
+import { LoginPage } from './pages';
 
-@App({
-  template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>',
-  providers: [Backand, Services],
-  config: {
-    mode: 'md',
-    scrollAssist: false
-  } // http://ionicframework.com/docs/v2/api/config/Config/
+@Component({
+  template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>'
 })
 
 export class MyApp {
@@ -41,9 +34,15 @@ constructor(public platform:Platform, public events:Events ,public backand:Backa
     });
     this.myEvents();
   }
+
   myEvents() {
     this.events.subscribe('myUser', (user) => {
       this.services.myUser = user[0];
     })
   }
 }
+
+ionicBootstrap(MyApp, [Backand, Services], {
+    mode: 'md',
+    scrollAssist: false
+  });

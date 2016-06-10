@@ -1,0 +1,15 @@
+<ion-navbar primary *navbar>
+  <ion-buttons left>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>
+  <ng-content></ng-content>
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="menuOpen($event)" class="more">
+      <ion-icon name="more"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>

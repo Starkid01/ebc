@@ -1,0 +1,5 @@
+.sub {
+  @include page-body;
+  @include heading;
+  @include inputs;
+}

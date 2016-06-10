@@ -1,0 +1,15 @@
+.create {
+  @include page-body;
+  @include heading;
+  @include inputs;
+
+  .myName {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .passErr {
+    margin-left: 1.1em;
+    margin-bottom: .2em;
+  }
+}

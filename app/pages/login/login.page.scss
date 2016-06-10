@@ -1,0 +1,10 @@
+.login {
+  @include page-body;
+  @include heading;
+  @include inputs;
+
+  .passErr {
+    margin-left: 1.6rem;
+    margin-bottom: .2rem;
+  }
+}
