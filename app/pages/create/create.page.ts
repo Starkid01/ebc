@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, Toast } from 'ionic-angular';
 
 import { LoginPage } from '../login';
-import { Backand, Services } from '../../shared';
+import { Backand, Services } from '../../services';
 
 @Component({
   templateUrl: 'build/pages/create/create.page.html',

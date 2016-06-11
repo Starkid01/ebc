@@ -2,7 +2,7 @@ import { Component, Type, ViewChild } from "@angular/core";
 import { Platform, ionicBootstrap, Nav, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
-import { Backand, Services } from './shared';
+import { Backand, Services } from './services';
 import { LoginPage } from './pages';
 
 @Component({

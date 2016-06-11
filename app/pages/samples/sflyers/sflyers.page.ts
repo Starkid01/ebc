@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../../shared';
 import { NavComponent } from '../../shared/nav';
-import { Backand, Services } from '../../../shared';
+import { Backand, Services } from '../../../services';
 
 @Component({
   templateUrl: 'build/pages/samples/sflyers/sflyers.page.html',

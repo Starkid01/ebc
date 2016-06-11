@@ -1,6 +1,6 @@
 import { Component, Type } from '@angular/core';
 
-import { Backand, Services } from '../../../shared';
+import { Backand, Services } from '../../../services';
 import { MyStuff } from '../../mystuff';
 import { Samples } from '../../samples';
 import { PersonPage } from '../../profile';
@@ -15,7 +15,7 @@ export class SideMenu {
   homePage: Type = MyStuff;
 
 
-  constructor(public backand:Backand, public services:Services) {
+constructor(private services:Services) {
     this.services.getUser();
     this.pages = [
       {title: 'EBC Samples', component: Samples},

@@ -3,7 +3,7 @@ import { Component, Renderer } from '@angular/core';
 import { NavParams, Platform } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
-import { Backand, Services } from '../../../shared';
+import { Backand, Services } from '../../../services';
 import { NavComponent } from '../nav';
 
 @Component({

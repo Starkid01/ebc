@@ -2,8 +2,9 @@ import { Validators, ControlGroup, Control } from '@angular/common';
 import { Component, DoCheck } from '@angular/core';
 import { Toast, NavController } from 'ionic-angular';
 
-import { Backand, Services, MyLoader } from '../../../shared';
+import { Backand, Services } from '../../../services';
 import { NavComponent } from '../../shared/nav';
+import { MyLoader } from '../../shared';
 
 @Component({
   templateUrl: 'build/pages/profile/editperson/editperson.page.html',

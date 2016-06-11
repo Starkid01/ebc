@@ -2,7 +2,7 @@ import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common'
 import { Component, Type, DoCheck } from '@angular/core';
 import { NavController, Alert, LocalStorage, Storage, Toast } from 'ionic-angular';
 
-import { Backand, Services } from '../../shared';
+import { Backand, Services } from '../../services';
 import { CreatePage } from '../create';
 import { SideMenu } from '../shared';
 

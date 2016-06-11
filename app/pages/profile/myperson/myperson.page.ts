@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Backand, Services } from '../../../shared';
+import { Backand, Services } from '../../../services';
 import { NavComponent } from '../../shared/nav';
 import { EditPage } from '../editperson';
 

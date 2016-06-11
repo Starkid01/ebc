@@ -1,6 +1,6 @@
 import { Component, Type} from '@angular/core';
 
-import { Backand, Services } from '../../shared';
+import { Backand, Services } from '../../services';
 import { SCardsPage } from './scards';
 import { SFlysPage } from './sflyers';
 
