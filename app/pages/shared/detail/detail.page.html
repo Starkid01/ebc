@@ -15,7 +15,7 @@
         <p class="desc">{{item?.desc}}</p>
       </ion-card-title>
     </ion-card-content>
-    <ion-toolbar>
+    <div>
       <ion-segment [(ngModel)]="message">
         <ion-segment-button value="text">
           <ion-icon name="text"></ion-icon>
@@ -27,7 +27,7 @@
           <ion-icon name="mail"></ion-icon>
         </ion-segment-button>
       </ion-segment>
-    </ion-toolbar>
+    </div>
   </ion-card>
   <div padding [ngSwitch]="message" class="messForm" [class.notAvail]="sample">
     <div class="mess" *ngIf="sample" padding>

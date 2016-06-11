@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { Backand, Services } from '../../../services';
@@ -11,7 +11,7 @@ import { EditPage } from '../editperson';
 })
 
 export class PersonPage {
-  editPage:any = EditPage;
+  editPage:Type = EditPage;
 
   constructor(private nav:NavController, public backand:Backand, public services:Services) {
   }

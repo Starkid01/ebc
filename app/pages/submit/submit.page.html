@@ -1,5 +1,17 @@
 <ebc-navbar>Submit Item</ebc-navbar>
 
 <ion-content class="sub">
-  knkiubnk
+  <ion-card>
+    <ion-card-header>
+      <h2 favorite>Submit Item</h2>
+    </ion-card-header>
+    <div>
+      <ion-segment [(ngModel)]="subform">
+        <ion-segment-button value="sample">Sample</ion-segment-button>
+        <ion-segment-button value="exist">Existing</ion-segment-button>
+        <ion-segment-button value="new">Scratch</ion-segment-button>
+      </ion-segment>
+    </div>
+    <ion-card-content></ion-card-content>
+  </ion-card>
 </ion-content>

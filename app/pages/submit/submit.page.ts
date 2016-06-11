@@ -10,6 +10,7 @@ import { NavComponent } from '../shared/nav';
 })
 
 export class SubmitPage {
+  subform:string = 'sample';
 
   constructor() {
 

@@ -4,7 +4,7 @@ import { Toast, NavController } from 'ionic-angular';
 
 import { Backand, Services } from '../../../services';
 import { NavComponent } from '../../shared/nav';
-import { MyLoader } from '../../shared';
+import { MyLoader } from '../../shared/myloader';
 
 @Component({
   templateUrl: 'build/pages/profile/editperson/editperson.page.html',
