@@ -46,6 +46,10 @@ ion-title {
       resize: both;
     }
   }
+
+  .field {
+    transform: translateX(-.65rem);
+  }
   /*.text-input-clear-icon {
     bottom: .75rem !important;
   }*/

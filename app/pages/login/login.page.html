@@ -12,19 +12,21 @@
     <ion-card-content>
       <form [class.myError]="error" [ngFormModel]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
-          <ion-item [class.myError]="username.errors && username.dirty">
-            <ion-label stacked for="username">Username</ion-label>
-            <ion-input clearInput ngControl="username" id="username" name="username" placeholder="email" type="email"></ion-input>
-          </ion-item>
-          <div class="passErr">
-            <p danger *ngIf="username.errors && username.dirty">Please Provide a Valid Email</p>
-          </div>
-          <ion-item>
-            <ion-label stacked for="password">Password</ion-label>
-            <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
-          </ion-item>
-          <div class="passErr">
-            <p danger *ngIf="backand.is_auth_error">Username or Password is Incorrect</p>
+          <div class="field">
+            <ion-item [class.myError]="!username.valid && username.touched">
+              <ion-label stacked for="username">Username</ion-label>
+              <ion-input clearInput ngControl="username" id="username" name="username" placeholder="email" type="email"></ion-input>
+            </ion-item>
+            <div class="passErr">
+              <p danger *ngIf="!username.valid && username.touched">Please Provide a Valid Email</p>
+            </div>
+            <ion-item>
+              <ion-label stacked for="password">Password</ion-label>
+              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+            </ion-item>
+            <div class="passErr">
+              <p danger *ngIf="backand.authError">Username or Password is Incorrect</p>
+            </div>
           </div>
           <span padding>
             <button block [disabled]="!loginForm.valid" type="submit">Sign In
@@ -33,9 +35,7 @@
           </span>
         </ion-list>
       </form>
-      <ion-item>
-        <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
-      </ion-item>
+      <button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
       <ion-note *ngIf="reset">
         <button clear danger (click)="resetPass()">
           <ion-icon name="unlock"></ion-icon>

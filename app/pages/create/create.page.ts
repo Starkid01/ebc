@@ -1,43 +1,35 @@
-import { FORM_DIRECTIVES, NgClass, Validators, NgFormModel, ControlGroup, Control } from '@angular/common';
+import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common';
 import { Component } from '@angular/core';
 import { NavController, Toast } from 'ionic-angular';
 
 import { LoginPage } from '../login';
-import { Backand, Services } from '../../services';
+import { BackandService, FormHandler } from '../../services';
 
 @Component({
-  templateUrl: 'build/pages/create/create.page.html',
-  directives: [FORM_DIRECTIVES]
+  templateUrl: 'build/pages/create/create.page.html'
 })
 
 export class CreatePage {
   createError: boolean;
   createForm: ControlGroup;
   verify: ControlGroup;
-  email: Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
+  email: Control = new Control('', Validators.compose([Validators.required, this.form.emailValidator]));
   firstName: Control = new Control('', Validators.required);
   lastName: Control = new Control('', Validators.required);
   password: Control  = new Control('', Validators.required);
   confirmPassword: Control = new Control('', Validators.required);
 
-  constructor(private nav:NavController, public backand:Backand, public services:Services) {
+  constructor(private nav:NavController, public backand:BackandService, public form:FormHandler) {
     this.verify = new ControlGroup({
         password: this.password,
         confirmPassword: this.confirmPassword
-        }, {}, services.areEqual);
+        }, {}, form.areEqual);
     this.createForm = new ControlGroup({
       email: this.email,
       firstName: this.firstName,
       lastName: this.lastName,
       verify: this.verify
     });
-  }
-
-  clearAll() {
-    this.services.clearForm(this.verify);
-    this.services.clearField(this.firstName);
-    this.services.clearField(this.lastName);
-    this.services.clearField(this.email);
   }
 
   accountMade() {
@@ -50,6 +42,13 @@ export class CreatePage {
       this.nav.pop();
     });
     this.nav.present(made);
+  }
+
+  clearAll() {
+    this.form.clearForm(this.verify);
+    this.form.clearField(this.firstName);
+    this.form.clearField(this.lastName);
+    this.form.clearField(this.email);
   }
 
   createUser(create){

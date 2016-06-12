@@ -1,7 +1,7 @@
 import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { Backand, Services } from '../../services';
+import { BackandService, Services } from '../../services';
 import { NavComponent } from '../shared/nav';
 
 @Component({

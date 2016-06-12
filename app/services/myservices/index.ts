@@ -1,1 +1,3 @@
-export * from './services';
+export * from './user-data.service';
+export * from './form-hander.service';
+export * from './picture.service';

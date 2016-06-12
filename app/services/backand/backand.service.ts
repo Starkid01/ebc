@@ -1,28 +1,33 @@
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+interface BackandHeader {
+  title:string,
+  value:string
+}
+
 @Injectable()
-export class Backand {
-  auth_token:{ header_name : string, header_value: string} = {header_name: '', header_value: ''};
-  api_url:string = "https://api.backand.com";
-  app_name:string = "ebc2";
-  auth_type:string = "N/A";
-  auth_status:string = "";
-  is_auth_error:boolean = false;
+export class BackandService {
+  authToken:BackandHeader = {title:'', value:''};
+  apiUrl:string = "https://api.backand.com";
+  appName:string = "ebc2";
+  authType:string = "N/A";
+  authStatus:string = "";
+  authError:boolean = false;
 
   constructor(public http:Http){
 
   }
 
   get tokenUrl(){
-    return this.api_url + '/token';
+    return this.apiUrl + '/token';
   }
 
   public signIn(user:string, pass:string){
-    this.auth_type = 'Token';
+    this.authType = 'Token';
     let creds = `username=${user}` +
       `&password=${pass}` +
-      `&appName=${this.app_name}` +
+      `&appName=${this.appName}` +
       `&grant_type=password`;
     let header = new Headers();
     header.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -38,8 +43,8 @@ export class Backand {
 
   public setTokenHeader(jwt) {
     if (jwt) {
-      this.auth_token.header_name = 'Authorization';
-      this.auth_token.header_value = 'Bearer ' + jwt;
+      this.authToken.title = 'Authorization';
+      this.authToken.value = 'Bearer ' + jwt;
     }
   }
 
@@ -50,7 +55,7 @@ export class Backand {
 
   private get authHeader() {
     let authHeader = new Headers();
-    authHeader.append(this.auth_token.header_name, this.auth_token.header_value);
+    authHeader.append(this.authToken.title, this.authToken.value);
     return authHeader;
   }
 
@@ -60,9 +65,9 @@ export class Backand {
 
   public requestReset (email: string) {
     let header = new Headers();
-    let reset = this.api_url + '/1/user/requestResetPassword';
+    let reset = this.apiUrl + '/1/user/requestResetPassword';
     let resetData = JSON.stringify({
-      appName: this.app_name,
+      appName: this.appName,
       username: email
     });
 
@@ -75,7 +80,7 @@ export class Backand {
 
   public signUp(value:Object){
     let newUser = JSON.stringify(value);
-    const sigUpUrl = this.api_url + '/1/user/signup';
+    const sigUpUrl = this.apiUrl + '/1/user/signup';
 
     let header = new Headers();
     header.append('SignUpToken', 'dbaea0da-730d-4039-8f8a-77a507a3e908');
@@ -86,14 +91,14 @@ export class Backand {
   }
 
   public currentUser(){
-    const userQuery = this.api_url + '/1/query/data/CurrentUser';
+    const userQuery = this.apiUrl + '/1/query/data/CurrentUser';
     return this.http.get(userQuery, {
       headers: this.authHeader
     }).map(res => res.json())
   }
 
-public updatePass(pass:Object){
-    let passwordChange = this.api_url + '/1/user/changePassword';
+  public updatePass(pass:Object){
+    let passwordChange = this.apiUrl + '/1/user/changePassword';
     let changePass = JSON.stringify(pass);
     this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(passwordChange, changePass, {
@@ -101,22 +106,22 @@ public updatePass(pass:Object){
     }).map(res => res)
   }
 
-  public getItems(name:string){
-    let itemQuery = this.api_url + '/1/query/data/' + name;
+  public getItems(item:string){
+    let itemQuery = this.apiUrl + '/1/query/data/' + item;
     return this.http.get(itemQuery, {
       headers: this.authHeader
     }).map(res => res.json())
   }
 
-  public getItem(name:string, id:number){
-    let itemQuery = this.api_url + '/1/objects/' + name + '/' + id;
+  public getItem(item:string, id:number){
+    let itemQuery = this.apiUrl + '/1/objects/' + item + '/' + id;
     return this.http.get(itemQuery, {
       headers: this.authHeader
     }).map(res => res.json())
   }
 
-  public updateItem(name:string, id:number, data:Object){
-    let itemQuery = this.api_url + '/1/objects/' + name + '/' + id;
+  public updateItem(item:string, id:number, data:Object){
+    let itemQuery = this.apiUrl + '/1/objects/' + item + '/' + id;
     let info = JSON.stringify(data);
     this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.put(itemQuery, info, {

@@ -1,7 +1,7 @@
 import { Component, Type } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Backand, Services } from '../../../services';
+import { BackandService, UserService } from '../../../services';
 import { NavComponent } from '../../shared/nav';
 import { EditPage } from '../editperson';
 
@@ -13,6 +13,6 @@ import { EditPage } from '../editperson';
 export class PersonPage {
   editPage:Type = EditPage;
 
-  constructor(private nav:NavController, public backand:Backand, public services:Services) {
+  constructor(private nav:NavController, public user:UserService) {
   }
 }

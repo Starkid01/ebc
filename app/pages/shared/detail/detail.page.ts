@@ -3,7 +3,7 @@ import { Component, Renderer } from '@angular/core';
 import { NavParams, Platform } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
-import { Backand, Services } from '../../../services';
+import { BackandService, FormHandler } from '../../../services';
 import { NavComponent } from '../nav';
 
 @Component({
@@ -16,7 +16,7 @@ export class DetailPage {
   smsForm:ControlGroup;
   phone:Control = new Control('');
   text:Control = new Control('');
-  email:Control = new Control('', this.services.emailValidator);
+  email:Control = new Control('', this.form.emailValidator);
   body:Control = new Control('');
   item:Object;
   hide:boolean = false;
@@ -27,7 +27,7 @@ export class DetailPage {
   picked:Array<any>;
   type:string;
 
-  constructor(public backand:Backand, public services:Services, public params:NavParams, private platform:Platform, private render:Renderer) {
+  constructor(public backand:BackandService, public form:FormHandler, public params:NavParams, private platform:Platform, private render:Renderer) {
     this.params = params;
     this.platform = platform;
     this.itemDetail();
@@ -154,7 +154,7 @@ export class DetailPage {
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.auth_status = `Error: ${errorMessage}`;
+        this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });
   }

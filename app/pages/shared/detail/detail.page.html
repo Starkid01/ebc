@@ -37,23 +37,26 @@
       <form [ngFormModel]="smsForm" (ngSubmit)="sendSms(smsForm)">
         <ion-list no-lines>
           <h3 mygray>Send Text<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
-          <div radio-group ngControl="phone">
-            <ion-item *ngFor="let number of picked?.phoneNumbers">
-              <ion-label [for]="number.id">{{number.type}}: {{number.value}}</ion-label>
-              <ion-radio [id]="number.id" name="sms" [value]="number.value"></ion-radio>
+          <div class="field">
+            <div radio-group ngControl="phone">
+              <ion-item *ngFor="let number of picked?.phoneNumbers">
+                <ion-label [for]="number.id">{{number.type}}: {{number.value}}</ion-label>
+                <ion-radio [id]="number.id" name="sms" [value]="number.value"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label for="manual">Other Number</ion-label>
+                <ion-radio id="manual" name="sms" [value]="field" checked></ion-radio>
+              </ion-item>
+            </div>
+            <ion-item>
+              <ion-label for="custom" stacked></ion-label>
+              <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" clearInput></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label for="manual">Other Number</ion-label>
-              <ion-radio id="manual" name="sms" [value]="field" checked></ion-radio>
+              <ion-label for="text" stacked>Message</ion-label>
+              <ion-input ngControl="text" id="text" name="text" type="text" clearInput></ion-input>
             </ion-item>
           </div>
-          <ion-item>
-            <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" clearInput></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label for="text" stacked>Message</ion-label>
-            <ion-input ngControl="text" id="text" name="text" type="text" clearInput></ion-input>
-          </ion-item>
           <ion-item>
             <button block [disabled]="sample" class="formBtn" type="submit">Send Message</button>
           </ion-item>
@@ -65,27 +68,30 @@
       <form [ngFormModel]="emailForm" (ngSubmit)="sendEmail(emailForm)">
         <ion-list no-lines>
           <h3 mygray>Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
-          <div radio-group ngControl="email">
-            <ion-item *ngFor="let email of picked?.emails">
-              <ion-label for="email.id">{{email.type}}: {{email.value}}</ion-label>
-              <ion-radio [id]="email.id" name="email" [value]="email.value"></ion-radio>
+          <div class="field">
+            <div radio-group ngControl="email">
+              <ion-item *ngFor="let email of picked?.emails">
+                <ion-label for="email.id">{{email.type}}: {{email.value}}</ion-label>
+                <ion-radio [id]="email.id" name="email" [value]="email.value"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label for="manual">Other Email</ion-label>
+                <ion-radio id="manual" name="email" [value]="field"></ion-radio>
+              </ion-item>
+            </div>
+            <ion-item>
+              <ion-label for="custom" stacked></ion-label>
+              <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" clearInput></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label for="manual">Other Email</ion-label>
-              <ion-radio id="manual" name="email" [value]="field"></ion-radio>
+              <ion-label for="text" stacked>Subject</ion-label>
+              <ion-input ngControl="text" id="text" name="text" type="text" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label for="body" stacked>Message</ion-label>
+              <ion-textarea ngControl="body" id="body" name="text" type="text"></ion-textarea>
             </ion-item>
           </div>
-          <ion-item>
-            <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" clearInput></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label for="text" stacked>Subject</ion-label>
-            <ion-input ngControl="text" id="text" name="text" type="text" clearInput></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label for="body" stacked>Message</ion-label>
-            <ion-textarea ngControl="body" id="body" name="text" type="text"></ion-textarea>
-          </ion-item>
           <ion-item>
             <button block [disabled]="sample" class="formBtn" type="submit">Send Email</button>
           </ion-item>

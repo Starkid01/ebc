@@ -3,7 +3,6 @@ import { IONIC_DIRECTIVES } from 'ionic-angular';
 
 @Component({
   selector: 'ebc-uploader',
-  directives: [IONIC_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
   template:
   `<div class="drop">

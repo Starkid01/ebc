@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../../shared';
 import { NavComponent } from '../../shared/nav';
-import { Backand, Services } from '../../../services';
+import { BackandService } from '../../../services';
 
 @Component({
   templateUrl: 'build/pages/mystuff/myflys/myflys.page.html',
@@ -14,7 +14,7 @@ export class MyFlysPage {
   flyers:Array<any>;
   none:boolean;
 
-  constructor(public backand:Backand, public services: Services, public nav:NavController) {
+  constructor(public backand:BackandService, public nav:NavController) {
     this.myFlyers();
   }
 
@@ -26,6 +26,14 @@ export class MyFlysPage {
     }
   }
 
+  goTo(id:number){
+    let item = {
+      index: id,
+      table: 'items'
+    };
+    this.nav.push(DetailPage, item);
+  }
+
   myFlyers(){
     let items = 'MyFlyer';
     this.backand.getItems(items).subscribe(
@@ -34,16 +42,8 @@ export class MyFlysPage {
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.auth_status = `Error: ${errorMessage}`;
+        this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });
-  }
-
-  goTo(id:number){
-    let item = {
-      index: id,
-      table: 'items'
-    };
-    this.nav.push(DetailPage, item);
   }
 }

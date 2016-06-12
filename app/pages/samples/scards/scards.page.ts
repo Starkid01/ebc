@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../../shared';
 import { NavComponent } from '../../shared/nav';
-import { Backand, Services } from '../../../services';
+import { BackandService } from '../../../services';
 
 @Component({
   templateUrl: 'build/pages/samples/scards/scards.page.html',
@@ -13,7 +13,7 @@ import { Backand, Services } from '../../../services';
 export class SCardsPage {
   cards:Array<any>;
 
-  constructor(public backand:Backand, public services: Services, public nav:NavController) {
+  constructor(public backand:BackandService, public nav:NavController) {
     this.sampleCards();
   }
 
@@ -25,7 +25,7 @@ export class SCardsPage {
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.auth_status = `Error: ${errorMessage}`;
+        this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });
   }

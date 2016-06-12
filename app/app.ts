@@ -2,7 +2,7 @@ import { Component, Type, ViewChild } from "@angular/core";
 import { Platform, ionicBootstrap, Nav, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
-import { Backand, Services } from './services';
+import { BackandService, UserService, FormHandler } from './services';
 import { LoginPage } from './pages';
 
 @Component({
@@ -13,7 +13,7 @@ export class MyApp {
   @ViewChild(Nav) nav:Nav;
   rootPage:Type = LoginPage;
 
-constructor(public platform:Platform, public events:Events ,public backand:Backand, public services:Services){
+constructor(public platform:Platform, public events:Events, public user:UserService){
     platform.ready().then(() => {
       // The platform is now ready. Note: if this callback fails to fire, follow
       // the Troubleshooting guide for a number of possible solutions:
@@ -37,12 +37,12 @@ constructor(public platform:Platform, public events:Events ,public backand:Backa
 
   myEvents() {
     this.events.subscribe('myUser', (user) => {
-      this.services.myUser = user[0];
+      this.user.myUser = user[0];
     })
   }
 }
 
-ionicBootstrap(MyApp, [Backand, Services], {
+ionicBootstrap(MyApp, [BackandService, UserService, FormHandler], {
     mode: 'md',
     scrollAssist: false
   });

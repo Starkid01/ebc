@@ -2,7 +2,7 @@ import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common'
 import { Component, Type, DoCheck } from '@angular/core';
 import { NavController, Alert, LocalStorage, Storage, Toast } from 'ionic-angular';
 
-import { Backand, Services } from '../../services';
+import { BackandService, FormHandler } from '../../services';
 import { CreatePage } from '../create';
 import { SideMenu } from '../shared';
 
@@ -14,14 +14,14 @@ export class LoginPage implements DoCheck {
   signUp:Type = CreatePage;
   local:Storage = new Storage(LocalStorage);
   loginForm:ControlGroup;
-  username:Control = new Control('', Validators.compose([Validators.required, this.services.emailValidator]));
+  username:Control = new Control('', Validators.compose([Validators.required, this.form.emailValidator]));
   password:Control = new Control('', Validators.required);
   signed:boolean;
   error:boolean;
   reset:boolean;
   attempts:number = 0;
 
-  constructor(private nav:NavController, public backand:Backand, public services:Services) {
+constructor(private nav:NavController, public backand:BackandService, public form:FormHandler) {
     this.loginForm = new ControlGroup({
       username: this.username,
       password: this.password
@@ -34,25 +34,8 @@ export class LoginPage implements DoCheck {
     }
   }
 
-  resetVerify() {
-    let resVerify = Toast.create({
-      message: 'Check Your Email for Password Reset',
-      duration: 3000
-    });
-
-    resVerify.onDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    this.nav.present(resVerify);
-  }
-
-  openPage(page){
-    this.nav.push(page);
-  }
-
   clearAll() {
-    this.services.clearForm(this.loginForm);
+    this.form.clearForm(this.loginForm);
   }
 
   loggedIn() {
@@ -60,7 +43,11 @@ export class LoginPage implements DoCheck {
     nav.setPages([{page: SideMenu}], {animate: true});
   }
 
-  resetPass() {
+  openPage(page){
+    this.nav.push(page);
+  }
+
+   resetPass() {
     let sets = Alert.create({
       title: 'Reset Password',
       message: 'Enter Email to Recieve a Password Reset Link',
@@ -96,21 +83,34 @@ export class LoginPage implements DoCheck {
     this.nav.present(sets);
   }
 
+  resetVerify() {
+    let resVerify = Toast.create({
+      message: 'Check Your Email for Password Reset',
+      duration: 3000
+    });
+
+    resVerify.onDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    this.nav.present(resVerify);
+  }
+
   signIn(login){
     let auth = login.value;
 
     this.backand.signIn(auth.username, auth.password).subscribe(
       data => {
-        this.backand.auth_status = 'OK';
-        this.backand.is_auth_error = false;
+        this.backand.authStatus = 'OK';
+        this.backand.authError = false;
         this.backand.setTokenHeader(data);
         this.local.set('jwt', data);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.auth_status = `Error: ${errorMessage}`;
-        this.backand.is_auth_error = true;
-        this.error = this.backand.is_auth_error;
+        this.backand.authStatus = `Error: ${errorMessage}`;
+        this.backand.authError = true;
+        this.error = this.backand.authError;
         this.backand.logError(err);
         this.attempts = this.attempts+1;
         this.clearAll();

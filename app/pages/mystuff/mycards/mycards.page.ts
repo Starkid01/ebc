@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../../shared';
 import { NavComponent } from '../../shared/nav';
-import { Backand, Services } from '../../../services';
+import { BackandService } from '../../../services';
 
 @Component({
   templateUrl: 'build/pages/mystuff/mycards/mycards.page.html',
@@ -14,7 +14,7 @@ export class MyCardsPage {
   cards:Array<any>;
   none:boolean;
 
-  constructor(public backand:Backand, public services: Services, public nav:NavController) {
+  constructor(public backand:BackandService, public nav:NavController) {
     this.myCards();
   }
 
@@ -24,6 +24,14 @@ export class MyCardsPage {
     } else {
       this.none = false;
     }
+  }
+
+  goTo(id:number){
+    let item = {
+      index: id,
+      table: 'items'
+    };
+    this.nav.push(DetailPage, item);
   }
 
   myCards(){
@@ -36,16 +44,8 @@ export class MyCardsPage {
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.auth_status = `Error: ${errorMessage}`;
+        this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });
-  }
-
-  goTo(id:number){
-    let item = {
-      index: id,
-      table: 'items'
-    };
-    this.nav.push(DetailPage, item);
   }
 }
