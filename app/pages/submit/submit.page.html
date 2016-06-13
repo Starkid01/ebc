@@ -7,11 +7,42 @@
     </ion-card-header>
     <div>
       <ion-segment [(ngModel)]="subform">
-        <ion-segment-button value="sample">Sample</ion-segment-button>
+        <ion-segment-button value="sample">Template</ion-segment-button>
         <ion-segment-button value="exist">Existing</ion-segment-button>
         <ion-segment-button value="new">Scratch</ion-segment-button>
       </ion-segment>
     </div>
-    <ion-card-content></ion-card-content>
+    <ion-card-content [ngSwitch]="subform">
+      <form [ngFormModel]="itemForm">
+        <ion-list no-lines class="field">
+          <ion-item>
+            <ion-label for="name" stacked>Title</ion-label>
+            <ion-input clearInput id="name" name="name" type="text" placeholder="{{isType}} Name" ngControl="name"></ion-input>
+          </ion-item>
+          <div *ngSwitchWhen="'sample'">
+            <ion-item>
+              Samples
+            </ion-item>
+          </div>
+          <div *ngSwitchWhen="'exist'">
+            <ion-item>
+              Existing
+            </ion-item>
+          </div>
+          <div *ngSwitchWhen="'new'">
+            <ion-item>
+              New
+            </ion-item>
+          </div>
+          <ion-item>
+            <ion-label favorite class="flyerBox" for="flyer">Flyer</ion-label>
+            <ion-checkbox item-right favorite name="flyer" id="flyer" [(ngModel)]="isFlyer" ngControl="flyer"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+        <div padding>
+          <button block type="submit">Submit Item</button>
+        </div>
+      </form>
+    </ion-card-content>
   </ion-card>
 </ion-content>
