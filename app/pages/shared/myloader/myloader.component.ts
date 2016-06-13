@@ -1,9 +1,12 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IONIC_DIRECTIVES } from 'ionic-angular';
 
 @Component({
   selector: 'ebc-uploader',
+<<<<<<< HEAD
+=======
   encapsulation: ViewEncapsulation.None,
+>>>>>>> origin/master
   template:
   `<div class="drop">
 	<div class="loadBg">
