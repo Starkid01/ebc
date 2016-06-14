@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { DetailPage } from '../../shared';
+import { DetailPage, EbcProduct } from '../../shared';
 import { NavComponent } from '../../shared/nav';
 import { BackandService } from '../../../services';
 
@@ -10,12 +10,12 @@ import { BackandService } from '../../../services';
   directives: [NavComponent]
 })
 
-export class MyFlysPage {
-  flyers:Array<any>;
+export class MyFlysPage implements DoCheck, OnInit {
+  flyers:Array<EbcProduct>;
   none:boolean;
 
   constructor(public backand:BackandService, public nav:NavController) {
-    this.myFlyers();
+
   }
 
   ngDoCheck(){
@@ -24,6 +24,10 @@ export class MyFlysPage {
     } else{
       this.none = false;
     }
+  }
+
+  ngOnInit() {
+    this.myFlyers();
   }
 
   goTo(id:number){

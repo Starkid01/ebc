@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { DetailPage } from '../../shared';
+import { DetailPage, EbcProduct } from '../../shared';
 import { NavComponent } from '../../shared/nav';
 import { BackandService } from '../../../services';
 
@@ -10,11 +10,22 @@ import { BackandService } from '../../../services';
   directives: [NavComponent]
 })
 
-export class SCardsPage {
-  cards:Array<any>;
+export class SCardsPage implements OnInit {
+  cards:Array<EbcProduct>;
 
   constructor(public backand:BackandService, public nav:NavController) {
+  }
+
+  ngOnInit() {
     this.sampleCards();
+  }
+
+  goTo(id:number){
+    let item = {
+      index: id,
+      table: 'samples'
+    };
+    this.nav.push(DetailPage, item);
   }
 
   sampleCards(){
@@ -28,13 +39,5 @@ export class SCardsPage {
         this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
       });
-  }
-
-  goTo(id:number){
-    let item = {
-      index: id,
-      table: 'samples'
-    };
-    this.nav.push(DetailPage, item);
   }
 }

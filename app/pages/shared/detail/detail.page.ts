@@ -1,24 +1,25 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
-import { Component, Renderer } from '@angular/core';
+import { Component, Renderer, OnInit } from '@angular/core';
 import { NavParams, Platform } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
 import { BackandService, FormHandler } from '../../../services';
 import { NavComponent } from '../nav';
+import { EbcProduct } from '../';
 
 @Component({
   templateUrl: 'build/pages/shared/detail/detail.page.html',
   directives: [NavComponent]
 })
 
-export class DetailPage {
+export class DetailPage implements OnInit {
   emailForm:ControlGroup;
   smsForm:ControlGroup;
   phone:Control = new Control('');
   text:Control = new Control('');
   email:Control = new Control('', this.form.emailValidator);
   body:Control = new Control('');
-  item:Object;
+  item:EbcProduct;
   hide:boolean = false;
   sample:boolean;
   message:string = '';
@@ -30,7 +31,6 @@ export class DetailPage {
   constructor(public backand:BackandService, public form:FormHandler, public params:NavParams, private platform:Platform, private render:Renderer) {
     this.params = params;
     this.platform = platform;
-    this.itemDetail();
     this.text['_value'] = 'Something Cool';
     this.smsForm = new ControlGroup({
       phone: this.phone,
@@ -41,27 +41,11 @@ export class DetailPage {
       text: this.text,
       body: this.body
     });
+  }
+
+  ngOnInit() {
+    this.itemDetail();
     this.isSample();
-  }
-
-  isSample() {
-    let obj = this.params.get('table');
-
-    if(obj == 'samples'){
-      this.sample = true;
-    }
-    else {
-      this.sample = false;
-    }
-  }
-
-  isType() {
-    if(this.item['flyer']) {
-      this.type = 'Flyer';
-    }
-    else {
-      this.type = 'Card';
-    }
   }
 
   clickCheck() {
@@ -107,6 +91,14 @@ export class DetailPage {
     }
   }
 
+  getContact() {
+    Contacts.pickContact().then((contact) => {
+      this.picked = contact;
+      this.hide = true;
+      console.log(this.picked, this.picked['name'], this.picked['phoneNumbers'], this.picked['emails']);
+    })
+  }
+
   isAvail(app:Object) {
     let myApp = app;
     let fb;
@@ -143,6 +135,26 @@ export class DetailPage {
       );
   }
 
+  isSample() {
+    let obj = this.params.get('table');
+
+    if(obj == 'samples'){
+      this.sample = true;
+    }
+    else {
+      this.sample = false;
+    }
+  }
+
+  isType() {
+    if(this.item['flyer']) {
+      this.type = 'Flyer';
+    }
+    else {
+      this.type = 'Card';
+    }
+  }
+
   itemDetail(){
     let obj = this.params.get('table');
     let id = this.params.get('index');
@@ -175,13 +187,5 @@ export class DetailPage {
     };
 
     EmailComposer.open(myEmail);
-  }
-
-  getContact() {
-    Contacts.pickContact().then((contact) => {
-      this.picked = contact;
-      this.hide = true;
-      console.log(this.picked, this.picked['name'], this.picked['phoneNumbers'], this.picked['emails']);
-    })
   }
 }

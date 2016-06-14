@@ -1,6 +1,5 @@
 import { Component, Type } from '@angular/core';
 
-//import { Backand, Services } from '../../services';
 import { MyCardsPage } from './mycards';
 import { MyFlysPage } from './myflys';
 
@@ -11,6 +10,7 @@ import { MyFlysPage } from './myflys';
 export class MyStuff {
   cardTab: Type = MyCardsPage;
   flyerTab: Type = MyFlysPage;
+
   constructor() {
   }
 }

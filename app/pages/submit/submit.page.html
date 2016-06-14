@@ -19,9 +19,24 @@
             <ion-label for="name" stacked>Title</ion-label>
             <ion-input clearInput id="name" name="name" type="text" placeholder="{{isType}} Name" ngControl="name"></ion-input>
           </ion-item>
-          <div *ngSwitchWhen="'sample'">
-            <ion-item>
-              Samples
+          <div *ngSwitchWhen="'sample'" padding>
+            <ion-item *ngIf="!isFlyer">
+              <ion-thumbnail item-left>
+                <img [src]="tempView">
+              </ion-thumbnail>
+              <ion-label stacked>Sample Cards</ion-label>
+              <ion-select [(ngModel)]="tempView">
+                <ion-option *ngFor="let card of tempCards; let i = index" [value]="card.pic">{{i+1}}) {{card.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="isFlyer">
+              <ion-thumbnail item-left>
+                <img [src]="tempView">
+              </ion-thumbnail>
+              <ion-label stacked>Sample Flyers</ion-label>
+              <ion-select [(ngModel)]="tempView">
+                <ion-option *ngFor="let flyer of tempFlyers; let i = index" [value]="flyer.pic">{{i+1}}) {{flyer.name}}</ion-option>
+              </ion-select>
             </ion-item>
           </div>
           <div *ngSwitchWhen="'exist'">

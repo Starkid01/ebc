@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { DetailPage } from '../../shared';
+import { DetailPage, EbcProduct } from '../../shared';
 import { NavComponent } from '../../shared/nav';
 import { BackandService } from '../../../services';
 
@@ -10,23 +10,27 @@ import { BackandService } from '../../../services';
   directives: [NavComponent]
 })
 
-export class MyCardsPage {
-  cards:Array<any>;
-  none:boolean;
+export class MyCardsPage implements DoCheck, OnInit {
+  cards: Array<EbcProduct>;
+  none: boolean;
 
-  constructor(public backand:BackandService, public nav:NavController) {
-    this.myCards();
+  constructor(public backand: BackandService, public nav: NavController) {
+
   }
 
-  ngDoCheck(){
-    if(this.cards = []){
+  ngDoCheck() {
+    if (this.cards = []) {
       this.none = true;
     } else {
       this.none = false;
     }
   }
 
-  goTo(id:number){
+  ngOnInit() {
+    this.myCards();
+  }
+
+  goTo(id: number) {
     let item = {
       index: id,
       table: 'items'
@@ -34,7 +38,7 @@ export class MyCardsPage {
     this.nav.push(DetailPage, item);
   }
 
-  myCards(){
+  myCards() {
     let items = 'MyCard';
     this.backand.getItems(items).subscribe(
       data => {
