@@ -12,10 +12,11 @@ import { EbcProduct } from '../shared';
 
 export class SubmitPage implements DoCheck, OnInit {
   flyer: Control = new Control('');
-  name: Control = new Control('', Validators.required);
   isFlyer: boolean = false;
   itemForm: ControlGroup;
   isType: string = 'Card';
+  media: Control = new Control('');
+  name: Control = new Control('', Validators.required);
   subform: string = 'sample';
   tempCards: Array<EbcProduct>;
   tempFlyers: Array<EbcProduct>;
@@ -24,7 +25,8 @@ export class SubmitPage implements DoCheck, OnInit {
   constructor(private backand: BackandService) {
     this.itemForm = new ControlGroup({
       name: this.name,
-      flyer: this.flyer
+      flyer: this.flyer,
+      media: this.media
     })
   }
 
