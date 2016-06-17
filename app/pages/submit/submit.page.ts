@@ -20,7 +20,7 @@ export class SubmitPage implements DoCheck, OnInit {
   subform: string = 'sample';
   tempCards: Array<EbcProduct>;
   tempFlyers: Array<EbcProduct>;
-  tempView: string = '';
+  tempView: string = 'img/default.png';
 
   constructor(private backand: BackandService) {
     this.itemForm = new ControlGroup({
