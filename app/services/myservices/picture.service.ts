@@ -1,18 +1,19 @@
-declare var FileUploadOptions:any;
+//declare var FileUploadOptions:any;
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Toast, Platform, ActionSheet, App } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+import { Camera, Transfer } from 'ionic-native';
+import 'rxjs';
 
 @Injectable()
 export class PictureService {
-  newPic:boolean = false;
-  picFile:string;
-  myLoader:boolean = false;
-  myProg:number;
-  nav:any;
+  newPic: boolean = false;
+  picFile: string;
+  myLoader: boolean = false;
+  myProg: number;
+  nav: any;
 
-  constructor(public app:App, public http:Http) {
+  constructor(public app: App, public http: Http) {
 
   }
 
@@ -72,7 +73,7 @@ export class PictureService {
     this.nav.present(actionPics);
   }
 
-  getSigned(preset:string, user:Object) {
+  getSigned(preset: string, user: Object) {
     let opt = JSON.stringify({
       preset: preset,
       tag: user['firstName'] + ' ' + user['lastName']
@@ -81,35 +82,40 @@ export class PictureService {
     header.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
       headers: header
-      }).map(res => res)
+    }).map(res => res)
   }
 
-  upload(signed:Object, onSuccess:any) {
-    let ft = new FileTransfer();
-    let options = new FileUploadOptions();
-    let filename = this.picFile.substring(this.picFile.lastIndexOf('/')+1);
+  upload(signed: Object, onSuccess: any) {
+    let ft = new Transfer();
+    let filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
     let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
-
-    options.fileKey = 'file';
-    options.fileName = filename;
-    options.mimeType = 'image/jpeg';
-    options.chunkedMode = false;
-    options.headers = {
-        'Content-Type' : undefined
+    let options = {
+      fileKey: 'file',
+      fileName: filename,
+      mimeType: 'image/jpeg',
+      hunkedMode: false,
+      headers: {
+        'Content-Type': undefined
+      },
+      params: signed
     }
-    options.params = signed;
-
-    ft.onprogress = (e:ProgressEvent) => this.progress(e);
-    ft.upload(this.picFile, url, onSuccess, this.failed, options);
+    ft.onProgress(this.progress);
+    ft.upload(this.picFile, url, options)
+      .then(result => {
+        onSuccess(result);
+      })
+      .catch(error => {
+        this.failed(error);
+      })
   }
 
-  progress = (prog:ProgressEvent) => {
+  progress = (prog: ProgressEvent) => {
     this.myLoader = true;
     this.myProg = Math.round((prog.loaded / prog.total) * 100);
     console.log(this.myProg);
   }
 
-  failed = (err:any) => {
+  failed = (err: any) => {
     let code = err.code;
     console.log(code, err);
   }

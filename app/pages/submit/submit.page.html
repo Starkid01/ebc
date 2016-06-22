@@ -19,7 +19,7 @@
             <ion-label for="name" stacked>Title</ion-label>
             <ion-input clearInput id="name" name="name" type="text" placeholder="{{isType}} Name" ngControl="name"></ion-input>
           </ion-item>
-          <div *ngSwitchCase="'sample'" padding>
+          <div *ngSwitchWhen="'sample'" padding>
             <ion-item *ngIf="!isFlyer">
               <ion-thumbnail item-left>
                 <img [src]="tempView">
@@ -39,12 +39,12 @@
               </ion-select>
             </ion-item>
           </div>
-          <div *ngSwitchCase="'exist'">
+          <div *ngSwitchWhen="'exist'">
             <ion-item>
               Existing
             </ion-item>
           </div>
-          <div *ngSwitchCase="'new'">
+          <div *ngSwitchWhen="'new'">
             <ion-item>
               New
             </ion-item>

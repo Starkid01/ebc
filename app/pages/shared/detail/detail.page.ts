@@ -1,5 +1,6 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
 import { Component, Renderer, OnInit } from '@angular/core';
+import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
@@ -13,22 +14,23 @@ import { EbcProduct } from '../';
 })
 
 export class DetailPage implements OnInit {
-  emailForm:ControlGroup;
-  smsForm:ControlGroup;
-  phone:Control = new Control('');
-  text:Control = new Control('');
-  email:Control = new Control('', this.form.emailValidator);
-  body:Control = new Control('');
-  item:EbcProduct;
-  hide:boolean = false;
-  sample:boolean;
-  message:string = '';
-  pickPhone:string = '';
-  field:string;
-  picked:Array<any>;
-  type:string;
+  body: Control = new Control('');
+  email: Control = new Control('', this.form.emailValidator);
+  emailForm: ControlGroup;
+  field: string;
+  hide: boolean = false;
+  item: EbcProduct;
+  media: SafeResourceUrl;
+  message: string = '';
+  phone: Control = new Control('');
+  picked: Array<any>;
+  pickPhone: string = '';
+  sample: boolean;
+  smsForm: ControlGroup;
+  text: Control = new Control('');
+  type: string;
 
-  constructor(public backand:BackandService, public form:FormHandler, public params:NavParams, private platform:Platform, private render:Renderer) {
+  constructor(public safe:DomSanitizationService  ,public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer) {
     this.params = params;
     this.platform = platform;
     this.text['_value'] = 'Something Cool';
@@ -50,23 +52,23 @@ export class DetailPage implements OnInit {
 
   clickCheck() {
     let app = {};
-    if(this.platform.is('mobile')){
+    if (this.platform.is('mobile')) {
       let my = <SVGElement>document.getElementById('myItem')['contentDocument'];
 
       this.render.listen(my, 'click', (e) => {
         let clicked = e.target['parentNode'];
-        if(clicked['href']) {
+        if (clicked['href']) {
           let link = clicked['href']['baseVal'];
-          if(e.target['id'] == 'address') {
+          if (e.target['id'] == 'address') {
             e.preventDefault();
             let data = clicked['attributes'][2]['value'];
             LaunchNavigator.navigate(data)
               .then(
-                success => console.log('Launched navigator'),
-                error => console.log('Error launching navigator', error)
+              success => console.log('Launched navigator'),
+              error => console.log('Error launching navigator', error)
               );
           }
-          if(link.includes('facebook')) {
+          if (link.includes('facebook')) {
             e.preventDefault();
             app =
               {
@@ -76,13 +78,13 @@ export class DetailPage implements OnInit {
               };
             this.isAvail(app);
           };
-          if(link.includes('instagram')) {
+          if (link.includes('instagram')) {
             e.preventDefault();
             app =
               {
                 appName: 'dm',
                 url: link,
-                appLink: 'instagram://user?username=' + link.substr(link.search('com')+4)
+                appLink: 'instagram://user?username=' + link.substr(link.search('com') + 4)
               };
             this.isAvail(app);
           };
@@ -99,46 +101,46 @@ export class DetailPage implements OnInit {
     })
   }
 
-  isAvail(app:Object) {
+  isAvail(app: Object) {
     let myApp = app;
     let fb;
     let dm;
 
-    if(this.platform.is('ios')) {
+    if (this.platform.is('ios')) {
       fb = 'fb://';
       dm = 'instagram://';
-    } else if(this.platform.is('android')) {
-      fb ='com.facebook.katana';
+    } else if (this.platform.is('android')) {
+      fb = 'com.facebook.katana';
       dm = 'com.instagram.android';
     }
-    if(myApp['appName'] == 'fb') {
-      Object.defineProperty(myApp, 'check',{
+    if (myApp['appName'] == 'fb') {
+      Object.defineProperty(myApp, 'check', {
         value: fb
       })
     }
-    if(myApp['appName'] == 'dm') {
-      Object.defineProperty(myApp, 'check',{
+    if (myApp['appName'] == 'dm') {
+      Object.defineProperty(myApp, 'check', {
         value: dm
       })
     }
 
     AppAvailability.check(myApp['check'])
       .then(
-        yes => {
-          console.log(myApp['check'] + " is available");
-          InAppBrowser.open(myApp['appLink'], '_system');
-        },
-        no =>  {
-          console.log(myApp['check'] + " is NOT available");
-          InAppBrowser.open(myApp['url'], '_system');
-        }
+      yes => {
+        console.log(myApp['check'] + " is available");
+        InAppBrowser.open(myApp['appLink'], '_system');
+      },
+      no => {
+        console.log(myApp['check'] + " is NOT available");
+        InAppBrowser.open(myApp['url'], '_system');
+      }
       );
   }
 
   isSample() {
     let obj = this.params.get('table');
 
-    if(obj == 'samples'){
+    if (obj == 'samples') {
       this.sample = true;
     }
     else {
@@ -147,7 +149,7 @@ export class DetailPage implements OnInit {
   }
 
   isType() {
-    if(this.item['flyer']) {
+    if (this.item['flyer']) {
       this.type = 'Flyer';
     }
     else {
@@ -155,13 +157,14 @@ export class DetailPage implements OnInit {
     }
   }
 
-  itemDetail(){
+  itemDetail() {
     let obj = this.params.get('table');
     let id = this.params.get('index');
 
     this.backand.getItem(obj, id).subscribe(
       data => {
         this.item = data;
+        this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
         this.isType();
       },
       err => {
