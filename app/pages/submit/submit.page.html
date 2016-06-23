@@ -1,4 +1,4 @@
-<ebc-navbar>Submit Item</ebc-navbar>
+<ebc-navbar>Create New Item</ebc-navbar>
 
 <ion-content class="sub">
   <ion-card>
@@ -16,7 +16,7 @@
       <form [ngFormModel]="itemForm">
         <ion-list no-lines class="field">
           <ion-item>
-            <ion-label for="name" stacked>Title</ion-label>
+            <ion-label for="name" favorite stacked>Title</ion-label>
             <ion-input clearInput id="name" name="name" type="text" placeholder="{{isType}} Name" ngControl="name"></ion-input>
           </ion-item>
           <div *ngSwitchWhen="'sample'" padding>
@@ -49,6 +49,10 @@
               New
             </ion-item>
           </div>
+          <ion-item>
+            <ion-label from="desc" stacked>Description</ion-label>
+            <ion-textarea id="desc" name="desc" type="text"></ion-textarea>
+          </ion-item>
           <ion-item>
             <ion-label favorite class="flyerBox" for="flyer">Flyer</ion-label>
             <ion-checkbox item-right favorite name="flyer" id="flyer" [(ngModel)]="isFlyer" ngControl="flyer"></ion-checkbox>

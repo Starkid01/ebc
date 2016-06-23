@@ -42,8 +42,6 @@ export class MyCardsPage implements DoCheck, OnInit {
     let items = 'MyCard';
     this.backand.getItems(items).subscribe(
       data => {
-        console.log('My Cards');
-        console.log(data);
         this.cards = data;
       },
       err => {

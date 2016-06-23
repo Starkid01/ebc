@@ -18,8 +18,8 @@ export class SubmitPage implements DoCheck, OnInit {
   media: Control = new Control('');
   name: Control = new Control('', Validators.required);
   subform: string = 'sample';
-  tempCards: Array<EbcProduct>;
-  tempFlyers: Array<EbcProduct>;
+  tempCards: Array<EbcProduct> = [];
+  tempFlyers: Array<EbcProduct> = [];
   tempView: string = 'img/default.png';
 
   constructor(private backand: BackandService) {
@@ -41,6 +41,18 @@ export class SubmitPage implements DoCheck, OnInit {
   ngOnInit() {
     this.getSamples('SampleCard');
     this.getSamples('SampleFlyer');
+  }
+
+  findSample() {
+    let selected:EbcProduct;
+    if(this.isType == 'Flyer') {
+       selected = this.tempFlyers.find(select => select.pic == this.tempView);
+       return selected;
+    }
+    if(this.isType == 'Card') {
+      selected = this.tempCards.find(select => select.pic == this.tempView);
+      return selected;
+    }    
   }
 
   getSamples(type: string) {
