@@ -1,71 +1,33 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 
 import { BackandService } from '../../services';
 import { NavComponent } from '../shared/nav';
 import { EbcProduct } from '../shared';
+import { SampleForm } from './submit-sample.form';
 
 @Component({
   templateUrl: 'build/pages/submit/submit.page.html',
-  directives: [NavComponent]
+  directives: [NavComponent, SampleForm]
 })
 
-export class SubmitPage implements DoCheck, OnInit {
-  flyer: Control = new Control('');
+export class SubmitPage {
+  @ViewChild(SampleForm) samples: SampleForm;
+  
   isFlyer: boolean = false;
-  itemForm: ControlGroup;
-  isType: string = 'Card';
-  media: Control = new Control('');
-  name: Control = new Control('', Validators.required);
   subform: string = 'sample';
-  tempCards: Array<EbcProduct> = [];
-  tempFlyers: Array<EbcProduct> = [];
-  tempView: string = 'img/default.png';
 
   constructor(private backand: BackandService) {
-    this.itemForm = new ControlGroup({
-      name: this.name,
-      flyer: this.flyer,
-      media: this.media
-    })
+    
   }
 
-  ngDoCheck() {
-    if (this.isFlyer) {
-      this.isType = 'Flyer';
-    } else {
-      this.isType = 'Card';
+  submitItem() {
+    let newItem:Object;
+
+    if(this.subform == "sample") {
+      newItem = this.samples.tempForm();
+      newItem['flyer'] = this.isFlyer;
+      console.log(newItem);
     }
-  }
-
-  ngOnInit() {
-    this.getSamples('SampleCard');
-    this.getSamples('SampleFlyer');
-  }
-
-  findSample() {
-    let selected:EbcProduct;
-    if(this.isType == 'Flyer') {
-       selected = this.tempFlyers.find(select => select.pic == this.tempView);
-       return selected;
-    }
-    if(this.isType == 'Card') {
-      selected = this.tempCards.find(select => select.pic == this.tempView);
-      return selected;
-    }    
-  }
-
-  getSamples(type: string) {
-    this.backand.getItems(type).subscribe(
-      data => {
-        if (type == 'SampleCard') {
-          this.tempCards = data;
-        }
-        if (type == 'SampleFlyer') {
-          this.tempFlyers = data;
-        }
-      },
-      err => console.log(err)
-    );
   }
 }

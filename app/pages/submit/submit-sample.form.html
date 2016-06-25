@@ -1,0 +1,28 @@
+<form [ngFormModel]="itemForm">
+  <ion-item>
+    <ion-label for="name" favorite stacked>Title</ion-label>
+    <ion-input clearInput id="name" name="name" type="text" [placeholder]="isType + ' Name'" ngControl="name"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!flyer">
+    <ion-thumbnail item-left>
+      <img [src]="tempView">
+    </ion-thumbnail>
+    <ion-label stacked>Sample Cards</ion-label>
+    <ion-select [(ngModel)]="tempView" placeholder="Selection" required>
+      <ion-option *ngFor="let card of tempCards; let i = index" [value]="card.pic">{{i+1}}) {{card.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="flyer">
+    <ion-thumbnail item-left>
+      <img [src]="tempView">
+    </ion-thumbnail>
+    <ion-label stacked>Sample Flyers</ion-label>
+    <ion-select [(ngModel)]="tempView" placeholder="Selection">
+      <ion-option *ngFor="let flyer of tempFlyers; let i = index" [value]="flyer.pic">{{i+1}}) {{flyer.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label from="desc" stacked>Description</ion-label>
+    <ion-textarea id="desc" name="desc" type="text"></ion-textarea>
+  </ion-item>
+</form>
