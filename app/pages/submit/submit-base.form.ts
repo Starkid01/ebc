@@ -17,6 +17,10 @@ export class FormBase implements DoCheck {
   }
 
   ngDoCheck() {
+    this.checkFlyer();
+  }
+
+  checkFlyer() {
     if (this.flyer) {
       return this.isType = 'Flyer';
     } else {

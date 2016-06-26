@@ -13,20 +13,22 @@ import { SampleForm } from './submit-sample.form';
 
 export class SubmitPage {
   @ViewChild(SampleForm) samples: SampleForm;
-  
+
   isFlyer: boolean = false;
   subform: string = 'sample';
 
   constructor(private backand: BackandService) {
-    
+
   }
 
   submitItem() {
-    let newItem:Object;
+    let newItem: Object;
 
-    if(this.subform == "sample") {
+    if (this.subform == "sample") {
       newItem = this.samples.tempForm();
-      newItem['flyer'] = this.isFlyer;
+      if (newItem) {
+        newItem['flyer'] = this.isFlyer;
+      }
       console.log(newItem);
     }
   }

@@ -7,10 +7,16 @@
     text-align: right;
   }
 
+  .selectErr {
+    transform: translateY(-3.5rem);
+    margin-bottom: -3.5rem;
+  }
+
   .field {
     padding-left: 1.1rem;
     padding-right: 1.1rem;
   }
+
   ion-select {
     transform: translateY(-3rem);
   }

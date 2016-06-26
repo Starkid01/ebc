@@ -57,7 +57,7 @@ ion-title {
     ion-input, ion-textarea {
       color: map-get($colors, light);
       border: map-get($colors, danger) 1px solid;
-      background: rgba(map-get($colors, danger), .35);
+      background: lighten($color: map-get($colors, danger), $amount: 25%);
     }
   }
 }

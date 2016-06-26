@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { Validators, ControlGroup, Control } from '@angular/common';
+import { NavController } from 'ionic-angular';
 
 import { BackandService } from '../../services';
 import { FormBase } from './submit-base.form';
@@ -10,12 +11,13 @@ import { EbcProduct } from '../shared';
   templateUrl: 'build/pages/submit/submit-sample.form.html',
 })
 
-export class SampleForm extends FormBase implements OnInit {
+export class SampleForm extends FormBase implements DoCheck, OnInit {
+  phone: Control = new Control('');
   tempCards: Array<EbcProduct> = [];
   tempFlyers: Array<EbcProduct> = [];
   tempView: string = 'img/default.png';
 
-  constructor(private backand: BackandService) {
+  constructor(private nav: NavController, private backand: BackandService) {
     super();
     this.itemForm = new ControlGroup({
       name: this.name,
@@ -25,19 +27,26 @@ export class SampleForm extends FormBase implements OnInit {
     })
   }
 
+  ngDoCheck() {
+    this.selectedValid();
+    super.ngDoCheck();
+  }
+
   ngOnInit() {
     this.getSamples('SampleCard');
     this.getSamples('SampleFlyer');
   }
 
-
+  contactForm() {
+    
+  }
 
   findSample() {
     let selected: EbcProduct;
     if (this.isType == 'Flyer') {
       selected = this.tempFlyers.find(select => select.pic == this.tempView);
     }
-    if (this.isType == 'Card') {
+    else if (this.isType == 'Card') {
       selected = this.tempCards.find(select => select.pic == this.tempView);
     }
     return selected;
@@ -57,17 +66,29 @@ export class SampleForm extends FormBase implements OnInit {
     );
   }
 
+  selectedValid() {
+    let ch = this.findSample() === undefined;
+    if (ch) {
+      this.itemForm.setErrors({ noTemp: true }, true);
+    }
+    else {
+      this.itemForm.setErrors(null, true);
+    }
+  }
+
   tempForm() {
-    if (this.tempView == 'img/default.png') {
-      console.log('Please Select from Templates');
-      this.itemForm.setErrors({noTemp: true});
-    } else {
-      let buildData = {
+    let buildData: Object;
+    if (!this.itemForm.valid) {
+      return false;
+    }
+    else {
+      let selected = {
         selectedId: this.findSample()['id'],
         selectedName: this.findSample()['name']
       }
-      this.data.updateValue(JSON.stringify(buildData));
+      let myData = JSON.stringify(buildData) + JSON.stringify(selected);
+      this.data.updateValue(myData);
+      return this.itemForm.value;
     }
-    return this.itemForm.value;
   }
 }
