@@ -1,0 +1,23 @@
+<div *ngIf="!flyer">
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="tempView">
+      </ion-thumbnail>
+      <ion-label stacked>Sample Cards*</ion-label>
+      <ion-select [(ngModel)]="tempView" placeholder="Selection">
+        <ion-option *ngFor="let card of tempCards; let i = index" [value]="card.pic">{{i+1}}) {{card.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div *ngIf="flyer">
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="tempView">
+      </ion-thumbnail>
+      <ion-label stacked>Sample Flyers*</ion-label>
+      <ion-select [(ngModel)]="tempView" placeholder="Selection">
+        <ion-option *ngFor="let flyer of tempFlyers; let i = index" [value]="flyer.pic">{{i+1}}) {{flyer.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+	<ion-item class="selectErr" *ngIf="!selectedValid()"><span danger>Please Select from Samples</span></ion-item>
