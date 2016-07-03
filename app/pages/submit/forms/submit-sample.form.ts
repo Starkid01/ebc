@@ -3,6 +3,7 @@ import { Validators, ControlGroup, Control } from '@angular/common';
 import { NavController } from 'ionic-angular';
 
 import { FormBase } from './submit-base.form';
+import { FormHandler } from '../../../services';
 
 @Component({
   selector: 'ebc-sample-form',
@@ -12,7 +13,7 @@ import { FormBase } from './submit-base.form';
 export class SampleForm extends FormBase {
   bodyName: Control = new Control('', Validators.required);
   detailForm: ControlGroup;
-  email: Control = new Control('');
+  email: Control = new Control('', FormHandler.prototype.emailValidator);
   phone: Control = new Control('');
 
   constructor(private nav: NavController) {

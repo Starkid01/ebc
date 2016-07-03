@@ -5,7 +5,7 @@ import { Slides } from 'ionic-angular';
 import { BackandService } from '../../services';
 import { NavComponent } from '../shared/nav';
 import { EbcProduct } from '../shared';
-import { SampleForm, SelectForm, SocialForm } from './forms';
+import { SampleForm, SelectForm, SocialForm, EbcData } from './forms';
 
 @Component({
   templateUrl: 'build/pages/submit/submit.page.html',
@@ -25,7 +25,15 @@ export class SubmitPage {
 
   }
 
-  nextForm(i:number) {
+  getSocial(input: EbcData) {
+    let item = input;
+    if (this.social.socialAdded()) {
+      item['data'] = input['data'].concat(this.social.socialData());
+    }
+    return item;
+  }
+
+  nextForm(i: number) {
     this.steps.slideTo(i);
   }
 
@@ -37,8 +45,8 @@ export class SubmitPage {
       }
       let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;
-      item['data'] = JSON.stringify(data) + this.samples.detailContact();
-      return item;
+      item['data'] = String.prototype.concat(JSON.stringify(data), this.samples.detailContact());
+      return this.getSocial(item);
     }
   }
 

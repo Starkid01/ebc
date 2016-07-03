@@ -25,7 +25,12 @@ export class SocialForm {
 		})
 	}
 
+	socialAdded() {
+		let added = this.socialForm.dirty;
+		return added
+	}
+
 	socialData() {
-		return this.socialForm.value;
+		return JSON.stringify(this.socialForm.value);
 	}
 }
