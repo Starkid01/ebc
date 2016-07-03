@@ -1,4 +1,6 @@
-<ebc-navbar>Create New Item</ebc-navbar>
+<ion-header>
+  <ebc-navbar>Create New Item</ebc-navbar>
+</ion-header>
 
 <ion-content class="sub">
   <ion-card>
@@ -13,23 +15,24 @@
       </ion-segment>
     </div>
     <ion-card-content [ngSwitch]="subform">
+      <ion-item>* Fields are Required</ion-item>
       <ion-list no-lines class="field">
         <div *ngSwitchCase="'sample'">
           <ebc-select-form [flyer]="isFlyer"></ebc-select-form>
           <ion-slides #steps>
             <ion-slide>
-              <ebc-sample-form [flyer]="isFlyer"></ebc-sample-form>
               <button clear block dark (click)="nextForm(1)">Add Social Media <ion-icon name="arrow-forward"></ion-icon></button>
+              <ebc-sample-form class="slideForm" [flyer]="isFlyer"></ebc-sample-form>
             </ion-slide>
             <ion-slide>
-              <ebc-social-form></ebc-social-form>
-               <button clear block dark (click)="nextForm(0)"><ion-icon name="arrow-back"></ion-icon> * Back to Selection From</button>
+              <button clear block dark (click)="nextForm(0)"><ion-icon name="arrow-back"></ion-icon> * Back to Selection From</button>
+              <ebc-social-form class="slideForm"></ebc-social-form>             
             </ion-slide>
           </ion-slides>
         </div>
         <div *ngSwitchCase="'exist'">
           <ion-item>
-            Existing
+             Existing
           </ion-item>
         </div>
         <div *ngSwitchCase="'new'">
@@ -41,7 +44,6 @@
           <ion-label favorite class="flyerBox" for="flyer">Flyer</ion-label>
           <ion-checkbox item-right favorite name="flyer" id="flyer" [(ngModel)]="isFlyer"></ion-checkbox>
         </ion-item>
-        <ion-item>* Fields are Required</ion-item>
       </ion-list>
       <div padding>
         <button block type="submit" (click)="submitItem()">Submit Item</button>

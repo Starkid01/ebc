@@ -6,11 +6,26 @@ import { Component } from '@angular/core';
 	templateUrl: 'build/pages/submit/forms/submit-social.form.html'
 })
 export class SocialForm {
-	socialForm:ControlGroup;
+	fb:Control = new Control('');
+	instagram:Control = new Control('');
+	linkedIn:Control = new Control('');
+	socialForm: ControlGroup;
+	soundCloud:Control = new Control('');
+	twitter:Control = new Control('');
+	web:Control = new Control('');
 
 	constructor() {
 		this.socialForm = new ControlGroup({
-			
+			fb: this.fb,
+			instagram: this.instagram,
+			linkedIn: this.linkedIn,
+			soundCloud: this.soundCloud,
+			twitter: this.twitter,
+			web: this.web
 		})
+	}
+
+	socialData() {
+		return this.socialForm.value;
 	}
 }

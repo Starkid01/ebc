@@ -1,8 +1,10 @@
-<ebc-navbar>Sample Flyers</ebc-navbar>
+<ion-header>
+  <ebc-navbar>Sample Flyers</ebc-navbar>
+</ion-header>
 
 <ion-content class="scards">
   <ion-card *ngFor="let f of flyers" (click)="goTo(f?.id)">
-   <button ion-item>
+    <button ion-item>
       <ion-card-header>
         <h2 favorite>{{f?.name}}</h2>
       </ion-card-header>

@@ -15,7 +15,7 @@ export class SelectForm implements DoCheck, OnInit {
 
   tempCards: Array<EbcProduct> = [];
   tempFlyers: Array<EbcProduct> = [];
-  tempView: string = 'img/default.png';
+  tempView: string;
 
   constructor(private nav: NavController, private backand: BackandService) {
   }
@@ -27,6 +27,7 @@ export class SelectForm implements DoCheck, OnInit {
   ngOnInit() {
     this.getSamples('SampleCard');
     this.getSamples('SampleFlyer');
+    console.log(this.tempView);
   }
 
   findSample() {

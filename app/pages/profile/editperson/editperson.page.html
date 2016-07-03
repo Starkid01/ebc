@@ -1,8 +1,9 @@
-<ebc-navbar>Edit Profile</ebc-navbar>
-
-<ebc-uploader *ngIf="pic.myLoader" [value]="pic.myProg"></ebc-uploader>
+<ion-header>
+  <ebc-navbar>Edit Profile</ebc-navbar>
+</ion-header>
 
 <ion-content class="edit">
+  <ebc-uploader *ngIf="pic.myLoader" [value]="pic.myProg"></ebc-uploader>
   <button *ngIf="upFile" light fab fab-top fab-left (click)="savePic()" class="action">
     <ion-icon name="cloud-upload"></ion-icon>
   </button>
@@ -58,16 +59,19 @@
           <div class="field">
             <ion-item clearInput>
               <ion-label stacked for="oldPass">Current Password</ion-label>
-              <ion-input clearInput ngControl="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+              <ion-input clearInput ngControl="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
             </ion-item>
             <div ngControlGroup="verify" [class.myError]="verify.errors">
               <ion-item>
                 <ion-label stacked for="password">Password</ion-label>
-                <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+                <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  type="password"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label stacked for="confirm">Confirm Password</ion-label>
-                <ion-input clearInput ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+                <ion-input clearInput ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  type="password"></ion-input>
               </ion-item>
               <div class="passErr">
                 <p danger *ngIf="verify.errors">Passwords Don't Match</p>

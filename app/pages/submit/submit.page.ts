@@ -15,6 +15,7 @@ import { SampleForm, SelectForm, SocialForm } from './forms';
 export class SubmitPage {
   @ViewChild(SampleForm) samples: SampleForm;
   @ViewChild(SelectForm) select: SelectForm;
+  @ViewChild(SocialForm) social: SocialForm;
   @ViewChild('steps') steps: Slides;
 
   isFlyer: boolean = false;
@@ -29,14 +30,14 @@ export class SubmitPage {
   }
 
   sampleTemp() {
-    if (this.select.selectedValid() && this.samples.itemForm.valid) {
+    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailForm.valid) {
       let data = {
         selID: this.select.findSample().id,
         selName: this.select.findSample().name
       }
       let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;
-      item['data'] = JSON.stringify(data);
+      item['data'] = JSON.stringify(data) + this.samples.detailContact();
       return item;
     }
   }

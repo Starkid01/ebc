@@ -1,8 +1,10 @@
-<ion-navbar primary *navbar>
-  <ion-title>
-    EBC: New User
-  </ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      EBC: New User
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="create">
   <ion-card padding>
@@ -32,11 +34,13 @@
           <div ngControlGroup="verify" [class.myError]="verify.errors">
             <ion-item>
               <ion-label stacked for="password">Password</ion-label>
-              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked for="confirm">Confirm Password</ion-label>
-              <ion-input clearInput ngControl="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+              <ion-input clearInput ngControl="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
             </ion-item>
             <div class="passErr">
               <p danger *ngIf="verify.errors">Passwords Don't Match</p>
@@ -56,6 +60,8 @@
   </ion-card>
 </ion-content>
 
-<ion-toolbar position="bottom">
-  <ion-note padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar position="bottom">
+    <ion-note padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
+  </ion-toolbar>
+</ion-footer>

@@ -1,8 +1,10 @@
-<ion-navbar primary *navbar>
-  <ion-title>
-    EBC: Electronic Business Card
-  </ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>
+      EBC: Electronic Business Card
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="login">
   <ion-card padding>
@@ -22,7 +24,8 @@
             </div>
             <ion-item>
               <ion-label stacked for="password">Password</ion-label>
-              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                type="password"></ion-input>
             </ion-item>
             <div class="passErr">
               <p danger *ngIf="backand.authError">Username or Password is Incorrect</p>
@@ -45,6 +48,8 @@
   </ion-card>
 </ion-content>
 
-<ion-toolbar position="bottom">
-  <ion-note padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar position="bottom">
+    <ion-note padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
+  </ion-toolbar>
+</ion-footer>

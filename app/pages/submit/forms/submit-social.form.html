@@ -1,6 +1,50 @@
 <form [ngFormModel]="socialForm">
   <ion-item>
-    <ion-label primary>Facebook</ion-label>
-		<ion-toggle></ion-toggle>
+    <ion-label fb>Facebook</ion-label>
+    <ion-toggle [(ngModel)]="fbField" fb></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="fbField">
+    <ion-label for="fb" stacked>Facebook Username</ion-label>
+    <ion-input clearInput id="fb" name="fb" type="text" ngControl="fb"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label instagram>Instagram</ion-label>
+    <ion-toggle [(ngModel)]="gram" instagram></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="gram">
+    <ion-label for="gram" stacked>Instagram Username</ion-label>
+    <ion-input clearInput id="gram" name="gram" type="text" ngControl="instagram"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label twitter>Twitter</ion-label>
+    <ion-toggle [(ngModel)]="dm" twitter></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="dm">
+    <ion-label for="dm" stacked>Twitter Username</ion-label>
+    <ion-input clearInput id="dm" name="dm" type="text" ngControl="twitter"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label sound>SoundCloud</ion-label>
+    <ion-toggle [(ngModel)]="sound" sound></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="sound">
+    <ion-label for="sound" stacked>SoundCloud Username</ion-label>
+    <ion-input clearInput id="sound" name="sound" type="text" ngControl="soundCloud"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label linked>LinkedIn</ion-label>
+    <ion-toggle [(ngModel)]="linked" linked></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="linked">
+    <ion-label for="linked" stacked>LinkedIn Username</ion-label>
+    <ion-input clearInput id="linked" name="linked" type="text" ngControl="linkedId"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label secondary>Website</ion-label>
+    <ion-toggle [(ngModel)]="url" secondary>></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="url">
+    <ion-label for="web" stacked>Website Address</ion-label>
+    <ion-input clearInput id="web" name="web" type="url" ngControl="web"></ion-input>
   </ion-item>
 </form>

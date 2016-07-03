@@ -10,6 +10,9 @@ import { FormBase } from './submit-base.form';
 })
 
 export class SampleForm extends FormBase {
+  bodyName: Control = new Control('', Validators.required);
+  detailForm: ControlGroup;
+  email: Control = new Control('');
   phone: Control = new Control('');
 
   constructor(private nav: NavController) {
@@ -19,7 +22,17 @@ export class SampleForm extends FormBase {
       desc: this.desc,
       data: this.data,
       pic: this.pic
-    })
+    });
+    this.detailForm = new ControlGroup({
+      bodyName: this.bodyName,
+      email: this.email,
+      phone: this.phone
+    });
+  }
+
+  detailContact() {
+    let details = JSON.stringify(this.detailForm.value);
+    return details;
   }
 
   tempForm() {

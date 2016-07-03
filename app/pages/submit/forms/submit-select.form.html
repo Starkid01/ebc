@@ -1,7 +1,7 @@
 <div *ngIf="!flyer">
     <ion-item>
       <ion-thumbnail item-left>
-        <img [src]="tempView">
+        <img [src]="tempView" title="EBC Card Not Selected">
       </ion-thumbnail>
       <ion-label stacked>Sample Cards*</ion-label>
       <ion-select [(ngModel)]="tempView" placeholder="Selection">
@@ -12,7 +12,7 @@
   <div *ngIf="flyer">
     <ion-item>
       <ion-thumbnail item-left>
-        <img [src]="tempView">
+        <img [src]="tempView" title="EBC Flyer Not Selected">
       </ion-thumbnail>
       <ion-label stacked>Sample Flyers*</ion-label>
       <ion-select [(ngModel)]="tempView" placeholder="Selection">
