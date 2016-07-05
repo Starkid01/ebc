@@ -16,12 +16,15 @@ export class FormHandler {
   }
 
   emailValidator(c: Control) {
-    if (!c.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
-      return { 'invalidEmailAddress': true };
-
-    } else {
-      return null;
-    }
+    let addy = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let isEmail = !c.value.match(addy);
+    return isEmail ? { 'invalidEmail': true } : null;
+  }
+  
+  phoneValidator(c: Control) {
+    let number = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
+    let isPhone = !c.value.match(number);
+    return isPhone ? { 'invalidPhone': true  } : null;
   }
 
   clearField(c: Control) {

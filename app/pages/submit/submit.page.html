@@ -19,20 +19,27 @@
       <ion-list no-lines class="field">
         <div *ngSwitchCase="'sample'">
           <ebc-select-form [flyer]="isFlyer"></ebc-select-form>
-          <ion-slides #steps>
+          <ion-slides #steps [options]="slideOpts">
             <ion-slide>
-              <button clear block dark (click)="nextForm(1)">Add Social Media <ion-icon name="arrow-forward"></ion-icon></button>
+              <button clear block dark (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-forward"></ion-icon></button>
+              <ebc-pic-form class="slideForm"></ebc-pic-form>
+            </ion-slide>
+            <ion-slide>
+              <div class="rowForm">
+                <button clear block dark (click)="nextForm(0)"><ion-icon name="arrow-back"></ion-icon> Add Artwork</button>
+                <button clear block dark (click)="nextForm(2)">Add Social Media <ion-icon name="arrow-forward"></ion-icon></button>
+              </div>
               <ebc-sample-form class="slideForm" [flyer]="isFlyer"></ebc-sample-form>
             </ion-slide>
             <ion-slide>
-              <button clear block dark (click)="nextForm(0)"><ion-icon name="arrow-back"></ion-icon> * Back to Selection Form</button>
-              <ebc-social-form class="slideForm"></ebc-social-form>             
+              <button clear block dark (click)="nextForm(1)"><ion-icon name="arrow-back"></ion-icon> Back to Selection Form</button>
+              <ebc-social-form class="slideForm"></ebc-social-form>
             </ion-slide>
           </ion-slides>
         </div>
         <div *ngSwitchCase="'exist'">
           <ion-item>
-             Existing
+            Existing
           </ion-item>
         </div>
         <div *ngSwitchCase="'new'">

@@ -5,21 +5,25 @@ import { Slides } from 'ionic-angular';
 import { BackandService } from '../../services';
 import { NavComponent } from '../shared/nav';
 import { EbcProduct } from '../shared';
-import { SampleForm, SelectForm, SocialForm, EbcData } from './forms';
+import { EbcData, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 
 @Component({
   templateUrl: 'build/pages/submit/submit.page.html',
-  directives: [NavComponent, SampleForm, SelectForm, SocialForm]
+  directives: [NavComponent, PicForm, SampleForm, SelectForm, SocialForm]
 })
 
 export class SubmitPage {
   @ViewChild(SampleForm) samples: SampleForm;
   @ViewChild(SelectForm) select: SelectForm;
   @ViewChild(SocialForm) social: SocialForm;
+  @ViewChild(PicForm) pic: PicForm;
   @ViewChild('steps') steps: Slides;
 
   isFlyer: boolean = false;
   subform: string = 'sample';
+  slideOpts: Object = {
+    initialSlide: 1
+  }
 
   constructor(private backand: BackandService) {
 

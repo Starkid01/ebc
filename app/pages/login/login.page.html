@@ -20,7 +20,7 @@
               <ion-input clearInput ngControl="username" id="username" name="username" placeholder="email" type="email"></ion-input>
             </ion-item>
             <div class="passErr">
-              <p danger *ngIf="!username.valid && username.touched">Please Provide a Valid Email</p>
+              <p danger *ngIf="username.errors?.invalidEmail && username.touched">Please Provide a Valid Email</p>
             </div>
             <ion-item>
               <ion-label stacked for="password">Password</ion-label>
