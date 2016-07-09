@@ -47,7 +47,7 @@ export class SubmitPage {
   }
 
   sampleTemp() {
-    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailForm.dirty) {
+    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.bodyName.valid) {
       let data = {
         selID: this.select.findSample().id,
         selName: this.select.findSample().name
