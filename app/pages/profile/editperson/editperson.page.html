@@ -47,7 +47,7 @@
             </ion-item>
           </div>
           <ion-item>
-            <button block class="formBtn" type="submit">Confirm Change</button>
+            <button block [disabled]="!editForm.dirty" class="formBtn" type="submit">Confirm Change</button>
           </ion-item>
         </ion-list>
       </form>

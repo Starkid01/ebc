@@ -2,21 +2,23 @@ import { Validators, ControlGroup, Control } from '@angular/common';
 import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 
-import { BackandService } from '../../services';
+import { BackandService, PictureService } from '../../services';
 import { NavComponent } from '../shared/nav';
 import { EbcProduct } from '../shared';
+import { MyLoader } from '../shared/myloader';
 import { EbcData, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 
 @Component({
   templateUrl: 'build/pages/submit/submit.page.html',
-  directives: [NavComponent, PicForm, SampleForm, SelectForm, SocialForm]
+  directives: [NavComponent, MyLoader, PicForm, SampleForm, SelectForm, SocialForm],
+	providers: [PictureService]
 })
 
 export class SubmitPage {
   @ViewChild(SampleForm) samples: SampleForm;
   @ViewChild(SelectForm) select: SelectForm;
   @ViewChild(SocialForm) social: SocialForm;
-  @ViewChild(PicForm) pic: PicForm;
+  @ViewChild(PicForm) pics: PicForm;
   @ViewChild('steps') steps: Slides;
 
   isFlyer: boolean = false;
@@ -25,7 +27,7 @@ export class SubmitPage {
     initialSlide: 1
   }
 
-  constructor(private backand: BackandService) {
+  constructor(private backand: BackandService, public pic: PictureService) {
 
   }
 
@@ -33,6 +35,9 @@ export class SubmitPage {
     let item = input;
     if (this.social.socialAdded()) {
       item['data'] = input['data'].concat(this.social.socialData());
+    }
+    if(this.pics.hasArt) {
+      item['pic'] = this.pics.getArt();
     }
     return item;
   }
@@ -42,7 +47,7 @@ export class SubmitPage {
   }
 
   sampleTemp() {
-    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailForm.valid) {
+    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailForm.dirty) {
       let data = {
         selID: this.select.findSample().id,
         selName: this.select.findSample().name

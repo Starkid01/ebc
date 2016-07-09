@@ -14,6 +14,7 @@
   }
 
   .action {
+    transform: translateY(1.2rem);
     z-index: 5;
   }
   
@@ -36,20 +37,11 @@
   
   .rowForm {
     display: flex;
-    
-    &:nth-child(n) {
-      width: 99%;
-    }
+    justify-content: space-between;
   }
 
  .selectErr {
     transform: translateY(-3.5rem);
     margin-bottom: -3.5rem;
-  }
- 
-  .slideForm {
-    ion-item {
-      width: 99%;
-    }
   }
 }

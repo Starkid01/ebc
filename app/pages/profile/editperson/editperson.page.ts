@@ -82,18 +82,6 @@ export class EditPage implements DoCheck {
       });
   }
 
-  picSaved() {
-    let myImg = Toast.create({
-        message: 'Your Profile Pic has been Saved',
-        duration: 2000
-    });
-    myImg.onDismiss(() => {
-      this.pic.myLoader = false;
-      this.upFile = false;
-    });
-    this.nav.present(myImg);
-  }
-
   savePic() {
     this.pic.getSigned('usersPic', this.user.myUser)
       .subscribe(
@@ -104,7 +92,6 @@ export class EditPage implements DoCheck {
           console.log(err);
         },
         () => {
-          console.log(this.signed);
           this.pic.upload(this.signed, this.success);
     });
   }
@@ -133,12 +120,11 @@ export class EditPage implements DoCheck {
 
   success = (result:any) => {
     let finish = JSON.parse(result.response);
-    console.log(finish);
     let image = {
       pic: finish['url']
     };
-    console.log(image);
     this.saveUpdate(image);
-    this.picSaved();
+    this.pic.picSaved();
+    this.upFile = false;
   }
 }

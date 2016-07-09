@@ -1,12 +1,11 @@
-<ebc-uploader *ngIf="pic.myLoader" [value]="pic.myProg"></ebc-uploader>
-<ion-item class="artwork">
-  <img [src]="pic.picFile" title="Please Upload Artwork" />
-</ion-item>
 <div>
-  <button favorite fab fab-left class="action">
+  <button favorite fab fab-left (click)="savePic()" class="action">
     <ion-icon name="cloud-upload"></ion-icon>
   </button>
-  <button secondary fab fab-right class="action" (click)="pic.getPics()">
+  <button secondary fab fab-right (click)="pic.getPics()" class="action">
     <ion-icon name="image"></ion-icon>
   </button>
 </div>
+<ion-item class="artwork">
+  <img [src]="pic.picFile" title="Please Upload Artwork" />
+</ion-item>

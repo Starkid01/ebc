@@ -9,11 +9,16 @@ export class PictureService {
   newPic: boolean = false;
   picFile: string;
   myLoader: boolean = false;
-  myProg: number;
+  myProg: number = 0;
   nav: any;
 
   constructor(public app: App, public http: Http) {
 
+  }
+
+  failed = (err: any) => {
+    let code = err.code;
+    console.log(code, err);
   }
 
   getPics() {
@@ -75,7 +80,7 @@ export class PictureService {
   getSigned(preset: string, user: Object) {
     let opt = JSON.stringify({
       preset: preset,
-      tag: user['firstName'] + ' ' + user['lastName']
+      tag: `${user['firstName']} ${user['lastName']}`
     });
     let header = new Headers();
     header.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -85,6 +90,7 @@ export class PictureService {
   }
 
   upload(signed: Object, onSuccess: any) {
+    this.myLoader = true;
     let ft = new Transfer();
     let filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
     let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
@@ -108,14 +114,19 @@ export class PictureService {
       })
   }
 
-  progress = (prog: ProgressEvent) => {
-    this.myLoader = true;
-    this.myProg = Math.round((prog.loaded / prog.total) * 100);
-    console.log(this.myProg);
+  picSaved() {
+    let myImg = Toast.create({
+        message: 'Your Profile Pic has been Saved',
+        duration: 2000
+    });
+    myImg.onDismiss(() => {
+      this.myLoader = false;
+    });
+    this.nav.present(myImg);
   }
 
-  failed = (err: any) => {
-    let code = err.code;
-    console.log(code, err);
+  progress = (prog: ProgressEvent) => {
+    this.myProg = Math.round((prog.loaded / prog.total) * 100);
+    console.log(this.myProg);
   }
 }
