@@ -1,6 +1,10 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
-import { Input, DoCheck } from '@angular/core';
+import { Component, Input, DoCheck } from '@angular/core';
 
+@Component({
+  selector: 'ebc-base-form',
+  templateUrl: 'build/pages/submit/forms/submit-base.form.html'
+})
 export class FormBase implements DoCheck {
   @Input() flyer: boolean;
 
@@ -11,9 +15,13 @@ export class FormBase implements DoCheck {
   name: Control = new Control('', Validators.required);
   pic: Control = new Control('');
 
-
   constructor() {
-
+    this.itemForm = new ControlGroup({
+      name: this.name,
+      desc: this.desc,
+      data: this.data,
+      pic: this.pic
+    });
   }
 
   ngDoCheck() {
@@ -26,5 +34,9 @@ export class FormBase implements DoCheck {
     } else {
       return this.isType = 'Card';
     }
+  }
+
+  formValue() {
+    return this.itemForm.value;
   }
 }

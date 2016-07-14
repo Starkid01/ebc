@@ -22,31 +22,71 @@
           <ebc-select-form [flyer]="isFlyer"></ebc-select-form>
           <ion-slides #steps [options]="slideOpts">
             <ion-slide>
-              <button clear block dark (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-forward"></ion-icon></button>
+              <div padding>
+                <button clear block dark (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
               <ebc-pic-form class="slideForm"></ebc-pic-form>
             </ion-slide>
             <ion-slide>
-              <div class="rowForm">
-                <button clear dark (click)="nextForm(0)"><ion-icon name="arrow-back"></ion-icon> Add Artwork</button>
-                <button clear dark (click)="nextForm(2)">Add Social Media <ion-icon name="arrow-forward"></ion-icon></button>
+              <div padding class="rowForm">
+                <button clear dark (click)="nextForm(0)"><ion-icon name="arrow-dropleft"></ion-icon> Artwork</button>
+                <button clear dark (click)="nextForm(2)">Social <ion-icon name="arrow-dropright"></ion-icon></button>
               </div>
               <ebc-sample-form class="slideForm" [flyer]="isFlyer"></ebc-sample-form>
             </ion-slide>
             <ion-slide>
-              <button clear block dark (click)="nextForm(1)"><ion-icon name="arrow-back"></ion-icon> Back to Selection Form</button>
+              <div padding>
+                <button clear block dark (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+              </div>
               <ebc-social-form class="slideForm"></ebc-social-form>
             </ion-slide>
           </ion-slides>
         </div>
         <div *ngSwitchCase="'exist'">
-          <ion-item>
-            Existing
-          </ion-item>
+          <ion-slides #steps [options]="slideOpts">
+            <ion-slide>
+              <div padding>
+                <button clear block dark (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-pic-form class="slideForm"></ebc-pic-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding class="rowForm">
+                <button clear dark (click)="nextForm(0)"><ion-icon name="arrow-dropleft"></ion-icon> Artwork</button>
+                <button clear dark (click)="nextForm(2)">Social <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-base-form class="slideForm" [flyer]="isFlyer"></ebc-base-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding>
+                <button clear block dark (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+              </div>
+              <ebc-social-form class="slideForm"></ebc-social-form>
+            </ion-slide>
+          </ion-slides>
         </div>
         <div *ngSwitchCase="'new'">
-          <ion-item>
-            New
-          </ion-item>
+          <ion-slides #steps [options]="slideOpts">
+            <ion-slide>
+              <div padding>
+                <button clear block dark (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-pic-form class="slideForm"></ebc-pic-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding class="rowForm">
+                <button clear dark (click)="nextForm(0)"><ion-icon name="arrow-dropleft"></ion-icon> Artwork</button>
+                <button clear dark (click)="nextForm(2)">Social <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-sample-form class="slideForm" [flyer]="isFlyer"></ebc-sample-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding>
+                <button clear block dark (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+              </div>
+              <ebc-social-form class="slideForm"></ebc-social-form>
+            </ion-slide>
+          </ion-slides>
         </div>
         <ion-item>
           <ion-label favorite class="flyerBox" for="flyer">Flyer</ion-label>
@@ -54,7 +94,7 @@
         </ion-item>
       </ion-list>
       <div padding>
-        <button block type="submit" (click)="submitItem()">Submit Item</button>
+        <button [disabled]="isValid" block type="submit" (click)="submitItem()">Submit Item</button>
       </div>
     </ion-card-content>
   </ion-card>
