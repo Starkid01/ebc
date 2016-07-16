@@ -1,5 +1,5 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
-import { AfterContentInit, DoCheck, Component, ViewChild } from '@angular/core';
+import { AfterViewChecked, DoCheck, Component, ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 
 import { BackandService, PictureService } from '../../services';
@@ -14,7 +14,7 @@ import { FormBase, EbcData, PicForm, SampleForm, SelectForm, SocialForm } from '
   providers: [PictureService]
 })
 
-export class SubmitPage implements AfterContentInit, DoCheck {
+export class SubmitPage implements AfterViewChecked, DoCheck {
   @ViewChild(FormBase) base: FormBase;
   @ViewChild(SampleForm) samples: SampleForm;
   @ViewChild(SelectForm) select: SelectForm;
@@ -26,22 +26,19 @@ export class SubmitPage implements AfterContentInit, DoCheck {
   isValid: boolean = false;
   loaded: boolean = false;
   subform: string = 'sample';
-  slideOpts: Object = {
-    initialSlide: 1
-  };
+  slideOpts: Object = { initialSlide: 1 };
+  invalidForm: boolean;
 
   constructor(private backand: BackandService, public pic: PictureService) {
 
   }
 
-  ngAfterContentInit() {
-    this.loaded = true;
+  ngAfterViewChecked() {
+    this.formValid();
   }
 
   ngDoCheck() {
-    if (this.loaded) {
-      //this.formValid();
-    }
+    this.isValid = this.invalidForm;
   }
 
   existForm() {
@@ -67,7 +64,7 @@ export class SubmitPage implements AfterContentInit, DoCheck {
   }
 
   newForm() {
-    if (this.samples.itemForm.valid && this.samples.bodyName.valid) {
+    if (this.samples.itemForm.valid && this.samples.detailCheck()) {
       let item = this.samples.formValue();
       item['flyer'] = this.isFlyer;
       item['data'] = this.samples.detailContact();
@@ -83,7 +80,7 @@ export class SubmitPage implements AfterContentInit, DoCheck {
   }
 
   sampleForm() {
-    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.bodyName.valid) {
+    if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailCheck()) {
       let data = {
         selID: this.select.findSample().id,
         selName: this.select.findSample().name
@@ -115,16 +112,16 @@ export class SubmitPage implements AfterContentInit, DoCheck {
 
   formValid() {
     if (this.subform == 'sample' && this.sampleForm() !== null) {
-      this.isValid = false;
+      this.invalidForm = false;
     }
     else if (this.subform == 'exist' && this.existForm() !== null) {
-      this.isValid = false;
+      this.invalidForm = false;
     }
     else if (this.subform == 'new' && this.newForm() !== null) {
-      this.isValid = false;
+      this.invalidForm = false;
     }
     else {
-      this.isValid = true;
+      this.invalidForm = true;
     }
   }
 }

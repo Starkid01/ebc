@@ -36,6 +36,22 @@ export class SampleForm extends FormBase {
     return details;
   }
 
+  detailCheck() {
+    let field: Array<boolean> = [
+      this.bodyName.valid
+    ];
+
+    if (this.email.touched && this.email.value != '') {
+      field.push(this.email.valid);
+    }
+
+    if (this.phone.touched && this.phone.value != '') {
+      field.push(this.phone.valid);
+    }
+
+    return field.every(validField => validField == true);
+  }
+
   tempForm() {
     return this.itemForm.value;
   }
