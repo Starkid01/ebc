@@ -15,7 +15,7 @@ export class MyCardsPage implements DoCheck, OnInit {
   none: boolean;
 
   constructor(public backand: BackandService, public nav: NavController) {
-
+    
   }
 
   ngDoCheck() {

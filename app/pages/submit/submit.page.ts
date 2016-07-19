@@ -107,6 +107,11 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     if (this.subform == 'new' && this.newForm() !== null) {
       newItem = this.newForm();
     }
+    this.backand.addItem(newItem).subscribe(
+      data => console.log(data, newItem),
+      err => console.log(this.backand.extractErrorMessage(err), newItem),
+      () => console.log('New Item Created')
+    );
   }
 
   formValid() {

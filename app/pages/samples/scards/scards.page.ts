@@ -11,16 +11,16 @@ import { BackandService } from '../../../services';
 })
 
 export class SCardsPage implements OnInit {
-  cards:Array<EbcProduct>;
+  cards: Array<EbcProduct>;
 
-  constructor(public backand:BackandService, public nav:NavController) {
+  constructor(public backand: BackandService, public nav: NavController) {
   }
 
   ngOnInit() {
     this.sampleCards();
   }
 
-  goTo(id:number){
+  goTo(id: number) {
     let item = {
       index: id,
       table: 'samples'
@@ -28,11 +28,12 @@ export class SCardsPage implements OnInit {
     this.nav.push(DetailPage, item);
   }
 
-  sampleCards(){
+  sampleCards() {
     let samples = 'SampleCard';
     this.backand.getItems(samples).subscribe(
       data => {
         this.cards = data;
+        console.log(this.cards);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
