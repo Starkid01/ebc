@@ -4,5 +4,6 @@ export interface EbcProduct {
     desc?: string,
     media?: string,
     pic?: string,
-    flyer: Boolean
+    flyer: boolean,
+    ready: boolean
 }

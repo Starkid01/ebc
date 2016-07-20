@@ -33,7 +33,6 @@ export class SCardsPage implements OnInit {
     this.backand.getItems(samples).subscribe(
       data => {
         this.cards = data;
-        console.log(this.cards);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);

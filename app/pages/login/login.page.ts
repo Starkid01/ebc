@@ -1,5 +1,5 @@
 import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common';
-import { Component, Type, DoCheck } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { NavController, Alert, LocalStorage, Storage, Toast } from 'ionic-angular';
 
 import { BackandService, FormHandler } from '../../services';
@@ -10,28 +10,19 @@ import { SideMenu } from '../shared';
   templateUrl: 'build/pages/login/login.page.html'
 })
 
-export class LoginPage implements DoCheck {
-  signUp:Type = CreatePage;
-  local:Storage = new Storage(LocalStorage);
-  loginForm:ControlGroup;
-  username:Control = new Control('', Validators.compose([Validators.required, this.form.emailValidator]));
-  password:Control = new Control('', Validators.required);
-  signed:boolean;
-  error:boolean;
-  reset:boolean;
-  attempts:number = 0;
+export class LoginPage {
+  signUp: Type = CreatePage;
+  local: Storage = new Storage(LocalStorage);
+  loginForm: ControlGroup;
+  username: Control = new Control('', Validators.compose([Validators.required, this.form.emailValidator]));
+  password: Control = new Control('', Validators.required);
+  signed: boolean;
 
-constructor(private nav:NavController, public backand:BackandService, public form:FormHandler) {
+  constructor(private nav: NavController, public backand: BackandService, public form: FormHandler) {
     this.loginForm = new ControlGroup({
       username: this.username,
       password: this.password
     });
-  }
-
-  ngDoCheck(){
-    if(this.attempts >= 5){
-      this.reset = true;
-    }
   }
 
   clearAll() {
@@ -40,14 +31,14 @@ constructor(private nav:NavController, public backand:BackandService, public for
 
   loggedIn() {
     let nav = this.nav;
-    nav.setPages([{page: SideMenu}], {animate: true});
+    nav.setPages([{ page: SideMenu }], { animate: true });
   }
 
-  openPage(page){
+  openPage(page) {
     this.nav.push(page);
   }
 
-   resetPass() {
+  resetPass() {
     let sets = Alert.create({
       title: 'Reset Password',
       message: 'Enter Email to Recieve a Password Reset Link',
@@ -96,7 +87,7 @@ constructor(private nav:NavController, public backand:BackandService, public for
     this.nav.present(resVerify);
   }
 
-  signIn(login){
+  signIn(login) {
     let auth = login.value;
 
     this.backand.signIn(auth.username, auth.password).subscribe(
@@ -110,9 +101,7 @@ constructor(private nav:NavController, public backand:BackandService, public for
         var errorMessage = this.backand.extractErrorMessage(err);
         this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.authError = true;
-        this.error = this.backand.authError;
         this.backand.logError(err);
-        this.attempts = this.attempts+1;
         this.clearAll();
       },
       () => {

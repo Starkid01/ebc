@@ -30,7 +30,7 @@ export class DetailPage implements OnInit {
   text: Control = new Control('');
   type: string;
 
-  constructor(public safe:DomSanitizationService  ,public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer) {
+  constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer) {
     this.params = params;
     this.platform = platform;
     this.text['_value'] = 'Something Cool';
@@ -43,6 +43,10 @@ export class DetailPage implements OnInit {
       text: this.text,
       body: this.body
     });
+  }
+
+  ngDoCheck() {
+    console.log(this.item);
   }
 
   ngOnInit() {

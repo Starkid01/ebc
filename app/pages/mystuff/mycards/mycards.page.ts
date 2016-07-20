@@ -19,7 +19,7 @@ export class MyCardsPage implements DoCheck, OnInit {
   }
 
   ngDoCheck() {
-    if (this.cards = []) {
+    if (this.cards == []) {
       this.none = true;
     } else {
       this.none = false;
