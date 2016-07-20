@@ -19,7 +19,7 @@ export class MyFlysPage implements DoCheck, OnInit {
   }
 
   ngDoCheck(){
-    if(this.flyers == []){
+    if(this.flyers == undefined ||  this.flyers.length == 0){
       this.none = true;
     } else{
       this.none = false;

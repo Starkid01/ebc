@@ -18,10 +18,10 @@ export class MyCardsPage implements DoCheck, OnInit {
     
   }
 
-  ngDoCheck() {
-    if (this.cards == []) {
+  ngDoCheck(){
+    if(this.cards == undefined ||  this.cards.length == 0){
       this.none = true;
-    } else {
+    } else{
       this.none = false;
     }
   }
