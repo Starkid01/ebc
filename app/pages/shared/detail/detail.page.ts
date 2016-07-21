@@ -127,11 +127,9 @@ export class DetailPage implements OnInit {
     AppAvailability.check(myApp['check'])
       .then(
       yes => {
-        console.log(myApp['check'] + " is available");
         InAppBrowser.open(myApp['appLink'], '_system');
       },
       no => {
-        console.log(myApp['check'] + " is NOT available");
         InAppBrowser.open(myApp['url'], '_system');
       }
       );
@@ -176,8 +174,9 @@ export class DetailPage implements OnInit {
 
   sendSms(form) {
     let mySms = form.value;
+    let body = `${mySms.text} ${this.item['media']}`;
 
-    SMS.send(mySms.phone, mySms.text + ' ' + this.item['media']);
+    SMS.send(mySms.phone, body);
   }
 
   sendEmail(form) {
@@ -185,7 +184,7 @@ export class DetailPage implements OnInit {
     let myEmail = {
       to: myInput.email,
       subject: myInput.text,
-      body: '<p>' + myInput.body + '</p>' + this.item['media'],
+      body: `<p>${myInput.body}</p>${this.item['media']}`,
       isHtml: true
     };
 
