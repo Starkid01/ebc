@@ -44,11 +44,7 @@ export class DetailPage implements OnInit {
       body: this.body
     });
   }
-
-  ngDoCheck() {
-    console.log(this.item);
-  }
-
+  
   ngOnInit() {
     this.itemDetail();
     this.isSample();
