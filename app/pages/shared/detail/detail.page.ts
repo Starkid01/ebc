@@ -1,7 +1,7 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
 import { Component, Renderer, OnInit } from '@angular/core';
 import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
-import { NavParams, Platform } from 'ionic-angular';
+import { NavParams, Platform, Toast, NavController } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
 import { BackandService, FormHandler } from '../../../services';
@@ -30,7 +30,7 @@ export class DetailPage implements OnInit {
   text: Control = new Control('');
   type: string;
 
-  constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer) {
+  constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer, private nav: NavController) {
     this.params = params;
     this.platform = platform;
     this.text['_value'] = 'Something Cool';
@@ -44,7 +44,7 @@ export class DetailPage implements OnInit {
       body: this.body
     });
   }
-  
+
   ngOnInit() {
     this.itemDetail();
     this.isSample();
@@ -172,13 +172,6 @@ export class DetailPage implements OnInit {
       });
   }
 
-  sendSms(form) {
-    let mySms = form.value;
-    let body = `${mySms.text} ${this.item['media']}`;
-
-    SMS.send(mySms.phone, body);
-  }
-
   sendEmail(form) {
     let myInput = form.value;
     let myEmail = {
@@ -188,6 +181,26 @@ export class DetailPage implements OnInit {
       isHtml: true
     };
 
-    EmailComposer.open(myEmail);
+    EmailComposer.open(myEmail).then(
+      data => this.sentMsg('Email'),
+      err => console.log(err, 'Fail'));
+  }
+
+  sentMsg(type: string) {
+    let isSent = Toast.create({
+      message: `Your ${type} as been Sent`,
+      duration: 5000
+    });
+
+    this.nav.present(isSent);
+  }
+
+  sendSms(form) {
+    let mySms = form.value;
+    let body = `${mySms.text} ${this.item['media']}`;
+
+    SMS.send(mySms.phone, body).then(
+      data => console.log(data, 'Sent'),
+      err => this.sentMsg('SMS Text'));
   }
 }
