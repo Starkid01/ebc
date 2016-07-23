@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../';
 import { EbcProduct } from '../../';
-import { BackandService } from '../../../../services';
+import { BackandService } from '../../../services';
 
 export class ItemBase implements DoCheck, OnInit {
   public dbTable: string;

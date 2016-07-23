@@ -1,7 +1,7 @@
 import { Component, Type } from '@angular/core';
 
 import { BackandService, UserService } from '../../../services';
-import { MyStuff, Samples } from '../items';
+import { MyStuff, Samples } from '../../items';
 import { PersonPage } from '../../profile';
 import { SubmitPage } from '../../submit';
 

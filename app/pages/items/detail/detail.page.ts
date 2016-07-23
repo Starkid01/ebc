@@ -4,8 +4,8 @@ import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-brows
 import { NavParams, Platform, Toast, NavController } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
-import { BackandService, FormHandler } from '../../../../services';
-import { NavComponent } from '../../nav';
+import { BackandService, FormHandler } from '../../../services';
+import { NavComponent } from '../../shared/nav';
 import { EbcProduct } from '../../';
 
 @Component({

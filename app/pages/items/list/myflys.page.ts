@@ -2,19 +2,20 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { ItemBase } from './';
-import { NavComponent } from '../../nav';
-import { BackandService } from '../../../../services';
+import { NavComponent } from '../../shared/nav';
+import { BackandService } from '../../../services';
 
 @Component({
-  templateUrl: 'build/pages/shared/items/list/base.component.html',
+  templateUrl: 'build/pages/items/list/base.component.html',
 	directives: [NavComponent]
 })
-export class MyCardsPage extends ItemBase {
-	title: string = 'My Cards';
+
+export class MyFlysPage extends ItemBase {
+		title: string = 'My Flyers';
 
 	constructor(public backand: BackandService, public nav: NavController) {
 		super(backand, nav);
 		this.dbTable = 'items';
-		this.itemType = 'MyCard'
+		this.itemType = 'MyFlyer'
 	}
 }
