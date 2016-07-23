@@ -1,48 +1,46 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { DetailPage, EbcProduct } from '../../shared';
-import { NavComponent } from '../../shared/nav';
-import { BackandService } from '../../../services';
+import { DetailPage } from '../';
+import { EbcProduct } from '../../';
+import { BackandService } from '../../../../services';
 
-@Component({
-  templateUrl: 'build/pages/mystuff/mycards/mycards.page.html',
-  directives: [NavComponent]
-})
+export class ItemBase implements DoCheck, OnInit {
+  public dbTable: string;
+  public itemType: string;
+  private items: Array<EbcProduct>;
+  private none: boolean;
 
-export class MyCardsPage implements DoCheck, OnInit {
-  cards: Array<EbcProduct>;
-  none: boolean;
 
   constructor(public backand: BackandService, public nav: NavController) {
-    
+
   }
 
-  ngDoCheck(){
-    if(this.cards == undefined ||  this.cards.length == 0){
+  ngDoCheck() {
+    if (this.items == undefined || this.items.length == 0) {
       this.none = true;
-    } else{
+    } else {
       this.none = false;
     }
   }
 
   ngOnInit() {
-    this.myCards();
+    this.myItems();
   }
 
   goTo(id: number) {
     let item = {
       index: id,
-      table: 'items'
+      table: this.dbTable
     };
     this.nav.push(DetailPage, item);
   }
 
-  myCards() {
-    let items = 'MyCard';
+  myItems() {
+    let items = this.itemType;
     this.backand.getItems(items).subscribe(
       data => {
-        this.cards = data;
+        this.items = data;
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);

@@ -22,12 +22,10 @@ ion-title {
 
 @import '../pages/login/login.page';
 @import '../pages/create/create.page';
-@import '../pages/mystuff/mycards/mycards.page';
-@import '../pages/mystuff/myflys/myflys.page';
-@import '../pages/samples/sflyers/sflyers.page';
-@import '../pages/samples/scards/scards.page';
+@import '../pages/submit/submit.page';
 @import '../pages/profile/myperson/myperson.page';
 @import '../pages/profile/editperson/editperson.page';
-@import '../pages/shared/detail/detail.page';
-@import '../pages/submit/submit.page';
+@import '../pages/shared/items/detail/detail.page';
+@import '../pages/shared/items/detail/detail.page';
 @import '../pages/shared/myloader/myloader.component';
+@import '../pages/shared/items/list/base.component';

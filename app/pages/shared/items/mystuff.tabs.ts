@@ -1,10 +1,9 @@
 import { Component, Type } from '@angular/core';
 
-import { MyCardsPage } from './mycards';
-import { MyFlysPage } from './myflys';
+import { MyCardsPage, MyFlysPage } from './list';
 
 @Component({
-  templateUrl: 'build/pages/mystuff/mystuff.tabs.html'
+  templateUrl: 'build/pages/shared/items/base-items.tabs.html'
 })
 
 export class MyStuff {

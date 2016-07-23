@@ -4,12 +4,12 @@ import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-brows
 import { NavParams, Platform, Toast, NavController } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
-import { BackandService, FormHandler } from '../../../services';
-import { NavComponent } from '../nav';
-import { EbcProduct } from '../';
+import { BackandService, FormHandler } from '../../../../services';
+import { NavComponent } from '../../nav';
+import { EbcProduct } from '../../';
 
 @Component({
-  templateUrl: 'build/pages/shared/detail/detail.page.html',
+  templateUrl: 'build/pages/shared/items/detail/detail.page.html',
   directives: [NavComponent]
 })
 
