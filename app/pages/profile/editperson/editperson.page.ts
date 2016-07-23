@@ -76,10 +76,19 @@ export class EditPage implements DoCheck {
         this.form.clearField(pass.controls.oldPass);
       },
       () => {
-        console.log('Password Changed');
+        this.profileUpdated('Password');
         this.form.clearForm(pass.controls.verify);
         this.form.clearField(pass.controls.oldPass);
       });
+  }
+
+  profileUpdated(action: string) {
+    let editSuccess = Toast.create({
+      message: `Your ${action} has been updated`,
+      duration: 5000
+    })
+
+    this.nav.present(editSuccess);
   }
 
   savePic() {
@@ -114,6 +123,7 @@ export class EditPage implements DoCheck {
         this.user.getUser();
         if(form){
           this.form.clearForm(form);
+          this.profileUpdated('Profile');
         }
       });
   }
