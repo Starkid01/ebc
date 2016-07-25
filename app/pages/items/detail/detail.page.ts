@@ -9,7 +9,7 @@ import { NavComponent } from '../../shared/nav';
 import { EbcProduct } from '../../';
 
 @Component({
-  templateUrl: 'build/pages/shared/items/detail/detail.page.html',
+  templateUrl: 'build/pages/items/detail/detail.page.html',
   directives: [NavComponent]
 })
 
