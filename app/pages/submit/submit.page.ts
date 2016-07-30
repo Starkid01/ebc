@@ -1,12 +1,13 @@
 import { Validators, ControlGroup, Control } from '@angular/common';
 import { AfterViewChecked, DoCheck, Component, ViewChild } from '@angular/core';
-import { Slides } from 'ionic-angular';
+import { NavController, Modal, Slides } from 'ionic-angular';
 
 import { BackandService, PictureService } from '../../services';
 import { NavComponent } from '../shared/nav';
 import { EbcProduct } from '../shared';
 import { MyLoader } from '../shared/myloader';
 import { FormBase, EbcData, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
+import { SubmitConfirm } from './';
 
 @Component({
   templateUrl: 'build/pages/submit/submit.page.html',
@@ -29,7 +30,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   slideOpts: Object = { initialSlide: 1 };
   invalidForm: boolean;
 
-  constructor(private backand: BackandService, public pic: PictureService) {
+  constructor(private backand: BackandService, private nav: NavController, public pic: PictureService) {
 
   }
 
@@ -41,10 +42,16 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     this.isValid = this.invalidForm;
   }
 
+  confirmInput(newItem) {
+    let confirm = Modal.create(SubmitConfirm, newItem);
+    this.nav.present(confirm);
+  }
+
   existForm() {
     if (this.base.itemForm.valid) {
       let item = this.base.formValue();
       item['flyer'] = this.isFlyer;
+      item['data'] = '{"exist": true}';
       return this.getSocial(item);
     }
     else {
@@ -55,7 +62,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   getSocial(input: EbcData) {
     let item = input;
     if (this.social.socialAdded()) {
-      item['data'] = input['data'].concat(this.social.socialData());
+      item['data'] = String.prototype.concat(this.social.socialData(), '\n', input['data']);
     }
     if (this.pics.hasArt) {
       item['pic'] = this.pics.getArt();
@@ -87,7 +94,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       }
       let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;
-      item['data'] = String.prototype.concat(JSON.stringify(data), this.samples.detailContact());
+      item['data'] = String.prototype.concat(this.samples.detailContact(), '\n', JSON.stringify(data));
       return this.getSocial(item);
     }
     else {
@@ -97,7 +104,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
 
   submitItem() {
     let newItem: Object = {};
-
+       
     if (this.subform == 'sample' && this.sampleForm() !== null) {
       newItem = this.sampleForm();
     }
@@ -107,11 +114,13 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     if (this.subform == 'new' && this.newForm() !== null) {
       newItem = this.newForm();
     }
-    this.backand.addItem(newItem).subscribe(
+
+    this.confirmInput(newItem);
+    /*this.backand.addItem(newItem).subscribe(
       data => console.log(data, newItem),
       err => console.log(this.backand.extractErrorMessage(err), newItem),
       () => console.log('New Item Created')
-    );
+    );*/
   }
 
   formValid() {
