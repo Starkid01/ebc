@@ -40,3 +40,32 @@
     margin-bottom: -3.5rem;
   }
 }
+
+.confirm {
+  @include heading;
+  
+  ion-col {
+    border-radius: .4rem;
+    background-color: map-get($colors, light);
+    margin: .4rem;
+    padding: .8rem;
+    opacity: .7;
+  }
+
+  .head {
+    margin-bottom: .7rem;
+  }
+
+  .flyBox {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  hr {
+    border: none;
+    width: 100%;
+    height: .3rem;
+    margin: 1.7rem auto;
+    background-color: map-get($colors, secondary);
+  }
+}

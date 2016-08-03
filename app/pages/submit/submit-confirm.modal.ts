@@ -8,20 +8,31 @@ import { BackandService } from '../../services';
 
 })
 
-export class SubmitConfirm {
+export class SubmitConfirm implements OnInit {
+	contactData: Object = {};
 	extra: Object[];
-
+	formData: Object = {};
+	selectData: Object = {};
+	socialData: Object = {};
+	
 	constructor(private back: BackandService, private params: NavParams, private view: ViewController) {
 
 	}
 
 	ngOnInit() {
-		let info = this.params.data.data.split('\n');
-		this.extra = JSON.parse(`[${info}]`);
-		console.log(this.params.data, this.extra, info.length);
+		this.dataParse();
 	}
 
 	close() {
 		this.view.dismiss();
+	}
+
+	dataParse() {
+		this.extra = this.params.data.data;
+		this.formData = this.params.data;
+		this.contactData = this.extra.find(i => i.hasOwnProperty('bodyName'));
+		this.socialData =  this.extra.find(i => i.hasOwnProperty('fb'));
+		this.selectData =  this.extra.find(i => i.hasOwnProperty('selName'));
+		console.log(this.formData, this.contactData, this.socialData, this.selectData);
 	}
 }

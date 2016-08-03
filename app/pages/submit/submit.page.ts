@@ -51,7 +51,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     if (this.base.itemForm.valid) {
       let item = this.base.formValue();
       item['flyer'] = this.isFlyer;
-      item['data'] = '{"exist": true}';
+      item['data'] = [];
       return this.getSocial(item);
     }
     else {
@@ -59,10 +59,10 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     }
   }
 
-  getSocial(input: EbcData) {
+  getSocial(input) {
     let item = input;
     if (this.social.socialAdded()) {
-      item['data'] = String.prototype.concat(this.social.socialData(), '\n', input['data']);
+      item['data'] = Array.prototype.concat(this.social.socialData(), input['data']);
     }
     if (this.pics.hasArt) {
       item['pic'] = this.pics.getArt();
@@ -74,7 +74,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     if (this.samples.itemForm.valid && this.samples.detailCheck()) {
       let item = this.samples.formValue();
       item['flyer'] = this.isFlyer;
-      item['data'] = this.samples.detailContact();
+      item['data'] = [this.samples.detailContact()];
       return this.getSocial(item);
     }
     else {
@@ -94,7 +94,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       }
       let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;
-      item['data'] = String.prototype.concat(this.samples.detailContact(), '\n', JSON.stringify(data));
+      item['data'] = [this.samples.detailContact(), data];
       return this.getSocial(item);
     }
     else {

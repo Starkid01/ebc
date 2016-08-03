@@ -32,7 +32,7 @@ export class SampleForm extends FormBase {
   }
 
   detailContact() {
-    let details = JSON.stringify(this.detailForm.value);
+    let details = this.detailForm.value;
     return details;
   }
 

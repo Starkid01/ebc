@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar favorite>
-		<title>Submit Confirm</title>
+		<ion-title>Submit Confirm</ion-title>
 		<ion-buttons end>
 			<button (click)="close()">
       <ion-icon name="close"></ion-icon>
@@ -10,5 +10,33 @@
 </ion-header>
 
 <ion-content>
-	
+	<ion-grid padding class="confirm">
+		<ion-row class="head">
+			<h2 primary>Please Verify</h2>
+		</ion-row>
+		<ion-row>
+			<ion-col><strong>Title:</strong> {{formData?.name}}</ion-col>
+			<ion-col><strong>Description:</strong> {{formData?.desc}}</ion-col>
+			<ion-col class="flyBox">
+				<strong>Flyer:</strong>
+				<ion-checkbox favorite [(ngModel)]="formData.flyer"></ion-checkbox>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col><strong>Your Image:</strong>
+				<ion-thumb>
+					<img [src]="formData.pic" />
+				</ion-thumb>
+			</ion-col>
+		</ion-row>
+		<hr>
+		<ion-row class="head">
+			<h3 favorite>Contact Info</h3>
+		</ion-row>
+		<ion-row>
+			<ion-col><strong>Name:</strong> {{contactData?.bodyName}}</ion-col>
+			<ion-col><strong>Phone:</strong> {{contactData?.phone}}</ion-col>
+			<ion-col><strong>Email:</strong> {{contactData?.email}}</ion-col>
+		</ion-row>
+	</ion-grid>
 </ion-content>

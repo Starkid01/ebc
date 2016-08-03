@@ -31,6 +31,6 @@ export class SocialForm {
 	}
 
 	socialData() {
-		return JSON.stringify(this.socialForm.value);
+		return this.socialForm.value;
 	}
 }
