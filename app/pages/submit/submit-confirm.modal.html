@@ -36,7 +36,30 @@
 		<ion-row>
 			<ion-col><strong>Name:</strong> {{contactData?.bodyName}}</ion-col>
 			<ion-col><strong>Phone:</strong> {{contactData?.phone}}</ion-col>
+		</ion-row>
+		<ion-row>
 			<ion-col><strong>Email:</strong> {{contactData?.email}}</ion-col>
 		</ion-row>
+		<hr>
+		<ion-row class="head">
+			<h3 favorite>Social Media Info</h3>
+		</ion-row>
+		<ion-row>
+			<ion-col><strong>Facebook:</strong> {{socialData?.fb}}</ion-col>
+			<ion-col><strong>Twitter:</strong> {{socialData?.twitter}}</ion-col>
+			<ion-col><strong>Instagram:</strong> {{socialData?.instagram}}</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col><strong>Website:</strong> {{socialData?.web}}</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col><strong>Spotify:</strong> {{socialData?.spotify}}</ion-col>
+			<ion-col><strong>SoundCloud:</strong> {{socialData?.soundCloud}}</ion-col>
+			<ion-col><strong>LinkedIn:</strong> {{socialData?.linkedIn}}</ion-col>
+		</ion-row>
+		<div class="btns">
+			<button danger>Cancel</button>
+			<button>Confirm</button>
+		</div>
 	</ion-grid>
 </ion-content>

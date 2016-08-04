@@ -24,6 +24,14 @@
     <ion-input clearInput id="dm" name="dm" type="text" ngControl="twitter"></ion-input>
   </ion-item>
   <ion-item>
+    <ion-label spoti>Spotify</ion-label>
+    <ion-toggle [(ngModel)]="spot" spoti></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="spot">
+    <ion-label for="spotify" stacked>Spotify Username</ion-label>
+    <ion-input clearInput id="spotify" name="spotify" type="text" ngControl="spotify"></ion-input>
+  </ion-item>
+  <ion-item>
     <ion-label sound>SoundCloud</ion-label>
     <ion-toggle [(ngModel)]="sound" sound></ion-toggle>
   </ion-item>
@@ -41,7 +49,7 @@
   </ion-item>
   <ion-item>
     <ion-label secondary>Website</ion-label>
-    <ion-toggle [(ngModel)]="url" secondary>></ion-toggle>
+    <ion-toggle [(ngModel)]="url" secondary></ion-toggle>
   </ion-item>
   <ion-item *ngIf="url">
     <ion-label for="web" stacked>Website Address</ion-label>

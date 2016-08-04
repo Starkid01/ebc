@@ -52,6 +52,12 @@
     opacity: .7;
   }
 
+  .btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: .8rem;
+  }
+
   .head {
     margin-bottom: .7rem;
   }

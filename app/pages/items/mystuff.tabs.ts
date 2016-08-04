@@ -9,6 +9,7 @@ import { MyCardsPage, MyFlysPage } from './list';
 export class MyStuff {
   cardTab: Type = MyCardsPage;
   flyerTab: Type = MyFlysPage;
+  title: string = 'My';
 
   constructor() {
   }

@@ -32,7 +32,8 @@ $colors: (
   instagram:  #c13584,
   twitter:    #55acee,
   linked:     #0077b5,
-  sound:      #ff8800
+  sound:      #ff8800,
+  spoti:       #2ebd59
 );
 
 $light-gray: lighten(map-get($colors, mygray), 35%);

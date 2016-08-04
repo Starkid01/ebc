@@ -11,6 +11,7 @@ export class SocialForm {
 	linkedIn:Control = new Control('');
 	socialForm: ControlGroup;
 	soundCloud:Control = new Control('');
+	spotify: Control = new Control('');
 	twitter:Control = new Control('');
 	web:Control = new Control('');
 
@@ -20,6 +21,7 @@ export class SocialForm {
 			instagram: this.instagram,
 			linkedIn: this.linkedIn,
 			soundCloud: this.soundCloud,
+			spotify: this.spotify,
 			twitter: this.twitter,
 			web: this.web
 		})

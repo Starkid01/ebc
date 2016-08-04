@@ -9,6 +9,7 @@ import { SCardsPage, SFlysPage } from './list';
 export class Samples {
   cardTab: Type = SCardsPage;
   flyerTab: Type = SFlysPage;
+  title: string = 'Sample';
 
   constructor() {
   }
