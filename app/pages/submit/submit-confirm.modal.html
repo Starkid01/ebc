@@ -58,8 +58,8 @@
 			<ion-col><strong>LinkedIn:</strong> {{socialData?.linkedIn}}</ion-col>
 		</ion-row>
 		<div class="btns">
-			<button danger>Cancel</button>
-			<button>Confirm</button>
+			<button danger (click)="close()">Cancel</button>
+			<button (click)="finalSubmit()">Confirm</button>
 		</div>
 	</ion-grid>
 </ion-content>

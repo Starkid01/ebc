@@ -14,8 +14,8 @@ export class SubmitConfirm implements OnInit {
 	formData: Object = {};
 	selectData: Object = {};
 	socialData: Object = {};
-	
-	constructor(private back: BackandService, private params: NavParams, private view: ViewController) {
+
+	constructor(private backand: BackandService, private params: NavParams, private view: ViewController) {
 
 	}
 
@@ -31,8 +31,19 @@ export class SubmitConfirm implements OnInit {
 		this.extra = this.params.data.data;
 		this.formData = this.params.data;
 		this.contactData = this.extra.find(i => i.hasOwnProperty('bodyName'));
-		this.socialData =  this.extra.find(i => i.hasOwnProperty('fb'));
-		this.selectData =  this.extra.find(i => i.hasOwnProperty('selName'));
+		this.socialData = this.extra.find(i => i.hasOwnProperty('fb'));
+		this.selectData = this.extra.find(i => i.hasOwnProperty('selName'));
 		console.log(this.formData, this.contactData, this.socialData, this.selectData);
+	}
+
+	finalSubmit() {
+		let itemData = this.formData;
+		itemData['data'] = JSON.stringify(this.extra);
+
+		console.log(itemData);
+		/*this.backand.addItem(itemData).subscribe(
+      data => console.log(data, itemData),
+      err => console.log(this.backand.extractErrorMessage(err), itemData),
+      () => console.log('New Item Created'))*/
 	}
 }
