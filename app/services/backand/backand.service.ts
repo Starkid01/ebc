@@ -9,12 +9,12 @@ interface BackandHeader {
 
 @Injectable()
 export class BackandService {
-  authToken: BackandHeader = { title: '', value: '' };
-  apiUrl: string = "https://api.backand.com";
   appName: string = "ebc2";
-  authType: string = "N/A";
-  authStatus: string = "";
+  apiUrl: string = "https://api.backand.com";
   authError: boolean = false;
+  authStatus: string = "";
+  authToken: BackandHeader = { title: '', value: '' };
+  authType: string = "N/A";
 
   constructor(public http: Http) {
 
@@ -30,41 +30,29 @@ export class BackandService {
       .map(res => res)
   }
 
-  get tokenUrl() {
-    return `${this.apiUrl}/token`;
-  }
-
-  public signIn(user: string, pass: string) {
-    this.authType = 'Token';
-    let creds = `username=${user}&password=${pass}&appName=${this.appName}&grant_type=password`;
-    let header = new Headers();
-    header.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post(this.tokenUrl, creds, {
-      headers: header
-    })
-      .map(res => this.getToken(res))
+  public currentUser() {
+    const userQuery = `${this.apiUrl}/1/query/data/CurrentUser`;
+    return this.http.get(userQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
   }
 
   public extractErrorMessage(err) {
     return JSON.parse(err._body).error_description;
   }
 
-  public setTokenHeader(jwt) {
-    if (jwt) {
-      this.authToken.title = 'Authorization';
-      this.authToken.value = `Bearer ${jwt}`;
-    }
+  public getItem(item: string, id: number) {
+    let itemQuery = `${this.apiUrl}/1/objects/${item}/${id}`;
+    return this.http.get(itemQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
   }
 
-  private getToken(res) {
-    console.log(res);
-    return res.json().access_token;
-  }
-
-  private get authHeader() {
-    let authHeader = new Headers();
-    authHeader.append(this.authToken.title, this.authToken.value);
-    return authHeader;
+  public getItems(item: string) {
+    let itemQuery = `${this.apiUrl}/1/query/data/${item}`;
+    return this.http.get(itemQuery, {
+      headers: this.authHeader
+    }).map(res => res.json())
   }
 
   logError(err) {
@@ -86,6 +74,24 @@ export class BackandService {
       .map(res => res)
   }
 
+  public setTokenHeader(jwt) {
+    if (jwt) {
+      this.authToken.title = 'Authorization';
+      this.authToken.value = `Bearer ${jwt}`;
+    }
+  }
+
+  public signIn(user: string, pass: string) {
+    this.authType = 'Token';
+    let creds = `username=${user}&password=${pass}&appName=${this.appName}&grant_type=password`;
+    let header = new Headers();
+    header.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.tokenUrl, creds, {
+      headers: header
+    })
+      .map(res => this.getToken(res))
+  }
+
   public signUp(value: Object) {
     let newUser = JSON.stringify(value);
     const sigUpUrl = `${this.apiUrl}/1/user/signup`;
@@ -98,11 +104,17 @@ export class BackandService {
       .map(res => this.getToken(res))
   }
 
-  public currentUser() {
-    const userQuery = `${this.apiUrl}/1/query/data/CurrentUser`;
-    return this.http.get(userQuery, {
+  get tokenUrl() {
+    return `${this.apiUrl}/token`;
+  }
+
+  public updateItem(item: string, id: number, data: Object) {
+    let itemQuery = `${this.apiUrl}/1/objects/${item}/${id}`;
+    let info = JSON.stringify(data);
+    this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.put(itemQuery, info, {
       headers: this.authHeader
-    }).map(res => res.json())
+    }).map(res => res)
   }
 
   public updatePass(pass: Object) {
@@ -114,26 +126,14 @@ export class BackandService {
     }).map(res => res)
   }
 
-  public getItems(item: string) {
-    let itemQuery = `${this.apiUrl}/1/query/data/${item}`;
-    return this.http.get(itemQuery, {
-      headers: this.authHeader
-    }).map(res => res.json())
+  private get authHeader() {
+    let authHeader = new Headers();
+    authHeader.append(this.authToken.title, this.authToken.value);
+    return authHeader;
   }
 
-  public getItem(item: string, id: number) {
-    let itemQuery = `${this.apiUrl}/1/objects/${item}/${id}`;
-    return this.http.get(itemQuery, {
-      headers: this.authHeader
-    }).map(res => res.json())
-  }
-
-  public updateItem(item: string, id: number, data: Object) {
-    let itemQuery = `${this.apiUrl}/1/objects/${item}/${id}`;
-    let info = JSON.stringify(data);
-    this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.put(itemQuery, info, {
-      headers: this.authHeader
-    }).map(res => res)
+  private getToken(res) {
+    console.log(res);
+    return res.json().access_token;
   }
 }
