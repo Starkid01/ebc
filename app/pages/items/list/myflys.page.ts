@@ -16,6 +16,6 @@ export class MyFlysPage extends ItemBase {
 	constructor(public backand: BackandService, public nav: NavController) {
 		super(backand, nav);
 		this.dbTable = 'items';
-		this.itemType = 'MyFlyer'
+		this.itemType = 'MyFlyer';
 	}
 }

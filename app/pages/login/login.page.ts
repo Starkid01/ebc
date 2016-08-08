@@ -1,6 +1,6 @@
-import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common';
+import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
-import { NavController, Alert, LocalStorage, Storage, Toast } from 'ionic-angular';
+import { NavController, AlertController, LocalStorage, Storage, ToastController } from 'ionic-angular';
 
 import { BackandService, FormHandler } from '../../services';
 import { CreatePage } from '../create';
@@ -13,13 +13,13 @@ import { SideMenu } from '../shared';
 export class LoginPage {
   signUp: Type = CreatePage;
   local: Storage = new Storage(LocalStorage);
-  loginForm: ControlGroup;
-  username: Control = new Control('', Validators.compose([Validators.required, this.form.emailValidator]));
-  password: Control = new Control('', Validators.required);
+  loginForm: FormGroup;
+  username: FormControl = new FormControl('', Validators.compose([Validators.required, this.form.emailValidator]));
+  password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 
-  constructor(private nav: NavController, public backand: BackandService, public form: FormHandler) {
-    this.loginForm = new ControlGroup({
+  constructor(private nav: NavController, private alert: AlertController, private toast: ToastController, public backand: BackandService, public form: FormHandler) {
+    this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
     });
@@ -39,7 +39,7 @@ export class LoginPage {
   }
 
   resetPass() {
-    let sets = Alert.create({
+    let sets = this.alert.create({
       title: 'Reset Password',
       message: 'Enter Email to Recieve a Password Reset Link',
       inputs: [
@@ -61,7 +61,7 @@ export class LoginPage {
             this.backand.requestReset(e).subscribe(
               data => console.log('Reset Request Sent'),
               err => {
-                console.log(err)
+                console.log(err);
               },
               () => {
                 this.resetVerify();
@@ -71,20 +71,19 @@ export class LoginPage {
         }
       ]
     });
-    this.nav.present(sets);
+    sets.present();
   }
 
   resetVerify() {
-    let resVerify = Toast.create({
+    let resVerify = this.toast.create({
       message: 'Check Your Email for Password Reset',
       duration: 3000
     });
 
-    resVerify.onDismiss(() => {
+    resVerify.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-
-    this.nav.present(resVerify);
+    resVerify.present();
   }
 
   signIn(login) {

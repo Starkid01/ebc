@@ -3,18 +3,18 @@ import { Injectable } from '@angular/core';
 import 'rxjs';
 
 interface BackandHeader {
-  title: string,
-  value: string
+  title: string;
+  value: string;
 }
 
 @Injectable()
 export class BackandService {
-  appName: string = "ebc2";
-  apiUrl: string = "https://api.backand.com";
+  appName: string = 'ebc2';
+  apiUrl: string = 'https://api.backand.com';
   authError: boolean = false;
-  authStatus: string = "";
+  authStatus: string = '';
   authToken: BackandHeader = { title: '', value: '' };
-  authType: string = "N/A";
+  authType: string = 'N/A';
 
   constructor(public http: Http) {
 
@@ -27,14 +27,14 @@ export class BackandService {
     return this.http.post(itemsUrl, myItem, {
       headers: this.authHeader
     })
-      .map(res => res)
+      .map(res => res);
   }
 
   public currentUser() {
     const userQuery = `${this.apiUrl}/1/query/data/CurrentUser`;
     return this.http.get(userQuery, {
       headers: this.authHeader
-    }).map(res => res.json())
+    }).map(res => res.json());
   }
 
   public extractErrorMessage(err) {
@@ -45,14 +45,14 @@ export class BackandService {
     let itemQuery = `${this.apiUrl}/1/objects/${item}/${id}`;
     return this.http.get(itemQuery, {
       headers: this.authHeader
-    }).map(res => res.json())
+    }).map(res => res.json());
   }
 
   public getItems(item: string) {
     let itemQuery = `${this.apiUrl}/1/query/data/${item}`;
     return this.http.get(itemQuery, {
       headers: this.authHeader
-    }).map(res => res.json())
+    }).map(res => res.json());
   }
 
   logError(err) {
@@ -71,7 +71,7 @@ export class BackandService {
     return this.http.post(reset, resetData, {
       headers: header
     })
-      .map(res => res)
+      .map(res => res);
   }
 
   public setTokenHeader(jwt) {
@@ -89,7 +89,7 @@ export class BackandService {
     return this.http.post(this.tokenUrl, creds, {
       headers: header
     })
-      .map(res => this.getToken(res))
+      .map(res => this.getToken(res));
   }
 
   public signUp(value: Object) {
@@ -101,7 +101,7 @@ export class BackandService {
     return this.http.post(sigUpUrl, newUser, {
       headers: header
     })
-      .map(res => this.getToken(res))
+      .map(res => this.getToken(res));
   }
 
   get tokenUrl() {
@@ -114,7 +114,7 @@ export class BackandService {
     this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.put(itemQuery, info, {
       headers: this.authHeader
-    }).map(res => res)
+    }).map(res => res);
   }
 
   public updatePass(pass: Object) {
@@ -123,7 +123,7 @@ export class BackandService {
     this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(passwordChange, changePass, {
       headers: this.authHeader
-    }).map(res => res)
+    }).map(res => res);
   }
 
   private get authHeader() {

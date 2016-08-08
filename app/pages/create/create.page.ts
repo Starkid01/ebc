@@ -1,30 +1,31 @@
-import { Validators, NgFormModel, ControlGroup, Control } from '@angular/common';
+import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
-import { NavController, Toast } from 'ionic-angular';
+import {  NavController, ToastController } from 'ionic-angular';
 
 import { LoginPage } from '../login';
 import { BackandService, FormHandler } from '../../services';
 
 @Component({
-  templateUrl: 'build/pages/create/create.page.html'
+  templateUrl: 'build/pages/create/create.page.html',
+  directives: [REACTIVE_FORM_DIRECTIVES]
 })
 
 export class CreatePage {
   createError: boolean;
-  createForm: ControlGroup;
-  verify: ControlGroup;
-  email: Control = new Control('', Validators.compose([Validators.required, this.form.emailValidator]));
-  firstName: Control = new Control('', Validators.required);
-  lastName: Control = new Control('', Validators.required);
-  password: Control  = new Control('', Validators.required);
-  confirmPassword: Control = new Control('', Validators.required);
+  createForm: FormGroup;
+  verify: FormGroup;
+  email: FormControl = new FormControl('', Validators.compose([Validators.required, this.form.emailValidator]));
+  firstName: FormControl = new FormControl('', Validators.required);
+  lastName: FormControl = new FormControl('', Validators.required);
+  password: FormControl = new FormControl('', Validators.required);
+  confirmPassword: FormControl = new FormControl('', Validators.required);
 
-  constructor(private nav:NavController, public backand:BackandService, public form:FormHandler) {
-    this.verify = new ControlGroup({
-        password: this.password,
-        confirmPassword: this.confirmPassword
-        }, {}, form.areEqual);
-    this.createForm = new ControlGroup({
+  constructor(private toast: ToastController, private nav: NavController, public backand: BackandService, public form: FormHandler) {
+    this.verify = new FormGroup({
+      password: this.password,
+      confirmPassword: this.confirmPassword
+    }, {}, form.areEqual);
+    this.createForm = new FormGroup({
       email: this.email,
       firstName: this.firstName,
       lastName: this.lastName,
@@ -33,15 +34,15 @@ export class CreatePage {
   }
 
   accountMade() {
-    let made = Toast.create({
+    let made = this.toast.create({
       message: 'Your account has been Created Please SignIn',
       duration: 3000
     });
 
-    made.onDismiss(() =>{
+    made.onDidDismiss(() => {
       this.nav.pop();
     });
-    this.nav.present(made);
+    made.present();
   }
 
   clearAll() {
@@ -51,7 +52,7 @@ export class CreatePage {
     this.form.clearField(this.email);
   }
 
-  createUser(create){
+  createUser(create) {
     let dets = create.value;
     let pass = dets.verify;
     let user = {

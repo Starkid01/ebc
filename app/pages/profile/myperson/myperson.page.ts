@@ -11,8 +11,8 @@ import { EditPage } from '../editperson';
 })
 
 export class PersonPage {
-  editPage:Type = EditPage;
+  editPage: Type = EditPage;
 
-  constructor(private nav:NavController, public user:UserService) {
+  constructor(private nav: NavController, public user: UserService) {
   }
 }

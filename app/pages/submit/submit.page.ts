@@ -1,6 +1,5 @@
-import { Validators, ControlGroup, Control } from '@angular/common';
 import { AfterViewChecked, DoCheck, Component, ViewChild } from '@angular/core';
-import { NavController, Modal, Slides } from 'ionic-angular';
+import { ModalController, Slides } from 'ionic-angular';
 
 import { BackandService, PictureService } from '../../services';
 import { NavComponent } from '../shared/nav';
@@ -30,7 +29,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   slideOpts: Object = { initialSlide: 1 };
   invalidForm: boolean;
 
-  constructor(private backand: BackandService, private nav: NavController, public pic: PictureService) {
+  constructor(private backand: BackandService, private modal: ModalController, public pic: PictureService) {
 
   }
 
@@ -43,8 +42,8 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   }
 
   confirmInput(newItem) {
-    let confirm = Modal.create(SubmitConfirm, newItem);
-    this.nav.present(confirm);
+    let confirm = this.modal.create(SubmitConfirm, newItem);
+    confirm.present();
   }
 
   existForm() {
@@ -53,8 +52,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       item['flyer'] = this.isFlyer;
       item['data'] = [];
       return this.getSocial(item);
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -76,8 +74,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       item['flyer'] = this.isFlyer;
       item['data'] = [this.samples.detailContact()];
       return this.getSocial(item);
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -96,44 +93,35 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       item['flyer'] = this.isFlyer;
       item['data'] = [this.samples.detailContact(), data];
       return this.getSocial(item);
-    }
-    else {
+    } else {
       return null;
     }
   }
 
   submitItem() {
     let newItem: Object = {};
-       
-    if (this.subform == 'sample' && this.sampleForm() !== null) {
+
+    if (this.subform === 'sample' && this.sampleForm() !== null) {
       newItem = this.sampleForm();
     }
-    if (this.subform == 'exist' && this.existForm() !== null) {
+    if (this.subform === 'exist' && this.existForm() !== null) {
       newItem = this.existForm();
     }
-    if (this.subform == 'new' && this.newForm() !== null) {
+    if (this.subform === 'new' && this.newForm() !== null) {
       newItem = this.newForm();
     }
 
     this.confirmInput(newItem);
-    /*this.backand.addItem(newItem).subscribe(
-      data => console.log(data, newItem),
-      err => console.log(this.backand.extractErrorMessage(err), newItem),
-      () => console.log('New Item Created')
-    );*/
   }
 
   formValid() {
-    if (this.subform == 'sample' && this.sampleForm() !== null) {
+    if (this.subform === 'sample' && this.sampleForm() !== null) {
       this.invalidForm = false;
-    }
-    else if (this.subform == 'exist' && this.existForm() !== null) {
+    } else if (this.subform === 'exist' && this.existForm() !== null) {
       this.invalidForm = false;
-    }
-    else if (this.subform == 'new' && this.newForm() !== null) {
+    } else if (this.subform === 'new' && this.newForm() !== null) {
       this.invalidForm = false;
-    }
-    else {
+    } else {
       this.invalidForm = true;
     }
   }

@@ -11,13 +11,12 @@ export class ItemBase implements DoCheck, OnInit {
   private items: Array<EbcProduct>;
   private none: boolean;
 
-
   constructor(public backand: BackandService, public nav: NavController) {
 
   }
 
   ngDoCheck() {
-    if (this.items == undefined || this.items.length == 0) {
+    if (this.items === undefined || this.items.length === 0) {
       this.none = true;
     } else {
       this.none = false;

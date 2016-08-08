@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Toast, Platform, ActionSheet, App } from 'ionic-angular';
+import { ToastController, Platform, ActionSheetController, App } from 'ionic-angular';
 import { Camera, Transfer } from 'ionic-native';
 import 'rxjs';
 
@@ -12,7 +12,7 @@ export class PictureService {
   myProg: number = 0;
   nav: any;
 
-  constructor(public app: App, public http: Http) {
+  constructor(public app: App, public toast: ToastController, public action: ActionSheetController, public http: Http) {
 
   }
 
@@ -22,7 +22,7 @@ export class PictureService {
   }
 
   getPics() {
-    let actionPics = ActionSheet.create({
+    let actionPics = this.action.create({
       title: 'Get Pictures',
       buttons: [
         {
@@ -32,7 +32,7 @@ export class PictureService {
             let opts = {
               quality: 100,
               allowEdit: true
-            }
+            };
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
@@ -51,7 +51,7 @@ export class PictureService {
               quality: 100,
               sourceType: 0,
               allowEdit: true
-            }
+            };
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
@@ -73,8 +73,7 @@ export class PictureService {
         },
       ]
     });
-    this.nav = this.app.getActiveNav();
-    this.nav.present(actionPics);
+    actionPics.present();
   }
 
   getSigned(preset: string, user: Object) {
@@ -86,7 +85,7 @@ export class PictureService {
     header.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
       headers: header
-    }).map(res => res)
+    }).map(res => res);
   }
 
   upload(signed: Object, onSuccess: any) {
@@ -103,7 +102,7 @@ export class PictureService {
         'Content-Type': undefined
       },
       params: signed
-    }
+    };
     ft.onProgress(this.progress);
     ft.upload(this.picFile, url, options)
       .then(result => {
@@ -111,18 +110,18 @@ export class PictureService {
       })
       .catch(error => {
         this.failed(error);
-      })
+      });
   }
 
   picSaved() {
-    let myImg = Toast.create({
-        message: 'Your Profile Pic has been Saved',
-        duration: 2000
+    let myImg = this.toast.create({
+      message: 'Your Profile Pic has been Saved',
+      duration: 2000
     });
-    myImg.onDismiss(() => {
+    myImg.onDidDismiss(() => {
       this.myLoader = false;
     });
-    this.nav.present(myImg);
+    myImg.present();
   }
 
   progress = (prog: ProgressEvent) => {

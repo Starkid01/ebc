@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, Toast, ViewController } from 'ionic-angular';
+import { NavParams, ToastController, ViewController } from 'ionic-angular';
 
 import { BackandService } from '../../services';
 
 @Component({
 	templateUrl: 'build/pages/submit/submit-confirm.modal.html'
-
 })
 
 export class SubmitConfirm implements OnInit {
@@ -15,24 +14,24 @@ export class SubmitConfirm implements OnInit {
 	selectData: Object = {};
 	socialData: Object = {};
 
-	constructor(private backand: BackandService, private nav: NavController, private params: NavParams, private view: ViewController) {
+	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
 	}
 
 	ngOnInit() {
 		this.dataParse();
 	}
-	
+
 	completeSubmit() {
-		let completed = Toast.create({
+		let completed = this.toast.create({
 			message: 'Your Card/Flyer has been Submitted',
 			duration: 5000,
-		});	
+		});
 
-		completed.onDismiss(() => {
+		completed.onDidDismiss(() => {
 			this.close();
-		})
-		this.nav.present(completed);
+		});
+		completed.present();
 	}
 
 	close() {
@@ -49,12 +48,12 @@ export class SubmitConfirm implements OnInit {
 	}
 
 	finalSubmit() {
-		let itemData = this.formData;
-		itemData['data'] = JSON.stringify(this.extra);
+    let itemData = this.formData;
+    itemData['data'] = JSON.stringify(this.extra);
 
-		this.backand.addItem(itemData).subscribe(
+    this.backand.addItem(itemData).subscribe(
       data => console.log(data, itemData),
       err => console.log(this.backand.extractErrorMessage(err), itemData),
-      () => this.completeSubmit())
-	}
+      () => this.completeSubmit());
+  }
 }

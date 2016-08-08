@@ -10,10 +10,10 @@ import { LoginPage } from './pages';
 })
 
 export class MyApp {
-  @ViewChild(Nav) nav:Nav;
-  rootPage:Type = LoginPage;
+  @ViewChild(Nav) nav: Nav;
+  rootPage: Type = LoginPage;
 
-constructor(public platform:Platform, public events:Events, public user:UserService){
+  constructor(public platform: Platform, public events: Events, public user: UserService) {
     platform.ready().then(() => {
       // The platform is now ready. Note: if this callback fails to fire, follow
       // the Troubleshooting guide for a number of possible solutions:
@@ -38,11 +38,12 @@ constructor(public platform:Platform, public events:Events, public user:UserServ
   myEvents() {
     this.events.subscribe('myUser', (user) => {
       this.user.myUser = user[0];
-    })
+    });
   }
 }
 
 ionicBootstrap(MyApp, [BackandService, UserService, FormHandler], {
-    mode: 'md',
-    scrollAssist: false
-  });
+  mode: 'md',
+  scrollAssist: false,
+  tabsHighlight: true
+});

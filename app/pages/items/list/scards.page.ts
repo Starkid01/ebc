@@ -16,6 +16,6 @@ export class SCardsPage extends ItemBase {
 	constructor(public backand: BackandService, public nav: NavController) {
 		super(backand, nav);
 		this.dbTable = 'samples';
-		this.itemType = 'SampleCard'
+		this.itemType = 'SampleCard';
 	}
 }

@@ -12,11 +12,11 @@
       <h2 favorite>Create New Account</h2>
     </ion-card-header>
     <ion-card-content>
-      <form [ngFormModel]="createForm" (ngSubmit)="createUser(createForm)">
+      <form [formGroup]="createForm" (ngSubmit)="createUser(createForm)">
         <ion-list no-lines class="field" [class.myError]="createError">
           <ion-item [class.myError]="email.errors && email.dirty">
             <ion-label stacked for="username">Username</ion-label>
-            <ion-input clearInput ngControl="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
+            <ion-input clearInput formControlName="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
           </ion-item>
           <div class="passErr">
             <p danger *ngIf="email.errors && email.dirty">Please Provide a Valid Email</p>
@@ -24,22 +24,22 @@
           <div class="myName">
             <ion-item>
               <ion-label stacked for="firstName">First Name</ion-label>
-              <ion-input clearInput ngControl="firstName" id="firstName" name="name" placeholder="John/Jane" type="text"></ion-input>
+              <ion-input clearInput formControlName="firstName" id="firstName" name="name" placeholder="John/Jane" type="text"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked for="lastName">Last Name</ion-label>
-              <ion-input clearInput ngControl="lastName" id="lastName" name="name" placeholder="Doe" type="text"></ion-input>
+              <ion-input clearInput formControlName="lastName" id="lastName" name="name" placeholder="Doe" type="text"></ion-input>
             </ion-item>
           </div>
-          <div ngControlGroup="verify" [class.myError]="verify.errors">
+          <div formGroupName="verify" [class.myError]="verify.errors">
             <ion-item>
               <ion-label stacked for="password">Password</ion-label>
-              <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+              <ion-input clearInput formControlName="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 type="password"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked for="confirm">Confirm Password</ion-label>
-              <ion-input clearInput ngControl="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+              <ion-input clearInput formControlName="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 type="password"></ion-input>
             </ion-item>
             <div class="passErr">

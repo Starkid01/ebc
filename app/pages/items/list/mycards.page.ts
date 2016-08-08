@@ -15,6 +15,6 @@ export class MyCardsPage extends ItemBase {
 	constructor(public backand: BackandService, public nav: NavController) {
 		super(backand, nav);
 		this.dbTable = 'items';
-		this.itemType = 'MyCard'
+		this.itemType = 'MyCard';
 	}
 }

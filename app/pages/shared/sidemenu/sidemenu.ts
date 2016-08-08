@@ -6,8 +6,8 @@ import { PersonPage } from '../../profile';
 import { SubmitPage } from '../../submit';
 
 interface Page {
-  title:string,
-  component:Type
+  title: string;
+  component: Type;
 }
 
 @Component({
@@ -19,17 +19,17 @@ export class SideMenu {
   homePage: Type = MyStuff;
 
 
-  constructor(private user:UserService) {
+  constructor(private user: UserService) {
     this.user.getUser();
     this.pages = [
-      {title: 'EBC Samples', component: Samples},
-      {title: 'My Stuff', component: MyStuff},
-      {title: 'My Profile', component: PersonPage},
-      {title: 'Submit Item', component: SubmitPage}
+      { title: 'EBC Samples', component: Samples },
+      { title: 'My Stuff', component: MyStuff },
+      { title: 'My Profile', component: PersonPage },
+      { title: 'Submit Item', component: SubmitPage }
     ];
   }
 
-  toPages(page){
+  toPages(page) {
     this.homePage = page.component;
   }
 }

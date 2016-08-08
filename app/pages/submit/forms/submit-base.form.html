@@ -1,10 +1,10 @@
-<form [ngFormModel]="itemForm">
+<form [formGroup]="itemForm">
   <ion-item>
     <ion-label for="name" favorite stacked>Title*</ion-label>
-    <ion-input clearInput id="name" name="name" type="text" [placeholder]="isType + ' Title'" ngControl="name"></ion-input>
+    <ion-input clearInput id="name" name="name" type="text" [placeholder]="isType + ' Title'" formControlName="name"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label from="desc" stacked>Description</ion-label>
-    <ion-textarea id="desc" name="desc" type="text" placeholder="Detail Text" ngControl="desc"></ion-textarea>
+    <ion-textarea id="desc" name="desc" type="text" placeholder="Detail Text" formControlName="desc"></ion-textarea>
   </ion-item>
 </form>

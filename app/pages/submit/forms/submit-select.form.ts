@@ -1,5 +1,4 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { Validators, ControlGroup, Control } from '@angular/common';
 import { NavController } from 'ionic-angular';
 
 import { BackandService } from '../../../services';
@@ -33,10 +32,9 @@ export class SelectForm implements DoCheck, OnInit {
   findSample() {
     let selected: EbcProduct;
     if (this.flyer) {
-      selected = this.tempFlyers.find(select => select.pic == this.tempView);
-    }
-    else if (!this.flyer) {
-      selected = this.tempCards.find(select => select.pic == this.tempView);
+      selected = this.tempFlyers.find(select => select.pic === this.tempView);
+    } else if (!this.flyer) {
+      selected = this.tempCards.find(select => select.pic === this.tempView);
     }
     return selected;
   }
@@ -44,10 +42,10 @@ export class SelectForm implements DoCheck, OnInit {
   getSamples(type: string) {
     this.backand.getItems(type).subscribe(
       data => {
-        if (type == 'SampleCard') {
+        if (type === 'SampleCard') {
           this.tempCards = data;
         }
-        if (type == 'SampleFlyer') {
+        if (type === 'SampleFlyer') {
           this.tempFlyers = data;
         }
       },

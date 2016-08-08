@@ -5,13 +5,13 @@ import { BackandService } from '../backand';
 
 @Injectable()
 export class UserService {
-  myUser:Object;
+  myUser: Object;
 
-  constructor(public events:Events, public backand:BackandService){
+  constructor(public events: Events, public backand: BackandService) {
 
   }
 
-  getUser(){
+  getUser() {
     this.backand.currentUser().subscribe(
       data => {
         this.backand.authStatus = 'OK';
@@ -33,6 +33,6 @@ export class UserService {
     this.events.subscribe('myUser', (user) => {
       this.myUser = user[0];
       console.log(user);
-    })
+    });
   }
 }

@@ -1,22 +1,23 @@
-import { Validators, ControlGroup, Control } from '@angular/common';
+import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'ebc-base-form',
-  templateUrl: 'build/pages/submit/forms/submit-base.form.html'
+  templateUrl: 'build/pages/submit/forms/submit-base.form.html',
+  directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class FormBase implements DoCheck {
   @Input() flyer: boolean;
 
-  data: Control = new Control('');
-  desc: Control = new Control('');
-  itemForm: ControlGroup;
+  data: FormControl = new FormControl('');
+  desc: FormControl = new FormControl('');
+  itemForm: FormGroup;
   isType: string = 'Card';
-  name: Control = new Control('', Validators.required);
-  pic: Control = new Control('');
+  name: FormControl = new FormControl('', Validators.required);
+  pic: FormControl = new FormControl('');
 
   constructor() {
-    this.itemForm = new ControlGroup({
+    this.itemForm = new FormGroup({
       name: this.name,
       desc: this.desc,
       data: this.data,

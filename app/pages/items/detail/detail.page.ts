@@ -1,7 +1,7 @@
-import { Validators, ControlGroup, Control } from '@angular/common';
+import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
 import { Component, Renderer, OnInit } from '@angular/core';
 import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
-import { NavParams, Platform, Toast, NavController } from 'ionic-angular';
+import { NavParams, Platform, ToastController } from 'ionic-angular';
 import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
 
 import { BackandService, FormHandler } from '../../../services';
@@ -10,35 +10,35 @@ import { EbcProduct } from '../../';
 
 @Component({
   templateUrl: 'build/pages/items/detail/detail.page.html',
-  directives: [NavComponent]
+  directives: [NavComponent, REACTIVE_FORM_DIRECTIVES]
 })
 
 export class DetailPage implements OnInit {
-  body: Control = new Control('');
-  email: Control = new Control('', this.form.emailValidator);
-  emailForm: ControlGroup;
+  body: FormControl = new FormControl('');
+  email: FormControl = new FormControl('', this.form.emailValidator);
+  emailForm: FormGroup;
   field: string;
   hide: boolean = false;
   item: EbcProduct;
   media: SafeResourceUrl;
   message: string = '';
-  phone: Control = new Control('');
+  phone: FormControl = new FormControl('');
   picked: Array<any>;
   pickPhone: string = '';
   sample: boolean;
-  smsForm: ControlGroup;
-  text: Control = new Control('');
+  smsForm: FormGroup;
+  text: FormControl = new FormControl('');
   type: string;
 
-  constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer, private nav: NavController) {
+  constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer, private toast: ToastController) {
     this.params = params;
     this.platform = platform;
     this.text['_value'] = 'Something Cool';
-    this.smsForm = new ControlGroup({
+    this.smsForm = new FormGroup({
       phone: this.phone,
       text: this.text
     });
-    this.emailForm = new ControlGroup({
+    this.emailForm = new FormGroup({
       email: this.email,
       text: this.text,
       body: this.body
@@ -59,7 +59,7 @@ export class DetailPage implements OnInit {
         let clicked = e.target['parentNode'];
         if (clicked['href']) {
           let link = clicked['href']['baseVal'];
-          if (e.target['id'] == 'address') {
+          if (e.target['id'] === 'address') {
             e.preventDefault();
             let data = clicked['attributes'][2]['value'];
             LaunchNavigator.navigate(data)
@@ -70,22 +70,20 @@ export class DetailPage implements OnInit {
           }
           if (link.includes('facebook')) {
             e.preventDefault();
-            app =
-              {
-                appName: 'fb',
-                url: link,
-                appLink: 'fb://facewebmodal/f?href=' + link
-              };
+            app = {
+              appName: 'fb',
+              url: link,
+              appLink: 'fb://facewebmodal/f?href=' + link
+            };
             this.isAvail(app);
           };
           if (link.includes('instagram')) {
             e.preventDefault();
-            app =
-              {
-                appName: 'dm',
-                url: link,
-                appLink: 'instagram://user?username=' + link.substr(link.search('com') + 4)
-              };
+            app = {
+              appName: 'dm',
+              url: link,
+              appLink: 'instagram://user?username=' + link.substr(link.search('com') + 4)
+            };
             this.isAvail(app);
           };
         };
@@ -98,7 +96,7 @@ export class DetailPage implements OnInit {
       this.picked = contact;
       this.hide = true;
       console.log(this.picked, this.picked['name'], this.picked['phoneNumbers'], this.picked['emails']);
-    })
+    });
   }
 
   isAvail(app: Object) {
@@ -113,15 +111,15 @@ export class DetailPage implements OnInit {
       fb = 'com.facebook.katana';
       dm = 'com.instagram.android';
     }
-    if (myApp['appName'] == 'fb') {
+    if (myApp['appName'] === 'fb') {
       Object.defineProperty(myApp, 'check', {
         value: fb
-      })
+      });
     }
-    if (myApp['appName'] == 'dm') {
+    if (myApp['appName'] === 'dm') {
       Object.defineProperty(myApp, 'check', {
         value: dm
-      })
+      });
     }
 
     AppAvailability.check(myApp['check'])
@@ -138,10 +136,9 @@ export class DetailPage implements OnInit {
   isSample() {
     let obj = this.params.get('table');
 
-    if (obj == 'samples') {
+    if (obj === 'samples') {
       this.sample = true;
-    }
-    else {
+    } else {
       this.sample = false;
     }
   }
@@ -149,8 +146,7 @@ export class DetailPage implements OnInit {
   isType() {
     if (this.item['flyer']) {
       this.type = 'Flyer';
-    }
-    else {
+    } else {
       this.type = 'Card';
     }
   }
@@ -187,12 +183,12 @@ export class DetailPage implements OnInit {
   }
 
   sentMsg(type: string) {
-    let isSent = Toast.create({
+    let isSent = this.toast.create({
       message: `Your ${type} as been Sent`,
       duration: 5000
     });
 
-    this.nav.present(isSent);
+    isSent.present();
   }
 
   sendSms(form) {

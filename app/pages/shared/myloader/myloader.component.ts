@@ -15,5 +15,5 @@ import { IONIC_DIRECTIVES } from 'ionic-angular';
 })
 
 export class MyLoader {
-  @Input('value') upload:number;
+  @Input('value') upload: number;
 }

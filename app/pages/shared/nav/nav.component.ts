@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Popover } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 
 import { PopoverMenu } from './popover.menu';
 
@@ -9,13 +9,13 @@ import { PopoverMenu } from './popover.menu';
 })
 
 export class NavComponent {
-  constructor(private nav:NavController){
+  constructor(private pop: PopoverController, private nav: NavController) {
 
   }
 
   menuOpen(click) {
-    let menu = Popover.create(PopoverMenu);
-    this.nav.present(menu, {
+    let menu = this.pop.create(PopoverMenu);
+    menu.present({
       ev: click
     });
   }

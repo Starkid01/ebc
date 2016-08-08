@@ -34,16 +34,16 @@
 
   <div [ngSwitch]="section">
     <div *ngSwitchCase="'user'">
-      <form [ngFormModel]="editForm" (ngSubmit)="editInfo(editForm)">
+      <form [formGroup]="editForm" (ngSubmit)="editInfo(editForm)">
         <ion-list class="editForm" no-lines>
           <div class="field">
             <ion-item>
               <ion-label stacked for="firstName">First Name</ion-label>
-              <ion-input clearInput ngControl="firstName" id="firstName" name="firstName" [placeholder]="user.myUser?.firstName" type="text"></ion-input>
+              <ion-input clearInput formControlName="firstName" id="firstName" name="firstName" [placeholder]="user.myUser?.firstName" type="text"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked for="lastName">Last Name</ion-label>
-              <ion-input clearInput ngControl="lastName" id="firstName" name="firstName" [placeholder]="user.myUser?.lastName" type="text"></ion-input>
+              <ion-input clearInput formControlName="lastName" id="firstName" name="firstName" [placeholder]="user.myUser?.lastName" type="text"></ion-input>
             </ion-item>
           </div>
           <ion-item>
@@ -54,23 +54,23 @@
     </div>
 
     <div *ngSwitchCase="'password'">
-      <form [ngFormModel]="passwordForm" (ngSubmit)="editPass(passwordForm)">
+      <form [formGroup]="passwordForm" (ngSubmit)="editPass(passwordForm)">
         <ion-list no-lines class="editForm">
           <div class="field">
             <ion-item clearInput>
               <ion-label stacked for="oldPass">Current Password</ion-label>
-              <ion-input clearInput ngControl="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+              <ion-input clearInput formControlName="oldPass" id="oldPass" name="oldPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 type="password"></ion-input>
             </ion-item>
-            <div ngControlGroup="verify" [class.myError]="verify.errors">
+            <div formGroupName="verify" [class.myError]="verify.errors">
               <ion-item>
                 <ion-label stacked for="password">Password</ion-label>
-                <ion-input clearInput ngControl="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                <ion-input clearInput formControlName="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   type="password"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label stacked for="confirm">Confirm Password</ion-label>
-                <ion-input clearInput ngControl="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                <ion-input clearInput formControlName="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   type="password"></ion-input>
               </ion-item>
               <div class="passErr">

@@ -1,6 +1,6 @@
-import { Validators, ControlGroup, Control } from '@angular/common';
+import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
-import { Toast, NavController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { BackandService, FormHandler, UserService, PictureService } from '../../../services';
 import { NavComponent } from '../../shared/nav';
@@ -8,42 +8,40 @@ import { MyLoader } from '../../shared/myloader';
 
 @Component({
   templateUrl: 'build/pages/profile/editperson/editperson.page.html',
-  directives: [MyLoader, NavComponent],
+  directives: [MyLoader, NavComponent, REACTIVE_FORM_DIRECTIVES],
   providers: [PictureService]
 })
 
 export class EditPage implements DoCheck {
-  section:string = 'user';
-  signed:Object;
-  upFile:boolean = false;
-  passwordForm:ControlGroup;
-  oldPass:Control = new Control('', Validators.required);
-  verify:ControlGroup;
-  password:Control = new Control('', Validators.required);
-  confirm:Control = new Control('', Validators.required);
-  editForm:ControlGroup;
-  firstName:Control = new Control('');
-  lastName:Control = new Control('');
+  section: string = 'user';
+  signed: Object;
+  upFile: boolean = false;
+  passwordForm: FormGroup;
+  oldPass: FormControl = new FormControl('', Validators.required);
+  verify: FormGroup;
+  password: FormControl = new FormControl('', Validators.required);
+  confirm: FormControl = new FormControl('', Validators.required);
+  editForm: FormGroup;
+  firstName: FormControl = new FormControl('');
+  lastName: FormControl = new FormControl('');
 
-  constructor(public nav:NavController, public backand:BackandService, public form:FormHandler, public user:UserService, public pic:PictureService) {
-    this.editForm = new ControlGroup({
+  constructor(public toast: ToastController, public backand: BackandService, public form: FormHandler, public user: UserService, public pic: PictureService) {
+    this.editForm = new FormGroup({
       firstName: this.firstName,
-      lastName:  this.lastName
+      lastName: this.lastName
     });
-
-    this.verify = new ControlGroup({
+    this.verify = new FormGroup({
       password: this.password,
       confirm: this.confirm
     }, {}, form.areEqual);
-
-    this.passwordForm = new ControlGroup({
+    this.passwordForm = new FormGroup({
       oldPass: this.oldPass,
       verify: this.verify
     });
   }
 
   ngDoCheck() {
-    if(this.pic.newPic) {
+    if (this.pic.newPic) {
       this.user.myUser['pic'] = this.pic['picFile'];
       this.pic.newPic = false;
       this.upFile = true;
@@ -52,15 +50,15 @@ export class EditPage implements DoCheck {
 
   editInfo(info) {
     let input = info.value;
-    for(let i in input){
-      if(input[i] === ''){
+    for (let i in input) {
+      if (input[i] === '') {
         delete input[i];
         this.saveUpdate(input, info);
       }
     }
   }
 
-  editPass(pass){
+  editPass(pass) {
     let newPass = {
       oldPassword: pass.value.oldPass,
       newPassword: pass.value.verify.password
@@ -83,26 +81,26 @@ export class EditPage implements DoCheck {
   }
 
   profileUpdated(action: string) {
-    let editSuccess = Toast.create({
+    let editSuccess = this.toast.create({
       message: `Your ${action} has been updated`,
       duration: 5000
     })
 
-    this.nav.present(editSuccess);
+    editSuccess.present();
   }
 
   savePic() {
     this.pic.getSigned('usersPic', this.user.myUser)
       .subscribe(
-        data => {
-          this.signed = JSON.parse(data['_body']);
-        },
-        err => {
-          console.log(err);
-        },
-        () => {
-          this.pic.upload(this.signed, this.success);
-    });
+      data => {
+        this.signed = JSON.parse(data['_body']);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        this.pic.upload(this.signed, this.success);
+      });
   }
 
   saveUpdate(value, form?) {
@@ -114,21 +112,21 @@ export class EditPage implements DoCheck {
       },
       err => {
         console.log(err);
-        if(form){
+        if (form) {
           this.form.clearForm(form);
         }
       },
       () => {
         console.log('Info has Changed');
         this.user.getUser();
-        if(form){
+        if (form) {
           this.form.clearForm(form);
           this.profileUpdated('Profile');
         }
       });
   }
 
-  success = (result:any) => {
+  success = (result: any) => {
     let finish = JSON.parse(result.response);
     let image = {
       pic: finish['url']
