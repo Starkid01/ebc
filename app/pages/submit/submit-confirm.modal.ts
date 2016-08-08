@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, Toast, ViewController } from 'ionic-angular';
 
 import { BackandService } from '../../services';
 
@@ -15,12 +15,24 @@ export class SubmitConfirm implements OnInit {
 	selectData: Object = {};
 	socialData: Object = {};
 
-	constructor(private backand: BackandService, private params: NavParams, private view: ViewController) {
+	constructor(private backand: BackandService, private nav: NavController, private params: NavParams, private view: ViewController) {
 
 	}
 
 	ngOnInit() {
 		this.dataParse();
+	}
+	
+	completeSubmit() {
+		let completed = Toast.create({
+			message: 'Your Card/Flyer has been Submitted',
+			duration: 5000,
+		});	
+
+		completed.onDismiss(() => {
+			this.close();
+		})
+		this.nav.present(completed);
 	}
 
 	close() {
@@ -40,10 +52,9 @@ export class SubmitConfirm implements OnInit {
 		let itemData = this.formData;
 		itemData['data'] = JSON.stringify(this.extra);
 
-		console.log(itemData);
-		/*this.backand.addItem(itemData).subscribe(
+		this.backand.addItem(itemData).subscribe(
       data => console.log(data, itemData),
       err => console.log(this.backand.extractErrorMessage(err), itemData),
-      () => console.log('New Item Created'))*/
+      () => this.completeSubmit())
 	}
 }
