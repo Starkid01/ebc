@@ -10,12 +10,12 @@ import { BackandService } from '../../../services';
 	directives: [NavComponent]
 })
 
-export class SFlysPage extends ItemBase {
-	title: string = 'Sample Flyers';
+export class TFlysPage extends ItemBase {
+	title: string = 'Template Flyers';
 
 	constructor(public backand: BackandService, public nav: NavController) {
 		super(backand, nav);
-		this.dbTable = 'samples';
-		this.itemType = 'SampleFlyer';
+		this.dbTable = 'templates';
+		this.itemType = 'TempFlyer';
 	}
 }

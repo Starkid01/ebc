@@ -1,5 +1,5 @@
 import { Component, Type } from '@angular/core';
-import { NavController, LocalStorage, Storage, ViewController } from 'ionic-angular';
+import { App, LocalStorage, Storage, ViewController } from 'ionic-angular';
 
 import { LoginPage } from '../../login';
 
@@ -14,13 +14,13 @@ import { LoginPage } from '../../login';
 export class PopoverMenu {
   local: Storage = new Storage(LocalStorage);
 
-  constructor(private nav: NavController, private view: ViewController) {
+  constructor(private app: App, private view: ViewController) {
   }
 
   signOut() {
+    let nav = this.app.getRootNav();
     this.view.dismiss();
     this.local.remove('jwt');
-    this.nav.setRoot(LoginPage);
-    // this.nav.rootNav.setRoot(LoginPage);
+    nav.setRoot(LoginPage);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Type } from '@angular/core';
 
 import { BackandService, UserService } from '../../../services';
-import { MyStuff, Samples } from '../../items';
+import { MyStuff, Samples, Templates } from '../../items';
 import { PersonPage } from '../../profile';
 import { SubmitPage } from '../../submit';
 
@@ -25,6 +25,7 @@ export class SideMenu {
       { title: 'EBC Samples', component: Samples },
       { title: 'My Stuff', component: MyStuff },
       { title: 'My Profile', component: PersonPage },
+      { title: 'Templates', component: Templates },
       { title: 'Submit Item', component: SubmitPage }
     ];
   }
