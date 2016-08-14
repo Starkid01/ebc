@@ -73,7 +73,7 @@ export class DetailPage implements OnInit {
             app = {
               appName: 'fb',
               url: link,
-              appLink: 'fb://facewebmodal/f?href=' + link
+              appLink: `fb://facewebmodal/f?href=${link}`
             };
             this.isAvail(app);
           };
@@ -82,7 +82,7 @@ export class DetailPage implements OnInit {
             app = {
               appName: 'dm',
               url: link,
-              appLink: 'instagram://user?username=' + link.substr(link.search('com') + 4)
+              appLink: `instagram://user?username=${link.substr(link.search('com') + 4)}`
             };
             this.isAvail(app);
           };
