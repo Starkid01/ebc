@@ -59,9 +59,10 @@ export class DetailPage implements OnInit {
         let clicked = e.target['parentNode'];
         if (clicked['href']) {
           let link = clicked['href']['baseVal'];
+          let data = clicked['attributes'][2]['value'];
+          console.log(e, data);
           if (e.target['id'] === 'address') {
             e.preventDefault();
-            let data = clicked['attributes'][2]['value'];
             LaunchNavigator.navigate(data)
               .then(
               success => console.log('Launched navigator'),
@@ -82,7 +83,7 @@ export class DetailPage implements OnInit {
             app = {
               appName: 'dm',
               url: link,
-              appLink: `instagram://user?username=${link.substr(link.search('com') + 4)}`
+              appLink: `instagram://user?username=${data}`
             };
             this.isAvail(app);
           };
