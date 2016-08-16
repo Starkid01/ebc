@@ -74,7 +74,7 @@ export class DetailPage implements OnInit {
             app = {
               appName: 'fb',
               url: link,
-              appLink: `fb://facewebmodal/f?href=${link}`
+              appLink: `fb://${data}`
             };
             this.isAvail(app);
           };
