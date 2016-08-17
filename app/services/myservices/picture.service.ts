@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { ToastController, Platform, ActionSheetController, App } from 'ionic-angular';
-import { Camera, Transfer } from 'ionic-native';
+import { Camera, File, Transfer } from 'ionic-native';
 import 'rxjs';
 
 @Injectable()
@@ -29,14 +29,16 @@ export class PictureService {
           text: 'Take Picture',
           icon: 'camera',
           handler: () => {
+            this.removeFile();
             let opts = {
+              destinationType: 1,
               quality: 100,
+              sourceType: 1,
               allowEdit: true
             };
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
-              this.picFile;
             }, (err) => {
               console.log(err);
             });
@@ -47,15 +49,16 @@ export class PictureService {
           text: 'Get Picture',
           icon: 'images',
           handler: () => {
+            this.removeFile();
             let opts = {
+              destinationType: 1,
               quality: 100,
-              sourceType: 0,
+              sourceType: 2,
               allowEdit: true
             };
             Camera.getPicture(opts).then((imageData) => {
               this.picFile = imageData;
               this.newPic = true;
-              this.picFile;
             }, (err) => {
               console.log(err);
             });
@@ -127,5 +130,17 @@ export class PictureService {
   progress = (prog: ProgressEvent) => {
     this.myProg = Math.round((prog.loaded / prog.total) * 100);
     console.log(this.myProg);
+  }
+
+  removeFile() {
+    if (this.picFile) {
+      let dir = this.picFile.substring(0, this.picFile.lastIndexOf('/'));
+      let file = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
+      File.removeFile(dir, file).then(
+        value => console.log(value),
+        err => console.log(err));
+      console.log(this.picFile);
+      this.picFile = null;
+    }
   }
 }

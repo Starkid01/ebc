@@ -1,8 +1,8 @@
-<div>
-  <button favorite fab fab-left (click)="savePic()" class="action">
+<div class="btns">
+  <button favorite fab fab-left (click)="savePic()" class="action" [disabled]="!pic.newPic">
     <ion-icon name="cloud-upload"></ion-icon>
   </button>
-  <button secondary fab fab-right (click)="pic.getPics()" class="action">
+  <button secondary fab fab-right (click)="pic.getPics()" class="action right">
     <ion-icon name="image"></ion-icon>
   </button>
 </div>
