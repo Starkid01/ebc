@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 
@@ -11,15 +11,14 @@ import { FormHandler, UserService } from '../../../services';
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 
-export class SampleForm extends FormBase implements OnInit {
+export class SampleForm extends FormBase {
   bodyName: FormControl = new FormControl('', Validators.required);
   detailForm: FormGroup;
   email: FormControl = new FormControl('', FormHandler.prototype.emailValidator);
   phone: FormControl = new FormControl('', FormHandler.prototype.phoneValidator);
-  titleName: string;
 
   constructor(private nav: NavController, public user: UserService) {
-    super();
+    super(user);
     this.itemForm = new FormGroup({
       name: this.name,
       desc: this.desc,
@@ -31,20 +30,6 @@ export class SampleForm extends FormBase implements OnInit {
       email: this.email,
       phone: this.phone
     });
-  }
-
-  ngDoCheck() {
-    super.checkFlyer();
-
-    if (this.flyer) {
-      this.titleName = 'Event';
-    } else {
-      this.titleName = 'Business';
-    }
-  }
-
-  ngOnInit() {
-    this.desc.updateValue(this.user.myUser['email']);
   }
 
   detailContact() {
