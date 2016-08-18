@@ -92,6 +92,7 @@ export class PictureService {
   }
 
   upload(signed: Object, onSuccess: any) {
+    this.newPic = false;
     this.myLoader = true;
     let ft = new Transfer();
     let filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);

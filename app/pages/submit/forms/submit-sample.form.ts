@@ -3,7 +3,7 @@ import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@a
 import { NavController } from 'ionic-angular';
 
 import { FormBase } from './submit-base.form';
-import { FormHandler } from '../../../services';
+import { FormHandler, UserService } from '../../../services';
 
 @Component({
   selector: 'ebc-sample-form',
@@ -11,13 +11,14 @@ import { FormHandler } from '../../../services';
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 
-export class SampleForm extends FormBase {
+export class SampleForm extends FormBase implements OnInit {
   bodyName: FormControl = new FormControl('', Validators.required);
   detailForm: FormGroup;
   email: FormControl = new FormControl('', FormHandler.prototype.emailValidator);
   phone: FormControl = new FormControl('', FormHandler.prototype.phoneValidator);
+  titleName: string;
 
-  constructor(private nav: NavController) {
+  constructor(private nav: NavController, public user: UserService) {
     super();
     this.itemForm = new FormGroup({
       name: this.name,
@@ -30,6 +31,20 @@ export class SampleForm extends FormBase {
       email: this.email,
       phone: this.phone
     });
+  }
+
+  ngDoCheck() {
+    super.checkFlyer();
+
+    if (this.flyer) {
+      this.titleName = 'Event';
+    } else {
+      this.titleName = 'Business';
+    }
+  }
+
+  ngOnInit() {
+    this.desc.updateValue(this.user.myUser['email']);
   }
 
   detailContact() {

@@ -1,6 +1,6 @@
 <form [formGroup]="itemForm">
   <ion-item>
-    <ion-label for="name" favorite stacked>Title*</ion-label>
+    <ion-label for="name" favorite stacked>{{titleName}} Name*</ion-label>
     <ion-input clearInput id="name" name="name" type="text" [placeholder]="isType + ' Title'" formControlName="name"></ion-input>
   </ion-item>
   <ion-item>
@@ -10,7 +10,7 @@
 </form>
 <form [formGroup]="detailForm">
   <ion-item>
-    <ion-label for="bodyName" favorite stacked>Name*</ion-label>
+    <ion-label for="bodyName" favorite stacked>Your Name*</ion-label>
     <ion-input clearInput id="bodyName" name="bodyName" type="text" [placeholder]="isType + ' Name'" formControlName="bodyName"></ion-input>
   </ion-item>
   <div class="rowForm">

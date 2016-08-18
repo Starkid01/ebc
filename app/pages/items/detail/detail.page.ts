@@ -33,7 +33,6 @@ export class DetailPage implements OnInit {
   constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer, private toast: ToastController) {
     this.params = params;
     this.platform = platform;
-    this.text['_value'] = 'Something Cool';
     this.smsForm = new FormGroup({
       phone: this.phone,
       text: this.text
@@ -161,6 +160,7 @@ export class DetailPage implements OnInit {
         this.item = data;
         this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
         this.isType();
+        this.text.updateValue(`Check out my EBC ${this.type}`);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
