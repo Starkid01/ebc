@@ -27,6 +27,7 @@ export class DetailPage implements OnInit {
   pickPhone: string = '';
   sample: boolean;
   smsForm: FormGroup;
+  startText: string;
   text: FormControl = new FormControl('');
   type: string;
 
@@ -47,6 +48,10 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     this.itemDetail();
     this.isSample();
+  }
+
+  ngDoCheck() {
+    this.setText();
   }
 
   clickCheck() {
@@ -149,6 +154,7 @@ export class DetailPage implements OnInit {
     } else {
       this.type = 'Card';
     }
+    this.setText();
   }
 
   itemDetail() {
@@ -159,14 +165,13 @@ export class DetailPage implements OnInit {
       data => {
         this.item = data;
         this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
-        this.isType();
-        this.text.updateValue(`Check out my EBC ${this.type}`);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);
         this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
-      });
+      },
+      () => this.isType());
   }
 
   sendEmail(form) {
@@ -177,6 +182,7 @@ export class DetailPage implements OnInit {
       body: `<p>${myInput.body}</p>${this.item['media']}`,
       isHtml: true
     };
+    console.log(myInput['text']);
 
     EmailComposer.open(myEmail).then(
       data => this.sentMsg('Email'),
@@ -199,5 +205,9 @@ export class DetailPage implements OnInit {
     SMS.send(mySms.phone, body).then(
       data => console.log(data, 'Sent'),
       err => this.sentMsg('SMS Text'));
+  }
+
+  setText() {
+     this.startText = `Check out my EBC ${this.type}`;
   }
 }

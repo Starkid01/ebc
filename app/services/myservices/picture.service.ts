@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { NgZone, Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { ToastController, Platform, ActionSheetController, App } from 'ionic-angular';
 import { Camera, File, Transfer } from 'ionic-native';
@@ -12,7 +12,7 @@ export class PictureService {
   myProg: number = 0;
   nav: any;
 
-  constructor(public app: App, public toast: ToastController, public action: ActionSheetController, public http: Http) {
+  constructor(public app: App, public toast: ToastController, public action: ActionSheetController, public http: Http, private zone: NgZone) {
 
   }
 
@@ -37,8 +37,8 @@ export class PictureService {
               allowEdit: true
             };
             Camera.getPicture(opts).then((imageData) => {
-              this.picFile = imageData;
               this.newPic = true;
+              this.picFile = imageData;
             }, (err) => {
               console.log(err);
             });
@@ -54,11 +54,12 @@ export class PictureService {
               destinationType: 1,
               quality: 100,
               sourceType: 2,
+              saveToPhotoAlbum: true,
               allowEdit: true
             };
             Camera.getPicture(opts).then((imageData) => {
-              this.picFile = imageData;
               this.newPic = true;
+              this.picFile = imageData;
             }, (err) => {
               console.log(err);
             });
@@ -129,7 +130,7 @@ export class PictureService {
   }
 
   progress = (prog: ProgressEvent) => {
-    this.myProg = Math.round((prog.loaded / prog.total) * 100);
+    this.zone.run(() => this.myProg = Math.round((prog.loaded / prog.total) * 100));
     console.log(this.myProg);
   }
 
