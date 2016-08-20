@@ -24,8 +24,8 @@ export class SelectForm implements DoCheck, OnInit {
   }
 
   ngOnInit() {
-    this.getSamples('SampleCard');
-    this.getSamples('SampleFlyer');
+    this.getSamples('TempCard');
+    this.getSamples('TempFlyer');
     console.log(this.tempView);
   }
 
@@ -42,10 +42,10 @@ export class SelectForm implements DoCheck, OnInit {
   getSamples(type: string) {
     this.backand.getItems(type).subscribe(
       data => {
-        if (type === 'SampleCard') {
+        if (type === 'TempCard') {
           this.tempCards = data;
         }
-        if (type === 'SampleFlyer') {
+        if (type === 'TempFlyer') {
           this.tempFlyers = data;
         }
       },
