@@ -17,18 +17,19 @@ export class DetailPage implements OnInit {
   body: FormControl = new FormControl('');
   email: FormControl = new FormControl('', this.form.emailValidator);
   emailForm: FormGroup;
+  emailText: FormControl = new FormControl('');
   field: string;
   hide: boolean = false;
   item: EbcProduct;
   media: SafeResourceUrl;
   message: string = '';
+  opened: boolean;
   phone: FormControl = new FormControl('');
   picked: Array<any>;
   pickPhone: string = '';
   sample: boolean;
   smsForm: FormGroup;
-  startText: string;
-  text: FormControl = new FormControl('');
+  smsText: FormControl = new FormControl('');
   type: string;
 
   constructor(public safe: DomSanitizationService, public backand: BackandService, public form: FormHandler, public params: NavParams, private platform: Platform, private render: Renderer, private toast: ToastController) {
@@ -36,11 +37,11 @@ export class DetailPage implements OnInit {
     this.platform = platform;
     this.smsForm = new FormGroup({
       phone: this.phone,
-      text: this.text
+      smsText: this.smsText
     });
     this.emailForm = new FormGroup({
       email: this.email,
-      text: this.text,
+      emailText: this.emailText,
       body: this.body
     });
   }
@@ -48,6 +49,7 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     this.itemDetail();
     this.isSample();
+    console.log('again');
   }
 
   ngDoCheck() {
@@ -171,22 +173,24 @@ export class DetailPage implements OnInit {
         this.backand.authStatus = `Error: ${errorMessage}`;
         this.backand.logError(err);
       },
-      () => this.isType());
+      () => {
+        this.isType();
+        this.opened = true;
+      });
   }
 
   sendEmail(form) {
     let myInput = form.value;
     let myEmail = {
-      to: myInput.email,
-      subject: myInput.text,
-      body: `<p>${myInput.body}</p>${this.item['media']}`,
+      to: myInput['email'],
+      subject: myInput['emailText'],
+      body: `<p>${myInput['body']}</p>${this.item['media']}`,
       isHtml: true
     };
-    console.log(myInput['text']);
 
     EmailComposer.open(myEmail).then(
-      data => this.sentMsg('Email'),
-      err => console.log(err, 'Fail'));
+       data => this.sentMsg('Email'),
+       err => console.log(err, 'Fail'));
   }
 
   sentMsg(type: string) {
@@ -200,7 +204,7 @@ export class DetailPage implements OnInit {
 
   sendSms(form) {
     let mySms = form.value;
-    let body = `${mySms.text} ${this.item['media']}`;
+    let body = `${mySms['smsText']} ${this.item['media']}`;
 
     SMS.send(mySms.phone, body).then(
       data => console.log(data, 'Sent'),
@@ -208,6 +212,10 @@ export class DetailPage implements OnInit {
   }
 
   setText() {
-     this.startText = `Check out my EBC ${this.type}`;
+    if (this.opened) {
+      this.smsText.updateValue(`Check out my EBC ${this.type}`);
+      this.emailText.updateValue(`Check out my EBC ${this.type}`);
+      this.opened = false;
+    }
   }
 }

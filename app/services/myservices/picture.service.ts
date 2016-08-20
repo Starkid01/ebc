@@ -16,6 +16,18 @@ export class PictureService {
 
   }
 
+  copyFile(imagePath: string) {
+    let newName = `${this.randomName(10)}.jpg`;
+    let path = imagePath.substring(0, imagePath.lastIndexOf('/'));
+    let file = imagePath.substring(imagePath.lastIndexOf('/') + 1);
+    File.copyFile(path, file, path, newName).then(
+      value => {
+        this.picFile = value['nativeURL'];
+        this.removeFile(imagePath);
+      },
+      err => console.log(err));
+  }
+
   failed = (err: any) => {
     let code = err.code;
     console.log(code, err);
@@ -29,7 +41,6 @@ export class PictureService {
           text: 'Take Picture',
           icon: 'camera',
           handler: () => {
-            this.removeFile();
             let opts = {
               destinationType: 1,
               quality: 100,
@@ -38,7 +49,7 @@ export class PictureService {
             };
             Camera.getPicture(opts).then((imageData) => {
               this.newPic = true;
-              this.picFile = imageData;
+             this.copyFile(imageData);
             }, (err) => {
               console.log(err);
             });
@@ -49,7 +60,6 @@ export class PictureService {
           text: 'Get Picture',
           icon: 'images',
           handler: () => {
-            this.removeFile();
             let opts = {
               destinationType: 1,
               quality: 100,
@@ -59,7 +69,7 @@ export class PictureService {
             };
             Camera.getPicture(opts).then((imageData) => {
               this.newPic = true;
-              this.picFile = imageData;
+              this.copyFile(imageData);
             }, (err) => {
               console.log(err);
             });
@@ -130,19 +140,30 @@ export class PictureService {
   }
 
   progress = (prog: ProgressEvent) => {
-    this.zone.run(() => this.myProg = Math.round((prog.loaded / prog.total) * 100));
-    console.log(this.myProg);
+    let p = Math.round((prog.loaded / prog.total) * 100);
+    let timer;
+
+    if (p < 100) {
+      timer = setInterval(() => this.myProg = p, 1);
+    } else {
+      timer.clearTimeout();
+    }
   }
 
-  removeFile() {
-    if (this.picFile) {
-      let dir = this.picFile.substring(0, this.picFile.lastIndexOf('/'));
-      let file = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
-      File.removeFile(dir, file).then(
-        value => console.log(value),
-        err => console.log(err));
-      console.log(this.picFile);
-      this.picFile = null;
+  randomName(x: number) {
+    let s = '';
+    while (s.length < x && x > 0) {
+      let r = Math.random();
+      s += (r < 0.1 ? Math.floor(r * 100) : String.fromCharCode(Math.floor(r * 26) + (r > 0.5 ? 97 : 65)));
     }
+    return s;
+  }
+
+  removeFile(imgFile: string) {
+    let path = imgFile.substring(0, imgFile.lastIndexOf('/'));
+    let file = imgFile.substring(imgFile.lastIndexOf('/') + 1);
+    File.removeFile(path, file).then(
+      value => console.log(value),
+      err => console.log(err));
   }
 }

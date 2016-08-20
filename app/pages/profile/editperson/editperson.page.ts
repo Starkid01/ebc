@@ -43,7 +43,6 @@ export class EditPage implements DoCheck {
   ngDoCheck() {
     if (this.pic.newPic) {
       this.user.myUser['pic'] = this.pic['picFile'];
-      this.pic.newPic = false;
       this.upFile = true;
     }
   }
