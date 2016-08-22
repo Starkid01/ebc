@@ -4,13 +4,12 @@ import { ModalController, Slides } from 'ionic-angular';
 import { BackandService, PictureService } from '../../services';
 import { NavComponent } from '../shared/nav';
 import { EbcProduct } from '../shared';
-import { MyLoader } from '../shared/myloader';
 import { FormBase, EbcData, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 import { SubmitConfirm } from './';
 
 @Component({
   templateUrl: 'build/pages/submit/submit.page.html',
-  directives: [NavComponent, FormBase, MyLoader, PicForm, SampleForm, SelectForm, SocialForm],
+  directives: [NavComponent, FormBase, PicForm, SampleForm, SelectForm, SocialForm],
   providers: [PictureService]
 })
 

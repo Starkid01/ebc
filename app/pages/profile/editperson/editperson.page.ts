@@ -1,14 +1,13 @@
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
 import { BackandService, FormHandler, UserService, PictureService } from '../../../services';
 import { NavComponent } from '../../shared/nav';
-import { MyLoader } from '../../shared/myloader';
 
 @Component({
   templateUrl: 'build/pages/profile/editperson/editperson.page.html',
-  directives: [MyLoader, NavComponent, REACTIVE_FORM_DIRECTIVES],
+  directives: [NavComponent],
   providers: [PictureService]
 })
 

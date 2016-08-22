@@ -1,4 +1,4 @@
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
 import { NavController, AlertController, LocalStorage, Storage, ToastController } from 'ionic-angular';
 

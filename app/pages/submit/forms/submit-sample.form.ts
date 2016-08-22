@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 
 import { FormBase } from './submit-base.form';
@@ -7,8 +7,7 @@ import { FormHandler, UserService } from '../../../services';
 
 @Component({
   selector: 'ebc-sample-form',
-  templateUrl: 'build/pages/submit/forms/submit-sample.form.html',
-  directives: [REACTIVE_FORM_DIRECTIVES]
+  templateUrl: 'build/pages/submit/forms/submit-sample.form.html'
 })
 
 export class SampleForm extends FormBase {

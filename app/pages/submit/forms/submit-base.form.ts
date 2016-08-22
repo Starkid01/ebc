@@ -1,12 +1,11 @@
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, DoCheck } from '@angular/core';
 
 import { UserService } from '../../../services';
 
 @Component({
   selector: 'ebc-base-form',
-  templateUrl: 'build/pages/submit/forms/submit-base.form.html',
-  directives: [REACTIVE_FORM_DIRECTIVES]
+  templateUrl: 'build/pages/submit/forms/submit-base.form.html'
 })
 export class FormBase implements DoCheck {
   @Input() flyer: boolean;

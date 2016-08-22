@@ -1,6 +1,6 @@
-import { NgZone, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { ToastController, Platform, ActionSheetController, App } from 'ionic-angular';
+import { ActionSheetController, App, Loading, LoadingController, Platform, ToastController } from 'ionic-angular';
 import { Camera, File, Transfer } from 'ionic-native';
 import 'rxjs';
 
@@ -8,11 +8,10 @@ import 'rxjs';
 export class PictureService {
   newPic: boolean = false;
   picFile: string;
-  myLoader: boolean = false;
+  myLoader: Loading;
   myProg: number = 0;
-  nav: any;
 
-  constructor(public app: App, public toast: ToastController, public action: ActionSheetController, public http: Http, private zone: NgZone) {
+  constructor(public app: App, public toast: ToastController, public action: ActionSheetController, public http: Http, public loader: LoadingController) {
 
   }
 
@@ -102,9 +101,31 @@ export class PictureService {
     }).map(res => res);
   }
 
-  upload(signed: Object, onSuccess: any) {
+  picSaved() {
+    let myImg = this.toast.create({
+      message: 'Your Profile Pic has been Saved',
+      duration: 2000
+    });
+    myImg.onDidDismiss(() => {
+      this.myLoader.dismiss();
+    });
+    myImg.present();
+  }
+
+  progress = (prog: ProgressEvent) => {
+    let p = Math.round((prog.loaded / prog.total) * 100);
+    let timer;
+
+    if (p < 100) {
+      timer = setInterval(() => this.myProg = p, 1);
+    } else {
+      timer.clearTimeout();
+    }
+  }
+
+   upload(signed: Object, onSuccess: any) {
     this.newPic = false;
-    this.myLoader = true;
+    this.uploading();
     let ft = new Transfer();
     let filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
     let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
@@ -128,26 +149,12 @@ export class PictureService {
       });
   }
 
-  picSaved() {
-    let myImg = this.toast.create({
-      message: 'Your Profile Pic has been Saved',
-      duration: 2000
+  uploading() {
+    this.myLoader = this.loader.create({
+      content: 'Uploading File...'
     });
-    myImg.onDidDismiss(() => {
-      this.myLoader = false;
-    });
-    myImg.present();
-  }
 
-  progress = (prog: ProgressEvent) => {
-    let p = Math.round((prog.loaded / prog.total) * 100);
-    let timer;
-
-    if (p < 100) {
-      timer = setInterval(() => this.myProg = p, 1);
-    } else {
-      timer.clearTimeout();
-    }
+    this.myLoader.present();
   }
 
   randomName(x: number) {

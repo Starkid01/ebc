@@ -1,10 +1,9 @@
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
 	selector: 'ebc-social-form',
-	templateUrl: 'build/pages/submit/forms/submit-social.form.html',
-  directives: [REACTIVE_FORM_DIRECTIVES]
+	templateUrl: 'build/pages/submit/forms/submit-social.form.html'
 })
 export class SocialForm {
 	fb: FormControl = new FormControl('');

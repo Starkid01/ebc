@@ -1,4 +1,4 @@
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Renderer, OnInit } from '@angular/core';
 import { DomSanitizationService, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
@@ -10,7 +10,7 @@ import { EbcProduct } from '../../';
 
 @Component({
   templateUrl: 'build/pages/items/detail/detail.page.html',
-  directives: [NavComponent, REACTIVE_FORM_DIRECTIVES]
+  directives: [NavComponent]
 })
 
 export class DetailPage implements OnInit {

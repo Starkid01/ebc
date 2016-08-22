@@ -1,4 +1,4 @@
-import { Validators, REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import {  NavController, ToastController } from 'ionic-angular';
 
@@ -6,8 +6,7 @@ import { LoginPage } from '../login';
 import { BackandService, FormHandler } from '../../services';
 
 @Component({
-  templateUrl: 'build/pages/create/create.page.html',
-  directives: [REACTIVE_FORM_DIRECTIVES]
+  templateUrl: 'build/pages/create/create.page.html'
 })
 
 export class CreatePage {
