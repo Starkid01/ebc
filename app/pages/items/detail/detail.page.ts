@@ -49,7 +49,6 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     this.itemDetail();
     this.isSample();
-    console.log('again');
   }
 
   ngDoCheck() {
@@ -65,8 +64,8 @@ export class DetailPage implements OnInit {
         let clicked = e.target['parentNode'];
         if (clicked['href']) {
           let link = clicked['href']['baseVal'];
-          let data = clicked['attributes'][2]['value'];
-          console.log(e, data);
+          let attr = Array.from(clicked['attributes']);
+          let data = attr[2]['value'];
           if (e.target['id'] === 'address') {
             e.preventDefault();
             LaunchNavigator.navigate(data)
@@ -84,7 +83,7 @@ export class DetailPage implements OnInit {
             };
             this.isAvail(app);
           };
-          if (link.includes('instagram')) {
+          if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc') {
             e.preventDefault();
             app = {
               appName: 'dm',
@@ -102,7 +101,6 @@ export class DetailPage implements OnInit {
     Contacts.pickContact().then((contact) => {
       this.picked = contact;
       this.hide = true;
-      console.log(this.picked, this.picked['name'], this.picked['phoneNumbers'], this.picked['emails']);
     });
   }
 
@@ -132,12 +130,11 @@ export class DetailPage implements OnInit {
     AppAvailability.check(myApp['check'])
       .then(
       yes => {
-        InAppBrowser.open(myApp['appLink'], '_system');
+        let dom = new InAppBrowser(myApp['appLink'], '_system');
       },
       no => {
-        InAppBrowser.open(myApp['url'], '_system');
-      }
-      );
+        let dom = new InAppBrowser(myApp['url'], '_system');
+      });
   }
 
   isSample() {
@@ -189,8 +186,8 @@ export class DetailPage implements OnInit {
     };
 
     EmailComposer.open(myEmail).then(
-       data => this.sentMsg('Email'),
-       err => console.log(err, 'Fail'));
+      data => this.sentMsg('Email'),
+      err => console.log(err, 'Fail'));
   }
 
   sentMsg(type: string) {
