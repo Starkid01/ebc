@@ -46,5 +46,5 @@ ionicBootstrap(MyApp, [BackandService, UserService, FormHandler], {
   mode: 'md',
   scrollAssist: false,
   tabsHighlight: true,
-  tabHideOnSubPages: true
+  tabsHideOnSubPages: true
 });
