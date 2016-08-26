@@ -6,4 +6,5 @@ export interface EbcProduct {
     pic?: string;
     flyer: boolean;
     ready: boolean;
+    disable: boolean;
 }

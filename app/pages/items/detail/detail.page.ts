@@ -15,16 +15,17 @@ import { EbcProduct } from '../../';
 
 export class DetailPage implements OnInit {
   body: FormControl = new FormControl('');
-  email: FormControl = new FormControl('', this.form.emailValidator);
+  email: FormControl = new FormControl('', [this.form.emailValidator, Validators.required]);
   emailForm: FormGroup;
   emailText: FormControl = new FormControl('');
   field: string;
   hide: boolean = false;
   item: EbcProduct;
+  itemName: string;
   media: SafeResourceUrl;
   message: string = '';
   opened: boolean;
-  phone: FormControl = new FormControl('');
+  phone: FormControl = new FormControl('', [this.form.phoneValidator, Validators.required]);
   picked: Array<any>;
   pickPhone: string = '';
   sample: boolean;
@@ -48,7 +49,6 @@ export class DetailPage implements OnInit {
 
   ngOnInit() {
     this.itemDetail();
-    this.isSample();
   }
 
   ngDoCheck() {
@@ -66,6 +66,7 @@ export class DetailPage implements OnInit {
           let link = clicked['href']['baseVal'];
           let attr = Array.from(clicked['attributes']);
           let data = attr[2]['value'];
+          let insta = new RegExp('\w$');
           if (e.target['id'] === 'address') {
             e.preventDefault();
             LaunchNavigator.navigate(data)
@@ -83,17 +84,26 @@ export class DetailPage implements OnInit {
             };
             this.isAvail(app);
           };
-          if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc') {
+          if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc' || e.target['id'] === `insta${insta}`) {
             e.preventDefault();
             app = {
               appName: 'dm',
               url: link,
-              appLink: `instagram://user?username=${data}`
+              appLink: `instagram://${data}`
             };
             this.isAvail(app);
           };
         };
       });
+    }
+  }
+
+  customField() {
+    if (this.phone.value === '') {
+      this.phone.updateValue(this.field);
+    }
+    if (this.email.value === '') {
+      this.email.updateValue(this.field);
     }
   }
 
@@ -137,14 +147,10 @@ export class DetailPage implements OnInit {
       });
   }
 
-  isSample() {
+  isDisable() {
     let obj = this.params.get('table');
-
-    if (obj === 'samples') {
-      this.sample = true;
-    } else {
-      this.sample = false;
-    }
+    this.sample = this.item.disable;
+    this.itemName = obj;
   }
 
   isType() {
@@ -172,6 +178,7 @@ export class DetailPage implements OnInit {
       },
       () => {
         this.isType();
+        this.isDisable();
         this.opened = true;
       });
   }
@@ -202,6 +209,8 @@ export class DetailPage implements OnInit {
   sendSms(form) {
     let mySms = form.value;
     let body = `${mySms['smsText']} ${this.item['media']}`;
+
+    console.log(mySms);
 
     SMS.send(mySms.phone, body).then(
       data => console.log(data, 'Sent'),

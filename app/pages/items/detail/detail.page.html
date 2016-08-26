@@ -33,7 +33,7 @@
   </ion-card>
   <div padding [ngSwitch]="message" class="messForm" [class.notAvail]="sample">
     <div class="mess" *ngIf="sample" padding>
-      <h3 danger>This Feature is not Available with Samples</h3>
+      <h3 danger>This Feature is not Available for {{itemName}}</h3>
     </div>
     <div *ngSwitchCase="'text'">
       <form [formGroup]="smsForm" (ngSubmit)="sendSms(smsForm)">
@@ -52,7 +52,7 @@
             </div>
             <ion-item>
               <ion-label for="custom" stacked></ion-label>
-              <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" [ngModelOptions]="{standalone: true}" clearInput></ion-input>
+              <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" [ngModelOptions]="{standalone: true}" (blur)="customField()" clearInput></ion-input>
             </ion-item>
             <ion-item>
               <ion-label for="text" stacked>Message</ion-label>
@@ -60,7 +60,7 @@
             </ion-item>
           </div>
           <ion-item>
-            <button block [disabled]="sample" class="formBtn" type="submit">Send Message</button>
+            <button block [disabled]="sample || !phone.valid" class="formBtn" type="submit">Send Message</button>
           </ion-item>
         </ion-list>
       </form>
@@ -83,7 +83,7 @@
             </div>
             <ion-item>
               <ion-label for="custom" stacked></ion-label>
-              <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" [ngModelOptions]="{standalone: true}" clearInput></ion-input>
+              <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" [ngModelOptions]="{standalone: true}" (blur)="customField()" clearInput></ion-input>
             </ion-item>
             <ion-item>
               <ion-label for="text" stacked>Subject</ion-label>
@@ -95,7 +95,7 @@
             </ion-item>
           </div>
           <ion-item>
-            <button block [disabled]="sample" class="formBtn" type="submit">Send Email</button>
+            <button block [disabled]="sample || !email.valid" class="formBtn" type="submit">Send Email</button>
           </ion-item>
         </ion-list>
       </form>
