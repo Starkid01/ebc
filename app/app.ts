@@ -1,19 +1,20 @@
-import { Component, Type, ViewChild } from "@angular/core";
-import { Platform, ionicBootstrap, Nav, Events } from 'ionic-angular';
+import { Component, OnInit, Type, ViewChild } from "@angular/core";
+import { Platform, ionicBootstrap, LocalStorage, Nav, Events, Storage } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { BackandService, UserService, FormHandler } from './services';
-import { LoginPage } from './pages';
+import { LoginPage, SideMenu } from './pages';
 
 @Component({
   template: '<ion-nav id="nav" [root]="rootPage"></ion-nav>'
 })
 
-export class MyApp {
+export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
+  local: LocalStorage = new Storage(LocalStorage);
   rootPage: Type = LoginPage;
 
-  constructor(public platform: Platform, public events: Events, public user: UserService) {
+  constructor(public platform: Platform, public back: BackandService, public events: Events, public user: UserService) {
     platform.ready().then(() => {
       // The platform is now ready. Note: if this callback fails to fire, follow
       // the Troubleshooting guide for a number of possible solutions:
@@ -32,7 +33,23 @@ export class MyApp {
       StatusBar.overlaysWebView(false);
       StatusBar.backgroundColorByHexString('#0d95bb');
     });
+  }
+
+  ngOnInit() {
     this.myEvents();
+    this.authCheck();
+  }
+
+  authCheck() {
+    this.local.get('jwt').then(
+      jwt => {
+        if (jwt) {
+          this.back.isAuth(jwt);
+          this.nav.setRoot(SideMenu);
+        } else {
+          this.nav.setRoot(LoginPage);
+        }
+      })
   }
 
   myEvents() {

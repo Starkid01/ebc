@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
-import { NavController, AlertController, LocalStorage, Storage, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 
 import { BackandService, FormHandler } from '../../services';
 import { CreatePage } from '../create';
@@ -12,7 +12,6 @@ import { SideMenu } from '../shared';
 
 export class LoginPage {
   signUp: Type = CreatePage;
-  local: Storage = new Storage(LocalStorage);
   loginForm: FormGroup;
   username: FormControl = new FormControl('', Validators.compose([Validators.required, this.form.emailValidator]));
   password: FormControl = new FormControl('', Validators.required);
@@ -94,7 +93,6 @@ export class LoginPage {
         this.backand.authStatus = 'OK';
         this.backand.authError = false;
         this.backand.setTokenHeader(data);
-        this.local.set('jwt', data);
       },
       err => {
         var errorMessage = this.backand.extractErrorMessage(err);

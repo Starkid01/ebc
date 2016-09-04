@@ -1,6 +1,8 @@
+import 'rxjs';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
-import 'rxjs';
+import { LocalStorage, Storage } from 'ionic-angular';
+
 
 interface BackandHeader {
   title: string;
@@ -15,6 +17,7 @@ export class BackandService {
   authStatus: string = '';
   authToken: BackandHeader = { title: '', value: '' };
   authType: string = 'N/A';
+  local: LocalStorage = new Storage(LocalStorage);
 
   constructor(public http: Http) {
 
@@ -55,7 +58,12 @@ export class BackandService {
     }).map(res => res.json());
   }
 
-  logError(err) {
+  public isAuth(jwt) {
+    this.authToken = JSON.parse(jwt);
+    this.authHeader;
+  }
+
+  public logError(err) {
     console.error('Error: ' + err);
   }
 
@@ -78,6 +86,7 @@ export class BackandService {
     if (jwt) {
       this.authToken.title = 'Authorization';
       this.authToken.value = `Bearer ${jwt}`;
+      this.local.set('jwt', JSON.stringify(this.authToken));
     }
   }
 
