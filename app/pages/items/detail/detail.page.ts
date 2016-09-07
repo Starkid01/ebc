@@ -99,10 +99,10 @@ export class DetailPage implements OnInit {
   }
 
   customField() {
-    if (this.phone.value === '') {
+    if (this.message === 'text') {
       this.phone.updateValue(this.field);
     }
-    if (this.email.value === '') {
+    if (this.message === 'mail') {
       this.email.updateValue(this.field);
     }
   }

@@ -9,6 +9,7 @@
   </ion-item>
 </form>
 <form [formGroup]="detailForm">
+  <ion-list-header><span favorite>Info Goes on {{isType}}</span></ion-list-header> 
   <ion-item>
     <ion-label for="bodyName" favorite stacked>Your Name*</ion-label>
     <ion-input clearInput id="bodyName" name="bodyName" type="text" [placeholder]="isType + ' Name'" formControlName="bodyName"></ion-input>
