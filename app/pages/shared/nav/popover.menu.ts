@@ -20,7 +20,7 @@ export class PopoverMenu {
   signOut() {
     let nav = this.app.getRootNav();
     this.view.dismiss();
-    this.local.remove('jwt');
+    this.local.clear();
     nav.setRoot(LoginPage);
   }
 }

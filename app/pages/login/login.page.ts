@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
-import { NavController, AlertController, ToastController } from 'ionic-angular';
+import { AlertController, Events, NavController, ToastController } from 'ionic-angular';
 
 import { BackandService, FormHandler } from '../../services';
 import { CreatePage } from '../create';
@@ -17,7 +17,11 @@ export class LoginPage {
   password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 
-  constructor(private nav: NavController, private alert: AlertController, private toast: ToastController, public backand: BackandService, public form: FormHandler) {
+  constructor(private nav: NavController,
+    private alert: AlertController,
+    private toast: ToastController,
+    public backand: BackandService,
+    public form: FormHandler) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
@@ -60,7 +64,7 @@ export class LoginPage {
             this.backand.requestReset(e).subscribe(
               data => console.log('Reset Request Sent'),
               err => {
-                console.log(err);
+                this.backand.errorHander(err);
               },
               () => {
                 this.resetVerify();
@@ -95,10 +99,7 @@ export class LoginPage {
         this.backand.setTokenHeader(data);
       },
       err => {
-        var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.authStatus = `Error: ${errorMessage}`;
-        this.backand.authError = true;
-        this.backand.logError(err);
+        this.backand.errorHander(err);
         this.clearAll();
       },
       () => {

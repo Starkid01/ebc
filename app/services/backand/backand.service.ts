@@ -1,7 +1,7 @@
 import 'rxjs';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { LocalStorage, Storage } from 'ionic-angular';
+import { Events, LocalStorage, Storage } from 'ionic-angular';
 
 
 interface BackandHeader {
@@ -19,7 +19,7 @@ export class BackandService {
   authType: string = 'N/A';
   local: LocalStorage = new Storage(LocalStorage);
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private event: Events) {
 
   }
 
@@ -40,8 +40,15 @@ export class BackandService {
     }).map(res => res.json());
   }
 
-  public extractErrorMessage(err) {
-    return JSON.parse(err._body).error_description;
+  public errorHander(res) {
+    if (res.status === 401) {
+      this.local.clear();
+      this.event.publish('auth');
+    };
+    let errorMessage = this.extractErrorMessage(res);
+    this.authStatus = `Error: ${errorMessage}`;
+    this.authError = true;
+    this.logError(res);
   }
 
   public getItem(item: string, id: number) {
@@ -52,7 +59,7 @@ export class BackandService {
   }
 
   public getItems(item: string) {
-    let itemQuery = `${this.apiUrl}/1/query/data/${item}`;
+    const itemQuery = `${this.apiUrl}/1/query/data/${item}`;
     return this.http.get(itemQuery, {
       headers: this.authHeader
     }).map(res => res.json());
@@ -63,13 +70,9 @@ export class BackandService {
     this.authHeader;
   }
 
-  public logError(err) {
-    console.error('Error: ' + err);
-  }
-
   public requestReset(email: string) {
     let header = new Headers();
-    let reset = `${this.apiUrl}/1/user/requestResetPassword`;
+    const reset = `${this.apiUrl}/1/user/requestResetPassword`;
     let resetData = JSON.stringify({
       appName: this.appName,
       username: email
@@ -127,7 +130,7 @@ export class BackandService {
   }
 
   public updatePass(pass: Object) {
-    let passwordChange = `${this.apiUrl}/1/user/changePassword`;
+    const passwordChange = `${this.apiUrl}/1/user/changePassword`;
     let changePass = JSON.stringify(pass);
     this.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(passwordChange, changePass, {
@@ -141,8 +144,16 @@ export class BackandService {
     return authHeader;
   }
 
+  private extractErrorMessage(err) {
+    return JSON.parse(err._body).error_description;
+  }
+
   private getToken(res) {
     console.log(res);
     return res.json().access_token;
+  }
+
+  private logError(err) {
+    console.error('Error: ' + err);
   }
 }

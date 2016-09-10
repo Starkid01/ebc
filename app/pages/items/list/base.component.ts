@@ -42,9 +42,7 @@ export class ItemBase implements DoCheck, OnInit {
         this.items = data;
       },
       err => {
-        var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.authStatus = `Error: ${errorMessage}`;
-        this.backand.logError(err);
+        this.backand.errorHander(err);
       });
   }
 }

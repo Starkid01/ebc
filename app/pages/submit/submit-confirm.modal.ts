@@ -53,7 +53,7 @@ export class SubmitConfirm implements OnInit {
 
 		this.backand.addItem(itemData).subscribe(
       data => console.log(data, itemData),
-      err => console.log(this.backand.extractErrorMessage(err), itemData),
+      err => this.backand.errorHander(err),
       () => this.completeSubmit());
   }
 }

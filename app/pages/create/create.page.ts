@@ -67,7 +67,7 @@ export class CreatePage {
         console.log(data);
       },
       err => {
-        console.log(err);
+        this.backand.errorHander(err);
         this.createError = true;
         this.clearAll();
       },

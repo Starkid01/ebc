@@ -56,6 +56,10 @@ export class MyApp implements OnInit {
     this.events.subscribe('myUser', (user) => {
       this.user.myUser = user[0];
     });
+    this.events.subscribe('auth', () => {
+      console.log('Not Auth');
+      this.authCheck();
+    })
   }
 }
 

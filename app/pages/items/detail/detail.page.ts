@@ -172,9 +172,7 @@ export class DetailPage implements OnInit {
         this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
       },
       err => {
-        var errorMessage = this.backand.extractErrorMessage(err);
-        this.backand.authStatus = `Error: ${errorMessage}`;
-        this.backand.logError(err);
+        this.backand.errorHander(err);
       },
       () => {
         this.isType();
