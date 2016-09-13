@@ -1,8 +1,7 @@
 import 'rxjs';
 import { Http, Headers } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { Events, LocalStorage, Storage } from 'ionic-angular';
-
 
 interface BackandHeader {
   title: string;
@@ -19,7 +18,7 @@ export class BackandService {
   authType: string = 'N/A';
   local: LocalStorage = new Storage(LocalStorage);
 
-  constructor(public http: Http, private event: Events) {
+  constructor(public http: Http, private events: Events) {
 
   }
 
@@ -43,12 +42,14 @@ export class BackandService {
   public errorHander(res) {
     if (res.status === 401) {
       this.local.clear();
-      this.event.publish('auth');
+      this.events.publish('No Auth');
+      console.log('Go To Login');
     };
     let errorMessage = this.extractErrorMessage(res);
     this.authStatus = `Error: ${errorMessage}`;
     this.authError = true;
     this.logError(res);
+    console.log('Just Error');
   }
 
   public getItem(item: string, id: number) {

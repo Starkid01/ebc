@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
-import { AlertController, Events, NavController, ToastController } from 'ionic-angular';
+import { AlertController, Events, App, ToastController } from 'ionic-angular';
 
 import { BackandService, FormHandler } from '../../services';
 import { CreatePage } from '../create';
@@ -17,7 +17,7 @@ export class LoginPage {
   password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 
-  constructor(private nav: NavController,
+  constructor(public app: App,
     private alert: AlertController,
     private toast: ToastController,
     public backand: BackandService,
@@ -33,12 +33,13 @@ export class LoginPage {
   }
 
   loggedIn() {
-    let nav = this.nav;
+    let nav = this.app.getRootNav();
     nav.setPages([{ page: SideMenu }], { animate: true });
   }
 
   openPage(page) {
-    this.nav.push(page);
+    let nav = this.app.getRootNav();
+    nav.push(page);
   }
 
   resetPass() {
