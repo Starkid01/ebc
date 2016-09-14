@@ -51,8 +51,8 @@
               </ion-item>
             </div>
             <ion-item>
-              <ion-label for="custom" stacked danger>Hit Enter After Filled</ion-label>
-              <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" [ngModelOptions]="{standalone: true}" (keyup.enter)="customField()" clearInput></ion-input>
+              <ion-label for="custom" stacked danger>Double Tap Submit After Filled</ion-label>
+              <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" [ngModelOptions]="{standalone: true}" (blur)="customField()" clearInput></ion-input>
             </ion-item>
             <ion-item>
               <ion-label for="text" stacked>Message</ion-label>
@@ -82,8 +82,8 @@
               </ion-item>
             </div>
             <ion-item>
-              <ion-label for="custom" stacked danger>Hit Enter After Filled</ion-label>
-              <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" [ngModelOptions]="{standalone: true}" (keyup.enter)="customField()" clearInput></ion-input>
+              <ion-label for="custom" stacked danger>Double Tap Submit  After Filled</ion-label>
+              <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" [ngModelOptions]="{standalone: true}" (blur)="customField()" clearInput></ion-input>
             </ion-item>
             <ion-item>
               <ion-label for="text" stacked>Subject</ion-label>
