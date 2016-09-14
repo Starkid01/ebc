@@ -57,7 +57,6 @@ export class MyApp implements OnInit {
       this.user.myUser = user[0];
     });
     this.events.subscribe('No Auth', () => {
-      console.log('Not Auth');
       this.nav.setRoot(LoginPage);
     })
   }

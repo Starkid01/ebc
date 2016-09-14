@@ -40,16 +40,15 @@ export class BackandService {
   }
 
   public errorHander(res) {
-    if (res.status === 401) {
-      this.local.clear();
-      this.events.publish('No Auth');
-      console.log('Go To Login');
-    };
     let errorMessage = this.extractErrorMessage(res);
     this.authStatus = `Error: ${errorMessage}`;
     this.authError = true;
     this.logError(res);
-    console.log('Just Error');
+    if (res.status === 401) {
+      this.local.clear();
+      this.events.publish('No Auth');
+      this.authError = false; 
+    };
   }
 
   public getItem(item: string, id: number) {
