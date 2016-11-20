@@ -15,7 +15,7 @@ import { EbcProduct } from '../../shared';
 export class DetailPage implements OnInit {
   body: FormControl = new FormControl('');
   ebcUrl: string = 'http://ebc.beezleeart.com/cards/';
-  email: FormControl = new FormControl('', [this.form.emailValidator, Validators.required]);
+  email: FormControl = new FormControl('', [FormHandler.emailValidator, Validators.required]);
   emailForm: FormGroup;
   emailText: FormControl = new FormControl('');
   field: string;
@@ -25,7 +25,7 @@ export class DetailPage implements OnInit {
   media: SafeResourceUrl;
   message: string = '';
   opened: boolean;
-  phone: FormControl = new FormControl('', [this.form.phoneValidator, Validators.required]);
+  phone: FormControl = new FormControl('', [FormHandler.phoneValidator, Validators.required]);
   picked: Array<any>;
   pickPhone: string = '';
   sample: boolean;
@@ -34,7 +34,7 @@ export class DetailPage implements OnInit {
   type: string;
 
   constructor(public safe: DomSanitizer, public backand: BackandService,
-    public form: FormHandler, public params: NavParams,
+    public params: NavParams,
     private platform: Platform, private render: Renderer,
     private toast: ToastController) {
     this.params = params;

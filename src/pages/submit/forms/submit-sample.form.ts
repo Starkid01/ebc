@@ -15,8 +15,8 @@ export class SampleForm extends FormBase {
 
   bodyName: FormControl = new FormControl('', Validators.required);
   detailForm: FormGroup;
-  email: FormControl = new FormControl('', FormHandler.prototype.emailValidator);
-  phone: FormControl = new FormControl('', FormHandler.prototype.phoneValidator);
+  email: FormControl = new FormControl('', FormHandler.emailValidator);
+  phone: FormControl = new FormControl('', FormHandler.phoneValidator);
 
   constructor(private nav: NavController, public user: UserService) {
     super(user);
