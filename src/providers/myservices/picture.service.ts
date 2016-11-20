@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { ActionSheetController, App, Loading, LoadingController, Platform, ToastController } from 'ionic-angular';
+import { ActionSheetController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Camera, File, Transfer } from 'ionic-native';
 import 'rxjs';
 

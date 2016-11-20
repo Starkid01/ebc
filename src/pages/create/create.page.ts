@@ -2,7 +2,6 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import { LoginPage } from '../login';
 import { BackandService, FormHandler } from '../../providers';
 
 @Component({

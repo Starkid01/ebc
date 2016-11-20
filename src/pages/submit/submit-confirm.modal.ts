@@ -3,17 +3,40 @@ import { NavParams, ToastController, ViewController } from 'ionic-angular';
 
 import { BackandService } from '../../providers';
 
+interface Contact {
+	bodyName?: string;
+	phone?: string;
+	email?: string;
+}
+
+interface Form {
+	name?: string;
+	desc?: string;
+	flyer?: boolean;
+	pic?: string;
+}
+
+interface Social {
+	fb?: string;
+	twitter?: string;
+	instagram?: string;
+	web?: string;
+	spotify?: string;
+	soundCloud?: string;
+	linkedIn?: string;
+}
+
 @Component({
 	selector: 'modal-confirm',
 	templateUrl: 'submit-confirm.modal.html'
 })
 
 export class SubmitConfirm implements OnInit {
-	contactData: Object = {};
+	contactData: Contact = {};
 	extra: Object[];
-	formData: Object = {};
+	formData: Form = {};
 	selectData: Object = {};
-	socialData: Object = {};
+	socialData: Social = {};
 
 	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 

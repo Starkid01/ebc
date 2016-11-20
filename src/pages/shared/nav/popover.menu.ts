@@ -1,4 +1,4 @@
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { App, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 

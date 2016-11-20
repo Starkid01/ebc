@@ -3,9 +3,15 @@ import { Events } from 'ionic-angular';
 
 import { BackandService } from '../backand';
 
+interface EbcUser {
+  firstName?: string;
+  lastName?: string;
+  pic?: string;
+}
+
 @Injectable()
 export class UserService {
-  myUser: Object;
+  myUser: EbcUser;
 
   constructor(public events: Events, public backand: BackandService) {
 

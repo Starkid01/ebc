@@ -121,6 +121,7 @@ export class DetailPage implements OnInit {
     let myApp = app;
     let fb;
     let dm;
+    let dom;
 
     if (this.platform.is('ios')) {
       fb = 'fb://';
@@ -143,10 +144,10 @@ export class DetailPage implements OnInit {
     AppAvailability.check(myApp['check'])
       .then(
       yes => {
-        let dom = new InAppBrowser(myApp['appLink'], '_system');
+        dom = new InAppBrowser(myApp['appLink'], '_system');
       },
       no => {
-        let dom = new InAppBrowser(myApp['url'], '_system');
+        dom = new InAppBrowser(myApp['url'], '_system');
       });
   }
 

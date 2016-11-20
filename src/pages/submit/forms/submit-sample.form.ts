@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 

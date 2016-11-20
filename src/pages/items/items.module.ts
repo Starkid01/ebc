@@ -10,7 +10,6 @@ import { Templates } from './templates.tabs';
 import {
 	MyCardsPage,
 	MyFlysPage,
-	ItemBase,
 	SCardsPage,
 	SFlysPage,
 	TCardsPage,

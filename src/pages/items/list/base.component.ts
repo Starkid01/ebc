@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { DoCheck, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../detail';
@@ -8,8 +8,8 @@ import { BackandService } from '../../../providers';
 export class ItemBase implements DoCheck, OnInit {
   public dbTable: string;
   public itemType: string;
-  private items: Array<EbcProduct>;
-  private none: boolean;
+  public items: Array<EbcProduct>;
+  public none: boolean;
 
   constructor(public backand: BackandService, public nav: NavController) {
 
