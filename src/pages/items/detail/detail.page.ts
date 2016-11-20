@@ -14,6 +14,7 @@ import { EbcProduct } from '../../shared';
 
 export class DetailPage implements OnInit {
   body: FormControl = new FormControl('');
+  ebcUrl: string = 'http://ebc.beezleeart.com/cards/';
   email: FormControl = new FormControl('', [this.form.emailValidator, Validators.required]);
   emailForm: FormGroup;
   emailText: FormControl = new FormControl('');
@@ -188,7 +189,7 @@ export class DetailPage implements OnInit {
     let myEmail = {
       to: myInput['email'],
       subject: myInput['emailText'],
-      body: `<p>${myInput['body']}</p>${this.item['media']}`,
+      body: `<p>${myInput['body']}</p> <p>${this.ebcUrl}${this.item['media']}</p>`,
       isHtml: true
     };
 
@@ -208,7 +209,7 @@ export class DetailPage implements OnInit {
 
   sendSms(form) {
     let mySms = form.value;
-    let body = `${mySms['smsText']} ${this.item['media']}`;
+    let body = `${mySms['smsText']} ${this.ebcUrl}${this.item['id']}`;
 
     console.log(mySms);
 
