@@ -14,13 +14,13 @@ export class FormHandler {
     }
   }
 
-  static emailValidator(c: AbstractControl) {
+  emailValidator(c: AbstractControl) {
     let addy = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let isEmail = !c.value.match(addy);
     return isEmail ? { 'invalidEmail': true } : null;
   }
 
-  static phoneValidator(c: AbstractControl) {
+  phoneValidator(c: AbstractControl) {
     let numberEx = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
     let isPhone = !c.value.match(numberEx);
     return isPhone ? { 'invalidPhone': true } : null;

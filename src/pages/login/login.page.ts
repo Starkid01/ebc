@@ -14,7 +14,7 @@ import { SideMenu } from '../shared';
 export class LoginPage {
   signUp: Type<CreatePage> = CreatePage;
   loginForm: FormGroup;
-  username: FormControl = new FormControl('', Validators.compose([Validators.required, FormHandler.emailValidator]));
+  username: FormControl = new FormControl('', Validators.compose([Validators.required, this.form.emailValidator]));
   password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, RadioControlValueAccessor } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from 'ionic-angular';
 

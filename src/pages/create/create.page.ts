@@ -13,7 +13,7 @@ export class CreatePage {
   createError: boolean;
   createForm: FormGroup;
   verify: FormGroup;
-  email: FormControl = new FormControl('', Validators.compose([Validators.required, FormHandler.emailValidator]));
+  email: FormControl = new FormControl('', Validators.compose([Validators.required, this.form.emailValidator]));
   firstName: FormControl = new FormControl('', Validators.required);
   lastName: FormControl = new FormControl('', Validators.required);
   password: FormControl = new FormControl('', Validators.required);

@@ -15,10 +15,10 @@ export class SampleForm extends FormBase {
 
   bodyName: FormControl = new FormControl('', Validators.required);
   detailForm: FormGroup;
-  email: FormControl = new FormControl('', FormHandler.emailValidator);
-  phone: FormControl = new FormControl('', FormHandler.phoneValidator);
+  email: FormControl = new FormControl('', this.form.emailValidator);
+  phone: FormControl = new FormControl('', this.form.phoneValidator);
 
-  constructor(private nav: NavController, public user: UserService) {
+  constructor(private nav: NavController, public form: FormHandler, public user: UserService) {
     super(user);
     this.itemForm = new FormGroup({
       name: this.name,
