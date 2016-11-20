@@ -1,14 +1,17 @@
 <ion-header>
   <ebc-navbar>Edit Profile</ebc-navbar>
 </ion-header>
-
 <ion-content class="edit">
-  <button *ngIf="upFile" light fab fab-top fab-left (click)="savePic()" class="action">
-    <ion-icon name="cloud-upload"></ion-icon>
-  </button>
-  <button secondary fab fab-top fab-right (click)="pic.getPics()" class="action">
-    <ion-icon name="image"></ion-icon>
-  </button>
+  <ion-fab *ngIf="upFile" top left>
+    <button ion-fab color="light" (click)="savePic()" class="action">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab top right>
+    <button ion-fab color="secondary" (click)="pic.getPics()" class="action">
+      <ion-icon name="image"></ion-icon>
+    </button>
+  </ion-fab>
   <ion-card>
     <!--<ion-img class="userImg" [src]="user.myUser?.pic"></ion-img>-->
     <div class="userImg">
@@ -30,7 +33,6 @@
       </ion-segment>
     </div>
   </ion-card>
-
   <div [ngSwitch]="section">
     <div *ngSwitchCase="'user'">
       <form [formGroup]="editForm" (ngSubmit)="editInfo(editForm)">
@@ -38,7 +40,8 @@
           <div class="field">
             <ion-item>
               <ion-label stacked for="firstName">First Name</ion-label>
-              <ion-input clearInput formControlName="firstName" id="firstName" name="firstName" [placeholder]="user.myUser?.firstName" type="text"></ion-input>
+              <ion-input clearInput formControlName="firstName" id="firstName" name="firstName" [placeholder]="user.myUser?.firstName"
+                type="text"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked for="lastName">Last Name</ion-label>
@@ -51,7 +54,6 @@
         </ion-list>
       </form>
     </div>
-
     <div *ngSwitchCase="'password'">
       <form [formGroup]="passwordForm" (ngSubmit)="editPass(passwordForm)">
         <ion-list no-lines class="editForm">
