@@ -1,0 +1,16 @@
+<ion-menu [content]="ebcMenu">
+  <ion-header>
+    <ion-toolbar color="favorite">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list no-lines>
+      <button menuClose ion-item *ngFor="let p of pages" (click)="toPages(p)">
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav id="page" [root]="homePage" #ebcMenu swipeBackEnabled="false"></ion-nav>

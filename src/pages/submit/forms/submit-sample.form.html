@@ -1,0 +1,28 @@
+<form [formGroup]="itemForm">
+  <ion-item>
+    <ion-label color="favorite" stacked>{{titleName}} Name*</ion-label>
+    <ion-input clearInput id="name" name="name" type="text" [placeholder]="isType + ' Title'" formControlName="name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Description</ion-label>
+    <ion-textarea id="desc" name="desc" type="text" placeholder="Detail Text" formControlName="desc"></ion-textarea>
+  </ion-item>
+  <ion-item></ion-item>
+</form>
+<form [formGroup]="detailForm">
+  <ion-list-header><span color="favorite">Info Goes on {{isType}}</span></ion-list-header> 
+  <ion-item>
+    <ion-label color="favorite" stacked>Your Name*</ion-label>
+    <ion-input clearInput id="bodyName" name="bodyName" type="text" [placeholder]="isType + ' Name'" formControlName="bodyName"></ion-input>
+  </ion-item>
+  <div class="rowForm">
+    <ion-item>
+      <ion-label color="favorite" stacked>Phone</ion-label>
+      <ion-input clearInput id="phone" name="phone" type="tel" [placeholder]="isType + ' phone number'" formControlName="phone"></ion-input>
+    </ion-item>
+    <ion-item class="last">
+      <ion-label color="favorite" stacked>Email</ion-label>
+      <ion-input clearInput id="email" name="email" type="email" [placeholder]="isType + ' email'" formControlName="email"></ion-input>
+    </ion-item>
+  </div>
+</form>

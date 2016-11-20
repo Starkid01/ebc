@@ -1,0 +1,100 @@
+<ion-header>
+  <ebc-navbar>Create New Item</ebc-navbar>
+</ion-header>
+
+<ion-content class="sub">
+  <ion-card>
+    <ion-card-header>
+      <h2 ion-text color="favorite">Submit Item</h2>
+    </ion-card-header>
+    <div class="sel">
+      <ion-segment [(ngModel)]="subform">
+        <ion-segment-button value="sample">Template</ion-segment-button>
+        <ion-segment-button value="exist">Existing</ion-segment-button>
+        <ion-segment-button value="new">New Design</ion-segment-button>
+      </ion-segment>
+    </div>
+    <ion-card-content *ngIf="loaded" [ngSwitch]="subform">
+      <ion-list no-lines class="field">
+        <ion-item>* Fields are Required</ion-item>
+        <div *ngSwitchCase="'sample'">
+         <ebc-select-form [flyer]="isFlyer"></ebc-select-form>
+          <ion-slides #steps [options]="slideOpts">
+            <ion-slide>
+              <div padding>
+                <button ion-button icon-right block color="favorite" (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-pic-form class="slideForm"></ebc-pic-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding class="rowForm">
+                <button ion-button icon-left color="favorite" (click)="nextForm(0)"><ion-icon name="arrow-dropleft"></ion-icon> Artwork</button>
+                <button ion-button icon-right color="favorite" (click)="nextForm(2)">Social <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-sample-form class="slideForm" [type]="isFlyer"></ebc-sample-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding>
+                <button ion-button icon-left block color="favorite" (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+              </div>
+              <ebc-social-form class="slideForm"></ebc-social-form>
+            </ion-slide>
+          </ion-slides>
+        </div>
+        <div *ngSwitchCase="'exist'">
+         <ion-slides #steps [options]="slideOpts">
+            <ion-slide>
+              <div padding>
+                <button ion-button icon-right block color="favorite" (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-pic-form class="slideForm"></ebc-pic-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding class="rowForm">
+                <button ion-button icon-left color="favorite" (click)="nextForm(0)"><ion-icon name="arrow-dropleft"></ion-icon> Artwork</button>
+                <button ion-button icon-right color="favorite" (click)="nextForm(2)">Social <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-base-form class="slideForm" [flyer]="isFlyer"></ebc-base-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding>
+                <button ion-button icon-left block color="favorite" (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+              </div>
+              <ebc-social-form class="slideForm"></ebc-social-form>
+            </ion-slide>
+          </ion-slides>
+        </div>
+        <div *ngSwitchCase="'new'">
+         <ion-slides #steps [options]="slideOpts">
+            <ion-slide>
+              <div padding>
+                <button ion-button icon-right block color="favorite" (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-pic-form class="slideForm"></ebc-pic-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding class="rowForm">
+                <button ion-button icon-left color="favorite" (click)="nextForm(0)"><ion-icon name="arrow-dropleft"></ion-icon> Artwork</button>
+                <button ion-button icon-right color="favorite" (click)="nextForm(2)">Social <ion-icon name="arrow-dropright"></ion-icon></button>
+              </div>
+              <ebc-sample-form class="slideForm" [type]="isFlyer"></ebc-sample-form>
+            </ion-slide>
+            <ion-slide>
+              <div padding>
+                <button ion-button icon-right block color="favorite" (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+              </div>
+              <ebc-social-form class="slideForm"></ebc-social-form>
+            </ion-slide>
+          </ion-slides>
+        </div>
+        <ion-item>
+          <ion-label color="favorite" class="flyerBox" for="flyer">Flyer</ion-label>
+          <ion-checkbox item-right color="favorite" name="flyer" id="flyer" [(ngModel)]="isFlyer"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <div padding>
+        <button [disabled]="isValid" ion-button block type="submit" (click)="submitItem()">Submit Item</button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

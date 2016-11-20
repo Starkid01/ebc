@@ -1,0 +1,27 @@
+<ion-header>
+  <ebc-navbar>{{title}}</ebc-navbar>
+</ion-header>
+
+<ion-content class="myitems">
+  <div *ngIf="none" padding>
+    <h2 ion-text color="favorite">Sorry You haven't Added Anything Here</h2>
+    <p>Please Submit a New Card</p>
+  </div>
+  <ion-card *ngFor="let i of items" (click)="goTo(i?.id)">
+    <button ion-item>
+      <ion-card-header>
+        <h2 ion-text color="favorite">{{i?.name}}</h2>
+      </ion-card-header>
+      <ion-card-content>
+        <hr>
+        <ion-item class="myItem">
+          <ion-thumbnail item-left>
+            <img [src]="i?.pic" title="Card is Being Created">
+          </ion-thumbnail>
+          <p ion-text class="desc">{{i?.desc}}</p>
+          <span ion-text item-right color="primary">View</span>
+        </ion-item>
+      </ion-card-content>
+    </button>
+  </ion-card>
+</ion-content>

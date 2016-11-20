@@ -1,0 +1,16 @@
+<ion-item class="artWarn"><span ion-text color="danger">Please Upload Artwork First</span></ion-item>
+<div class="btns">
+  <ion-fab left>
+    <button ion-fab color="favorite" (click)="savePic()" class="action" [disabled]="!pic.newPic">
+    <ion-icon name="cloud-upload"></ion-icon>
+  </button>
+  </ion-fab>
+  <ion-fab right>
+    <button ion-fab color="secondary" (click)="pic.getPics()" class="action right">
+    <ion-icon name="image"></ion-icon>
+  </button>
+  </ion-fab>
+</div>
+<ion-item class="artwork">
+  <img [src]="pic.picFile" title="Please Upload Artwork" />
+</ion-item>

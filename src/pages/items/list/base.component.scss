@@ -1,0 +1,23 @@
+page-items {
+  .myitems {
+    @include page-body;
+    @include heading;
+    @include image;
+
+    img[src="null"]::after {
+      font-size: 1.5rem;
+      font-weight: 600;
+      height: 6.1rem;
+      padding: .5rem;
+      white-space: pre-wrap;
+    }
+
+    .desc {
+      white-space: pre-wrap;
+    }
+
+    .myItem {
+      background-color: rgba(0,0,0,0);
+    }
+  }
+}

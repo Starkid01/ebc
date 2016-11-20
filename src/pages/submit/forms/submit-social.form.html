@@ -1,0 +1,58 @@
+<form [formGroup]="socialForm">
+  <ion-item>
+    <ion-label color="fb">Facebook</ion-label>
+    <ion-toggle [(ngModel)]="fbField" [ngModelOptions]="{standalone: true}" color="fb"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="fbField">
+    <ion-label stacked>Facebook Username</ion-label>
+    <ion-input clearInput id="fb" name="fb" type="text" formControlName="fb"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="instagram">Instagram</ion-label>
+    <ion-toggle [(ngModel)]="gram" [ngModelOptions]="{standalone: true}" color="instagram"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="gram">
+    <ion-label stacked>Instagram Username</ion-label>
+    <ion-input clearInput id="gram" name="gram" type="text" formControlName="instagram"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="twitter">Twitter</ion-label>
+    <ion-toggle [(ngModel)]="dm" [ngModelOptions]="{standalone: true}" color="twitter"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="dm">
+    <ion-label stacked>Twitter Username</ion-label>
+    <ion-input clearInput id="dm" name="dm" type="text" formControlName="twitter"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="spoti">Spotify</ion-label>
+    <ion-toggle [(ngModel)]="spot" [ngModelOptions]="{standalone: true}" color="spoti"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="spot">
+    <ion-label stacked>Spotify Username</ion-label>
+    <ion-input clearInput id="spotify" name="spotify" type="text" formControlName="spotify"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="sound">SoundCloud</ion-label>
+    <ion-toggle [(ngModel)]="sound" [ngModelOptions]="{standalone: true}" color="sound"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="sound">
+    <ion-label stacked>SoundCloud Username</ion-label>
+    <ion-input clearInput id="sound" name="sound" type="text" formControlName="soundCloud"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="linked">LinkedIn</ion-label>
+    <ion-toggle [(ngModel)]="linked" [ngModelOptions]="{standalone: true}" color="linked"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="linked">
+    <ion-label stacked>LinkedIn Username</ion-label>
+    <ion-input clearInput id="linked" name="linked" type="text" formControlName="linkedIn"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="secondary">Website</ion-label>
+    <ion-toggle [(ngModel)]="url" [ngModelOptions]="{standalone: true}" color="secondary"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="url">
+    <ion-label stacked>Website Address</ion-label>
+    <ion-input clearInput id="web" name="web" type="url" formControlName="web"></ion-input>
+  </ion-item>
+</form>

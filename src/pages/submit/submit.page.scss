@@ -1,0 +1,95 @@
+page-submit {
+  .sub {
+    @include page-body;
+    @include heading;
+    @include inputs;
+    @include image;
+    
+    ion-select {
+      transform: translateY(-3rem);
+    }
+    
+    .sel {
+      padding-bottom: 1rem; 
+    }
+
+    .action {
+      transform: translateY(1.2rem);
+      z-index: 5;
+    }
+    
+    .artwork {
+      text-align: center;
+      
+      img {
+        height: auto;
+      }
+    }
+
+    .field {
+      padding-left: 1.1rem;
+      padding-right: 1.1rem;
+    }
+
+    .flyerBox {
+      text-align: right;
+    }
+
+    .right {
+      right: .7rem;
+    }
+    
+    .rowForm {
+      display: flex;
+      justify-content: space-between;
+
+      .last {
+        @include last;
+      }
+    }
+
+  .selectErr {
+      transform: translateY(-3.5rem);
+      margin-bottom: -3.5rem;
+    }
+  }
+
+  .artWarn {
+    text-align: center;
+  }
+
+  .confirm {
+    @include heading;
+    
+    ion-col {
+      border-radius: .4rem;
+      background-color: map-get($colors, light);
+      margin: .4rem;
+      padding: .8rem;
+      opacity: .7;
+    }
+
+    .btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: .8rem;
+    }
+
+    .head {
+      margin-bottom: .7rem;
+    }
+
+    .flyBox {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    hr {
+      border: none;
+      width: 100%;
+      height: .3rem;
+      margin: 1.7rem auto;
+      background-color: map-get($colors, secondary);
+    }
+  }
+}
