@@ -1,10 +1,10 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Electronic Business Card",
+  "short_name": "EBC",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "assets/imgs/logo.png",
+    "src": "assets/img/logo.png",
     "sizes": "32x32",
     "type": "image/png"
   }],

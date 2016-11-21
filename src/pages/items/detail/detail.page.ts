@@ -187,10 +187,14 @@ export class DetailPage implements OnInit {
 
   sendEmail(form) {
     let myInput = form.value;
+    let link: string;
+    if(this.item['media'] !== undefined) {
+      link = `${this.ebcUrl}${this.item['id']}`;
+    }
     let myEmail = {
       to: myInput['email'],
       subject: myInput['emailText'],
-      body: `<p>${myInput['body']}</p> <p>${this.ebcUrl}${this.item['media']}</p>`,
+      body: `<p>${myInput['body']}</p> <p>${link}</p>`,
       isHtml: true
     };
 
@@ -210,7 +214,11 @@ export class DetailPage implements OnInit {
 
   sendSms(form) {
     let mySms = form.value;
-    let body = `${mySms['smsText']} ${this.ebcUrl}${this.item['id']}`;
+    let link: string;
+    if(this.item['media'] !== undefined) {
+      link = `${this.ebcUrl}${this.item['id']}`;
+    }
+    let body = `${mySms['smsText']} ${link}`;
 
     console.log(mySms);
 

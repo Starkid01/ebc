@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { IonicModule } from 'ionic-angular';
 
 import { DetailPage } from './detail';
@@ -31,6 +32,7 @@ import {
 	],
 	imports: [ 
 		CommonModule,
+		HttpModule,
 		IonicModule.forRoot(MyStuff),
 		NavModule
 	 ],

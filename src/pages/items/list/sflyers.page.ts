@@ -17,4 +17,12 @@ export class SFlysPage extends ItemBase {
 		this.dbTable = 'samples';
 		this.itemType = 'SampleFlyer';
 	}
+
+	ngOnInit() {
+		super.ngOnInit();
+	}
+
+	ngDoCheck() {
+		super.ngDoCheck();
+	}
 }

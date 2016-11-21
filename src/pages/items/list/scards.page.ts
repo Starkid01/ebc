@@ -17,4 +17,12 @@ export class SCardsPage extends ItemBase {
 		this.dbTable = 'samples';
 		this.itemType = 'SampleCard';
 	}
+
+	ngOnInit() {
+		super.ngOnInit();
+	}
+
+	ngDoCheck() {
+		super.ngDoCheck();
+	}
 }

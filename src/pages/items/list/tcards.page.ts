@@ -17,4 +17,12 @@ export class TCardsPage extends ItemBase {
 		this.dbTable = 'templates';
 		this.itemType = 'TempCard';
 	}
+
+	ngOnInit() {
+		super.ngOnInit();
+	}
+
+	ngDoCheck() {
+		super.ngDoCheck();
+	}
 }

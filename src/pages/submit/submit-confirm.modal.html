@@ -2,7 +2,7 @@
 	<ion-toolbar color="favorite">
 		<ion-title>Submit Confirm</ion-title>
 		<ion-buttons end>
-			<button (click)="close()">
+			<button ion-button icon-only (click)="close()">
       <ion-icon name="close"></ion-icon>
     </button>
 		</ion-buttons>
@@ -12,7 +12,7 @@
 <ion-content>
 	<ion-grid padding class="confirm">
 		<ion-row class="head">
-			<h2 color="primary">Please Verify</h2>
+			<h2 ion-text color="primary">Please Verify</h2>
 		</ion-row>
 		<ion-row>
 			<ion-col><strong>Title:</strong> {{formData?.name}}</ion-col>
@@ -31,7 +31,7 @@
 		</ion-row>
 		<hr>
 		<ion-row class="head">
-			<h3 color="favorite">Contact Info</h3>
+			<h3 ion-text color="favorite">Contact Info</h3>
 		</ion-row>
 		<ion-row>
 			<ion-col><strong>Name:</strong> {{contactData?.bodyName}}</ion-col>
@@ -42,7 +42,7 @@
 		</ion-row>
 		<hr>
 		<ion-row class="head">
-			<h3 color="favorite">Social Media Info</h3>
+			<h3 ion-text color="favorite">Social Media Info</h3>
 		</ion-row>
 		<ion-row>
 			<ion-col><strong>Facebook:</strong> {{socialData?.fb}}</ion-col>
@@ -58,8 +58,8 @@
 			<ion-col><strong>LinkedIn:</strong> {{socialData?.linkedIn}}</ion-col>
 		</ion-row>
 		<div class="btns">
-			<button color="danger" (click)="close()">Cancel</button>
-			<button (click)="finalSubmit()">Confirm</button>
+			<button ion-button color="danger" (click)="close()">Cancel</button>
+			<button ion-button (click)="finalSubmit()">Confirm</button>
 		</div>
 	</ion-grid>
 </ion-content>

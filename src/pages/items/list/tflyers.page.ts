@@ -17,4 +17,12 @@ export class TFlysPage extends ItemBase {
 		this.dbTable = 'templates';
 		this.itemType = 'TempFlyer';
 	}
+
+	ngOnInit() {
+		super.ngOnInit();
+	}
+
+	ngDoCheck() {
+		super.ngDoCheck();
+	}
 }

@@ -17,4 +17,12 @@ export class MyFlysPage extends ItemBase {
 		this.dbTable = 'items';
 		this.itemType = 'MyFlyer';
 	}
+
+	ngOnInit() {
+		super.ngOnInit();
+	}
+
+	ngDoCheck() {
+		super.ngDoCheck();
+	}
 }
