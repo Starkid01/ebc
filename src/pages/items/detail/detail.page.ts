@@ -14,7 +14,7 @@ import { EbcProduct } from '../../shared';
 
 export class DetailPage implements OnInit {
   body: FormControl = new FormControl('');
-  ebcUrl: string = 'http://ebc.beezleeart.com/cards/';
+  ebcUrl: string = 'http://ebc.beezleeart.com/card/';
   email: FormControl = new FormControl('', [this.form.emailValidator, Validators.required]);
   emailForm: FormGroup;
   emailText: FormControl = new FormControl('');
