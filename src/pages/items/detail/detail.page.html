@@ -49,10 +49,10 @@
                 <ion-radio id="manual" name="sms" [value]="field" checked></ion-radio>
               </ion-item>
             </div>
-            <ion-item>
-              <ion-label stacked color="danger">Double Tap Submit After Filled</ion-label>
+            <ion-item  [class.myError]="!phone.valid && phone.touched">
+              <ion-label stacked color="danger"><span *ngIf="!phone.valid && phone.touched" >Check the Number</span></ion-label>
               <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" [ngModelOptions]="{standalone: true}"
-                (blur)="customField()" clearInput></ion-input>
+                (input)="customField()" clearInput></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked>Message</ion-label>
@@ -72,19 +72,19 @@
           <h3 ion-text color="mygray">Send Email<span *ngIf="hide"> to {{picked?.name.formatted}}</span></h3>
           <div class="field">
             <div radio-group formControlName="email" [hidden]="!hide">
-              <ion-item *ngFor="let email of picked?.emails">
-                <ion-label>{{email.type}}: {{email.value}}</ion-label>
-                <ion-radio [id]="email.id" name="email" [value]="email.value"></ion-radio>
+              <ion-item *ngFor="let addy of picked?.emails">
+                <ion-label>{{addy.type}}: {{addy.value}}</ion-label>
+                <ion-radio [id]="email.id" name="email" [value]="addy.value"></ion-radio>
               </ion-item>
               <ion-item>
                 <ion-label>Other Email</ion-label>
                 <ion-radio id="manual" name="email" [value]="field"></ion-radio>
               </ion-item>
             </div>
-            <ion-item>
-              <ion-label stacked danger>Double Tap Submit After Filled</ion-label>
+            <ion-item [class.myError]="!email.valid && email.touched">
+              <ion-label stacked color="danger"><span *ngIf="!email.valid && email.touched">Check Email Address</span></ion-label>
               <ion-input id="custom" name="custom" type="email" [(ngModel)]="field" placeholder="Manual Selected Email" [ngModelOptions]="{standalone: true}"
-                (blur)="customField()" clearInput></ion-input>
+                (input)="customField()" clearInput></ion-input>
             </ion-item>
             <ion-item>
               <ion-label stacked>Subject</ion-label>

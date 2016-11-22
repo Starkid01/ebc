@@ -2,7 +2,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Renderer, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
-import { Contacts, SMS, EmailComposer, AppAvailability, InAppBrowser, LaunchNavigator } from 'ionic-native';
+import { AppAvailability, Contacts, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
 
 import { BackandService, FormHandler } from '../../../providers';
 import { EbcProduct } from '../../shared';
@@ -187,18 +187,10 @@ export class DetailPage implements OnInit {
 
   sendEmail(form) {
     let myInput = form.value;
-    let link: string;
-    if(this.item['media'] !== undefined) {
-      link = `${this.ebcUrl}${this.item['id']}`;
-    }
-    let myEmail = {
-      to: myInput['email'],
-      subject: myInput['emailText'],
-      body: `<p>${myInput['body']}</p> <p>${link}</p>`,
-      isHtml: true
-    };
+    let link: string  = `${this.ebcUrl}${this.item['id']}`;
+    let myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
 
-    EmailComposer.open(myEmail).then(
+    SocialSharing.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
       data => this.sentMsg('Email'),
       err => console.log(err, 'Fail'));
   }
@@ -214,17 +206,12 @@ export class DetailPage implements OnInit {
 
   sendSms(form) {
     let mySms = form.value;
-    let link: string;
-    if(this.item['media'] !== undefined) {
-      link = `${this.ebcUrl}${this.item['id']}`;
-    }
+    let link: string  = `${this.ebcUrl}${this.item['id']}`;
     let body = `${mySms['smsText']} ${link}`;
 
-    console.log(mySms);
-
-    SMS.send(mySms.phone, body).then(
-      data => console.log(data, 'Sent'),
-      err => this.sentMsg('SMS Text'));
+     SocialSharing.shareViaSMS(body, mySms.phone).then(
+      data => this.sentMsg('SMS Text'),
+      err => console.log(err, 'Fail'));
   }
 
   setText() {
