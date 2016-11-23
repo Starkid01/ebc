@@ -1,65 +1,69 @@
 <ion-header>
-	<ion-toolbar color="favorite">
-		<ion-title>Submit Confirm</ion-title>
-		<ion-buttons end>
-			<button ion-button icon-only (click)="close()">
+  <ion-toolbar color="favorite">
+    <ion-title>Submit Confirm</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close()">
       <ion-icon name="close"></ion-icon>
     </button>
-		</ion-buttons>
-	</ion-toolbar>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-grid padding class="confirm">
-		<ion-row class="head">
-			<h2 ion-text color="primary">Please Verify</h2>
-		</ion-row>
+  <ion-grid padding class="confirm">
+    <ion-row class="head">
+      <h2 ion-text color="primary">Please Verify</h2>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Title:</strong> {{formData?.name}}</ion-col>
+      <ion-col><strong>Description:</strong> {{formData?.desc}}</ion-col>
+      <ion-col class="flyBox">
+        <strong>Flyer:</strong>
+        <ion-checkbox color="favorite" [(ngModel)]="formData.flyer"></ion-checkbox>
+      </ion-col>
+    </ion-row>
 		<ion-row>
-			<ion-col><strong>Title:</strong> {{formData?.name}}</ion-col>
-			<ion-col><strong>Description:</strong> {{formData?.desc}}</ion-col>
-			<ion-col class="flyBox">
-				<strong>Flyer:</strong>
-				<ion-checkbox color="favorite" [(ngModel)]="formData.flyer"></ion-checkbox>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col><strong>Your Image:</strong>
-				<ion-thumbnail>
-					<img [src]="formData?.pic" />
-				</ion-thumbnail>
-			</ion-col>
-		</ion-row>
+      <ion-col><strong>Your Image:</strong>
+        <ion-thumbnail>
+          <img [src]="formData?.pic" />
+        </ion-thumbnail>
+      </ion-col>
+    </ion-row>
 		<hr>
-		<ion-row class="head">
-			<h3 ion-text color="favorite">Contact Info</h3>
-		</ion-row>
-		<ion-row>
-			<ion-col><strong>Name:</strong> {{contactData?.bodyName}}</ion-col>
-			<ion-col><strong>Phone:</strong> {{contactData?.phone}}</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col><strong>Email:</strong> {{contactData?.email}}</ion-col>
-		</ion-row>
-		<hr>
-		<ion-row class="head">
-			<h3 ion-text color="favorite">Social Media Info</h3>
-		</ion-row>
-		<ion-row>
-			<ion-col><strong>Facebook:</strong> {{socialData?.fb}}</ion-col>
-			<ion-col><strong>Twitter:</strong> {{socialData?.twitter}}</ion-col>
-			<ion-col><strong>Instagram:</strong> {{socialData?.instagram}}</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col><strong>Website:</strong> {{socialData?.web}}</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col><strong>Spotify:</strong> {{socialData?.spotify}}</ion-col>
-			<ion-col><strong>SoundCloud:</strong> {{socialData?.soundCloud}}</ion-col>
-			<ion-col><strong>LinkedIn:</strong> {{socialData?.linkedIn}}</ion-col>
-		</ion-row>
-		<div class="btns">
-			<button ion-button color="danger" (click)="close()">Cancel</button>
-			<button ion-button (click)="finalSubmit()">Confirm</button>
-		</div>
-	</ion-grid>
+    <ion-row>
+      <ion-col><strong>Create Info:</strong> {{createData?.create}}</ion-col>
+    </ion-row>
+    <hr>
+    <ion-row class="head">
+      <h3 ion-text color="favorite">Contact Info</h3>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Name:</strong> {{contactData?.bodyName}}</ion-col>
+      <ion-col><strong>Phone:</strong> {{contactData?.phone}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Email:</strong> {{contactData?.email}}</ion-col>
+    </ion-row>
+    <hr>
+    <ion-row class="head">
+      <h3 ion-text color="favorite">Social Media Info</h3>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Facebook:</strong> {{socialData?.fb}}</ion-col>
+      <ion-col><strong>Twitter:</strong> {{socialData?.twitter}}</ion-col>
+      <ion-col><strong>Instagram:</strong> {{socialData?.instagram}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Website:</strong> {{socialData?.web}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Spotify:</strong> {{socialData?.spotify}}</ion-col>
+      <ion-col><strong>SoundCloud:</strong> {{socialData?.soundCloud}}</ion-col>
+      <ion-col><strong>LinkedIn:</strong> {{socialData?.linkedIn}}</ion-col>
+    </ion-row>
+    <div class="btns">
+      <button ion-button color="danger" (click)="close()">Cancel</button>
+      <button ion-button (click)="finalSubmit()">Confirm</button>
+    </div>
+  </ion-grid>
 </ion-content>

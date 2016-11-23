@@ -10,8 +10,8 @@
     <div class="sel">
       <ion-segment [(ngModel)]="subform">
         <ion-segment-button value="sample">Template</ion-segment-button>
-        <ion-segment-button value="exist">Existing</ion-segment-button>
-        <ion-segment-button value="new">New Design</ion-segment-button>
+        <ion-segment-button value="exist">Pre Existing</ion-segment-button>
+        <ion-segment-button value="new">Custom EBC</ion-segment-button>
       </ion-segment>
     </div>
     <ion-card-content *ngIf="loaded" [ngSwitch]="subform">
@@ -81,7 +81,7 @@
             </ion-slide>
             <ion-slide>
               <div padding>
-                <button ion-button icon-right block color="favorite" (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
+                 <button ion-button icon-left block color="favorite" (click)="nextForm(1)"><ion-icon name="arrow-dropleft"></ion-icon> Back to Selection Form</button>
               </div>
               <ebc-social-form class="slideForm"></ebc-social-form>
             </ion-slide>

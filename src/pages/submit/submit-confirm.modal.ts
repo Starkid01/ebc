@@ -37,6 +37,7 @@ export class SubmitConfirm implements OnInit {
 	formData: Form = {};
 	selectData: Object = {};
 	socialData: Social = {};
+	createData: Object = {};
 
 	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
@@ -65,10 +66,10 @@ export class SubmitConfirm implements OnInit {
 	dataParse() {
 		this.extra = this.params.data.data;
 		this.formData = this.params.data;
-		this.contactData = this.extra.find(i => i.hasOwnProperty('bodyName'));
-		this.socialData = this.extra.find(i => i.hasOwnProperty('fb'));
-		this.selectData = this.extra.find(i => i.hasOwnProperty('selName'));
-		console.log(this.formData, this.contactData, this.socialData, this.selectData);
+		this.contactData = this.extra.find(obj => obj.hasOwnProperty('bodyName'));
+		this.socialData = this.extra.find(obj => obj.hasOwnProperty('fb'));
+		this.selectData = this.extra.find(obj => obj.hasOwnProperty('selName'));
+		this.createData = this.extra.find(obj => obj.hasOwnProperty('create'));
 	}
 
 	finalSubmit() {

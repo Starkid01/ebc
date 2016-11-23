@@ -5,14 +5,18 @@
   </ion-item>
   <ion-item>
     <ion-label stacked>Description</ion-label>
-    <ion-textarea id="desc" name="desc" type="text" placeholder="Detail Text" formControlName="desc"></ion-textarea>
+    <ion-textarea id="desc" name="desc" type="text" [placeholder]="isType + ' Detail'" formControlName="desc"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Creation Instructions</ion-label>
+    <ion-textarea id="data" name="data" type="text" placeholder="Where does your Interacteive Info Go?" formControlName="data"></ion-textarea>
   </ion-item>
   <ion-item></ion-item>
 </form>
 <form [formGroup]="detailForm">
   <ion-list-header><span ion-text color="favorite">Info Goes on {{isType}}</span></ion-list-header> 
   <ion-item>
-    <ion-label color="favorite" stacked>Your Name*</ion-label>
+    <ion-label color="favorite" stacked>Your Name (Optional)</ion-label>
     <ion-input clearInput id="bodyName" name="bodyName" type="text" [placeholder]="isType + ' Name'" formControlName="bodyName"></ion-input>
   </ion-item>
   <div class="rowForm">

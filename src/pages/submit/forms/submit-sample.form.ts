@@ -13,7 +13,7 @@ import { FormHandler, UserService } from '../../../providers';
 export class SampleForm extends FormBase {
   @Input() type: boolean;
 
-  bodyName: FormControl = new FormControl('', Validators.required);
+  bodyName: FormControl = new FormControl('');
   detailForm: FormGroup;
   email: FormControl = new FormControl('', this.form.emailValidator);
   phone: FormControl = new FormControl('', this.form.phoneValidator);

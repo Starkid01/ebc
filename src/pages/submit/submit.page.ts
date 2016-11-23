@@ -48,8 +48,11 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   existForm() {
     if (this.base.itemForm.valid) {
       let item = this.base.formValue();
+      let build = {
+        create: this.base.data.value
+      };
       item['flyer'] = this.isFlyer;
-      item['data'] = [];
+      item['data'] = [build];
       return this.getSocial(item);
     } else {
       return null;
@@ -70,8 +73,11 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   newForm() {
     if (this.samples.itemForm.valid && this.samples.detailCheck()) {
       let item = this.samples.formValue();
+      let build = {
+        create: this.samples.data.value
+      };
       item['flyer'] = this.isFlyer;
-      item['data'] = [this.samples.detailContact()];
+      item['data'] = [this.samples.detailContact(), build];
       return this.getSocial(item);
     } else {
       return null;
@@ -84,13 +90,16 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
 
   sampleForm() {
     if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailCheck()) {
+       let build = {
+        create: this.samples.data.value
+      };
       let data = {
         selID: this.select.findSample().id,
         selName: this.select.findSample().name
       }
       let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;
-      item['data'] = [this.samples.detailContact(), data];
+      item['data'] = [this.samples.detailContact(), data, build];
       return this.getSocial(item);
     } else {
       return null;
