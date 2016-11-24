@@ -1,5 +1,5 @@
 import { DoCheck, OnInit } from '@angular/core';
-import { ItemSliding, NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import { DetailPage } from '../detail';
 import { BackandItemService, BackandItem } from '../../../providers';
