@@ -1,19 +1,18 @@
 import { DoCheck, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import { DetailPage } from '../detail';
-import { EbcProduct } from '../../shared';
-import { BackandService } from '../../../providers';
+import { BackandItemService, BackandItem } from '../../../providers';
 
 export class ItemBase implements DoCheck, OnInit {
   public dbTable: string;
+  public delete: boolean;
   public itemType: string;
-  public items: Array<EbcProduct>;
+  public items: Array<BackandItem>;
   public none: boolean;
+  public type: string;
 
-  constructor(public backand: BackandService, public nav: NavController) {
-
-  }
+  constructor(public backand: BackandItemService, public nav: NavController, public toast: ToastController) { }
 
   ngDoCheck() {
     if (this.items === undefined || this.items.length === 0) {
@@ -27,6 +26,24 @@ export class ItemBase implements DoCheck, OnInit {
     this.myItems();
   }
 
+  deleteToast() {
+    let del = this.toast.create({
+      message: `The ${this.type} has been deleted.`,
+      duration: 5000
+    })
+
+    del.present();
+  }
+
+  ebcDel(id: number) {
+    this.backand.deleteItem(this.dbTable, id)
+    .add(
+      () => {
+        this.deleteToast();
+        this.myItems();
+      });
+  }
+
   goTo(id: number) {
     let item = {
       index: id,
@@ -38,11 +55,6 @@ export class ItemBase implements DoCheck, OnInit {
   myItems() {
     let items = this.itemType;
     this.backand.getItems(items).subscribe(
-      data => {
-        this.items = data;
-      },
-      err => {
-        this.backand.errorHander(err);
-      });
+      data => this.items = data);
   }
 }

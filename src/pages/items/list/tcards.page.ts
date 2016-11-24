@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
-import { BackandService } from '../../../providers';
+import { BackandItemService } from '../../../providers';
 
 @Component({
 	selector: 'page-items',
@@ -10,12 +10,14 @@ import { BackandService } from '../../../providers';
 })
 
 export class TCardsPage extends ItemBase {
+	dbTable = 'templates';
+	delete = false;
+	itemType = 'TempCard';
 	title: string = 'Template Cards';
+	type = 'Card';
 
-	constructor(public backand: BackandService, public nav: NavController) {
-		super(backand, nav);
-		this.dbTable = 'templates';
-		this.itemType = 'TempCard';
+constructor(public backand: BackandItemService, public nav: NavController, public toast: ToastController) {
+		super(backand, nav, toast);
 	}
 
 	ngOnInit() {

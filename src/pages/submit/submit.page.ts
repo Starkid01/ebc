@@ -1,7 +1,7 @@
 import { AfterViewChecked, DoCheck, Component, ViewChild } from '@angular/core';
 import { ModalController, Slides } from 'ionic-angular';
 
-import { BackandService, PictureService } from '../../providers';
+import { PictureService } from '../../providers';
 import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 import { SubmitConfirm } from './submit-confirm.modal';
 
@@ -25,7 +25,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   slideOpts: Object = { initialSlide: 1 };
   invalidForm: boolean;
 
-  constructor(private backand: BackandService, private modal: ModalController, public pic: PictureService) {
+  constructor(private modal: ModalController, public pic: PictureService) {
 
   }
 

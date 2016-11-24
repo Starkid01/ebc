@@ -7,7 +7,7 @@ import { LoginPage } from '../../login';
 @Component({
   template: `
     <ion-list no-lines>
-      <button ion-item (click)="signOut()"><span color="danger">Sign Out <ion-icon name="log-out"></ion-icon></span></button>
+      <button ion-item (click)="signOut()"><span ion-text color="danger">Sign Out <ion-icon name="log-out"></ion-icon></span></button>
     </ion-list>
   `
 })

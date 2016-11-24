@@ -1,31 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 
-import { BackandService } from '../backand';
-
-interface EbcUser {
-  firstName?: string;
-  lastName?: string;
-  pic?: string;
-}
+import { BackandAuthService, BackandUser } from '../backand';
 
 @Injectable()
 export class UserService {
-  myUser: EbcUser;
+  myUser: BackandUser;
 
-  constructor(public events: Events, public backand: BackandService) {
+  constructor(public events: Events, public auth: BackandAuthService) {
 
   }
 
   getUser() {
-    this.backand.currentUser().subscribe(
+    this.auth.currentUser().subscribe(
       data => {
-        this.backand.authStatus = 'OK';
         let user = data[0];
         this.setUser(user);
-      },
-      err => {
-        this.backand.errorHander(err);
       });
   }
 

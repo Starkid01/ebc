@@ -3,7 +3,7 @@ import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 
-import { BackandService, UserService } from '../providers';
+import { BackandConfigService, UserService } from '../providers';
 import { LoginPage } from '../pages/login';
 import { SideMenu } from '../pages/shared';
 
@@ -15,7 +15,7 @@ export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage: Type<LoginPage> = LoginPage;
 
-  constructor(public platform: Platform, public back: BackandService, public events: Events, public local: Storage, public user: UserService) {
+  constructor(public platform: Platform, public config: BackandConfigService, public events: Events, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -27,20 +27,22 @@ export class MyApp implements OnInit {
   }
 
   ngOnInit() {
-    this.myEvents();
+    this.config.authCheck();
     this.authCheck();
+    this.myEvents();
   }
 
   authCheck() {
-    this.local.get('jwt').then(
+    this.storage.get('auth_token').then(
       jwt => {
         if (jwt) {
-          this.back.isAuth(jwt);
+          this.user.getUser();
           this.nav.setRoot(SideMenu);
         } else {
           this.nav.setRoot(LoginPage);
         }
-      })
+      }
+    )
   }
 
   myEvents() {

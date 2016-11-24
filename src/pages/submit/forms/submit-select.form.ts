@@ -1,8 +1,7 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { BackandService } from '../../../providers';
-import { EbcProduct } from '../../shared';
+import { BackandItemService, BackandItem } from '../../../providers';
 
 @Component({
   selector: 'ebc-select-form',
@@ -12,11 +11,11 @@ import { EbcProduct } from '../../shared';
 export class SelectForm implements DoCheck, OnInit {
 	@Input() flyer: boolean;
 
-  tempCards: Array<EbcProduct> = [];
-  tempFlyers: Array<EbcProduct> = [];
+  tempCards: Array<BackandItem> = [];
+  tempFlyers: Array<BackandItem> = [];
   tempView: string;
 
-  constructor(private nav: NavController, private backand: BackandService) {
+  constructor(private nav: NavController, private backand: BackandItemService) {
   }
 
   ngDoCheck() {
@@ -30,7 +29,7 @@ export class SelectForm implements DoCheck, OnInit {
   }
 
   findSample() {
-    let selected: EbcProduct;
+    let selected: BackandItem;
     if (this.flyer) {
       selected = this.tempFlyers.find(select => select.pic === this.tempView);
     } else if (!this.flyer) {

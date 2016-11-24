@@ -43,7 +43,7 @@
                 type="password"></ion-input>
             </ion-item>
             <div class="passErr">
-              <p color="danger" *ngIf="verify.errors">Passwords Don't Match</p>
+              <p ion-text color="danger" *ngIf="verify.errors">Passwords Don't Match</p>
             </div>
             <div class="passErr">
               <p ion-text color="danger" *ngIf="createError">User Already Taken Please Try Again</p>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
-import { BackandService } from '../../../providers';
+import { BackandItemService } from '../../../providers';
 
 @Component({
 	selector: 'page-items',
@@ -10,12 +10,14 @@ import { BackandService } from '../../../providers';
 })
 
 export class MyFlysPage extends ItemBase {
+		dbTable = 'items';
+		delete = true;
+		itemType = 'MyFlyer';
 		title: string = 'My Flyers';
+		type = 'Flyer';
 
-	constructor(public backand: BackandService, public nav: NavController) {
-		super(backand, nav);
-		this.dbTable = 'items';
-		this.itemType = 'MyFlyer';
+	constructor(public backand: BackandItemService, public nav: NavController, public toast: ToastController) {
+		super(backand, nav, toast);
 	}
 
 	ngOnInit() {

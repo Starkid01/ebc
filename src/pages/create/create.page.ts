@@ -2,7 +2,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import { BackandService, FormHandler } from '../../providers';
+import { BackandAuthService, FormHandler } from '../../providers';
 
 @Component({
   selector: 'page-create',
@@ -19,7 +19,7 @@ export class CreatePage {
   password: FormControl = new FormControl('', Validators.required);
   confirmPassword: FormControl = new FormControl('', Validators.required);
 
-  constructor(private toast: ToastController, private nav: NavController, public backand: BackandService, public form: FormHandler) {
+  constructor(private toast: ToastController, private nav: NavController, public auth: BackandAuthService, public form: FormHandler) {
     this.verify = new FormGroup({
       password: this.password,
       confirmPassword: this.confirmPassword
@@ -32,10 +32,10 @@ export class CreatePage {
     });
   }
 
-  accountMade() {
+  accountMade(mess) {
     let made = this.toast.create({
-      message: 'Your account has been Created Please SignIn',
-      duration: 3000
+      message: mess,
+      duration: 5000
     });
 
     made.onDidDismiss(() => {
@@ -62,19 +62,14 @@ export class CreatePage {
       confirmPassword: pass.confirmPassword
     };
 
-    this.backand.signUp(user).subscribe(
+    this.auth.signUp(user).subscribe(
       data => {
-        console.log(data);
-      },
-      err => {
-        this.backand.errorHander(err);
-        this.createError = true;
+        this.createError = false;
+        this.accountMade(data['message']);
         this.clearAll();
       },
-      () => {
-        console.log('User Created');
-        this.createError = false;
-        this.accountMade();
+      err => {
+        this.createError = true;
         this.clearAll();
       });
   }

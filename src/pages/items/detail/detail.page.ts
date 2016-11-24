@@ -4,8 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
 import { AppAvailability, Contacts, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
 
-import { BackandService, FormHandler } from '../../../providers';
-import { EbcProduct } from '../../shared';
+import { BackandItemService, FormHandler, BackandItem } from '../../../providers';
 
 @Component({
   selector: 'page-detail',
@@ -20,7 +19,7 @@ export class DetailPage implements OnInit {
   emailText: FormControl = new FormControl('');
   field: string;
   hide: boolean = false;
-  item: EbcProduct;
+  item: BackandItem;
   itemName: string;
   media: SafeResourceUrl;
   message: string = '';
@@ -33,7 +32,7 @@ export class DetailPage implements OnInit {
   smsText: FormControl = new FormControl('');
   type: string;
 
-  constructor(public safe: DomSanitizer, public backand: BackandService,
+  constructor(public safe: DomSanitizer, public backand: BackandItemService,
     public params: NavParams, public form: FormHandler,
     private platform: Platform, private render: Renderer,
     private toast: ToastController) {
@@ -176,7 +175,7 @@ export class DetailPage implements OnInit {
         this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
       },
       err => {
-        this.backand.errorHander(err);
+        console.log(err);
       },
       () => {
         this.isType();

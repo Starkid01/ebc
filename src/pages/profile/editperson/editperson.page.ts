@@ -2,7 +2,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
-import { BackandService, FormHandler, UserService, PictureService } from '../../../providers';
+import { BackandAuthService, BackandItemService, FormHandler, UserService, PictureService } from '../../../providers';
 
 @Component({
   selector: 'page-edit',
@@ -22,7 +22,12 @@ export class EditPage implements DoCheck {
   firstName: FormControl = new FormControl('');
   lastName: FormControl = new FormControl('');
 
-  constructor(public toast: ToastController, public backand: BackandService, public form: FormHandler, public user: UserService, public pic: PictureService) {
+  constructor(public auth: BackandAuthService,
+    public backand: BackandItemService,
+    public form: FormHandler,
+    public user: UserService,
+    public pic: PictureService,
+    public toast: ToastController) {
     this.editForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName
@@ -56,24 +61,28 @@ export class EditPage implements DoCheck {
 
   editPass(pass) {
     let newPass = {
-      oldPassword: pass.value.oldPass,
-      newPassword: pass.value.verify.password
+      old: pass.value.oldPass,
+      new: pass.value.verify.password
     };
 
-    this.backand.updatePass(newPass).subscribe(
+    this.auth.changePassword(newPass.old, newPass.new).subscribe(
       data => {
-        console.log(data);
+        this.form.clearForm(pass.controls.verify);
+        this.form.clearField(pass.controls.oldPass);
+        this.profileUpdated('Password');
       },
       err => {
-        console.log(err);
-        this.form.clearForm(pass.controls.verify);
-        this.form.clearField(pass.controls.oldPass);
-      },
-      () => {
-        this.profileUpdated('Password');
-        this.form.clearForm(pass.controls.verify);
-        this.form.clearField(pass.controls.oldPass);
+        this.errorToast(err._body);
       });
+  }
+
+  errorToast(message) {
+    let errMess =  this.toast.create({
+      message: message,
+      duration: 5000
+    });
+
+    errMess.present();
   }
 
   profileUpdated(action: string) {

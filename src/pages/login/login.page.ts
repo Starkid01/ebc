@@ -2,7 +2,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
 import { AlertController, App, ToastController } from 'ionic-angular';
 
-import { BackandService, FormHandler } from '../../providers';
+import { BackandAuthService, BackandConfigService, FormHandler } from '../../providers';
 import { CreatePage } from '../create';
 import { SideMenu } from '../shared';
 
@@ -21,7 +21,8 @@ export class LoginPage {
   constructor(public app: App,
     private alert: AlertController,
     private toast: ToastController,
-    public backand: BackandService,
+    public auth: BackandAuthService,
+    public config: BackandConfigService,
     public form: FormHandler) {
     this.loginForm = new FormGroup({
       username: this.username,
@@ -63,15 +64,8 @@ export class LoginPage {
           handler: data => {
             let e = data.username;
             console.log(e);
-            this.backand.requestReset(e).subscribe(
-              data => console.log('Reset Request Sent'),
-              err => {
-                this.backand.errorHander(err);
-              },
-              () => {
-                this.resetVerify();
-                console.log('Check Your Email')
-              });
+            this.auth.requestResetPassword(e).subscribe(
+              data => this.resetVerify());
           }
         }
       ]
@@ -94,20 +88,12 @@ export class LoginPage {
   signIn(login) {
     let auth = login.value;
 
-    this.backand.signIn(auth.username, auth.password).subscribe(
+    this.auth.getAuthToken(auth.username, auth.password).subscribe(
       data => {
-        this.backand.authStatus = 'OK';
-        this.backand.authError = false;
-        this.backand.setTokenHeader(data);
-      },
-      err => {
-        this.backand.errorHander(err);
-        this.clearAll();
-      },
-      () => {
-        console.log('Finish Auth');
         this.loggedIn();
         this.clearAll();
-      });
+        console.log('what');
+      },
+      err => this.clearAll());
   }
 }

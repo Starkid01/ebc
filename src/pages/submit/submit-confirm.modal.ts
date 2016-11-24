@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ToastController, ViewController } from 'ionic-angular';
 
-import { BackandService } from '../../providers';
+import { BackandItemService } from '../../providers';
 
 interface Contact {
 	bodyName?: string;
@@ -39,7 +39,7 @@ export class SubmitConfirm implements OnInit {
 	socialData: Social = {};
 	createData: Object = {};
 
-	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
+	constructor(private backand: BackandItemService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
 	}
 
@@ -73,12 +73,12 @@ export class SubmitConfirm implements OnInit {
 	}
 
 	finalSubmit() {
-    let itemData = this.formData;
-    itemData['data'] = JSON.stringify(this.extra);
+		let itemData = this.formData;
+		itemData['data'] = JSON.stringify(this.extra);
 
-		this.backand.addItem(itemData).subscribe(
-      data => console.log(data, itemData),
-      err => this.backand.errorHander(err),
-      () => this.completeSubmit());
-  }
+		this.backand.addItem('items', itemData).add(
+			() => {
+				this.completeSubmit()
+			});
+	}
 }
