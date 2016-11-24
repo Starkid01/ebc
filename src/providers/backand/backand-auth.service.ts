@@ -19,15 +19,9 @@ export class BackandAuthService {
 
     let $obs = this.http.post(url, creds, {
       headers: this.config.authHeader
-    }).map(res => res);
-
-    $obs.subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.error(err);
-      },
+    }).map(res => res).do(
+      data => console.log(data),
+      err => this.config.errorHander(err),
       () => console.log('Finish Change Password'));
 
     return $obs;
@@ -45,7 +39,7 @@ export class BackandAuthService {
       headers: this.config.authHeader
     }).map(res => res.json());
 
-    $obs.subscribe(
+    $obs.do(
       data => console.log(data),
       err => this.config.errorHander(err),
       () => console.log('Current User')
@@ -66,15 +60,9 @@ export class BackandAuthService {
 
     let $obs = this.http.post(url, creds, {
       headers: header
-    }).map(res => this.getToken(res));
-
-    $obs.subscribe(
-      data => {
-        this.setTokenHeader(data);
-      },
-      err => {
-        this.config.errorHander(err);
-      },
+    }).map(res => this.getToken(res)).do(
+      data => this.setTokenHeader(data),
+      err => this.config.errorHander(err),
       () => console.log('Finish Auth'));
 
     return $obs;
@@ -94,15 +82,9 @@ export class BackandAuthService {
 
     let $obs = this.http.post(url, creds, {
       headers: header
-    }).map(res => this.getToken(res));
-
-    $obs.subscribe(
-      data => {
-        this.setTokenHeader(data);
-      },
-      err => {
-        this.config.errorHander(err);
-      },
+    }).map(res => this.getToken(res)).do(
+      data => this.setTokenHeader(data),
+      err => this.config.errorHander(err),
       () => console.log('Finish Re-Auth'));
 
     return $obs;
@@ -120,15 +102,9 @@ export class BackandAuthService {
 
     let $obs = this.http.post(url, creds, {
       headers: header
-    }).map(res => res);
-
-    $obs.subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        this.config.errorHander(err);
-      },
+    }).map(res => res).do(
+      data => console.log(data),
+      err => this.config.errorHander(err),
       () => console.log('Finish Request Reset Password'));
 
     return $obs;
@@ -142,15 +118,9 @@ export class BackandAuthService {
 
     let $obs = this.http.post(url, creds, {
       headers: header
-    }).map(res => res.json());
-
-    $obs.subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        this.config.errorHander(err);
-      },
+    }).map(res => res.json()).do(
+      data => console.log(data),
+      err => this.config.errorHander(err),
       () => console.log('Finish Sign Up'));
 
     return $obs;

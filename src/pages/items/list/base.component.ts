@@ -1,5 +1,5 @@
 import { DoCheck, OnInit } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { ItemSliding, NavController, ToastController } from 'ionic-angular';
 
 import { DetailPage } from '../detail';
 import { BackandItemService, BackandItem } from '../../../providers';
@@ -37,7 +37,7 @@ export class ItemBase implements DoCheck, OnInit {
 
   ebcDel(id: number) {
     this.backand.deleteItem(this.dbTable, id)
-    .add(
+    .subscribe(
       () => {
         this.deleteToast();
         this.myItems();

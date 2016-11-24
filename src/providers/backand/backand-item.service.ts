@@ -12,15 +12,14 @@ export class BackandItemService {
   public addItem(list, data) {
     let url = `${this.baseUrl}/${list}`;
     let added = JSON.stringify(data);
-    
+
     this.config.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     let $obs = this.http.post(url, added, {
       headers: this.config.authHeader
-   }).map(res => res.json()).subscribe(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
-      () => console.log('Items')
-    )
+      () => console.log('Items'));
 
     return $obs;
   }
@@ -31,11 +30,10 @@ export class BackandItemService {
     this.config.authHeader.append('Content-Type', 'application/x-www-form-urlencoded');
     let $obs = this.http.delete(url, {
       headers: this.config.authHeader
-    }).map(res => res.json()).subscribe(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
-      () => console.log('Items')
-    );
+      () => console.log('Items'));
 
     return $obs;
   }
@@ -45,14 +43,10 @@ export class BackandItemService {
 
     let $obs = this.http.get(url, {
       headers: this.config.authHeader
-    })
-    .map(res => res.json());
-
-    $obs.subscribe(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
-      () => console.log('Items')
-    )
+      () => console.log('Items'));
 
     return $obs;
   }
@@ -62,28 +56,22 @@ export class BackandItemService {
 
     let $obs = this.http.get(url, {
       headers: this.config.authHeader
-   }).map(res => res.json());
-
-    $obs.subscribe(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
-      () => console.log('Items')
-    );
+      () => console.log('Items'));
 
     return $obs;
   }
 
   public getItems(item: string) {
     const itemQuery = `${this.config.apiUrl}/1/query/data/${item}`;
-     let $obs =  this.http.get(itemQuery, {
+    let $obs = this.http.get(itemQuery, {
       headers: this.config.authHeader
-    }).map(res => res.json());
-
-    $obs.subscribe(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
-      () => console.log('Items')
-    );
+      () => console.log('Items'));
 
     return $obs;
   }
@@ -94,13 +82,10 @@ export class BackandItemService {
 
     let $obs = this.http.put(url, update, {
       headers: this.config.authHeader
-    }).map(res => res);
-    
-    $obs.subscribe(
+    }).map(res => res).do(
       data => console.log(data),
       err => this.config.errorHander(err),
-      () => console.log('Items')
-    )
+      () => console.log('Items'));
 
     return $obs;
   }
