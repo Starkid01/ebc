@@ -3,6 +3,10 @@ import { NavParams, ToastController, ViewController } from 'ionic-angular';
 
 import { BackandItemService } from '../../providers';
 
+interface Build {
+	create?: string;
+}
+
 interface Contact {
 	bodyName?: string;
 	phone?: string;
@@ -37,7 +41,7 @@ export class SubmitConfirm implements OnInit {
 	formData: Form = {};
 	selectData: Object = {};
 	socialData: Social = {};
-	createData: Object = {};
+	createData: Build = {};
 
 	constructor(private backand: BackandItemService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
