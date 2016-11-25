@@ -32,17 +32,19 @@ export class BackandConfigService {
   authCheck() {
     this.storage.get('auth_token').then(
       token => {
-        let storedToken = token;
+        let storedToken = JSON.parse(token);
 
         if (storedToken) {
-          this.authToken = JSON.parse(storedToken);
-          this.authType = this.authToken.header_name === 'Token' ? 'Token' : 'Anonymous';
+          this.authToken = storedToken;
+          this.authType = this.authToken.header_name === 'Authorized' ? 'Token' : 'Anonymous';
           this.authStatus = 'OK';
           if (this.authType == 'Token') {
-            this.username = JSON.parse(localStorage.getItem('username')).username;
+            this.storage.get('username').then(
+              user => this.username = user)
           }
-        } else {
-          this.authToken = { header_name: '', header_value: '' };
+        } else if (storedToken === null) {
+          console.log('Not');
+          this.authToken = { header_name: 'Authorized', header_value: 'Unauthorized' };
           this.authStatus = 'Not Authorized';
         }
       });
@@ -50,7 +52,7 @@ export class BackandConfigService {
 
   public get authHeader() {
     var authHeader = new Headers();
-    authHeader.append(this.authToken.header_name, this.authToken.header_value);
+    authHeader.set(this.authToken.header_name, this.authToken.header_value);
     return authHeader;
   }
 
@@ -59,6 +61,7 @@ export class BackandConfigService {
       this.storage.clear();
       this.events.publish('No Auth');
       this.is_auth_error = false;
+      this.authStatus = 'Not Authorized';
     }
     this.authStatus = this.extractErrorMessage(res);
     this.logError(res);

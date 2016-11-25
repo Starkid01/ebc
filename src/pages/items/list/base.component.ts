@@ -2,7 +2,7 @@ import { DoCheck, OnInit } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
 import { DetailPage } from '../detail';
-import { BackandItemService, BackandItem } from '../../../providers';
+import { BackandItemService, BackandItem, BackandConfigService } from '../../../providers';
 
 export class ItemBase implements DoCheck, OnInit {
   public dbTable: string;
@@ -12,7 +12,7 @@ export class ItemBase implements DoCheck, OnInit {
   public none: boolean;
   public type: string;
 
-  constructor(public backand: BackandItemService, public nav: NavController, public toast: ToastController) { }
+  constructor(public config: BackandConfigService, public backand: BackandItemService, public nav: NavController, public toast: ToastController) { }
 
   ngDoCheck() {
     if (this.items === undefined || this.items.length === 0) {

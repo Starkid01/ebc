@@ -18,7 +18,7 @@
       <ion-list no-lines class="field">
         <ion-item>* Fields are Required</ion-item>
         <div *ngSwitchCase="'sample'">
-          <ion-item>Use this Form to Use and EBC Template Based <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
+          <ion-item class="wrap">Use this Form to Use and EBC Template Based <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
          <ebc-select-form [flyer]="isFlyer"></ebc-select-form>
           <ion-slides #steps [options]="slideOpts">
             <ion-slide>
@@ -43,7 +43,7 @@
           </ion-slides>
         </div>
         <div *ngSwitchCase="'exist'">
-          <ion-item>Use this Form to Upload a Pre-Made <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
+          <ion-item class="wrap">Use this Form to Upload a Pre-Made <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
          <ion-slides #steps [options]="slideOpts">
             <ion-slide>
               <div padding>
@@ -67,7 +67,7 @@
           </ion-slides>
         </div>
         <div *ngSwitchCase="'new'">
-          <ion-item>Use this Form to Create a Custom EBC <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
+          <ion-item class="wrap">Use this Form to Create a Custom EBC <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
          <ion-slides #steps [options]="slideOpts">
             <ion-slide>
               <div padding>

@@ -142,12 +142,13 @@ export class BackandAuthService {
     this.config.authStatus = 'OK';
     this.config.authToken.header_name = 'AnonymousToken';
     this.config.authToken.header_value = this.config.anonymousToken;
-    localStorage.setItem('username', 'Anonymous');
+    this.storage.set('username', 'Anonymous');
     this.storeAuthToken(this.config.authToken);
   }
 
   private setTokenHeader(jwt) {
     if (jwt) {
+      this.config.authStatus = 'OK';
       this.config.authToken.header_name = 'Authorization';
       this.config.authToken.header_value = 'Bearer ' + jwt;
       this.storeAuthToken(this.config.authToken);
@@ -156,6 +157,5 @@ export class BackandAuthService {
 
   private storeAuthToken(token) {
     this.storage.set('auth_token', JSON.stringify(token));
-    this.config.authCheck();
   }
 }

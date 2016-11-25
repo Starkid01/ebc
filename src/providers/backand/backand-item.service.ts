@@ -46,9 +46,7 @@ export class BackandItemService {
 
     let $obs = this.http.get(url, {
       headers: headers
-    }).map(res => res.json())
-    
-    $obs.do(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
       () => console.log('Items'));
@@ -62,9 +60,7 @@ export class BackandItemService {
 
     let $obs = this.http.get(url, {
       headers: headers
-    }).map(res => res.json())
-    
-    $obs.do(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
       () => console.log('Items'));
@@ -78,9 +74,7 @@ export class BackandItemService {
 
     let $obs = this.http.get(itemQuery, {
       headers: headers
-    }).map(res => res.json())
-    
-    $obs.subscribe(
+    }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
       () => console.log('Items'));

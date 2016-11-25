@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
-import { BackandItemService } from '../../../providers';
+import { BackandItemService, BackandConfigService } from '../../../providers';
 
 @Component({
 	selector: 'page-items',
@@ -16,8 +16,8 @@ export class TFlysPage extends ItemBase {
 	title: string = 'Template Flyers';
 	type = 'Flyer';
 
-	constructor(public backand: BackandItemService, public nav: NavController, public toast: ToastController) {
-		super(backand, nav, toast);
+	constructor(public config: BackandConfigService, public backand: BackandItemService, public nav: NavController, public toast: ToastController) {
+		super(config, backand, nav, toast);
 	}
 
 	ngOnInit() {

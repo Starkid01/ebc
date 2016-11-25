@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { IonicModule } from 'ionic-angular';
 
 import { DetailPage } from './detail';
@@ -30,9 +28,7 @@ import {
 		TCardsPage,
 		TFlysPage
 	],
-	imports: [ 
-		CommonModule,
-		HttpModule,
+	imports: [
 		IonicModule.forRoot(MyStuff),
 		NavModule
 	 ],
