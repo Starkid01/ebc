@@ -1,6 +1,5 @@
 import { Component, Type } from '@angular/core';
 
-import { UserService } from '../../../providers';
 import { MyStuff, Samples, Templates } from '../../items';
 import { PersonPage } from '../../profile';
 import { SubmitPage } from '../../submit';
@@ -20,8 +19,7 @@ export class SideMenu {
   homePage: Type<MyStuff> = MyStuff;
 
 
-  constructor(private user: UserService) {
-    this.user.getUser();
+  constructor() {
     this.pages = [
       { title: 'EBC Samples', component: Samples },
       { title: 'My Stuff', component: MyStuff },

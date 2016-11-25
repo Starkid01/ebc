@@ -2,7 +2,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
 import { AlertController, App, ToastController } from 'ionic-angular';
 
-import { BackandAuthService, BackandConfigService, FormHandler } from '../../providers';
+import { BackandAuthService, BackandConfigService, UserService, FormHandler } from '../../providers';
 import { CreatePage } from '../create';
 import { SideMenu } from '../shared';
 
@@ -19,11 +19,12 @@ export class LoginPage {
   signed: boolean;
 
   constructor(public app: App,
-    private alert: AlertController,
-    private toast: ToastController,
     public auth: BackandAuthService,
     public config: BackandConfigService,
-    public form: FormHandler) {
+    public form: FormHandler,
+    public user: UserService,
+    private alert: AlertController,
+    private toast: ToastController) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
@@ -92,8 +93,8 @@ export class LoginPage {
       data => {
         this.loggedIn();
         this.clearAll();
-        console.log('what');
       },
-      err => this.clearAll());
+      err => this.clearAll(),
+      () => this.user.getUser());
   }
 }

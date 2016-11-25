@@ -16,9 +16,10 @@ export class BackandAuthService {
       oldPassword: oldPassword,
       newPassword: newPassword
     });
+    let headers = this.config.authHeader;
 
     let $obs = this.http.post(url, creds, {
-      headers: this.config.authHeader
+      headers: headers
     }).map(res => res).do(
       data => console.log(data),
       err => this.config.errorHander(err),
@@ -34,9 +35,11 @@ export class BackandAuthService {
   }
 
   public currentUser() {
-    const userQuery = `${this.config.apiUrl}/1/query/data/CurrentUser`;
+    let userQuery = `${this.config.apiUrl}/1/query/data/CurrentUser`;
+    let headers = this.config.authHeader;
+
     let $obs = this.http.get(userQuery, {
-      headers: this.config.authHeader
+      headers: headers
     }).map(res => res.json());
 
     $obs.do(
@@ -54,12 +57,11 @@ export class BackandAuthService {
       `&appName=${this.config.appName}` +
       `&grant_type=password`;
     let url = this.config.apiUrl + this.config.urls.token;
-    let header = new Headers();
+    let headers = new Headers();
 
-    header.append('Content-Type', 'application/x-www-form-urlencoded');
-
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let $obs = this.http.post(url, creds, {
-      headers: header
+      headers: headers
     }).map(res => this.getToken(res)).do(
       data => this.setTokenHeader(data),
       err => this.config.errorHander(err),
@@ -76,12 +78,11 @@ export class BackandAuthService {
       `&grant_type=password`;
     console.log(creds);
     let url = this.config.apiUrl + this.config.urls.token;
-    let header = new Headers();
+    let headers = new Headers();
 
-    header.append('Content-Type', 'application/x-www-form-urlencoded');
-
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let $obs = this.http.post(url, creds, {
-      headers: header
+      headers: headers
     }).map(res => this.getToken(res)).do(
       data => this.setTokenHeader(data),
       err => this.config.errorHander(err),
@@ -96,12 +97,12 @@ export class BackandAuthService {
       email: email,
       appName: this.config.appName
     });
-    let header = new Headers();
-    header.append('SignUpToken', this.config.signUpToken);
-    header.append('Content-Type', 'application/x-www-form-urlencoded');
+    let headers = new Headers();
+    headers.append('SignUpToken', this.config.signUpToken);
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     let $obs = this.http.post(url, creds, {
-      headers: header
+      headers: headers
     }).map(res => res).do(
       data => console.log(data),
       err => this.config.errorHander(err),
@@ -113,11 +114,11 @@ export class BackandAuthService {
   public signUp(data) {
     let url = this.config.apiUrl + this.config.urls.signup;
     let creds = JSON.stringify(data);
-    let header = new Headers();
-    header.append('SignUpToken', this.config.signUpToken);
+    let headers = new Headers();
+    headers.append('SignUpToken', this.config.signUpToken);
 
     let $obs = this.http.post(url, creds, {
-      headers: header
+      headers: headers
     }).map(res => res.json()).do(
       data => console.log(data),
       err => this.config.errorHander(err),
@@ -138,8 +139,8 @@ export class BackandAuthService {
   }
 
   private setAnonymousHeader() {
-    this.config.authStatus = "OK";
-    this.config.authToken.header_name = "AnonymousToken";
+    this.config.authStatus = 'OK';
+    this.config.authToken.header_name = 'AnonymousToken';
     this.config.authToken.header_value = this.config.anonymousToken;
     localStorage.setItem('username', 'Anonymous');
     this.storeAuthToken(this.config.authToken);
@@ -147,8 +148,8 @@ export class BackandAuthService {
 
   private setTokenHeader(jwt) {
     if (jwt) {
-      this.config.authToken.header_name = "Authorization";
-      this.config.authToken.header_value = "Bearer " + jwt;
+      this.config.authToken.header_name = 'Authorization';
+      this.config.authToken.header_value = 'Bearer ' + jwt;
       this.storeAuthToken(this.config.authToken);
     }
   }
