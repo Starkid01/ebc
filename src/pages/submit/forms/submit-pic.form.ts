@@ -7,15 +7,13 @@ import { PictureService, UserService } from '../../../providers';
 	templateUrl: 'submit-pic.form.html'
 })
 export class PicForm {
-	art: string;
-	hasArt: boolean = false;
+	art: string = '';
 
 	constructor(public pic: PictureService, public user: UserService) {
 
 	}
 
 	getArt() {
-		this.hasArt = false;
 		return this.art;
 	}
 
@@ -41,6 +39,5 @@ export class PicForm {
     console.log(image);
     this.pic.picSaved();
 		this.art = image;
-		this.hasArt = true;
   }
 }

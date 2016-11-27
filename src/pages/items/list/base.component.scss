@@ -13,7 +13,9 @@ page-items {
     }
 
     .desc {
+      max-height: 4rem;
       white-space: normal;
+      overflow: hidden;
     }
 
     .myItem {

@@ -35,7 +35,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
 
   ngDoCheck() {
     this.isValid = this.invalidForm;
-    if(this.subform !== undefined) {
+    if (this.subform !== undefined) {
       this.loaded = true;
     }
   }
@@ -64,9 +64,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     if (this.social.socialAdded()) {
       item['data'] = Array.prototype.concat(this.social.socialData(), input['data']);
     }
-    if (this.pics.hasArt) {
-      item['pic'] = this.pics.getArt();
-    }
+    item['pic'] = this.pics.getArt();
     return item;
   }
 
@@ -90,7 +88,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
 
   sampleForm() {
     if (this.select.selectedValid() && this.samples.itemForm.valid && this.samples.detailCheck()) {
-       let build = {
+      let build = {
         create: this.samples.data.value
       };
       let data = {

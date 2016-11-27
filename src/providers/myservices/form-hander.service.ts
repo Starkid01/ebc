@@ -20,7 +20,7 @@ export class FormHandler {
     if(c.dirty) {
       isEmail = !c.value.match(addy);
     }
-    return isEmail ? { 'invalidEmail': true } : null;
+    return isEmail ? { invalidEmail: true } : null;
   }
 
   phoneValidator(c: AbstractControl) {
@@ -29,7 +29,7 @@ export class FormHandler {
     if(c.dirty) {
       isPhone = !c.value.match(numberEx);
     }
-    return isPhone ? { 'invalidPhone': true } : null;
+    return isPhone ? { invalidPhone: true } : null;
   }
 
   clearField(c: FormControl) {

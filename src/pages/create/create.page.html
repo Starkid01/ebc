@@ -19,7 +19,8 @@
             <ion-input clearInput formControlName="email" id="username" name="username" placeholder="example@mail.com" type="email"></ion-input>
           </ion-item>
           <div class="passErr">
-            <p ion-text color="danger" *ngIf="email.errors && email.dirty">Please Provide a Valid Email</p>
+            <p ion-text color="danger" *ngIf="email.hasError('invalidEmail') && email.dirty">Please Provide a Valid Email</p>
+            <p ion-text color="danger" *ngIf="createError">User Already Taken Please Try Again</p>
           </div>
           <div class="myName">
             <ion-item>
@@ -37,17 +38,15 @@
               <ion-input clearInput formControlName="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 type="password"></ion-input>
             </ion-item>
+            <div class="passErr">
+              <p ion-text color="danger" *ngIf="password.hasError('minlength')">Password must be at least 6 characters</p>
+              <p ion-text color="danger" *ngIf="verify.hasError('notEqual')">Passwords Don't Match</p>
+            </div>
             <ion-item>
               <ion-label stacked>Confirm Password</ion-label>
               <ion-input clearInput formControlName="confirmPassword" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 type="password"></ion-input>
             </ion-item>
-            <div class="passErr">
-              <p ion-text color="danger" *ngIf="verify.errors">Passwords Don't Match</p>
-            </div>
-            <div class="passErr">
-              <p ion-text color="danger" *ngIf="createError">User Already Taken Please Try Again</p>
-            </div>
           </div>
         </ion-list>
         <div class="createBtn">
@@ -59,9 +58,8 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-
 <ion-footer>
   <ion-toolbar>
-    <ion-note ion-text color="mygray"  padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
+    <ion-note ion-text color="mygray" padding>&copy;&thinsp;2016 by EBC: Electronic Business Card</ion-note>
   </ion-toolbar>
 </ion-footer>

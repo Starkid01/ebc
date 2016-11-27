@@ -13,10 +13,10 @@ export class CreatePage {
   createError: boolean;
   createForm: FormGroup;
   verify: FormGroup;
-  email: FormControl = new FormControl('', Validators.compose([Validators.required, this.form.emailValidator]));
+  email: FormControl = new FormControl('', [Validators.required, this.form.emailValidator]);
   firstName: FormControl = new FormControl('', Validators.required);
   lastName: FormControl = new FormControl('', Validators.required);
-  password: FormControl = new FormControl('', Validators.required);
+  password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmPassword: FormControl = new FormControl('', Validators.required);
 
   constructor(private toast: ToastController, private nav: NavController, public auth: BackandAuthService, public form: FormHandler) {
