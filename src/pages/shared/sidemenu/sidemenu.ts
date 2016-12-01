@@ -22,7 +22,7 @@ export class SideMenu {
   constructor() {
     this.pages = [
       { title: 'EBC Samples', component: Samples },
-      { title: 'My Stuff', component: MyStuff },
+      { title: 'My EBC', component: MyStuff },
       { title: 'My Profile', component: PersonPage },
       { title: 'Templates', component: Templates },
       { title: 'Submit Item', component: SubmitPage }

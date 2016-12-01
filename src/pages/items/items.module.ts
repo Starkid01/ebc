@@ -6,6 +6,7 @@ import { MyStuff } from './mystuff.tabs';
 import { NavModule } from '../shared/nav';
 import { Samples } from './samples.tabs';
 import { Templates } from './templates.tabs';
+import { ShareModalComponent } from './share-modal';
 import {
 	MyCardsPage,
 	MyFlysPage,
@@ -25,6 +26,7 @@ import {
 		MyFlysPage,
 		SCardsPage,
 		SFlysPage,
+		ShareModalComponent,
 		TCardsPage,
 		TFlysPage
 	],
@@ -41,6 +43,7 @@ import {
 		MyFlysPage,
 		SCardsPage,
 		SFlysPage,
+		ShareModalComponent,
 		TCardsPage,
 		TFlysPage
 	]

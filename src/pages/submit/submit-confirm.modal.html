@@ -8,7 +8,6 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-grid padding class="confirm">
     <ion-row class="head">
@@ -22,14 +21,13 @@
         <ion-checkbox color="favorite" [(ngModel)]="formData.flyer"></ion-checkbox>
       </ion-col>
     </ion-row>
-		<ion-row>
+    <ion-row>
       <ion-col><strong>Your Image:</strong>
         <ion-thumbnail>
           <img [src]="formData?.pic" />
         </ion-thumbnail>
       </ion-col>
     </ion-row>
-		<hr>
     <ion-row>
       <ion-col><strong>Create Info:</strong> {{createData?.create}}</ion-col>
     </ion-row>
@@ -60,6 +58,17 @@
       <ion-col><strong>Spotify:</strong> {{socialData?.spotify}}</ion-col>
       <ion-col><strong>SoundCloud:</strong> {{socialData?.soundCloud}}</ion-col>
       <ion-col><strong>LinkedIn:</strong> {{socialData?.linkedIn}}</ion-col>
+    </ion-row>
+    <hr>
+    <ion-row class="head">
+      <h3 ion-text color="favorite">Template Info</h3>
+    </ion-row>
+    <ion-row>
+      <ion-col><strong>Template:</strong><br>
+      {{tempData?.selName}}</ion-col>
+      <ion-col *ngIf="template">
+        <ion-thumbnail><img [src]="tempData?.selImg" /></ion-thumbnail>
+      </ion-col>
     </ion-row>
     <div class="btns">
       <button ion-button color="danger" (click)="close()">Cancel</button>

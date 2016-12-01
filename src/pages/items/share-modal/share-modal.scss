@@ -1,0 +1,25 @@
+share-modal {
+  @include heading;
+  @include inputs;
+  .desc {
+    margin-top: 1rem;
+  }
+  .messForm {
+    ion-item {
+      background: rgba(255, 255, 255, 0);
+    }
+    .field {
+      padding-left: 1.1rem;
+      padding-right: .7rem;
+    }
+    .formBtn {
+      padding: 2rem;
+    }
+  }
+  .notAvail {
+    border: double .6rem map-get($colors, danger);
+    .mess {
+      text-align: center;
+    }
+  }
+}

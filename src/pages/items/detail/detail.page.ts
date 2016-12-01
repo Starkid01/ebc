@@ -4,7 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
 import { AppAvailability, Contacts, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
 
-import { BackandItemService, FormHandler, BackandItem } from '../../../providers';
+import { FormHandler, BackandItem } from '../../../providers';
 
 @Component({
   selector: 'page-detail',
@@ -32,7 +32,7 @@ export class DetailPage implements OnInit {
   smsText: FormControl = new FormControl('');
   type: string;
 
-  constructor(public safe: DomSanitizer, public backand: BackandItemService,
+  constructor(public safe: DomSanitizer,
     public params: NavParams, public form: FormHandler,
     private platform: Platform, private render: Renderer,
     private toast: ToastController) {
@@ -166,27 +166,16 @@ export class DetailPage implements OnInit {
   }
 
   itemDetail() {
-    let obj = this.params.get('table');
-    let id = this.params.get('index');
-
-    this.backand.getItem(obj, id).subscribe(
-      data => {
-        this.item = data;
-        this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        this.isType();
-        this.isDisable();
-        this.opened = true;
-      });
+    this.item = this.params.data;
+    this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
+    this.isType();
+    this.isDisable();
+    this.opened = true;
   }
 
   sendEmail(form) {
     let myInput = form.value;
-    let link: string  = `${this.ebcUrl}${this.item['id']}`;
+    let link: string = `${this.ebcUrl}${this.item['id']}`;
     let myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
 
     SocialSharing.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
@@ -205,10 +194,10 @@ export class DetailPage implements OnInit {
 
   sendSms(form) {
     let mySms = form.value;
-    let link: string  = `${this.ebcUrl}${this.item['id']}`;
+    let link: string = `${this.ebcUrl}${this.item['id']}`;
     let body = `${mySms['smsText']} ${link}`;
 
-     SocialSharing.shareViaSMS(body, mySms.phone).then(
+    SocialSharing.shareViaSMS(body, mySms.phone).then(
       data => this.sentMsg('SMS Text'),
       err => console.log(err, 'Fail'));
   }

@@ -43,7 +43,6 @@ export class BackandConfigService {
               user => this.username = user)
           }
         } else if (storedToken === null) {
-          console.log('Not');
           this.authToken = { header_name: 'Authorized', header_value: 'Unauthorized' };
           this.authStatus = 'Not Authorized';
         }

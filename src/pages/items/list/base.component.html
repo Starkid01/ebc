@@ -5,7 +5,7 @@
 <ion-content class="myitems">
   <div *ngIf="none" padding>
     <h2 ion-text color="favorite">Sorry You haven't Added Anything Here</h2>
-    <p>Please Submit a New Card</p>
+    <p>Please Submit a New {{type}}</p>
   </div>
   <ion-card *ngFor="let i of items">
     <ion-list>
@@ -26,13 +26,16 @@
           </ion-card-content>
         </ion-item>
         <ion-item-options *ngIf="delete" side="left">
-          <button ion-button icon-only color="danger" (click)="slideCard.close(); ebcDel(i?.id)">
+          <button ion-button icon-only color="danger" (click)="slideCard.close(); delAlert(i?.id)">
              <ion-icon name="trash"></ion-icon>
            </button>
         </ion-item-options>
         <ion-item-options side="right">
-          <button ion-button icon-only color="light" (click)="slideCard.close(); goTo(i?.id)">
+          <button ion-button icon-only color="light" (click)="slideCard.close(); goTo(i)">
             <ion-icon name="eye"></ion-icon>
+          </button>
+          <button *ngIf="delete" ion-button icon-only color="favorite" (click)="slideCard.close(); share(i)">
+            <ion-icon name="share-alt"></ion-icon>
           </button>
         </ion-item-options>
       </ion-item-sliding>

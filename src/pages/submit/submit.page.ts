@@ -93,7 +93,8 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       };
       let data = {
         selID: this.select.findSample().id,
-        selName: this.select.findSample().name
+        selName: this.select.findSample().name,
+        selImg: this.select.findSample().pic
       }
       let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;

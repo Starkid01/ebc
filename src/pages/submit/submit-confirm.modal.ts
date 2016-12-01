@@ -20,6 +20,12 @@ interface Form {
 	pic?: string;
 }
 
+interface PreMade {
+	selID?: string;
+	selName?: string;
+	selImg?: string;
+}
+
 interface Social {
 	fb?: string;
 	twitter?: string;
@@ -37,11 +43,14 @@ interface Social {
 
 export class SubmitConfirm implements OnInit {
 	contactData: Contact = {};
+	createData: Build = {};
 	extra: Object[];
 	formData: Form = {};
 	selectData: Object = {};
 	socialData: Social = {};
-	createData: Build = {};
+	tempData: PreMade = {};
+	template: boolean = false;
+
 
 	constructor(private backand: BackandItemService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
@@ -74,10 +83,21 @@ export class SubmitConfirm implements OnInit {
 		this.socialData = this.extra.find(obj => obj.hasOwnProperty('fb'));
 		this.selectData = this.extra.find(obj => obj.hasOwnProperty('selName'));
 		this.createData = this.extra.find(obj => obj.hasOwnProperty('create'));
+		this.tempData = this.extra.find(obj => obj.hasOwnProperty('selID'));
+		if (this.tempData !== undefined) {
+			this.template = true;
+			let logo = {
+				logo: this.formData.pic
+			};
+			this.extra.push(logo);
+		}
 	}
 
 	finalSubmit() {
 		let itemData = this.formData;
+		if (this.tempData !== undefined) {
+			this.formData.pic = this.tempData.selImg;
+		}
 		itemData['data'] = JSON.stringify(this.extra);
 
 		this.backand.addItem('items', itemData).subscribe(

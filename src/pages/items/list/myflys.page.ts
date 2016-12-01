@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
 import { BackandItemService, BackandConfigService } from '../../../providers';
@@ -16,8 +16,9 @@ export class MyFlysPage extends ItemBase {
 		title: string = 'My Flyers';
 		type = 'Flyer';
 
-	constructor(public config: BackandConfigService, public backand: BackandItemService, public nav: NavController, public toast: ToastController) {
-		super(config, backand, nav, toast);
+		constructor(public alert: AlertController, public config: BackandConfigService, public backand: BackandItemService,
+    public modal: ModalController, public nav: NavController, public toast: ToastController) {
+		super(alert, config, backand, modal, nav, toast);
 	}
 
 	ngOnInit() {

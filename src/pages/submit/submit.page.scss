@@ -4,67 +4,57 @@ page-submit {
     @include heading;
     @include inputs;
     @include image;
-    
+    img[src=''], img[src='null'] {
+      min-height: 2.5rem;
+    }
     ion-select {
       transform: translateY(-3rem);
     }
-    
     .wrap ion-label {
       white-space: normal;
     }
-
     .sel {
-      padding-bottom: 1rem; 
+      padding-bottom: 1rem;
     }
-
     .action {
       transform: translateY(1.2rem);
       z-index: 5;
     }
-    
     .artwork {
-      text-align: center;
-      
       img {
         height: auto;
       }
     }
-
     .field {
       padding-left: 1.1rem;
       padding-right: 1.1rem;
     }
-
     .flyerBox {
       text-align: right;
     }
-
     .right {
       right: .7rem;
     }
-    
     .rowForm {
       display: flex;
       justify-content: space-between;
-
       .last {
         @include last;
       }
     }
-
-  .selectErr {
+    .selectErr {
       transform: translateY(-3.5rem);
       margin-bottom: -3.5rem;
     }
   }
-
   .artWarn {
     text-align: center;
   }
+}
 
+modal-confirm {
   .confirm {
     @include heading;
-    
     ion-col {
       border-radius: .4rem;
       background-color: map-get($colors, light);
@@ -72,22 +62,18 @@ page-submit {
       padding: .8rem;
       opacity: .7;
     }
-
     .btns {
       display: flex;
       justify-content: space-between;
-      margin-top: .8rem;
+      padding-top: 2rem;
     }
-
     .head {
       margin-bottom: .7rem;
     }
-
     .flyBox {
       display: flex;
       justify-content: space-between;
     }
-
     hr {
       border: none;
       width: 100%;
