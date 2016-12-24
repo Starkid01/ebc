@@ -2,7 +2,8 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 
-import { BackandAuthService, FormHandler } from '../../providers';
+import { BackandAuthService } from '../../providers/backand';
+import { FormHandler } from '../../providers/myservices';
 
 @Component({
   selector: 'page-create',

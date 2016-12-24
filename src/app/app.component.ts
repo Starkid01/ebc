@@ -3,7 +3,8 @@ import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 
-import { BackandConfigService, UserService } from '../providers';
+import { BackandConfigService } from '../providers/backand';
+import { UserService } from '../providers/myservices';
 import { LoginPage } from '../pages/login';
 import { SideMenu } from '../pages/shared';
 
@@ -47,7 +48,7 @@ export class MyApp implements OnInit {
 
   myEvents() {
     this.events.subscribe('myUser', (user) => {
-      this.user.myUser = user[0];
+      this.user.myUser = user;
     });
     this.events.subscribe('No Auth', () => {
       this.nav.setRoot(LoginPage);

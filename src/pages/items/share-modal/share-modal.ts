@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { NavParams, ToastController, ViewController } from 'ionic-angular';
-import { Contacts, SocialSharing } from 'ionic-native';
+import { Contacts, Contact, SocialSharing } from 'ionic-native';
 
-import { BackandItem, FormHandler } from '../../../providers';
+import { BackandItem } from '../../../providers';
+import { FormHandler } from '../../../providers/myservices';
 
 @Component({
   selector: 'share-modal',
@@ -20,7 +21,7 @@ export class ShareModalComponent implements OnInit {
   item: BackandItem;
   message: string = '';
   phone: FormControl = new FormControl('', [this.form.phoneValidator, Validators.required]);
-  picked: Array<any>;
+  picked: Contact;
   pickPhone: string = '';
   smsForm: FormGroup;
   smsText: FormControl = new FormControl('');

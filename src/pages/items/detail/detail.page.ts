@@ -2,9 +2,10 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Renderer, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
-import { AppAvailability, Contacts, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
+import { AppAvailability, Contacts, Contact, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
 
-import { FormHandler, BackandItem } from '../../../providers';
+import { BackandItem } from '../../../providers/backand';
+import { FormHandler } from '../../../providers/myservices';
 
 @Component({
   selector: 'page-detail',
@@ -25,7 +26,7 @@ export class DetailPage implements OnInit {
   message: string = '';
   opened: boolean;
   phone: FormControl = new FormControl('', [this.form.phoneValidator, Validators.required]);
-  picked: Array<any>;
+  picked: Contact;
   pickPhone: string = '';
   sample: boolean;
   smsForm: FormGroup;

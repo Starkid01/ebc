@@ -1,7 +1,7 @@
 import { AfterViewChecked, DoCheck, Component, ViewChild } from '@angular/core';
 import { ModalController, Slides } from 'ionic-angular';
 
-import { PictureService } from '../../providers';
+import { PictureService } from '../../providers/myservices';
 import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 import { SubmitConfirm } from './submit-confirm.modal';
 

@@ -9,7 +9,7 @@
 <ion-content class="login">
   <ion-card padding>
     <ion-card-header>
-      <h2 favorite>Login</h2>
+      <h2 ion-text color="favorite">Login</h2>
     </ion-card-header>
     <ion-card-content>
       <form [class.myError]="config.is_auth_error" [formGroup]="loginForm" (ngSubmit)="signIn(loginForm)">

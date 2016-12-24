@@ -25,7 +25,7 @@ export class UserService {
 
   userData() {
     this.events.subscribe('myUser', (user) => {
-      this.myUser = user[0];
+      this.myUser = user;
       console.log(user);
     });
   }

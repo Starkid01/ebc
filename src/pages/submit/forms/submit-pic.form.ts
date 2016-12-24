@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { PictureService, UserService } from '../../../providers';
+import { PictureService, UserService } from '../../../providers/myservices';
 
 @Component({
 	selector: 'ebc-pic-form',

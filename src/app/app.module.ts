@@ -9,14 +9,8 @@ import { EditPage, PersonPage } from '../pages/profile';
 import { NavModule, SideMenu } from '../pages/shared';
 import { ItemModule } from '../pages/items';
 import { SubmitModule } from '../pages/submit';
-import {
-  BackandAuthService,
-  BackandConfigService,
-  BackandItemService,
-  FormHandler,
-  PictureService,
-  UserService
-} from '../providers';
+import { BackandAuthService, BackandConfigService, BackandItemService } from '../providers/backand';
+import { FormHandler, PictureService, UserService } from '../providers/myservices';
 
 const config = {
   mode: 'md',

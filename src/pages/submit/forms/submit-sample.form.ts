@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NavController } from 'ionic-angular';
 
 import { FormBase } from './submit-base.form';
-import { FormHandler, UserService } from '../../../providers';
+import { FormHandler, UserService } from '../../../providers/myservices';
 
 @Component({
   selector: 'ebc-sample-form',

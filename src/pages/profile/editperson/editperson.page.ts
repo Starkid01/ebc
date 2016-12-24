@@ -2,7 +2,8 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
-import { BackandAuthService, BackandItemService, FormHandler, UserService, PictureService } from '../../../providers';
+import { BackandAuthService, BackandItemService } from '../../../providers/backand';
+import { FormHandler, UserService, PictureService } from '../../../providers/myservices';
 
 @Component({
   selector: 'page-edit',

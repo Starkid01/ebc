@@ -1,7 +1,7 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Input, DoCheck } from '@angular/core';
 
-import { UserService } from '../../../providers';
+import { UserService } from '../../../providers/myservices';
 
 @Component({
   selector: 'ebc-base-form',

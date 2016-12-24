@@ -1,4 +1,5 @@
 import { Component, Type } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 import { MyStuff, Samples, Templates } from '../../items';
 import { PersonPage } from '../../profile';
@@ -16,10 +17,9 @@ interface Page {
 
 export class SideMenu {
   pages: Array<Page>;
-  homePage: Type<MyStuff> = MyStuff;
+  homePage: Type<Component> = MyStuff;
 
-
-  constructor() {
+  constructor(public nav: NavController) {
     this.pages = [
       { title: 'EBC Samples', component: Samples },
       { title: 'My EBC', component: MyStuff },
@@ -30,6 +30,6 @@ export class SideMenu {
   }
 
   toPages(page) {
-    this.homePage = page.component;
+    this.nav.getActiveChildNav().setPages([page.component]);
   }
 }

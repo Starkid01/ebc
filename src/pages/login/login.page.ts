@@ -2,7 +2,8 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
 import { AlertController, App, ToastController } from 'ionic-angular';
 
-import { BackandAuthService, BackandConfigService, UserService, FormHandler } from '../../providers';
+import { BackandAuthService, BackandConfigService } from '../../providers/backand';
+import { UserService, FormHandler } from '../../providers/myservices';
 import { CreatePage } from '../create';
 import { SideMenu } from '../shared';
 
@@ -37,7 +38,7 @@ export class LoginPage {
 
   loggedIn() {
     let nav = this.app.getRootNav();
-    nav.setPages([{ page: SideMenu }], { animate: true });
+    nav.setRoot(SideMenu);
   }
 
   openPage(page) {
