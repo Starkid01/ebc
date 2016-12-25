@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar color="favorite">
+    <ion-title>Private Policy</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div [innerHtml]="policy"></div>
+</ion-content>

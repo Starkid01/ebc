@@ -8,6 +8,7 @@ import { CreatePage } from '../pages/create';
 import { EditPage, PersonPage } from '../pages/profile';
 import { NavModule, SideMenu } from '../pages/shared';
 import { ItemModule } from '../pages/items';
+import { PrivatePolicyPage } from '../pages/private-policy';
 import { SubmitModule } from '../pages/submit';
 import { BackandAuthService, BackandConfigService, BackandItemService } from '../providers/backand';
 import { FormHandler, PictureService, UserService } from '../providers/myservices';
@@ -26,6 +27,7 @@ const config = {
     EditPage,
     LoginPage,
     PersonPage,
+    PrivatePolicyPage,
     SideMenu
   ],
   imports: [
@@ -41,6 +43,7 @@ const config = {
     EditPage,
     LoginPage,
     PersonPage,
+    PrivatePolicyPage,
     SideMenu
   ],
   providers: [

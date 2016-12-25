@@ -1,10 +1,11 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
-import { AlertController, App, ToastController } from 'ionic-angular';
+import { AlertController, App, ToastController, ModalController } from 'ionic-angular';
 
 import { BackandAuthService, BackandConfigService } from '../../providers/backand';
 import { UserService, FormHandler } from '../../providers/myservices';
 import { CreatePage } from '../create';
+import { PrivatePolicyPage } from '../private-policy';
 import { SideMenu } from '../shared';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginPage {
     public form: FormHandler,
     public user: UserService,
     private alert: AlertController,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private modal: ModalController) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
@@ -44,6 +46,11 @@ export class LoginPage {
   openPage(page) {
     let nav = this.app.getRootNav();
     nav.push(page);
+  }
+
+  privacy() {
+    let pol = this.modal.create(PrivatePolicyPage);
+    pol.present();
   }
 
   resetPass() {

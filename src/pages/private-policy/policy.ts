@@ -1,5 +1,5 @@
-<style>
-  #ppBody {
+export const info = `<style>
+#ppBody {
     font-size: 11pt;
     width: 100%;
     margin: 0 auto;
@@ -7,7 +7,6 @@
   }
   
   #ppHeader {
-    font-family: verdana;
     font-size: 21pt;
     width: 100%;
     margin: 0 auto;
@@ -191,4 +190,4 @@
 <div class="innerText">2059 S Allis St</div>Milwaukee, WI 53207
 <div class="innerText">USA</div>
 <div class="innerText"><a href="mailto:support.ebc@ebc.beezleeart.com">support.ebc@ebc.beezleeart.com</a></div>
-<div class="innerText"><br>Last Edited on 2016-12-20</div>
+<div class="innerText"><br>Last Edited on 2016-12-20</div>`
