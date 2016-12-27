@@ -58,7 +58,7 @@
               <ion-label stacked>Message</ion-label>
               <ion-input formControlName="smsText" id="text" name="text" type="text" clearInput></ion-input>
             </ion-item>
-            <ion-item></ion-item>
+            <div class="lastFix">&nbsp;</div>
           </div>
           <ion-item>
             <button ion-button block [disabled]="sample || !phone.valid" class="formBtn" type="submit">Send Message</button>
@@ -94,7 +94,7 @@
               <ion-label stacked>Message</ion-label>
               <ion-textarea formControlName="body" id="body" name="text" type="text"></ion-textarea>
             </ion-item>
-            <ion-item></ion-item>
+            <div class="lastFix">&nbsp;</div>
           </div>
           <ion-item>
             <button ion-button block [disabled]="sample || !email.valid" class="formBtn" type="submit">Send Email</button>

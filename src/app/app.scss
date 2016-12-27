@@ -30,3 +30,7 @@ ion-title {
 .cancel {
   color: map-get($colors, danger);
 }
+
+.lastFix {
+  line-height: 0;
+}
