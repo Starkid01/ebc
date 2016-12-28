@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 import { DetailPage } from './detail';
 import { MyStuff } from './mystuff.tabs';
@@ -31,6 +32,7 @@ import {
 		TFlysPage
 	],
 	imports: [
+    InlineSVGModule,
 		IonicModule.forRoot(MyStuff),
 		NavModule
 	 ],

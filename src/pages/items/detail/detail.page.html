@@ -9,7 +9,7 @@
       </div>
       <img [src]="item?.pic" [title]="'\n \n \n \n This '+type+' Being Created'" />
     </div>
-    <object *ngIf="item?.ready" id="myItem" type="image/svg+xml" [attr.data]="media" (load)="clickCheck()"></object>
+    <div *ngIf="item?.ready" #myItem [inlineSVG]="'https://crossorigin.me/'+item.media"></div>
     <ion-card-content>
       <ion-card-title>
         <h2 ion-text color="favorite">{{item?.name}}</h2>
@@ -49,8 +49,8 @@
                 <ion-radio id="manual" name="sms" [value]="field" checked></ion-radio>
               </ion-item>
             </div>
-            <ion-item  [class.myError]="!phone.valid && phone.touched">
-              <ion-label stacked color="danger"><span *ngIf="!phone.valid && phone.touched" >Check the Number</span></ion-label>
+            <ion-item [class.myError]="!phone.valid && phone.touched">
+              <ion-label stacked color="danger"><span *ngIf="!phone.valid && phone.touched">Check the Number</span></ion-label>
               <ion-input id="custom" name="custom" type="tel" [(ngModel)]="field" placeholder="Manual Selected Number" [ngModelOptions]="{standalone: true}"
                 (input)="customField()" clearInput></ion-input>
             </ion-item>

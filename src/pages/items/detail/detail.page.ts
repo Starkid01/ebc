@@ -1,5 +1,5 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { Component, Renderer, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
 import { AppAvailability, Contacts, Contact, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
@@ -13,6 +13,8 @@ import { FormHandler } from '../../../providers/myservices';
 })
 
 export class DetailPage implements OnInit {
+  @ViewChild('myItem') myItem: ElementRef;
+
   body: FormControl = new FormControl('');
   ebcUrl: string = 'http://ebc.beezleeart.com/card/';
   email: FormControl = new FormControl('', [this.form.emailValidator, Validators.required]);
@@ -50,6 +52,10 @@ export class DetailPage implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.clickCheck();
+  }
+
   ngOnInit() {
     this.itemDetail();
   }
@@ -60,45 +66,43 @@ export class DetailPage implements OnInit {
 
   clickCheck() {
     let app = {};
-    if (this.platform.is('mobile')) {
-      let my = <SVGElement>document.getElementById('myItem')['contentDocument'];
+    let my = this.myItem.nativeElement;
 
-      this.render.listen(my, 'click', (e) => {
-        let clicked = e.target['parentNode'];
-        if (clicked['href']) {
-          let link = clicked['href']['baseVal'];
-          let attr = Array.from(clicked['attributes']);
-          let data = attr[2]['value'];
-          let insta = new RegExp('\w$');
-          if (e.target['id'] === 'address') {
-            e.preventDefault();
-            LaunchNavigator.navigate(data)
-              .then(
-              success => console.log('Launched navigator'),
-              error => console.log('Error launching navigator', error)
-              );
-          }
-          if (link.includes('facebook')) {
-            e.preventDefault();
-            app = {
-              appName: 'fb',
-              url: link,
-              appLink: `fb://${data}`
-            };
-            this.isAvail(app);
+    this.render.listen(my, 'click', (e) => {
+      let clicked = e.target['parentNode'];
+      if (clicked['href']) {
+        let link = clicked['href']['baseVal'];
+        let attr = Array.from(clicked['attributes']);
+        let data = attr[2]['value'];
+        let insta = new RegExp('\w$');
+        if (e.target['id'] === 'address') {
+          e.preventDefault();
+          LaunchNavigator.navigate(data)
+            .then(
+            success => console.log('Launched navigator'),
+            error => console.log('Error launching navigator', error)
+            );
+        }
+        if (link.includes('facebook')) {
+          e.preventDefault();
+          app = {
+            appName: 'fb',
+            url: link,
+            appLink: `fb://${data}`
           };
-          if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc' || e.target['id'] === `insta${insta}`) {
-            e.preventDefault();
-            app = {
-              appName: 'dm',
-              url: link,
-              appLink: `instagram://${data}`
-            };
-            this.isAvail(app);
-          };
+          this.isAvail(app);
         };
-      });
-    }
+        if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc' || e.target['id'] === `insta${insta}`) {
+          e.preventDefault();
+          app = {
+            appName: 'dm',
+            url: link,
+            appLink: `instagram://${data}`
+          };
+          this.isAvail(app);
+        };
+      };
+    });
   }
 
   customField() {
@@ -168,7 +172,7 @@ export class DetailPage implements OnInit {
 
   itemDetail() {
     this.item = this.params.data;
-    this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
+    //this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
     this.isType();
     this.isDisable();
     this.opened = true;
