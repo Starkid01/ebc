@@ -1,7 +1,8 @@
 <div *ngIf="!flyer">
   <ion-item>
-    <ion-thumbnail item-left>
-      <img [src]="tempView" title="EBC Card Not Selected">
+    <ion-thumbnail item-left [ngSwitch]="tempView">
+      <img *ngSwitchDefault [src]="tempView" title="EBC Card">
+      <div *ngSwitchCase="''" class="broken-img">EBC Card Not Selected</div>
     </ion-thumbnail>
     <ion-label stacked>Sample Cards*</ion-label>
     <ion-select [(ngModel)]="tempView" placeholder="Selection">
@@ -11,8 +12,9 @@
 </div>
 <div *ngIf="flyer">
   <ion-item>
-    <ion-thumbnail item-left>
-      <img [src]="tempView" title="EBC Flyer Not Selected">
+    <ion-thumbnail item-left [ngSwitch]="tempView">
+      <img *ngSwitchDefault [src]="tempView" title="EBC Flyer">
+      <div *ngSwitchCase="''">EBC Flyer Not Selected</div>
     </ion-thumbnail>
     <ion-label stacked>Sample Flyers*</ion-label>
     <ion-select [(ngModel)]="tempView" placeholder="Selection">

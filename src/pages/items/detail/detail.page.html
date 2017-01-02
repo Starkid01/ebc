@@ -1,15 +1,21 @@
 <ion-header>
   <ebc-navbar>{{item?.name}}</ebc-navbar>
 </ion-header>
+
 <ion-content class="detail">
   <ion-card>
     <div *ngIf="!item?.ready" class="notAvail">
       <div class="notReady">
         <h3 ion-text color="light">This {{type}} is not ready for use yet.</h3>
       </div>
-      <img [src]="item?.pic" [title]="'\n \n \n \n This '+type+' Being Created'" />
+      <div [ngSwitch]="item?.pic">
+        <img *ngSwitchDefault [src]="item?.pic" [title]="'This '+type+' Being Created'" />
+        <div *ngSwitchCase="'' || null" class="broken-img">
+          <span>This {{type}} Being Created</span>
+        </div>
+      </div>
     </div>
-    <div *ngIf="item?.ready" #myItem [inlineSVG]="'https://crossorigin.me/'+item.media"></div>
+    <div *ngIf="item?.ready" #myItem [inlineSVG]="'https://crossorigin.me/'+item?.media"></div>
     <ion-card-content>
       <ion-card-title>
         <h2 ion-text color="favorite">{{item?.name}}</h2>

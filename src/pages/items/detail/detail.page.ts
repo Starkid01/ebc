@@ -24,7 +24,6 @@ export class DetailPage implements OnInit {
   hide: boolean = false;
   item: BackandItem;
   itemName: string;
-  media: SafeResourceUrl;
   message: string = '';
   opened: boolean;
   phone: FormControl = new FormControl('', [this.form.phoneValidator, Validators.required]);
@@ -66,43 +65,45 @@ export class DetailPage implements OnInit {
 
   clickCheck() {
     let app = {};
-    let my = this.myItem.nativeElement;
+    if (this.item.ready) {
+      let my = this.myItem.nativeElement;
 
-    this.render.listen(my, 'click', (e) => {
-      let clicked = e.target['parentNode'];
-      if (clicked['href']) {
-        let link = clicked['href']['baseVal'];
-        let attr = Array.from(clicked['attributes']);
-        let data = attr[2]['value'];
-        let insta = new RegExp('\w$');
-        if (e.target['id'] === 'address') {
-          e.preventDefault();
-          LaunchNavigator.navigate(data)
-            .then(
-            success => console.log('Launched navigator'),
-            error => console.log('Error launching navigator', error)
-            );
-        }
-        if (link.includes('facebook')) {
-          e.preventDefault();
-          app = {
-            appName: 'fb',
-            url: link,
-            appLink: `fb://${data}`
+      this.render.listen(my, 'click', (e) => {
+        let clicked = e.target['parentNode'];
+        if (clicked['href']) {
+          let link = clicked['href']['baseVal'];
+          let attr = Array.from(clicked['attributes']);
+          let data = attr[2]['value'];
+          let insta = new RegExp('\w$');
+          if (e.target['id'] === 'address') {
+            e.preventDefault();
+            LaunchNavigator.navigate(data)
+              .then(
+              success => console.log('Launched navigator'),
+              error => console.log('Error launching navigator', error)
+              );
+          }
+          if (link.includes('facebook')) {
+            e.preventDefault();
+            app = {
+              appName: 'fb',
+              url: link,
+              appLink: `fb://${data}`
+            };
+            this.isAvail(app);
           };
-          this.isAvail(app);
-        };
-        if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc' || e.target['id'] === `insta${insta}`) {
-          e.preventDefault();
-          app = {
-            appName: 'dm',
-            url: link,
-            appLink: `instagram://${data}`
+          if (e.target['id'] === 'instagram' || e.target['id'] === 'ebc' || e.target['id'] === `insta${insta}`) {
+            e.preventDefault();
+            app = {
+              appName: 'dm',
+              url: link,
+              appLink: `instagram://${data}`
+            };
+            this.isAvail(app);
           };
-          this.isAvail(app);
         };
-      };
-    });
+      });
+    }
   }
 
   customField() {

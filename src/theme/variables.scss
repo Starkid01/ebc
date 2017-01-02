@@ -61,31 +61,18 @@ $background-color : #fff;
   margin-left: 1.5rem;
 }
 
-@mixin image {
-  img[src="null"],
-  img[src=""] {
-    display: inline-block;
-    color: transparent;
-    height: 0;
-    position: relative;
-   
-    &::after {
-      content: attr(title);
-      text-align: center;
-      display: inline-block;
-      position: absolute;
-      color: map-get($colors, mygray);
-      left: 0;
-      top: 0;
-      width: 100%;
-      box-sizing: border-box;
-      border: map-get($colors, mygray) solid;
-      background-color: lighten(map-get($colors, mygray), 22%);
-      font-size: 1.5rem;
-      font-weight: 600;
-      padding: .12rem;
-      white-space: pre-wrap;
-    }
+@mixin broken {
+  .broken-img {
+    color: map-get($colors, mygray);
+    border: 2px map-get($colors, mygray) solid;
+    background-color: lighten(map-get($colors, mygray), 22%);
+    font-weight: 600;
+    padding: .12rem; 
+    text-align: center;
+    min-height: 45px;
+    max-width: 25vw;
+    width: 100%;
+    white-space: pre-wrap;
   }
 }
 

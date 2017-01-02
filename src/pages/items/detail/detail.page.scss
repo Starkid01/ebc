@@ -3,7 +3,8 @@ page-detail {
     @include page-body;
     @include heading;
     @include inputs;
-    @include image;
+    @include broken;
+    
     .desc {
       margin-top: 1rem;
     }
@@ -30,6 +31,10 @@ page-detail {
       border: double .6rem map-get($colors, danger);
       .mess {
         text-align: center;
+      }
+      .broken-img {
+        max-width: 100%;
+        font-size: 1.5rem;
       }
       .notReady {
         position: absolute;

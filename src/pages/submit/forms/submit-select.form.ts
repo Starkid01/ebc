@@ -13,7 +13,7 @@ export class SelectForm implements DoCheck, OnInit {
 
   tempCards: Array<BackandItem> = [];
   tempFlyers: Array<BackandItem> = [];
-  tempView: string;
+  tempView: string = ''; 
 
   constructor(private nav: NavController, private backand: BackandItemService) {
   }

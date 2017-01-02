@@ -17,8 +17,9 @@
           <ion-card-content>
             <hr>
             <ion-item class="myItem">
-              <ion-thumbnail item-left>
-                <img [src]="i?.pic" [title]="type+' is Being Created'">
+              <ion-thumbnail item-left [ngSwitch]="i?.pic">
+                <img *ngSwitchDefault [src]="i?.pic" [title]="type+' is Being Created'">
+                <div *ngSwitchCase="'' || null" class="broken-img">{{type}} is Being Created</div>
               </ion-thumbnail>
               <p ion-text class="desc">{{i?.desc}}</p>
               <span ion-text item-right color="primary"><ion-icon name="arrow-back"></ion-icon>&thinsp;Swipe&thinsp;<ion-icon *ngIf="delete" name="arrow-forward"></ion-icon></span>

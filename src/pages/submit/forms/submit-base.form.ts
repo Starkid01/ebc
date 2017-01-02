@@ -33,7 +33,7 @@ export class FormBase implements DoCheck {
   }
 
   ngOnInit() {
-    this.desc.setValue(this.user.myUser['email']);
+    this.desc.setValue('An EBC Product');
   }
 
   checkFlyer() {

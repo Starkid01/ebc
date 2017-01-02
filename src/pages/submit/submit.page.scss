@@ -3,10 +3,8 @@ page-submit {
     @include page-body;
     @include heading;
     @include inputs;
-    @include image;
-    img[src=''], img[src='null'] {
-      min-height: 2.5rem;
-    }
+    @include broken;
+    
     ion-select {
       transform: translateY(-3rem);
     }
@@ -25,6 +23,11 @@ page-submit {
         width: 100%;
         height: auto;
       }
+    }
+    .divider {
+      border-top: 0;
+      margin-bottom: -1rem;
+      padding-top: 1rem;
     }
     .field {
       padding-left: 1.1rem;

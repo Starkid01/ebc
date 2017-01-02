@@ -2,16 +2,8 @@ page-items {
   .myitems {
     @include page-body;
     @include heading;
-    @include image;
-
-    img[src="null"]::after {
-      font-size: 1.5rem;
-      font-weight: 600;
-      height: 6.1rem;
-      padding: .5rem;
-      white-space: pre-wrap;
-    }
-
+    @include broken;
+    
     .desc {
       max-height: 4rem;
       white-space: normal;

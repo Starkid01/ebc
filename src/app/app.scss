@@ -34,3 +34,14 @@ ion-title {
 .lastFix {
   line-height: 0;
 }
+
+ion-thumbnail {
+  display: inline-flex;
+  align-items: flex-start;
+  flex-direction: row;
+
+  img {
+    align-self: center;
+    height: auto !important;
+  }
+}
