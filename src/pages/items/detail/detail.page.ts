@@ -1,6 +1,5 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, ElementRef, OnInit, Renderer, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
 import { AppAvailability, Contacts, Contact, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
 
@@ -34,8 +33,7 @@ export class DetailPage implements OnInit {
   smsText: FormControl = new FormControl('');
   type: string;
 
-  constructor(public safe: DomSanitizer,
-    public params: NavParams, public form: FormHandler,
+  constructor(public params: NavParams, public form: FormHandler,
     private platform: Platform, private render: Renderer,
     private toast: ToastController) {
     this.params = params;
