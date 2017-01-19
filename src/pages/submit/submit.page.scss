@@ -20,8 +20,12 @@ page-submit {
     }
     .artwork {
       img {
-        width: 100%;
         height: auto;
+        margin: auto;
+        width: 100%;
+      }
+      .broken-img {
+        margin: auto;
       }
     }
     .divider {

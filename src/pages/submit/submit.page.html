@@ -20,7 +20,7 @@
         <div *ngSwitchCase="'sample'">
           <ion-item class="wrap">Use this Form to Use and EBC Template Based <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
          <ebc-select-form [flyer]="isFlyer"></ebc-select-form>
-          <ion-slides #steps [options]="slideOpts">
+          <ion-slides #steps initialSlide="1">
             <ion-slide>
               <div padding>
                 <button ion-button icon-right block color="favorite" (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
@@ -44,7 +44,7 @@
         </div>
         <div *ngSwitchCase="'exist'">
           <ion-item class="wrap">Use this Form to Upload a Pre-Made <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
-         <ion-slides #steps [options]="slideOpts">
+         <ion-slides #steps initialSlide="1">
             <ion-slide>
               <div padding>
                 <button ion-button icon-right block color="favorite" (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
@@ -68,7 +68,7 @@
         </div>
         <div *ngSwitchCase="'new'">
           <ion-item class="wrap">Use this Form to Create a Custom EBC <span [innerHtml]="isFlyer ? 'Flyer' : 'Card'"></span></ion-item>
-         <ion-slides #steps [options]="slideOpts">
+         <ion-slides #steps initialSlide="1">
             <ion-slide>
               <div padding>
                 <button ion-button icon-right block color="favorite" (click)="nextForm(1)">Back to Selection Form <ion-icon name="arrow-dropright"></ion-icon></button>
