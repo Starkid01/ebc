@@ -1,8 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.ebc" version="2.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<<<<<<< HEAD
     <name>EBC</name>
     <description>An Ionic Framework and Cordova project. EBC's cards and Fylers.</description>
     <author email="ebc.support@ebc.beezleeart.com" href="http://ebc.beezleeart.com/">EBC: Electrionic Business Card</author>
+=======
+  <name>EBC</name>
+  <description>An Ionic Framework and Cordova project. EBC's cards and Fylers.</description>
+  <author email="ebc.support@ebc.beezleeart.com" href="http://ebc.beezleeart.com">EBC: Electrionic Business Card</author>
+>>>>>>> 50d2f0b70612fc28bec6b78efe3e3e51a225a738
   <content src="index.html"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
@@ -11,11 +17,19 @@
   <allow-intent href="sms:*"/>
   <allow-intent href="mailto:*"/>
   <allow-intent href="geo:*"/>
+<<<<<<< HEAD
   <allow-navigation href="http://ionic.local/*"/>
   <allow-navigation href="http://*/*" />
   <allow-navigation href="https://*/*" />
   <allow-navigation href="http://ebc.beezleeart.com/*" />
   <allow-navigation href="https://ebc.beezleeart.com/*" />
+=======
+  <allow-navigation href="http://*/*"/>
+  <allow-navigation href="https://*/*"/>
+  <allow-navigation href="http://ebc.beezleeart.com/*"/>
+  <allow-navigation href="https://ebc.beezleeart.com/*"/>
+  <allow-navigation href="http://ionic.local/*"/>
+>>>>>>> 50d2f0b70612fc28bec6b78efe3e3e51a225a738
   <platform name="android">
     <allow-intent href="market:*"/>
     <icon src="resources\android\icon\drawable-ldpi-icon.png" density="ldpi"/>
