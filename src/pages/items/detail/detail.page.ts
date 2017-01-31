@@ -1,5 +1,7 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, ElementRef, OnInit, Renderer, ViewChild } from '@angular/core';
+import { Http } from '@angular/http';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
 import { AppAvailability, Contacts, Contact, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
 
@@ -32,9 +34,10 @@ export class DetailPage implements OnInit {
   smsForm: FormGroup;
   smsText: FormControl = new FormControl('');
   type: string;
+  svg: SafeHtml;
 
-  constructor(public params: NavParams, public form: FormHandler,
-    private platform: Platform, private render: Renderer,
+  constructor(public params: NavParams, public form: FormHandler, private http: Http,
+    private platform: Platform, private render: Renderer, private santize: DomSanitizer,
     private toast: ToastController) {
     this.params = params;
     this.platform = platform;
@@ -55,6 +58,13 @@ export class DetailPage implements OnInit {
 
   ngOnInit() {
     this.itemDetail();
+
+    let url = `https://cors-anywhere.herokuapp.com/${this.item.media}`;
+    this.http.request(url).subscribe(
+      inner => {
+        console.log(inner);
+        this.svg = this.santize.bypassSecurityTrustHtml(inner['_body']);
+      })
   }
 
   ngDoCheck() {

@@ -15,7 +15,8 @@
         </div>
       </div>
     </div>
-    <div *ngIf="item?.ready" #myItem [inlineSVG]="'https://cors-anywhere.herokuapp.com/'+item?.media"></div>
+   <!-- <div *ngIf="item?.ready" #myItem [inlineSVG]="'https://cors-anywhere.herokuapp.com/'+item?.media"></div>-->
+    <div *ngIf="item?.ready" #myItem [innerHtml]="svg"></div>
     <ion-card-content>
       <ion-card-title>
         <h2 ion-text color="favorite">{{item?.name}}</h2>
