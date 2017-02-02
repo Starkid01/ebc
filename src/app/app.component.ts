@@ -31,6 +31,12 @@ export class MyApp implements OnInit {
     this.config.authCheck();
     this.authCheck();
     this.myEvents();
+
+    if (window.indexedDB) {
+      console.log("I'm in WKWebView!");
+    } else {
+      console.log("I'm in UIWebView");
+    }
   }
 
   authCheck() {
