@@ -41,6 +41,7 @@
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
     "cordova-plugin-device",
+    "cordova-plugin-camera",
     "cordova-plugin-console",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
