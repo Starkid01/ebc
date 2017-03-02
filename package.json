@@ -6,7 +6,7 @@
   "license": "GNU GPLv3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pekes317/ebc2.git"
+    "url": "https://github.com/Pekes317/ebc.git"
   },
   "private": true,
   "scripts": {
