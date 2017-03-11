@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login';
@@ -33,6 +33,7 @@ const config = {
   imports: [
     ItemModule,
     IonicModule.forRoot(MyApp, config),
+    IonicStorageModule.forRoot(),
     NavModule,
     SubmitModule
   ],
@@ -52,8 +53,7 @@ const config = {
     BackandItemService,
     FormHandler,
     PictureService,
-    UserService,
-    Storage
+    UserService
   ]
 })
 export class AppModule { }

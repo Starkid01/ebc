@@ -39,7 +39,7 @@
         </ion-list>
       </form>
       <button ion-button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
-      <ion-note *ngIf="config.is_auth_error">
+      <ion-note>
         <button ion-button clear color="danger" (click)="resetPass()">
           <ion-icon name="unlock"></ion-icon>
           Reset</button>
