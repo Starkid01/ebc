@@ -2,8 +2,9 @@ import { Component, OnInit, Type, ViewChild } from '@angular/core';
 import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import { BackandService } from '@backand/angular2-sdk';
 
-import { BackandConfigService } from '../providers/backand';
+import { BackandItemService } from '../providers/backand';
 import { UserService } from '../providers/myservices';
 import { LoginPage } from '../pages/login';
 import { SideMenu } from '../pages/shared';
@@ -16,7 +17,7 @@ export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage: Type<LoginPage> = LoginPage;
 
-  constructor(public platform: Platform, public config: BackandConfigService, public events: Events, public storage: Storage, public user: UserService) {
+  constructor(public platform: Platform, public backand: BackandService, public events: Events, public items: BackandItemService, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -28,22 +29,27 @@ export class MyApp implements OnInit {
   }
 
   ngOnInit() {
-    this.config.authCheck();
+    this.backand.init({
+      appName: 'ebc2',
+      anonymousToken: '6755ec7e-3a7e-4dc7-a414-fd1acf8a51a1',
+      isMobile: true,
+      manageRefreshToken: true,
+      mobilePlatform: 'ionic',
+      runSocket: true,
+      signUpToken: 'dbaea0da-730d-4039-8f8a-77a507a3e908',
+      storagePrefix: 'ebc-',
+      useAnonymousTokenByDefault: false
+    });
     this.authCheck();
     this.myEvents();
-
-    if (window.indexedDB) {
-      console.log("I'm in WKWebView!");
-    } else {
-      console.log("I'm in UIWebView");
-    }
   }
 
   authCheck() {
-    this.storage.get('auth_token').then(
-      jwt => {
-        if (jwt) {
+    this.storage.get('auth').then(
+      bool => {
+        if (bool) {
           this.user.getUser();
+          this.items.buildList();
           this.nav.setRoot(SideMenu);
         } else {
           this.nav.setRoot(LoginPage);
@@ -56,8 +62,8 @@ export class MyApp implements OnInit {
     this.events.subscribe('myUser', (user) => {
       this.user.myUser = user;
     });
-    this.events.subscribe('No Auth', () => {
-      this.nav.setRoot(LoginPage);
+    this.events.subscribe('login', () => {
+      this.items.buildList();
     })
   }
 }

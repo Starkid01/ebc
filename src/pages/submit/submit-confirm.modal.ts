@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ToastController, ViewController } from 'ionic-angular';
-
-import { BackandItemService } from '../../providers';
+import { BackandService } from '@backand/angular2-sdk';
 
 interface Build {
 	create?: string;
@@ -52,7 +51,7 @@ export class SubmitConfirm implements OnInit {
 	template: boolean = false;
 
 
-	constructor(private backand: BackandItemService, private toast: ToastController, private params: NavParams, private view: ViewController) {
+	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
 	}
 
@@ -100,9 +99,12 @@ export class SubmitConfirm implements OnInit {
 		}
 		itemData['data'] = JSON.stringify(this.extra);
 
-		this.backand.addItem('items', itemData).subscribe(
-			() => {
-				this.completeSubmit()
+		this.backand.object.create('items', itemData)
+		  .then(res => {
+				this.completeSubmit();
+			})
+			.catch(err => {
+				console.log(err);
 			});
 	}
 }

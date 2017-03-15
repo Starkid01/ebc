@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
-import { BackandItemService, BackandConfigService } from '../../../providers';
+import { BackandItemService } from '../../../providers';
 
 @Component({
 	selector: 'page-items',
@@ -10,15 +10,15 @@ import { BackandItemService, BackandConfigService } from '../../../providers';
 })
 
 export class MyFlysPage extends ItemBase {
-		dbTable = 'items';
-		delete = true;
-		itemType = 'MyFlyer';
-		title: string = 'My Flyers';
-		type = 'Flyer';
+	dbTable = 'items';
+	delete = true;
+	itemType = 'MyFlyer';
+	title: string = 'My Flyers';
+	type = 'Flyer';
 
-		constructor(public alert: AlertController, public config: BackandConfigService, public backand: BackandItemService,
-    public modal: ModalController, public nav: NavController, public toast: ToastController) {
-		super(alert, config, backand, modal, nav, toast);
+	constructor(public alert: AlertController, public backand: BackandItemService,
+		public modal: ModalController, public nav: NavController, public toast: ToastController) {
+		super(alert, backand, modal, nav, toast);
 	}
 
 	ngOnInit() {

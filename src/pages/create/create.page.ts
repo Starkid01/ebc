@@ -1,6 +1,7 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
+import { BackandService } from '@backand/angular2-sdk';
 
 import { BackandAuthService } from '../../providers/backand';
 import { FormHandler } from '../../providers/myservices';
@@ -20,7 +21,8 @@ export class CreatePage {
   password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmPassword: FormControl = new FormControl('', Validators.required);
 
-  constructor(private toast: ToastController, private nav: NavController, public auth: BackandAuthService, public form: FormHandler) {
+  constructor(private auth: BackandAuthService, private backand: BackandService,
+    private form: FormHandler, private nav: NavController, private toast: ToastController) {
     this.verify = new FormGroup({
       password: this.password,
       confirmPassword: this.confirmPassword
@@ -63,13 +65,13 @@ export class CreatePage {
       confirmPassword: pass.confirmPassword
     };
 
-    this.auth.signUp(user).subscribe(
-      data => {
+    this.backand.signup(user.firstName, user.lastName, user.email, user.password, user.confirmPassword)
+      .then(data => {
         this.createError = false;
         this.accountMade(data['message']);
         this.clearAll();
-      },
-      err => {
+      })
+      .catch(err => {
         this.createError = true;
         this.clearAll();
       });

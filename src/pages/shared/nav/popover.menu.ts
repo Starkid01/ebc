@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { App, ModalController, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { BackandService } from '@backand/angular2-sdk';
+import { App, ModalController, ViewController } from 'ionic-angular';
 
 import { LoginPage } from '../../login';
 import { PrivatePolicyPage } from '../../private-policy';
@@ -22,6 +23,7 @@ export class PopoverMenu {
 
   constructor(
     private app: App,
+    private backand: BackandService,
     private modal: ModalController,
     private storage: Storage,
     private view: ViewController) { }
@@ -34,6 +36,8 @@ export class PopoverMenu {
 
   signOut() {
     let nav = this.app.getRootNav();
+
+    this.backand.signout();
     this.view.dismiss();
     this.storage.clear();
     nav.setRoot(LoginPage);

@@ -1,8 +1,8 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
 import { ToastController } from 'ionic-angular';
+import { BackandService } from '@backand/angular2-sdk';
 
-import { BackandAuthService, BackandItemService } from '../../../providers/backand';
 import { FormHandler, UserService, PictureService } from '../../../providers/myservices';
 
 @Component({
@@ -23,8 +23,7 @@ export class EditPage implements DoCheck {
   firstName: FormControl = new FormControl('');
   lastName: FormControl = new FormControl('');
 
-  constructor(public auth: BackandAuthService,
-    public backand: BackandItemService,
+  constructor(public backand: BackandService,
     public form: FormHandler,
     public user: UserService,
     public pic: PictureService,
@@ -66,19 +65,19 @@ export class EditPage implements DoCheck {
       new: pass.value.verify.password
     };
 
-    this.auth.changePassword(newPass.old, newPass.new).subscribe(
-      data => {
+    this.backand.changePassword(newPass.old, newPass.new)
+      .then(data => {
         this.form.clearForm(pass.controls.verify);
         this.form.clearField(pass.controls.oldPass);
         this.profileUpdated('Password');
-      },
-      err => {
+      })
+      .catch(err => {
         this.errorToast(err._body);
       });
   }
 
   errorToast(message) {
-    let errMess =  this.toast.create({
+    let errMess = this.toast.create({
       message: message,
       duration: 5000
     });
@@ -90,7 +89,7 @@ export class EditPage implements DoCheck {
     let editSuccess = this.toast.create({
       message: `Your ${action} has been updated`,
       duration: 5000
-    })
+    });
 
     editSuccess.present();
   }
@@ -112,22 +111,17 @@ export class EditPage implements DoCheck {
   saveUpdate(value, form?) {
     let name = 'users';
     let id = this.user.myUser['id'];
-    this.backand.updateItem(name, id, value).subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log(err);
-        if (form) {
-          this.form.clearForm(form);
-        }
-      },
-      () => {
-        console.log('Info has Changed');
+    this.backand.object.update(name, id, value)
+      .then(data => {
         this.user.getUser();
         if (form) {
           this.form.clearForm(form);
           this.profileUpdated('Profile');
+        };
+      })
+      .catch(err => {
+        if (form) {
+          this.form.clearForm(form);
         }
       });
   }

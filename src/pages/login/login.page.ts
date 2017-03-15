@@ -1,8 +1,9 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
 import { AlertController, App, ToastController, ModalController } from 'ionic-angular';
+import { BackandService } from '@backand/angular2-sdk';
 
-import { BackandAuthService, BackandConfigService } from '../../providers/backand';
+import { BackandAuthService } from '../../providers/backand';
 import { UserService, FormHandler } from '../../providers/myservices';
 import { CreatePage } from '../create';
 import { PrivatePolicyPage } from '../private-policy';
@@ -22,7 +23,7 @@ export class LoginPage {
 
   constructor(public app: App,
     public auth: BackandAuthService,
-    public config: BackandConfigService,
+    public backand: BackandService,
     public form: FormHandler,
     public user: UserService,
     private alert: AlertController,
@@ -73,8 +74,8 @@ export class LoginPage {
           handler: data => {
             let e = data.username;
             console.log(e);
-            this.auth.requestResetPassword(e).subscribe(
-              data => this.resetVerify());
+            this.backand.requestResetPassword(e)
+              .then(data => this.resetVerify());
           }
         }
       ]
@@ -97,12 +98,16 @@ export class LoginPage {
   signIn(login) {
     let auth = login.value;
 
-    this.auth.getAuthToken(auth.username, auth.password).subscribe(
-      data => {
-        this.loggedIn();
+    this.backand.signin(auth['username'], auth['password'])
+      .then(res => {
+        this.auth.authGood(res);
+        this.user.getUser();
         this.clearAll();
-      },
-      err => this.clearAll(),
-      () => this.user.getUser());
+        this.loggedIn();      
+      })
+      .catch(err => {
+        this.auth.authErr(err);
+        this.clearAll();
+      });
   }
 }

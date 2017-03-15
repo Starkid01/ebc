@@ -171,7 +171,6 @@ export class DetailPage implements OnInit {
 
   itemDetail() {
     this.item = this.params.data;
-    //this.media = this.safe.bypassSecurityTrustResourceUrl(this.item.media);
     this.isType();
     this.isDisable();
     this.opened = true;

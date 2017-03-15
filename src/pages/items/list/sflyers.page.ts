@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
-import { BackandItemService, BackandConfigService } from '../../../providers';
+import { BackandItemService } from '../../../providers';
 
 @Component({
 	selector: 'page-items',
@@ -16,9 +16,9 @@ export class SFlysPage extends ItemBase {
 	title: string = 'Sample Flyers';
 	type = 'Flyer';
 
-	constructor(public alert: AlertController, public config: BackandConfigService, public backand: BackandItemService,
+	constructor(public alert: AlertController, public backand: BackandItemService,
 		public modal: ModalController, public nav: NavController, public toast: ToastController) {
-		super(alert, config, backand, modal, nav, toast);
+		super(alert, backand, modal, nav, toast);
 	}
 
 	ngOnInit() {

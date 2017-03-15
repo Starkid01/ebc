@@ -25,14 +25,17 @@
     "@angular/platform-browser": "2.4.8",
     "@angular/platform-browser-dynamic": "2.4.8",
     "@angular/platform-server": "2.4.8",
-	  "ng-inline-svg": "2.2.0",
+    "@backand/angular2-sdk": "^1.1.2",
     "@ionic/storage": "2.0.0",
+    "@types/socket.io-client": "^1.4.29",
     "ionic-angular": "2.2.0",
     "ionic-native": "2.8.1",
     "ionicons": "3.0.0",
+    "ng-inline-svg": "2.2.0",
     "rxjs": "5.2.0",
-    "zone.js": "0.8.0",
-    "sw-toolbox": "3.6.0"
+    "socket.io-client": "^1.7.3",
+    "sw-toolbox": "3.6.0",
+    "zone.js": "0.8.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "1.1.4",
@@ -56,6 +59,6 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-x-socialsharing"
   ],
-  "cordovaPlatforms":[],
+  "cordovaPlatforms": [],
   "description": "ebc: An Ionic project"
 }

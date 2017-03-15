@@ -1,7 +1,7 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { BackandItemService, BackandItem } from '../../../providers';
+import {  BackandItemService, BackandItem } from '../../../providers';
 
 @Component({
   selector: 'ebc-select-form',
@@ -15,7 +15,7 @@ export class SelectForm implements DoCheck, OnInit {
   tempFlyers: Array<BackandItem> = [];
   tempView: string = ''; 
 
-  constructor(private nav: NavController, private backand: BackandItemService) {
+  constructor(private nav: NavController, private backand:  BackandItemService) {
   }
 
   ngDoCheck() {
@@ -23,8 +23,7 @@ export class SelectForm implements DoCheck, OnInit {
   }
 
   ngOnInit() {
-    this.getSamples('TempCard');
-    this.getSamples('TempFlyer');
+    this.getSamples();
     console.log(this.tempView);
   }
 
@@ -38,18 +37,12 @@ export class SelectForm implements DoCheck, OnInit {
     return selected;
   }
 
-  getSamples(type: string) {
-    this.backand.getItems(type).subscribe(
-      data => {
-        if (type === 'TempCard') {
-          this.tempCards = data;
-        }
-        if (type === 'TempFlyer') {
-          this.tempFlyers = data;
-        }
-      },
-      err => console.log(err)
-    );
+  getSamples() {
+     let cards = this.backand.getList('TempCard');
+     let flyer = this.backand.getList('TempFlyer');
+
+     this.tempCards = cards['TempCard'];
+     this.tempFlyers = flyer['TempFlyer'];
   }
 
   selectedValid() {

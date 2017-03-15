@@ -2,7 +2,7 @@ import { DoCheck, OnInit } from '@angular/core';
 import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { DetailPage } from '../detail';
-import { BackandItemService, BackandItem, BackandConfigService } from '../../../providers';
+import { BackandItemService, BackandItem } from '../../../providers';
 import { ShareModalComponent } from '../share-modal';
 
 export class ItemBase implements DoCheck, OnInit {
@@ -13,7 +13,7 @@ export class ItemBase implements DoCheck, OnInit {
   public none: boolean;
   public type: string;
 
-  constructor(public alert: AlertController, public config: BackandConfigService, public backand: BackandItemService,
+  constructor(public alert: AlertController, public backand: BackandItemService,
     public modal: ModalController, public nav: NavController, public toast: ToastController) { }
 
   ngDoCheck() {
@@ -58,12 +58,7 @@ export class ItemBase implements DoCheck, OnInit {
   }
 
   ebcDel(id: number) {
-    this.backand.deleteItem(this.dbTable, id)
-      .subscribe(
-      () => {
-        this.deleteToast();
-        this.myItems();
-      });
+    this.backand.deleteItem(this.dbTable, id);
   }
 
   goTo(ebc: BackandItem) {
@@ -72,9 +67,11 @@ export class ItemBase implements DoCheck, OnInit {
 
 
   myItems() {
-    let items = this.itemType;
-    this.backand.getItems(items).subscribe(
-      data => this.items = data);
+    setTimeout(() => {
+      let items = this.backand.getList(this.itemType);
+
+      this.items = items[this.itemType];
+    }, 500);
   }
 
   share(ebc: BackandItem) {

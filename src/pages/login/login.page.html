@@ -12,7 +12,7 @@
       <h2 ion-text color="favorite">Login</h2>
     </ion-card-header>
     <ion-card-content>
-      <form [class.myError]="config.is_auth_error" [formGroup]="loginForm" (ngSubmit)="signIn(loginForm)">
+      <form [class.myError]="auth.isAuthError" [formGroup]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
           <div class="field">
             <ion-item [class.myError]="!username.valid && username.touched">
@@ -28,7 +28,7 @@
                 type="password"></ion-input>
             </ion-item>
             <div class="passErr">
-              <p ion-text color="danger" *ngIf="config.is_auth_error">Username or Password is Incorrect</p>
+              <p ion-text color="danger" *ngIf="auth.isAuthError">Username or Password is Incorrect</p>
             </div>
           </div>
           <span padding>
@@ -40,9 +40,7 @@
       </form>
       <button ion-button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
       <ion-note>
-        <button ion-button clear color="danger" (click)="resetPass()">
-          <ion-icon name="unlock"></ion-icon>
-          Reset</button>
+        <button ion-button clear color="danger" (click)="resetPass()"><ion-icon name="unlock"></ion-icon>&ensp;Reset</button>
       </ion-note>
     </ion-card-content>
   </ion-card>
