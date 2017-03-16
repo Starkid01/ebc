@@ -90,13 +90,7 @@ $colors: (
   light: #f4f4f4,
   dark: #222,
   favorite: #703869,
-  mygray: #999,
-  fb: #3b5998,
-  instagram: #c13584,
-  twitter: #55acee,
-  linked: #0077b5,
-  sound: #ff8800,
-  spoti : #2ebd59
+  mygray: #999
   );
 
 $light-gray: lighten(map-get($colors, mygray), 25%);

@@ -26,13 +26,7 @@ interface PreMade {
 }
 
 interface Social {
-	fb?: string;
-	twitter?: string;
-	instagram?: string;
-	web?: string;
-	spotify?: string;
-	soundCloud?: string;
-	linkedIn?: string;
+	social?: Array<string>;
 }
 
 @Component({
@@ -79,7 +73,7 @@ export class SubmitConfirm implements OnInit {
 		this.extra = this.params.data.data;
 		this.formData = this.params.data;
 		this.contactData = this.extra.find(obj => obj.hasOwnProperty('bodyName'));
-		this.socialData = this.extra.find(obj => obj.hasOwnProperty('fb'));
+		this.socialData = this.extra.find(obj => obj.hasOwnProperty('social'));
 		this.selectData = this.extra.find(obj => obj.hasOwnProperty('selName'));
 		this.createData = this.extra.find(obj => obj.hasOwnProperty('create'));
 		this.tempData = this.extra.find(obj => obj.hasOwnProperty('selID'));

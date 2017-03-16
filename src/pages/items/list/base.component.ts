@@ -71,7 +71,7 @@ export class ItemBase implements DoCheck, OnInit {
       let items = this.backand.getList(this.itemType);
 
       this.items = items[this.itemType];
-    }, 500);
+    }, 1000);
   }
 
   share(ebc: BackandItem) {
