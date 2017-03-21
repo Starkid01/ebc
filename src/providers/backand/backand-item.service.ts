@@ -12,7 +12,7 @@ export class BackandItemService {
     let itemQuery = ['SampleCard', 'SampleFlyer', 'MyCard', 'MyFlyer', 'TempCard', 'TempFlyer'];
 
     itemQuery.forEach(i => {
-      this.backand.query.get(i)
+      this.backand.query.post(i)
         .then(res => {
           this.storage.set(i, res['data'])
           .then(() => {
