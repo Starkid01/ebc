@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BackandService } from '@backand/angular2-sdk';
+import { Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BackandItemService {
-  ebcMaster: Array<any> = [];
 
-  constructor(private backand: BackandService) { }
+  constructor(private backand: BackandService, private events: Events, private storage: Storage) { }
 
   buildList() {
     let itemQuery = ['SampleCard', 'SampleFlyer', 'MyCard', 'MyFlyer', 'TempCard', 'TempFlyer'];
@@ -13,10 +14,10 @@ export class BackandItemService {
     itemQuery.forEach(i => {
       this.backand.query.get(i)
         .then(res => {
-          let list = {}
-          list[i] = res['data'];
-
-          this.ebcMaster.push(list);
+          this.storage.set(i, res['data'])
+          .then(() => {
+            this.events.publish('set-items', i);
+          });
         })
         .catch(err => {
           console.log(err);
@@ -27,7 +28,7 @@ export class BackandItemService {
   deleteItem(obj, id) {
     this.backand.object.remove(obj, id)
     .then(res => {
-      console.log(res);
+      this.backand.object.action.get('items', 'SendUpdatedList');
     })
     .catch(err =>{
       console.log(err);
@@ -35,7 +36,10 @@ export class BackandItemService {
   }
 
   getList(name) {
-    let items = this.ebcMaster.find(list => list.hasOwnProperty(name));
-    return items;
+    return this.storage.get(name);
+  }
+
+  updateList() {
+    return this.events;
   }
 }

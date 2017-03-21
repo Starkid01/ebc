@@ -45,6 +45,7 @@ export class MyApp implements OnInit {
   }
 
   authCheck() {
+    this.updateList();
     this.storage.get('auth').then(
       bool => {
         if (bool) {
@@ -58,6 +59,20 @@ export class MyApp implements OnInit {
     )
   }
 
+  rebuildList(listArr: Array<any>) {
+    let items: Array<any> = [];
+
+    listArr.forEach(res => {
+      let obj = {};
+
+      res.forEach(i => {
+        obj[i.Key] = i.Value;
+      })
+      items.push(obj);
+    });
+    return items;
+  }
+
   myEvents() {
     this.events.subscribe('myUser', (user) => {
       this.user.myUser = user;
@@ -65,6 +80,22 @@ export class MyApp implements OnInit {
     this.events.subscribe('login', () => {
       this.items.buildList();
     })
+  }
+
+  updateList() {
+    this.backand.on('items_updated', (data) => {
+      let card = this.rebuildList(data[0]);
+      let flyer = this.rebuildList(data[1]);
+
+      this.storage.set('MyCard', card)
+        .then(() => {
+          this.events.publish('set-items', 'MyCard');
+        });
+      this.storage.set('MyFlyer', flyer)
+        .then(() => {
+          this.events.publish('set-items', 'MyFlyer');
+        });
+    });
   }
 }
 

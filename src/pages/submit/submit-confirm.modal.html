@@ -46,7 +46,7 @@
     <ion-row class="head">
       <h3 ion-text color="favorite">Social Media Info</h3>
     </ion-row>
-    <ion-row *ngFor="let social of socialData.social">
+    <ion-row *ngFor="let social of socialData?.social">
       <ion-col><strong>Social/URL:</strong> {{social}}</ion-col>
     </ion-row>
     <hr>

@@ -40,7 +40,9 @@ export class SubmitConfirm implements OnInit {
 	extra: Object[];
 	formData: Form = {};
 	selectData: Object = {};
-	socialData: Social = {};
+	socialData: Social = {
+		social: []
+	};
 	tempData: PreMade = {};
 	template: boolean = false;
 
@@ -94,8 +96,9 @@ export class SubmitConfirm implements OnInit {
 		itemData['data'] = JSON.stringify(this.extra);
 
 		this.backand.object.create('items', itemData)
-		  .then(res => {
+			.then(res => {
 				this.completeSubmit();
+				this.backand.object.action.get('items', 'SendUpdatedList');
 			})
 			.catch(err => {
 				console.log(err);

@@ -26,6 +26,7 @@ export class ItemBase implements DoCheck, OnInit {
 
   ngOnInit() {
     this.myItems();
+    this.update();
   }
 
   delAlert(id: number) {
@@ -67,16 +68,34 @@ export class ItemBase implements DoCheck, OnInit {
 
 
   myItems() {
-    setTimeout(() => {
-      let items = this.backand.getList(this.itemType);
-
-      this.items = items[this.itemType];
-    }, 1000);
+    this.backand.getList(this.itemType)
+      .then(data => {
+        if(data) {
+          this.items = data;
+        } else {
+          this.myItems();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   share(ebc: BackandItem) {
     let shareMod = this.modal.create(ShareModalComponent, ebc);
 
     shareMod.present();
+  }
+
+  update() {
+    this.backand.updateList().subscribe('set-items', type => {
+      this.backand.getList(this.itemType)
+        .then(data => {
+          this.items = data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 }
