@@ -1,7 +1,11 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, ElementRef, OnInit, Renderer, ViewChild } from '@angular/core';
 import { NavParams, Platform, ToastController } from 'ionic-angular';
-import { AppAvailability, Contacts, Contact, InAppBrowser, LaunchNavigator, SocialSharing } from 'ionic-native';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Contacts, Contact } from '@ionic-native/contacts';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { BackandItem } from '../../../providers/backand';
 import { FormHandler } from '../../../providers/myservices';
@@ -34,8 +38,8 @@ export class DetailPage implements OnInit {
   type: string;
 
   constructor(public params: NavParams, public form: FormHandler,
-    private platform: Platform, private render: Renderer,
-    private toast: ToastController) {
+    private appAvail: AppAvailability, private contacts: Contacts, private appBrowser:InAppBrowser, private launch: LaunchNavigator,
+    private platform: Platform, private render: Renderer, private social: SocialSharing, private toast: ToastController) {
     this.params = params;
     this.platform = platform;
     this.smsForm = new FormGroup({
@@ -75,7 +79,7 @@ export class DetailPage implements OnInit {
           let insta = new RegExp('\w$');
           if (e.target['id'] === 'address') {
             e.preventDefault();
-            LaunchNavigator.navigate(data)
+            this.launch.navigate(data)
               .then(
               success => console.log('Launched navigator'),
               error => console.log('Error launching navigator', error)
@@ -114,7 +118,7 @@ export class DetailPage implements OnInit {
   }
 
   getContact() {
-    Contacts.pickContact().then((contact) => {
+    this.contacts.pickContact().then((contact) => {
       this.picked = contact;
       this.hide = true;
     });
@@ -144,13 +148,13 @@ export class DetailPage implements OnInit {
       });
     }
 
-    AppAvailability.check(myApp['check'])
+    this.appAvail.check(myApp['check'])
       .then(
       yes => {
-        dom = new InAppBrowser(myApp['appLink'], '_system');
+        dom = this.appBrowser.create(myApp['appLink'], '_system');
       },
       no => {
-        dom = new InAppBrowser(myApp['url'], '_system');
+        dom = this.appBrowser.create(myApp['url'], '_system');
       });
   }
 
@@ -181,7 +185,7 @@ export class DetailPage implements OnInit {
     let link: string = `${this.ebcUrl}${this.item['id']}`;
     let myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
 
-    SocialSharing.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
+    this.social.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
       data => this.sentMsg('Email'),
       err => console.log(err, 'Fail'));
   }
@@ -200,7 +204,7 @@ export class DetailPage implements OnInit {
     let link: string = `${this.ebcUrl}${this.item['id']}`;
     let body = `${mySms['smsText']} ${link}`;
 
-    SocialSharing.shareViaSMS(body, mySms.phone).then(
+    this.social.shareViaSMS(body, mySms.phone).then(
       data => this.sentMsg('SMS Text'),
       err => console.log(err, 'Fail'));
   }

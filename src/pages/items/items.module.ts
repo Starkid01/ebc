@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Contacts } from '@ionic-native/contacts';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { IonicModule } from 'ionic-angular';
 import { InlineSVGModule } from 'ng-inline-svg';
 
@@ -33,7 +37,7 @@ import {
 	],
 	imports: [
     InlineSVGModule,
-		IonicModule.forRoot(MyStuff),
+		IonicModule,
 		NavModule
 	 ],
 	entryComponents: [
@@ -48,6 +52,12 @@ import {
 		ShareModalComponent,
 		TCardsPage,
 		TFlysPage
+	],
+	providers: [
+		AppAvailability,
+		Contacts,
+		InAppBrowser,
+		LaunchNavigator
 	]
 })
 export class ItemModule { }

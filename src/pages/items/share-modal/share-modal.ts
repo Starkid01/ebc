@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { NavParams, ToastController, ViewController } from 'ionic-angular';
-import { Contacts, Contact, SocialSharing } from 'ionic-native';
+import { Contacts, Contact } from '@ionic-native/contacts';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { BackandItem } from '../../../providers';
 import { FormHandler } from '../../../providers/myservices';
@@ -27,8 +28,8 @@ export class ShareModalComponent implements OnInit {
   smsText: FormControl = new FormControl('');
   type: string;
 
-  constructor(private form: FormHandler, private params: NavParams,
-    private toast: ToastController, private view: ViewController) {
+  constructor(private contacts: Contacts, private form: FormHandler, private params: NavParams,
+    private social: SocialSharing, private toast: ToastController, private view: ViewController) {
     this.smsForm = new FormGroup({
       phone: this.phone,
       smsText: this.smsText
@@ -58,7 +59,7 @@ export class ShareModalComponent implements OnInit {
   }
 
   getContact() {
-    Contacts.pickContact().then((contact) => {
+    this.contacts.pickContact().then((contact) => {
       this.picked = contact;
       this.hide = true;
     });
@@ -81,7 +82,7 @@ export class ShareModalComponent implements OnInit {
     let link: string = `${this.ebcUrl}${this.item['id']}`;
     let myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
 
-    SocialSharing.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
+    this.social.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
       data => this.sentMsg('Email'),
       err => console.log(err, 'Fail'));
   }
@@ -100,7 +101,7 @@ export class ShareModalComponent implements OnInit {
     let link: string = `${this.ebcUrl}${this.item['id']}`;
     let body = `${mySms['smsText']} ${link}`;
 
-    SocialSharing.shareViaSMS(body, mySms.phone).then(
+    this.social.shareViaSMS(body, mySms.phone).then(
       data => this.sentMsg('SMS Text'),
       err => console.log(err, 'Fail'));
   }

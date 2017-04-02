@@ -21,7 +21,7 @@ import { SocialForm } from './forms/submit-social.form';
 		SubmitPage
 	],
 	imports: [
-		IonicModule.forRoot(SubmitPage),
+		IonicModule,
 		NavModule
 	],
 	entryComponents: [

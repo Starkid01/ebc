@@ -3,10 +3,10 @@ import { Component, Type } from '@angular/core';
 import { AlertController, App, ToastController, ModalController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
+import { AboutHelpPage } from '../about-help';
 import { BackandAuthService } from '../../providers/backand';
 import { UserService, FormHandler } from '../../providers/myservices';
 import { CreatePage } from '../create';
-import { PrivatePolicyPage } from '../private-policy';
 import { SideMenu } from '../shared';
 
 @Component({
@@ -35,6 +35,11 @@ export class LoginPage {
     });
   }
 
+  aboutHelp() {
+    let nav = this.app.getRootNav();
+    nav.push(AboutHelpPage);
+  }
+
   clearAll() {
     this.form.clearForm(this.loginForm);
   }
@@ -47,11 +52,6 @@ export class LoginPage {
   openPage(page) {
     let nav = this.app.getRootNav();
     nav.push(page);
-  }
-
-  privacy() {
-    let pol = this.modal.create(PrivatePolicyPage);
-    pol.present();
   }
 
   resetPass() {

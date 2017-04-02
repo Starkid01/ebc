@@ -13,7 +13,7 @@ export class UserService {
   }
 
   getUser() {
-    this.backand.query.get('CurrentUser')
+    this.backand.query.post('CurrentUser')
       .then(res => {
         let user = res['data'][0];
         this.setUser(user);

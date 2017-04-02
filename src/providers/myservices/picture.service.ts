@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { ActionSheetController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { Camera, File, Transfer } from 'ionic-native';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import 'rxjs';
 
 @Injectable()
@@ -11,15 +13,15 @@ export class PictureService {
   myLoader: Loading;
   myProg: number = 0;
 
-  constructor(public app: App, public toast: ToastController, public action: ActionSheetController, public http: Http, public loader: LoadingController) {
-
-  }
+  constructor(public app: App, public camera: Camera,
+    public toast: ToastController, public action: ActionSheetController, public file: File,
+    public http: Http, public loader: LoadingController, public transfer: Transfer) { }
 
   copyFile(imagePath: string) {
     let newName = `${this.randomName(10)}.jpg`;
     let path = imagePath.substring(0, imagePath.lastIndexOf('/'));
     let file = imagePath.substring(imagePath.lastIndexOf('/') + 1);
-    File.copyFile(path, file, path, newName).then(
+    this.file.copyFile(path, file, path, newName).then(
       value => {
         this.picFile = value['nativeURL'];
         this.removeFile(imagePath);
@@ -46,9 +48,9 @@ export class PictureService {
               sourceType: 1,
               allowEdit: true
             };
-            Camera.getPicture(opts).then((imageData) => {
+            this.camera.getPicture(opts).then((imageData) => {
               this.newPic = true;
-             this.copyFile(imageData);
+              this.copyFile(imageData);
             }, (err) => {
               console.log(err);
             });
@@ -66,7 +68,7 @@ export class PictureService {
               saveToPhotoAlbum: true,
               allowEdit: true
             };
-            Camera.getPicture(opts).then((imageData) => {
+            this.camera.getPicture(opts).then((imageData) => {
               this.newPic = true;
               this.copyFile(imageData);
             }, (err) => {
@@ -123,24 +125,24 @@ export class PictureService {
     }
   }
 
-   upload(signed: Object, onSuccess: any) {
+  upload(signed: Object, onSuccess: any) {
+    const fileTransfer: TransferObject = this.transfer.create();
     this.newPic = false;
     this.uploading();
-    let ft = new Transfer();
     let filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
     let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
-    let options = {
+    let options: FileUploadOptions = {
       fileKey: 'file',
       fileName: filename,
       mimeType: 'image/jpeg',
-      hunkedMode: false,
+      chunkedMode: false,
       headers: {
         'Content-Type': undefined
       },
       params: signed
     };
-    ft.onProgress(this.progress);
-    ft.upload(this.picFile, url, options)
+    fileTransfer.onProgress(this.progress);
+    fileTransfer.upload(this.picFile, url, options)
       .then(result => {
         onSuccess(result);
       })
@@ -169,7 +171,7 @@ export class PictureService {
   removeFile(imgFile: string) {
     let path = imgFile.substring(0, imgFile.lastIndexOf('/'));
     let file = imgFile.substring(imgFile.lastIndexOf('/') + 1);
-    File.removeFile(path, file).then(
+    this.file.removeFile(path, file).then(
       value => console.log(value),
       err => console.log(err));
   }
