@@ -29,6 +29,10 @@ ion-title {
 
 .cancel {
   color: map-get($colors, danger);
+
+  .button-inner {
+    color: map-get($colors, danger);
+  }
 }
 
 .lastFix {

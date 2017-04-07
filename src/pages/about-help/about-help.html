@@ -8,7 +8,39 @@
   <div class="about-logo">
     <img alt="EBC Logo" src="assets/icon/about-logo.png">
   </div>
-
+  <ion-list no-lines>
+    <ion-item-divider>
+      <strong>App Information</strong>
+    </ion-item-divider>
+    <ion-item>
+      <h2 ion-text color="favorite">Name:</h2>
+      <ion-note item-right>{{appName}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <h2 ion-text color="favorite">Version:</h2>
+      <ion-note item-right>{{appVer}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <h2 ion-text color="favorite">Version Code:</h2>
+      <ion-note item-right>{{appVerCode}}</ion-note>
+    </ion-item>
+     <ion-item-divider>
+      <strong>Help &amp; Feedback</strong>
+    </ion-item-divider>
+    <button ion-item (click)="helpEmail()">
+       <h2 ion-text color="favorite">email:</h2>
+       <ion-note item-right>ebc.support@ebc.beezleeart.com</ion-note>
+    </button>
+    <ion-item-divider>
+      <strong>Legal</strong>
+    </ion-item-divider>
+    <button ion-item (click)="policy()">
+      <h2 ion-text color="favorite">Private Policy</h2>
+      <ion-note item-right>
+        <ion-icon name="list-box"></ion-icon>
+      </ion-note>
+    </button>
+  </ion-list>
 </ion-content>
 
 <ion-footer>

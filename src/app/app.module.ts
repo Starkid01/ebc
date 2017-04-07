@@ -1,5 +1,7 @@
 import { ErrorHandler, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BackandService } from '@backand/angular2-sdk';
+import { AppRate } from '@ionic-native/app-rate';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
@@ -43,6 +45,7 @@ const config = {
     SideMenu
   ],
   imports: [
+    BrowserModule,
     ItemModule,
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
@@ -62,6 +65,7 @@ const config = {
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AppRate,
     AppVersion,
     Camera,
     File,
