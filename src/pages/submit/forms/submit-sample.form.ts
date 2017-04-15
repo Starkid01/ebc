@@ -20,12 +20,6 @@ export class SampleForm extends FormBase {
 
   constructor(private nav: NavController, public form: FormHandler, public user: UserService) {
     super(user);
-    this.itemForm = new FormGroup({
-      name: this.name,
-      desc: this.desc,
-      data: this.data,
-      pic: this.pic
-    });
     this.detailForm = new FormGroup({
       bodyName: this.bodyName,
       email: this.email,
@@ -52,9 +46,5 @@ export class SampleForm extends FormBase {
     }
 
     return field.every(validField => validField === true);
-  }
-
-  tempForm() {
-    return this.itemForm.value;
   }
 }

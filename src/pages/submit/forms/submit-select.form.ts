@@ -24,7 +24,6 @@ export class SelectForm implements DoCheck, OnInit {
 
   ngOnInit() {
     this.getSamples();
-    console.log(this.tempView);
   }
 
   findSample() {

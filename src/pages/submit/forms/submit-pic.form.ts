@@ -8,10 +8,9 @@ import { PictureService, UserService } from '../../../providers/myservices';
 })
 export class PicForm {
 	art: string = '';
+	notAdded: boolean = true;
 
-	constructor(public pic: PictureService, public user: UserService) {
-
-	}
+	constructor(public pic: PictureService, public user: UserService) { }
 
 	getArt() {
 		return this.art;
@@ -39,5 +38,6 @@ export class PicForm {
     console.log(image);
     this.pic.picSaved();
 		this.art = image;
+		this.notAdded = false;
   }
 }

@@ -1,18 +1,3 @@
-<form [formGroup]="itemForm">
-  <ion-item>
-    <ion-label color="favorite" stacked>{{titleName}} Name*</ion-label>
-    <ion-input clearInput id="name" name="name" type="text" [placeholder]="isType + ' Title'" formControlName="name"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Description</ion-label>
-    <ion-textarea id="desc" name="desc" type="text" [placeholder]="isType + ' Detail'" formControlName="desc"></ion-textarea>
-  </ion-item>
-  <ion-item>
-    <ion-label stacked>Creation Instructions</ion-label>
-    <ion-textarea id="data" name="data" type="text" placeholder="Where does your Interactive Info Go?" formControlName="data"></ion-textarea>
-  </ion-item>
-  <div class="lastFix">&nbsp;</div>
-</form>
 <form [formGroup]="detailForm">
   <ion-list-header class="divider"><span ion-text color="favorite">Info Goes on {{isType}}</span></ion-list-header> 
   <ion-item>

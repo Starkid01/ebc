@@ -1,4 +1,4 @@
-import { AfterViewChecked, DoCheck, Component, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { ModalController, Slides } from 'ionic-angular';
 
 import { PictureService } from '../../providers/myservices';
@@ -10,7 +10,7 @@ import { SubmitConfirm } from './submit-confirm.modal';
   templateUrl: 'submit.page.html'
 })
 
-export class SubmitPage implements AfterViewChecked, DoCheck {
+export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
   @ViewChild(FormBase) base: FormBase;
   @ViewChild(SampleForm) samples: SampleForm;
   @ViewChild(SelectForm) select: SelectForm;
@@ -18,19 +18,24 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
   @ViewChild(PicForm) pics: PicForm;
   @ViewChild('steps') steps: Slides;
 
+  addPic: boolean = false;
+  addSocial: boolean = false;
   isFlyer: boolean = false;
   isValid: boolean = false;
+  invalidForm: boolean;
   loaded: boolean = false;
   subform: string;
-  slideOpts: Object = { initialSlide: 1 };
-  invalidForm: boolean;
 
-  constructor(private modal: ModalController, public pic: PictureService) {
-
-  }
+  constructor(private detect:ChangeDetectorRef, private modal: ModalController, public pic: PictureService) { }
 
   ngAfterViewChecked() {
+    this.steps.lockSwipes(true);
     this.formValid();
+    this.detect.detectChanges();
+  }
+
+  ngOnInit() {
+    this.steps.autoHeight = true;
   }
 
   ngDoCheck() {
@@ -38,6 +43,7 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     if (this.subform !== undefined) {
       this.loaded = true;
     }
+    this.steps.update();
   }
 
   confirmInput(newItem) {
@@ -56,6 +62,14 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
       return this.getSocial(item);
     } else {
       return null;
+    }
+  }
+
+   formValid() {
+    if (this.subform === 'temp' && this.select.selectedValid()) {
+      this.invalidForm = false;
+    } else {
+      this.invalidForm = true;
     }
   }
 
@@ -82,8 +96,13 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     }
   }
 
-  nextForm(i: number) {
-    this.steps.slideTo(i);
+  nextSlide(prev: boolean) {
+    this.steps.lockSwipes(false);
+    if(prev) {
+      this.steps.slidePrev();
+    } else {
+      this.steps.slideNext();
+    }
   }
 
   sampleForm() {
@@ -96,10 +115,10 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
         selName: this.select.findSample().name,
         selImg: this.select.findSample().pic
       }
-      let item = this.samples.tempForm();
+      /*let item = this.samples.tempForm();
       item['flyer'] = this.isFlyer;
       item['data'] = [this.samples.detailContact(), data, build];
-      return this.getSocial(item);
+      return this.getSocial(item);*/
     } else {
       return null;
     }
@@ -119,17 +138,5 @@ export class SubmitPage implements AfterViewChecked, DoCheck {
     }
 
     this.confirmInput(newItem);
-  }
-
-  formValid() {
-    if (this.subform === 'sample' && this.sampleForm() !== null) {
-      this.invalidForm = false;
-    } else if (this.subform === 'exist' && this.existForm() !== null) {
-      this.invalidForm = false;
-    } else if (this.subform === 'new' && this.newForm() !== null) {
-      this.invalidForm = false;
-    } else {
-      this.invalidForm = true;
-    }
   }
 }

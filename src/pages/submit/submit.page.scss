@@ -4,6 +4,10 @@ page-submit {
     @include heading;
     @include inputs;
     @include broken;
+
+    h3 {
+      margin-bottom: 0;
+    }
     
     ion-select {
       transform: translateY(-3rem);
@@ -40,6 +44,12 @@ page-submit {
     .flyerBox {
       text-align: right;
     }
+
+    .next-btn {
+      font-size: 1.5rem;
+      padding: 2rem;
+    }
+
     .right {
       right: .7rem;
     }
