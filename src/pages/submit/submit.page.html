@@ -103,7 +103,7 @@
               <ion-checkbox color="favorite" [(ngModel)]="addPic"></ion-checkbox>
             </ion-item>
             <div padding>
-              <button ion-button block [disabled]="addSocial || addPic">Review Information</button>
+              <button ion-button block [disabled]="addSocial || addPic" (click)="submitItem()">Confirm Information</button>
             </div>
             <ion-item>
               <div item-left>
@@ -118,7 +118,7 @@
         <ion-slide *ngIf="addSocial">
           <ebc-social-form></ebc-social-form>
           <div padding *ngIf="!addPic">
-            <button ion-button block>Review Information</button>
+            <button ion-button block (click)="submitItem()">Confirm Information</button>
           </div>
           <ion-item>
             <div item-left>
@@ -132,7 +132,7 @@
         <ion-slide *ngIf="addPic">
           <ebc-pic-form></ebc-pic-form>
           <div padding>
-            <button ion-button block [disabled]="pics?.notAdded">Review Information</button>
+            <button ion-button block [disabled]="pics?.notAdded" (click)="submitItem()">Confirm Information</button>
           </div>
           <ion-item>
             <div item-left>
