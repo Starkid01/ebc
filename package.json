@@ -25,7 +25,7 @@
     "@angular/platform-browser": "4.0.1",
     "@angular/platform-browser-dynamic": "4.0.1",
     "@angular/platform-server": "4.0.1",
-    "@backand/angular2-sdk": "^1.1.5",
+    "@backand/angular2-sdk": "^1.1.10",
     "@ionic-native/app-availability": "3.4.4",
     "@ionic-native/app-rate": "^3.4.4",
     "@ionic-native/app-version": "^3.4.4",

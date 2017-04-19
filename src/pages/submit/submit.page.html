@@ -118,14 +118,14 @@
         <ion-slide *ngIf="addSocial">
           <ebc-social-form></ebc-social-form>
           <div padding *ngIf="!addPic">
-            <button ion-button block (click)="submitItem()">Confirm Information</button>
+            <button ion-button block (click)="submitItem()" [disabled]="!social?.socialAdded()">Confirm Information</button>
           </div>
           <ion-item>
             <div item-left>
               <button class="next-btn" ion-button clear color="danger" (click)="nextSlide(true)">Back</button>
             </div>
             <div item-right *ngIf="addPic">
-              <button class="next-btn" ion-button clear (click)="nextSlide(false)">Next</button>
+              <button class="next-btn" ion-button clear (click)="nextSlide(false)" [disabled]="!social?.socialAdded()">Next</button>
             </div>
           </ion-item>
         </ion-slide>

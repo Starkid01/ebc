@@ -17,7 +17,6 @@ export class PicForm {
 	}
 
 	savePic() {
-		console.log('Saving');
 		let signed;
     this.pic.getSigned('usersItem', this.user.myUser)
       .subscribe(
