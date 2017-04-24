@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { ActionSheetController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import 'rxjs';
@@ -9,7 +9,7 @@ import 'rxjs';
 @Injectable()
 export class PictureService {
   newPic: boolean = false;
-  picFile: string;
+  picFile: string = '';
   myLoader: Loading;
   myProg: number = 0;
 
@@ -42,11 +42,12 @@ export class PictureService {
           text: 'Take Picture',
           icon: 'camera',
           handler: () => {
-            let opts = {
+              let opts: CameraOptions = {
               destinationType: 1,
               quality: 100,
               sourceType: 1,
-              allowEdit: true
+              allowEdit: true,
+              saveToPhotoAlbum: true
             };
             this.camera.getPicture(opts).then((imageData) => {
               this.newPic = true;
@@ -61,7 +62,7 @@ export class PictureService {
           text: 'Get Picture',
           icon: 'images',
           handler: () => {
-            let opts = {
+            let opts: CameraOptions = {
               destinationType: 1,
               quality: 100,
               sourceType: 2,

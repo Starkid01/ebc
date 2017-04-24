@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 
 import { PictureService, UserService } from '../../../providers/myservices';
 
@@ -6,11 +6,15 @@ import { PictureService, UserService } from '../../../providers/myservices';
 	selector: 'ebc-pic-form',
 	templateUrl: 'submit-pic.form.html'
 })
-export class PicForm {
+export class PicForm implements DoCheck {
 	art: string = '';
 	notAdded: boolean = true;
 
 	constructor(public pic: PictureService, public user: UserService) { }
+
+	ngDoCheck() {
+		this.art = this.pic.picFile;
+	}
 
 	getArt() {
 		return this.art;

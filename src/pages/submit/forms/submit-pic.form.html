@@ -10,6 +10,6 @@
   </button>
 </ion-fab>
 <ion-item class="artwork" [ngSwitch]="art">
-  <img *ngSwitchDefault [src]="pic.picFile" title="Please Upload Artwork">
+  <img *ngSwitchDefault [src]="art" title="Please Upload Artwork">
   <div *ngSwitchCase="''" class="broken-img">Please Upload Artwork</div>
 </ion-item>

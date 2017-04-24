@@ -2,7 +2,7 @@
   "name": "ebc",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "GNU GPLv3",
   "repository": {
     "type": "git",
@@ -56,7 +56,6 @@
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
     "cordova-plugin-device",
-    "cordova-plugin-camera",
     "cordova-plugin-console",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
