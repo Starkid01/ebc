@@ -98,11 +98,11 @@
               <ion-label>Add Social Media/URL</ion-label>
               <ion-checkbox color="favorite" [(ngModel)]="addSocial"></ion-checkbox>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="subform !== 'exist'">
               <ion-label>Add Logo/Picture</ion-label>
               <ion-checkbox color="favorite" [(ngModel)]="addPic"></ion-checkbox>
             </ion-item>
-            <div padding>
+            <div padding *ngIf="subform !== 'exist'">
               <button ion-button block [disabled]="addSocial || addPic" (click)="submitItem()">Confirm Information</button>
             </div>
             <ion-item>

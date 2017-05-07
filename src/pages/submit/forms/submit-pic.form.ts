@@ -8,6 +8,7 @@ import { PictureService, UserService } from '../../../providers/myservices';
 })
 export class PicForm implements DoCheck {
 	art: string = '';
+	image: string;
 	notAdded: boolean = true;
 
 	constructor(public pic: PictureService, public user: UserService) { }
@@ -16,8 +17,8 @@ export class PicForm implements DoCheck {
 		this.art = this.pic.picFile;
 	}
 
-	getArt() {
-		return this.art;
+	getArt() {;
+		return this.image;
 	}
 
 	savePic() {
@@ -37,10 +38,9 @@ export class PicForm implements DoCheck {
 
 	success = (result: any) => {
     let finish = JSON.parse(result.response);
-    let image = finish['url'];
-    console.log(image);
+    this.image = finish['url'];
     this.pic.picSaved();
-		this.art = image;
+		this.art = this.image;
 		this.notAdded = false;
   }
 }

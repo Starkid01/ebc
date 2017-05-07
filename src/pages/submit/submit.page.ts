@@ -42,6 +42,9 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
     this.isValid = this.invalidForm;
     if (this.subform !== undefined) {
       this.loaded = true;
+      if (this.subform === 'exist') {
+        this.addPic = true;
+      }
     }
     this.steps.update();
   }
@@ -50,7 +53,7 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
     let confirm = this.modal.create(SubmitConfirm, newItem);
     confirm.present();
   }
-  
+
   formValid() {
     if (this.subform === 'temp' && this.select.selectedValid()) {
       this.invalidForm = false;
@@ -81,7 +84,10 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
     let newItem = this.base.itemForm.value;
 
     newItem['data'] = [
-      { create: this.base.data.value }
+      {
+        create: this.base.data.value,
+        type: this.subform
+      }
     ];
     newItem['flyer'] = this.isFlyer;
     if (!this.invalidForm) {
@@ -100,7 +106,7 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
     if (this.social) {
       newItem['data'].push(this.social.socialForm.value);
     }
-    
+
     this.confirmInput(newItem);
   }
 }

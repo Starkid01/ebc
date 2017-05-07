@@ -211,8 +211,9 @@ export class DetailPage implements OnInit {
 
   setText() {
     if (this.opened) {
-      this.smsText.setValue(`Check out my EBC ${this.type}`);
-      this.emailText.setValue(`Check out my EBC ${this.type}`);
+      let startText: string = `Check out my interactive EBC ${this.type}, just touch to connect.`;
+      this.smsText.setValue(startText);
+      this.emailText.setValue(startText);
       this.opened = false;
     }
   }
