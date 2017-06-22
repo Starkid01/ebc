@@ -33,7 +33,7 @@ export class SideMenu {
   }
 
   toPages(page) {
-    //this.nav.getActiveChildNav().setPages([page.component]);
-    this.homePage = page;
+    this.nav.getActiveChildNav().setPages([page.component]);
+    //this.nav.getActiveChildNav().setRoot([page.component]);
   }
 }
