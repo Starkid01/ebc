@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, Type } from '@angular/core';
-import { AlertController, App, ToastController, ModalController } from 'ionic-angular';
+import { AlertController, App, IonicPage, ToastController, ModalController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
 import { AboutHelpPage } from '../about-help';
@@ -9,6 +9,9 @@ import { UserService, FormHandler } from '../../providers/myservices';
 import { CreatePage } from '../create';
 import { SideMenu } from '../shared';
 
+@IonicPage({
+  name: 'login'
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.page.html'

@@ -1,5 +1,5 @@
 import { Component, Type } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 import { MyStuff, Samples, Templates } from '../../items';
 import { PersonPage } from '../../profile';
@@ -10,6 +10,9 @@ interface Page {
   component: Type<any>;
 }
 
+@IonicPage({
+  name: 'menu'
+})
 @Component({
   selector: 'page-sidemenu',
   templateUrl: 'sidemenu.html'
@@ -30,6 +33,7 @@ export class SideMenu {
   }
 
   toPages(page) {
-    this.nav.getActiveChildNav().setPages([page.component]);
+    //this.nav.getActiveChildNav().setPages([page.component]);
+    this.homePage = page;
   }
 }

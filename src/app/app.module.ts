@@ -14,14 +14,14 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import io from 'socket.io-client';
 window["io"] = io;
 
-import { AboutHelpPage } from '../pages/about-help';
+import { AboutHelpPageModule } from '../pages/about-help';
 import { MyApp } from './app.component';
-import { LoginPage } from '../pages/login';
-import { CreatePage } from '../pages/create';
-import { EditPage, PersonPage } from '../pages/profile';
-import { NavModule, SideMenu } from '../pages/shared';
+import { LoginPageModule } from '../pages/login';
+import { CreatePageModule } from '../pages/create';
+import { EditPageModule, PersonPageModule } from '../pages/profile';
+import { NavModule, SideMenuModule } from '../pages/shared';
 import { ItemModule } from '../pages/items';
-import { PrivatePolicyPage } from '../pages/private-policy';
+import { PrivatePolicyPageModule } from '../pages/private-policy';
 import { SubmitModule } from '../pages/submit';
 import { BackandAuthService, BackandItemService } from '../providers/backand';
 import { FormHandler, PictureService, UserService } from '../providers/myservices';
@@ -35,33 +35,26 @@ const config = {
 
 @NgModule({
   declarations: [
-    AboutHelpPage,
-    MyApp,
-    CreatePage,
-    EditPage,
-    LoginPage,
-    PersonPage,
-    PrivatePolicyPage,
-    SideMenu
+    MyApp
   ],
   imports: [
+    AboutHelpPageModule,
     BrowserModule,
+    CreatePageModule,
+    EditPageModule,
     ItemModule,
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
+    LoginPageModule,
     NavModule,
+    PrivatePolicyPageModule,
+    PersonPageModule,
+    SideMenuModule,
     SubmitModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    AboutHelpPage,
-    MyApp,
-    CreatePage,
-    EditPage,
-    LoginPage,
-    PersonPage,
-    PrivatePolicyPage,
-    SideMenu
+    MyApp
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

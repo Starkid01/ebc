@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicModule } from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 
 import { NavModule } from '../shared/nav';
 import { SubmitPage } from './submit.page';
@@ -21,7 +21,7 @@ import { SocialForm } from './forms/submit-social.form';
 		SubmitPage
 	],
 	imports: [
-		IonicModule,
+		IonicPageModule.forChild(SubmitPage),
 		NavModule
 	],
 	entryComponents: [

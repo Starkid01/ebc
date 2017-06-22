@@ -1,11 +1,14 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
 import { BackandAuthService } from '../../providers/backand';
 import { FormHandler } from '../../providers/myservices';
 
+@IonicPage({
+  name: 'create-account'
+})
 @Component({
   selector: 'page-create',
   templateUrl: 'create.page.html'

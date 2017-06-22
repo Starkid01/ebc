@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { AlertController, ModalController } from 'ionic-angular';
+import { AlertController, IonicPage, ModalController } from 'ionic-angular';
 
 import { PrivatePolicyPage } from '../private-policy';
 
+@IonicPage({
+  name: 'about-help'
+})
 @Component({
   selector: 'page-about-help',
   templateUrl: 'about-help.html'

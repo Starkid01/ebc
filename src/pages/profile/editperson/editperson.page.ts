@@ -1,10 +1,13 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
-import { ToastController } from 'ionic-angular';
+import { IonicPage, ToastController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
 import { FormHandler, UserService, PictureService } from '../../../providers/myservices';
 
+@IonicPage({
+  name: 'edit-profile'
+})
 @Component({
   selector: 'page-edit',
   templateUrl: 'editperson.page.html'

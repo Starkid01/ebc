@@ -1,9 +1,12 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { ItemBase } from './base.component';
 import { BackandItemService } from '../../../providers';
 
+@IonicPage({
+	name: 'my-cards'
+})
 @Component({
 	selector: 'page-items',
 	templateUrl: 'base.component.html'

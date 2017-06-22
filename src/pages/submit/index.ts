@@ -1,3 +1,3 @@
 export * from './submit.page';
 export * from './submit-confirm.modal';
-export * from './submit.module';
+export * from './submit.page.module';

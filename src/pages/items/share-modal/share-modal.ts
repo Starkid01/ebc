@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { NavParams, ToastController, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { Contacts, Contact } from '@ionic-native/contacts';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { BackandItem } from '../../../providers';
 import { FormHandler } from '../../../providers/myservices';
 
+@IonicPage({
+  name: 'share'
+})
 @Component({
   selector: 'share-modal',
   templateUrl: 'share-modal.html'

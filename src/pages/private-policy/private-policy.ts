@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ViewController } from 'ionic-angular';
+import { IonicPage, ViewController } from 'ionic-angular';
 
 import { info } from './policy';
 
+@IonicPage({
+  name: 'private-policy'
+})
 @Component({
   selector: 'page-private-policy',
   templateUrl: 'private-policy.html'

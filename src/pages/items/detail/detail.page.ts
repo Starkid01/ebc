@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, ElementRef, OnInit, Renderer, ViewChild } from '@angular/core';
-import { NavParams, Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavParams, Platform, ToastController } from 'ionic-angular';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Contacts, Contact } from '@ionic-native/contacts';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -10,6 +10,11 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { BackandItem } from '../../../providers/backand';
 import { FormHandler } from '../../../providers/myservices';
 
+@IonicPage({
+  name: 'detail',
+  segment: 'item/:id',
+  defaultHistory: ['my-cards']
+})
 @Component({
   selector: 'page-detail',
   templateUrl: 'detail.page.html'

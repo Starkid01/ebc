@@ -1,63 +1,27 @@
 import { NgModule } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
 import { Contacts } from '@ionic-native/contacts';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { IonicModule } from 'ionic-angular';
-import { InlineSVGModule } from 'ng-inline-svg';
 
-import { DetailPage } from './detail';
-import { MyStuff } from './mystuff.tabs';
+import { DetailPageModule } from './detail';
+import { MyStuffModule } from './mystuff.tabs.module';
 import { NavModule } from '../shared/nav';
-import { Samples } from './samples.tabs';
-import { Templates } from './templates.tabs';
-import { ShareModalComponent } from './share-modal';
-import {
-	MyCardsPage,
-	MyFlysPage,
-	SCardsPage,
-	SFlysPage,
-	TCardsPage,
-	TFlysPage
-} from './list';
+import { SamplesModule } from './samples.tabs.module';
+import { TemplatesModule } from './templates.tabs.module';
+import { MyCardsPageModule, MyFlysPageModule, SCardsPageModule,
+	SFlysPageModule, TCardsPageModule, TFlysPageModule } from './list';
 
 @NgModule({
-	declarations: [
-		DetailPage,
-		MyStuff,
-		Samples,
-		Templates,
-		MyCardsPage,
-		MyFlysPage,
-		SCardsPage,
-		SFlysPage,
-		ShareModalComponent,
-		TCardsPage,
-		TFlysPage
-	],
 	imports: [
-    InlineSVGModule,
-		IonicModule,
-		NavModule
-	 ],
-	entryComponents: [
-		DetailPage,
-		MyStuff,
-		Samples,
-		Templates,
-		MyCardsPage,
-		MyFlysPage,
-		SCardsPage,
-		SFlysPage,
-		ShareModalComponent,
-		TCardsPage,
-		TFlysPage
-	],
-	providers: [
-		AppAvailability,
-		Contacts,
-		InAppBrowser,
-		LaunchNavigator
-	]
+		DetailPageModule,
+		MyStuffModule,
+		SamplesModule,
+		TemplatesModule,
+		MyCardsPageModule,
+		MyFlysPageModule,
+		SCardsPageModule,
+		SFlysPageModule,
+		TCardsPageModule,
+		TFlysPageModule
+	 ]
 })
 export class ItemModule { }
