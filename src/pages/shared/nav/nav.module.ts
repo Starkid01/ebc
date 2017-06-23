@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IonicModule } from 'ionic-angular';
 
 import { NavComponent } from './nav.component';
@@ -11,11 +10,11 @@ import { PopoverMenu } from './popover.menu';
 		PopoverMenu
 	],
 	exports: [
-		NavComponent
+		NavComponent,
+		PopoverMenu
 	],
 	imports: [
-		CommonModule,
-		IonicModule.forRoot(NavComponent)
+		IonicModule
 	],
 	entryComponents: [
 		PopoverMenu

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
+import { PopoverController } from 'ionic-angular';
 
 import { PopoverMenu } from './popover.menu';
 
@@ -9,7 +9,7 @@ import { PopoverMenu } from './popover.menu';
 })
 
 export class NavComponent {
-  constructor(private pop: PopoverController, private nav: NavController) {
+  constructor(private pop: PopoverController) {
 
   }
 

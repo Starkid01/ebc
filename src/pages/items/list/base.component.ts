@@ -63,7 +63,7 @@ export class ItemBase implements DoCheck, OnInit {
   }
 
   goTo(ebc: BackandItem) {
-    this.nav.push(DetailPage, ebc);
+    this.nav.push('detail', ebc);
   }
 
 

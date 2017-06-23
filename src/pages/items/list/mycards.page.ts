@@ -5,7 +5,8 @@ import { ItemBase } from './base.component';
 import { BackandItemService } from '../../../providers';
 
 @IonicPage({
-	name: 'my-cards'
+	name: 'my-cards',
+	segment: 'my-cards'
 })
 @Component({
 	selector: 'page-items',

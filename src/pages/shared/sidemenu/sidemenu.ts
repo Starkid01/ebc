@@ -1,17 +1,14 @@
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-
-import { MyStuff, Samples, Templates } from '../../items';
-import { PersonPage } from '../../profile';
-import { SubmitPage } from '../../submit';
 
 interface Page {
   title: string;
-  component: Type<any>;
+  component: string;
 }
 
 @IonicPage({
-  name: 'menu'
+  name: 'menu',
+  segment: 'menu'
 })
 @Component({
   selector: 'page-sidemenu',
@@ -20,20 +17,19 @@ interface Page {
 
 export class SideMenu {
   pages: Array<Page>;
-  homePage: Type<Component> = MyStuff;
+  homePage: string = 'my-stuff';
 
   constructor(public nav: NavController) {
     this.pages = [
-      { title: 'EBC Samples', component: Samples },
-      { title: 'My EBC', component: MyStuff },
-      { title: 'My Profile', component: PersonPage },
-      { title: 'Templates', component: Templates },
-      { title: 'Submit Item', component: SubmitPage }
+      { title: 'EBC Samples', component: 'samples' },
+      { title: 'My EBC', component: 'my-stuff' },
+      { title: 'My Profile', component: 'profile' },
+      { title: 'Templates', component: 'templates' },
+      { title: 'Submit Item', component: 'submit' }
     ];
   }
 
   toPages(page) {
     this.nav.getActiveChildNav().setPages([page.component]);
-    //this.nav.getActiveChildNav().setRoot([page.component]);
   }
 }

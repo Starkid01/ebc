@@ -1,10 +1,9 @@
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
-import { TCardsPage, TFlysPage } from './list';
-
 @IonicPage({
-  name: 'templates'
+  name: 'templates',
+  segment: 'templates'
 })
 @Component({
   selector: 'tabs-templates',
@@ -12,8 +11,8 @@ import { TCardsPage, TFlysPage } from './list';
 })
 
 export class Templates {
-  cardTab: Type<TCardsPage> = TCardsPage;
-  flyerTab: Type<TFlysPage> = TFlysPage;
+  cardTab: string = 'template-cards';
+  flyerTab: string = 'template-flyers';
   title: string = 'Template';
 
   constructor() {

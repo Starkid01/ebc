@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
-import { BackandAuthService } from '../../providers/backand';
 import { FormHandler } from '../../providers/myservices';
 
 @IonicPage({
-  name: 'create-account'
+  name: 'create-account',
+  segment: 'create-account'
 })
 @Component({
   selector: 'page-create',
@@ -24,8 +24,8 @@ export class CreatePage {
   password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmPassword: FormControl = new FormControl('', Validators.required);
 
-  constructor(private auth: BackandAuthService, private backand: BackandService,
-    private form: FormHandler, private nav: NavController, private toast: ToastController) {
+  constructor(private backand: BackandService, private form: FormHandler, 
+  private nav: NavController, private toast: ToastController) {
     this.verify = new FormGroup({
       password: this.password,
       confirmPassword: this.confirmPassword

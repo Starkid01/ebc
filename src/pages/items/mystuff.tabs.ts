@@ -4,7 +4,8 @@ import { IonicPage } from 'ionic-angular';
 import { MyCardsPage, MyFlysPage } from './list';
 
 @IonicPage({
-  name: 'my-stuff'
+  name: 'my-stuff',
+  segment: 'my-stuff'
 })
 @Component({
   selector: 'tabs-user',
@@ -12,8 +13,8 @@ import { MyCardsPage, MyFlysPage } from './list';
 })
 
 export class MyStuff {
-  cardTab: Type<MyCardsPage> = MyCardsPage;
-  flyerTab: Type<MyFlysPage> = MyFlysPage;
+  cardTab: string = 'my-cards';
+  flyerTab: string = 'my-flyers';
   title: string = 'My';
 
   constructor() {

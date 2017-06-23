@@ -3,9 +3,6 @@ import { Storage } from '@ionic/storage';
 import { BackandService } from '@backand/angular2-sdk';
 import { App, ViewController } from 'ionic-angular';
 
-import { AboutHelpPage } from '../../about-help';
-import { LoginPage } from '../../login';
-
 @Component({
   template: `
     <ion-list no-lines>
@@ -30,7 +27,7 @@ export class PopoverMenu {
   aboutHelp() {
     let nav = this.app.getRootNav();
     this.view.dismiss();
-    nav.push(AboutHelpPage);
+    nav.push('about-help');
   }
 
   signOut() {
@@ -39,6 +36,6 @@ export class PopoverMenu {
     this.backand.signout();
     this.view.dismiss();
     this.storage.clear();
-    nav.setRoot(LoginPage);
+    nav.setRoot('login');
   }
 }

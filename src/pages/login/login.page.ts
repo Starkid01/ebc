@@ -1,16 +1,14 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { Component, Type } from '@angular/core';
-import { AlertController, App, IonicPage, ToastController, ModalController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { AlertController, App, IonicPage, ToastController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
-import { AboutHelpPage } from '../about-help';
 import { BackandAuthService } from '../../providers/backand';
 import { UserService, FormHandler } from '../../providers/myservices';
-import { CreatePage } from '../create';
-import { SideMenu } from '../shared';
 
 @IonicPage({
-  name: 'login'
+  name: 'login',
+  segment: 'login'
 })
 @Component({
   selector: 'page-login',
@@ -18,20 +16,14 @@ import { SideMenu } from '../shared';
 })
 
 export class LoginPage {
-  signUp: Type<CreatePage> = CreatePage;
+  signUp: string = 'create-account';
   loginForm: FormGroup;
   username: FormControl = new FormControl('', [Validators.required, this.form.emailValidator]);
   password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 
-  constructor(public app: App,
-    public auth: BackandAuthService,
-    public backand: BackandService,
-    public form: FormHandler,
-    public user: UserService,
-    private alert: AlertController,
-    private toast: ToastController,
-    private modal: ModalController) {
+  constructor(public app: App,  public auth: BackandAuthService, public backand: BackandService,
+  public form: FormHandler, public user: UserService, private alert: AlertController, private toast: ToastController) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
@@ -40,7 +32,7 @@ export class LoginPage {
 
   aboutHelp() {
     let nav = this.app.getRootNav();
-    nav.push(AboutHelpPage);
+    nav.push('about-help');
   }
 
   clearAll() {
@@ -49,7 +41,7 @@ export class LoginPage {
 
   loggedIn() {
     let nav = this.app.getRootNav();
-    nav.setRoot(SideMenu);
+    nav.setRoot('menu');
   }
 
   openPage(page) {

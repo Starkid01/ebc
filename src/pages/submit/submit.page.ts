@@ -6,7 +6,8 @@ import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 import { SubmitConfirm } from './submit-confirm.modal';
 
 @IonicPage({
-  name: 'submit'
+  name: 'submit',
+  segment: 'submit'
 })
 @Component({
   selector: 'page-submit',

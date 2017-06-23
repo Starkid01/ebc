@@ -3,8 +3,6 @@ import { AppVersion } from '@ionic-native/app-version';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AlertController, IonicPage, ModalController } from 'ionic-angular';
 
-import { PrivatePolicyPage } from '../private-policy';
-
 @IonicPage({
   name: 'about-help'
 })
@@ -84,7 +82,7 @@ export class AboutHelpPage implements OnInit {
   }
 
   policy() {
-    let legal = this.modal.create(PrivatePolicyPage);
+    let legal = this.modal.create('private-policy');
     legal.present();
   }
 }

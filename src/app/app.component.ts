@@ -8,8 +8,8 @@ import { Platform, Nav, Events } from 'ionic-angular';
 
 import { BackandItemService } from '../providers/backand';
 import { UserService } from '../providers/myservices';
-import { LoginPage } from '../pages/login';
-import { SideMenu } from '../pages/shared';
+//import { LoginPage } from '../pages/login';
+//import { SideMenu } from '../pages/shared';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { SideMenu } from '../pages/shared';
 })
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
-  rootPage: Type<LoginPage> = LoginPage;
+  rootPage: any = 'login';
 
   constructor(public platform: Platform, public backand: BackandService,
     public events: Events, public items: BackandItemService, public splashScreen: SplashScreen,
@@ -55,9 +55,9 @@ export class MyApp implements OnInit {
         if (bool) {
           this.user.getUser();
           this.items.buildList();
-          this.nav.setRoot(SideMenu);
+          this.nav.setRoot('menu');
         } else {
-          this.nav.setRoot(LoginPage);
+          this.nav.setRoot('login');
         }
       }
     )

@@ -1,4 +1,5 @@
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BackandService } from '@backand/angular2-sdk';
 import { AppRate } from '@ionic-native/app-rate';
@@ -14,15 +15,15 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import io from 'socket.io-client';
 window["io"] = io;
 
-import { AboutHelpPageModule } from '../pages/about-help';
+//import { AboutHelpPageModule } from '../pages/about-help';
 import { MyApp } from './app.component';
-import { LoginPageModule } from '../pages/login';
-import { CreatePageModule } from '../pages/create';
-import { EditPageModule, PersonPageModule } from '../pages/profile';
-import { NavModule, SideMenuModule } from '../pages/shared';
-import { ItemModule } from '../pages/items';
-import { PrivatePolicyPageModule } from '../pages/private-policy';
-import { SubmitModule } from '../pages/submit';
+//import { LoginPageModule } from '../pages/login';
+//import { CreatePageModule } from '../pages/create';
+//import { EditPageModule, PersonPageModule } from '../pages/profile';
+import { NavModule } from '../pages/shared/nav';
+//import { ItemModule } from '../pages/items';
+//import { PrivatePolicyPageModule } from '../pages/private-policy';
+//import { SubmitModule } from '../pages/submit';
 import { BackandAuthService, BackandItemService } from '../providers/backand';
 import { FormHandler, PictureService, UserService } from '../providers/myservices';
 
@@ -38,19 +39,20 @@ const config = {
     MyApp
   ],
   imports: [
-    AboutHelpPageModule,
+    //AboutHelpPageModule,
     BrowserModule,
-    CreatePageModule,
-    EditPageModule,
-    ItemModule,
+    //CreatePageModule,
+    ///EditPageModule,
+    //ItemModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
-    LoginPageModule,
-    NavModule,
-    PrivatePolicyPageModule,
-    PersonPageModule,
-    SideMenuModule,
-    SubmitModule
+    NavModule
+    //LoginPageModule,
+    //PrivatePolicyPageModule,
+    //PersonPageModule,
+    //SideMenuModule,
+    //SubmitModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

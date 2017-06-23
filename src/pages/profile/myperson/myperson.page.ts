@@ -5,7 +5,8 @@ import { UserService } from '../../../providers/myservices';
 import { EditPage } from '../editperson';
 
 @IonicPage({
-  name: 'my-profile'
+  name: 'profile',
+  segment: ''
 })
 @Component({
   selector: 'page-person',
@@ -13,7 +14,7 @@ import { EditPage } from '../editperson';
 })
 
 export class PersonPage {
-  editPage: Type<EditPage> = EditPage;
+  editPage: string = 'edit';
 
   constructor(private nav: NavController, private user: UserService) {
   }

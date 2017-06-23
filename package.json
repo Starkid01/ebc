@@ -16,16 +16,16 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
-    "@angular/common": "4.2.3",
-    "@angular/compiler": "4.2.3",
-    "@angular/compiler-cli": "4.2.3",
-    "@angular/core": "4.2.3",
-    "@angular/forms": "4.2.3",
-    "@angular/http": "4.2.3",
-    "@angular/platform-browser": "4.2.3",
-    "@angular/platform-browser-dynamic": "4.2.3",
-    "@angular/platform-server": "4.2.3",
-    "@backand/angular2-sdk": "^1.2.3",
+    "@angular/common": "4.2.4",
+    "@angular/compiler": "4.2.4",
+    "@angular/compiler-cli": "4.2.4",
+    "@angular/core": "4.2.4",
+    "@angular/forms": "4.2.4",
+    "@angular/http": "4.2.4",
+    "@angular/platform-browser": "4.2.4",
+    "@angular/platform-browser-dynamic": "4.2.4",
+    "@angular/platform-server": "4.2.4",
+    "@backand/angular2-sdk": "^1.2.5",
     "@ionic-native/app-availability": "3.12.1",
     "@ionic-native/app-rate": "^3.12.1",
     "@ionic-native/app-version": "^3.12.1",
@@ -51,7 +51,7 @@
     "zone.js": "0.8.12"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "1.3.7",
+    "@ionic/app-scripts": "1.3.8",
     "@ionic/cli-plugin-cordova": "^1.4.0",
     "@ionic/cli-plugin-ionic-angular": "1.3.1",
     "typescript": "2.3.4"

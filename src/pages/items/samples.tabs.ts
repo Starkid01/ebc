@@ -4,7 +4,8 @@ import { IonicPage } from 'ionic-angular';
 import { SCardsPage, SFlysPage } from './list';
 
 @IonicPage({
-  name: 'samples'
+  name: 'samples',
+  segment: 'samples'
 })
 @Component({
   selector: 'tabs-samples',
@@ -12,8 +13,8 @@ import { SCardsPage, SFlysPage } from './list';
 })
 
 export class Samples {
-  cardTab: Type<SCardsPage> = SCardsPage;
-  flyerTab: Type<SFlysPage> = SFlysPage;
+  cardTab: string = 'sample-cards';
+  flyerTab: string = 'sample-flyers';
   title: string = 'Sample';
 
   constructor() {
