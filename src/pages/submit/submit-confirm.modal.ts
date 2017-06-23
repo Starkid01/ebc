@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ToastController, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
 interface Build {
@@ -29,6 +29,7 @@ interface Social {
 	social?: Array<string>;
 }
 
+@IonicPage()
 @Component({
 	selector: 'modal-confirm',
 	templateUrl: 'submit-confirm.modal.html'

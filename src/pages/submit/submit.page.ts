@@ -3,7 +3,6 @@ import { IonicPage, ModalController, Slides } from 'ionic-angular';
 
 import { PictureService } from '../../providers/myservices';
 import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
-import { SubmitConfirm } from './submit-confirm.modal';
 
 @IonicPage({
   name: 'submit',
@@ -54,7 +53,7 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
   }
 
   confirmInput(newItem) {
-    let confirm = this.modal.create(SubmitConfirm, newItem);
+    let confirm = this.modal.create('SubmitConfirm', newItem);
     confirm.present();
   }
 

@@ -26,8 +26,7 @@ import { NavModule } from '../../shared/nav';
 		AppAvailability,
 		Contacts,
 		InAppBrowser,
-		LaunchNavigator,
-    SocialSharing
+		LaunchNavigator
 	]
 })
 export class DetailPageModule {}

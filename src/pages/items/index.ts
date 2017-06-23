@@ -6,4 +6,3 @@ export * from './mystuff.tabs.module';
 export * from './samples.tabs.module';
 export * from './templates.tabs.module';
 export * from './list';
-export * from './items.module';

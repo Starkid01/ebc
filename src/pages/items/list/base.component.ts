@@ -1,9 +1,7 @@
 import { DoCheck, OnInit } from '@angular/core';
 import { AlertController, ModalController, NavController, ToastController } from 'ionic-angular';
 
-import { DetailPage } from '../detail';
 import { BackandItemService, BackandItem } from '../../../providers';
-import { ShareModalComponent } from '../share-modal';
 
 export class ItemBase implements DoCheck, OnInit {
   public dbTable: string;
@@ -82,7 +80,7 @@ export class ItemBase implements DoCheck, OnInit {
   }
 
   share(ebc: BackandItem) {
-    let shareMod = this.modal.create(ShareModalComponent, ebc);
+    let shareMod = this.modal.create('share', ebc);
 
     shareMod.present();
   }

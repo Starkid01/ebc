@@ -15,15 +15,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import io from 'socket.io-client';
 window["io"] = io;
 
-//import { AboutHelpPageModule } from '../pages/about-help';
 import { MyApp } from './app.component';
-//import { LoginPageModule } from '../pages/login';
-//import { CreatePageModule } from '../pages/create';
-//import { EditPageModule, PersonPageModule } from '../pages/profile';
 import { NavModule } from '../pages/shared/nav';
-//import { ItemModule } from '../pages/items';
-//import { PrivatePolicyPageModule } from '../pages/private-policy';
-//import { SubmitModule } from '../pages/submit';
 import { BackandAuthService, BackandItemService } from '../providers/backand';
 import { FormHandler, PictureService, UserService } from '../providers/myservices';
 
@@ -39,20 +32,11 @@ const config = {
     MyApp
   ],
   imports: [
-    //AboutHelpPageModule,
     BrowserModule,
-    //CreatePageModule,
-    ///EditPageModule,
-    //ItemModule,
     HttpModule,
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
     NavModule
-    //LoginPageModule,
-    //PrivatePolicyPageModule,
-    //PersonPageModule,
-    //SideMenuModule,
-    //SubmitModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
