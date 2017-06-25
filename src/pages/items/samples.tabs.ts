@@ -1,7 +1,5 @@
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
-
-import { SCardsPage, SFlysPage } from './list';
 
 @IonicPage({
   name: 'samples',

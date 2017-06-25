@@ -5,6 +5,7 @@ import { BackandService } from '@backand/angular2-sdk';
 import { AppRate } from '@ionic-native/app-rate';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
+import { FCM } from '@ionic-native/fcm';
 import { File } from '@ionic-native/file';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -47,6 +48,7 @@ const config = {
     AppRate,
     AppVersion,
     Camera,
+    FCM,
     File,
     BackandAuthService,
     BackandItemService,

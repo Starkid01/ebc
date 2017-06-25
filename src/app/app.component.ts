@@ -1,4 +1,4 @@
-import { Component, OnInit, Type, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BackandService } from '@backand/angular2-sdk';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -8,9 +8,6 @@ import { Platform, Nav, Events } from 'ionic-angular';
 
 import { BackandItemService } from '../providers/backand';
 import { UserService } from '../providers/myservices';
-//import { LoginPage } from '../pages/login';
-//import { SideMenu } from '../pages/shared';
-
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`

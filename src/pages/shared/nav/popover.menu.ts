@@ -9,6 +9,9 @@ import { App, ViewController } from 'ionic-angular';
       <button ion-item (click)="aboutHelp()">
         <span>About &amp; Help <ion-icon name="help-circle"></ion-icon></span>
       </button>
+       <button ion-item (click)="settingPage()">
+        <span>Settings <ion-icon name="settings"></ion-icon></span>
+      </button>
       <button ion-item (click)="signOut()">
         <span ion-text color="danger">Sign Out <ion-icon name="log-out"></ion-icon></span>
       </button>
@@ -28,6 +31,12 @@ export class PopoverMenu {
     let nav = this.app.getRootNav();
     this.view.dismiss();
     nav.push('about-help');
+  }
+
+  settingPage() {
+    let nav = this.app.getRootNav();
+    this.view.dismiss();
+    nav.push('settings');
   }
 
   signOut() {

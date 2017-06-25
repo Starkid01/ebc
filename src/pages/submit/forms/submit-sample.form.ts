@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NavController } from 'ionic-angular';
 
 import { FormBase } from './submit-base.form';
 import { FormHandler, UserService } from '../../../providers/myservices';
@@ -18,7 +17,7 @@ export class SampleForm extends FormBase {
   email: FormControl = new FormControl('', this.form.emailValidator);
   phone: FormControl = new FormControl('', this.form.phoneValidator);
 
-  constructor(private nav: NavController, public form: FormHandler, public user: UserService) {
+  constructor(public form: FormHandler, public user: UserService) {
     super(user);
     this.detailForm = new FormGroup({
       bodyName: this.bodyName,

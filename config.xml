@@ -106,4 +106,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="4.0.1" />
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
+    <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
 </widget>

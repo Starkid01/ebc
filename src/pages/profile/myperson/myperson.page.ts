@@ -1,8 +1,5 @@
-import { Component, Type } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
-
-import { UserService } from '../../../providers/myservices';
-import { EditPage } from '../editperson';
+import { Component } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
   name: 'profile',
@@ -16,6 +13,6 @@ import { EditPage } from '../editperson';
 export class PersonPage {
   editPage: string = 'edit';
 
-  constructor(private nav: NavController, private user: UserService) {
+  constructor() {
   }
 }

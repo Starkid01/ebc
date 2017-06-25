@@ -1,0 +1,16 @@
+page-settings {
+  .set {
+    @include page-body;
+    @include heading;
+
+    .body {
+      padding-top: 0;
+    }
+
+    .save-btn {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 1rem;
+    }
+  }
+}

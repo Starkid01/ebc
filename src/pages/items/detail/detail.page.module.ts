@@ -5,7 +5,6 @@ import { IonicPageModule } from 'ionic-angular';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
-import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { DetailPage } from './detail.page';
 import { NavModule } from '../../shared/nav';

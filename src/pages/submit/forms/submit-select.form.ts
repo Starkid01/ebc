@@ -1,7 +1,6 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
-import {  BackandItemService, BackandItem } from '../../../providers';
+import { BackandItemService, BackandItem } from '../../../providers';
 
 @Component({
   selector: 'ebc-select-form',
@@ -15,7 +14,7 @@ export class SelectForm implements DoCheck, OnInit {
   tempFlyers: Array<BackandItem> = [];
   tempView: string = ''; 
 
-  constructor(private nav: NavController, private backand:  BackandItemService) {
+  constructor(private backand:  BackandItemService) {
   }
 
   ngDoCheck() {

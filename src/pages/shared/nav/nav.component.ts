@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
 
 import { PopoverMenu } from './popover.menu';
@@ -9,9 +9,9 @@ import { PopoverMenu } from './popover.menu';
 })
 
 export class NavComponent {
-  constructor(private pop: PopoverController) {
+ @Input('color') barColor: string = 'primary';
 
-  }
+  constructor(private pop: PopoverController) { }
 
   menuOpen(click) {
     let menu = this.pop.create(PopoverMenu);

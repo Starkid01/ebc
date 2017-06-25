@@ -1,0 +1,20 @@
+<ion-header>
+  <ebc-navbar color="favorite">Settings</ebc-navbar>
+</ion-header>
+
+<ion-content class="set">
+  <ion-card>
+    <ion-card-header>
+      <h2 ion-text color="mygray">App Settings</h2>
+    </ion-card-header>
+    <ion-card-content class="body" padding>
+      <ion-item>
+        <ion-label>Notification Messages</ion-label>
+        <ion-toggle color="secondary" [(ngModel)]="notify"></ion-toggle>
+      </ion-item>
+      <div class="save-btn">
+        <button ion-button outline color="primary" (click)="setSettings()">Save</button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
