@@ -8,13 +8,15 @@
       <h2 ion-text color="mygray">App Settings</h2>
     </ion-card-header>
     <ion-card-content class="body" padding>
+      <form [formGroup]="settings" (ngSubmit)="setSettings()">
       <ion-item>
         <ion-label>Notification Messages</ion-label>
-        <ion-toggle color="secondary" [(ngModel)]="notify"></ion-toggle>
+        <ion-toggle color="secondary" formControlName="notifications"></ion-toggle>
       </ion-item>
       <div class="save-btn">
-        <button ion-button outline color="primary" (click)="setSettings()">Save</button>
+        <button ion-button outline color="primary" type="submit" [disabled]="noChange">Save</button>
       </div>
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>

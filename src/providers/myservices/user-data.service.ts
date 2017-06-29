@@ -8,9 +8,7 @@ import { BackandUser } from '../backand';
 export class UserService {
   myUser: BackandUser;
 
-  constructor(public events: Events, public backand: BackandService) {
-
-  }
+  constructor(public events: Events, public backand: BackandService) { }
 
   getUser() {
     this.backand.query.post('CurrentUser')
@@ -21,6 +19,10 @@ export class UserService {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  notifyEnroll(token) {
+    console.log(token);
   }
 
   setUser(user) {

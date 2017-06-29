@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BackandService } from '@backand/angular2-sdk';
+import { FCM } from '@ionic-native/fcm';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 import { Platform, Nav, Events } from 'ionic-angular';
+import { Subscription } from 'rxjs';
 
 
 import { BackandItemService } from '../providers/backand';
@@ -16,8 +18,8 @@ export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = 'login';
 
-  constructor(public platform: Platform, public backand: BackandService,
-    public events: Events, public items: BackandItemService, public splashScreen: SplashScreen,
+  constructor(public platform: Platform, public backand: BackandService, public events: Events,
+    public fcm: FCM, public items: BackandItemService, public splashScreen: SplashScreen,
     public statusBar: StatusBar, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -80,7 +82,46 @@ export class MyApp implements OnInit {
     });
     this.events.subscribe('login', () => {
       this.items.buildList();
-    })
+    });
+    this.events.subscribe('notify', (get) => {
+      this.registerDevice();
+      this.noitified(get);
+    });
+  }
+
+  noitified(on) {
+    let push: Subscription;
+    let subbed: boolean = false;
+
+    if (on) {
+      push = this.fcm.onNotification()
+        .subscribe(data => {
+          subbed = true;
+          if (data.wasTapped) {
+            console.log('Received in background');
+          } else {
+            console.log('Received in foreground');
+          };
+        })
+    } else {
+      console.log('Notification Off');
+      if (subbed) {
+        push.unsubscribe();
+        subbed = false;
+      }
+    }
+  }
+
+  registerDevice() {
+    this.fcm.getToken()
+      .then(device => {
+        this.user.notifyEnroll(device);
+      })
+      .catch(err => console.log(err));
+
+    let refresh = this.fcm.onTokenRefresh().subscribe(
+      token => console.log(token),
+      err => console.log(err))
   }
 
   updateList() {

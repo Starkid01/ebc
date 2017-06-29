@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
+//import { ReactiveFormsModule } from '@angular/forms';
 
 import { SettingsPage } from './settings';
 import { NavModule } from '../shared/nav';
