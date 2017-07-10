@@ -5,7 +5,7 @@ import { Contacts, Contact } from '@ionic-native/contacts';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { BackandItem } from '../../../providers';
-import { FormHandler } from '../../../providers/myservices';
+import { ShareInput } from '../../../providers/myservices';
 
 @IonicPage({
   name: 'share'
@@ -15,55 +15,29 @@ import { FormHandler } from '../../../providers/myservices';
   templateUrl: 'share-modal.html'
 })
 export class ShareModalComponent implements OnInit {
-  body: FormControl = new FormControl('');
   ebcUrl: string = 'http://ebc.beezleeart.com/card/';
-  email: FormControl = new FormControl('', [this.form.emailValidator, Validators.required]);
-  emailForm: FormGroup;
-  emailText: FormControl = new FormControl('');
-  field: string;
+  emailShare: ShareInput;
   hide: boolean = false;
   item: BackandItem;
-  message: string = '';
-  phone: FormControl = new FormControl('', [this.form.phoneValidator, Validators.required]);
-  picked: Contact;
-  pickPhone: string = '';
-  smsForm: FormGroup;
-  smsText: FormControl = new FormControl('');
+  smsShare: ShareInput;
   type: string;
 
-  constructor(private contacts: Contacts, private form: FormHandler, private params: NavParams,
-    private social: SocialSharing, private toast: ToastController, private view: ViewController) {
-    this.smsForm = new FormGroup({
-      phone: this.phone,
-      smsText: this.smsText
-    });
-    this.emailForm = new FormGroup({
-      email: this.email,
-      emailText: this.emailText,
-      body: this.body
-    });
-  }
+  constructor(private contacts: Contacts, private params: NavParams, private toast: ToastController, private view: ViewController) { }
 
   ngOnInit() {
     this.getItem();
+    this.setEmail();
+    this.setMessage();
   }
 
   close() {
     this.view.dismiss();
   }
 
-  customField() {
-    if (this.message === 'text') {
-      this.phone.setValue(this.field);
-    }
-    if (this.message === 'mail') {
-      this.email.setValue(this.field);
-    }
-  }
-
   getContact() {
     this.contacts.pickContact().then((contact) => {
-      this.picked = contact;
+      this.setEmail(contact);
+      this.setMessage(contact);
       this.hide = true;
     });
   }
@@ -80,38 +54,36 @@ export class ShareModalComponent implements OnInit {
     this.setText();
   }
 
-  sendEmail(form) {
-    let myInput = form.value;
-    let link: string = `${this.ebcUrl}${this.item['id']}`;
-    let myEmail = `<p>${myInput['body']}</p> <p>${link}</p>`;
-
-    this.social.shareViaEmail(myEmail, myInput['emailText'], myInput['email']).then(
-      data => this.sentMsg('Email'),
-      err => console.log(err, 'Fail'));
+  setEmail(contact?: Contact) {
+    this.emailShare = {
+      ebcUrl: `${this.ebcUrl}${this.item['id']}`,
+      hide: false,
+      messText: this.setText(),
+      disabled: this.item.disable
+    }
+     if (contact) {
+      this.emailShare.contacts = contact.emails;
+      this.emailShare.hide = true;
+      this.emailShare.name = contact.name;
+    }
   }
 
-  sentMsg(type: string) {
-    let isSent = this.toast.create({
-      message: `Your ${type} as been Sent`,
-      duration: 5000
-    });
-
-    isSent.present();
+  setMessage(contact?: Contact) {
+    this.smsShare = {
+      ebcUrl: `${this.ebcUrl}${this.item['id']}`,
+      hide: false,
+      messText: this.setText(),
+      disabled: this.item.disable
+    }
+    if (contact) {
+      this.smsShare.contacts = contact.phoneNumbers;
+      this.smsShare.hide = true;
+      this.smsShare.name = contact.name;
+    }
   }
 
-  sendSms(form) {
-    let mySms = form.value;
-    let link: string = `${this.ebcUrl}${this.item['id']}`;
-    let body = `${mySms['smsText']} ${link}`;
-
-    this.social.shareViaSMS(body, mySms.phone).then(
-      data => this.sentMsg('SMS Text'),
-      err => console.log(err, 'Fail'));
-  }
-
-  setText() {
+  setText(): string {
     let startText: string = `Check out my interactive EBC ${this.type}, just touch to connect.`;
-    this.smsText.setValue(startText);
-    this.emailText.setValue(startText);
+    return startText;
   }
 }

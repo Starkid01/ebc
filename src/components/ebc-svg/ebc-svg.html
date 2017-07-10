@@ -1,0 +1,12 @@
+<div *ngIf="!item?.ready" class="notAvail">
+  <div class="notReady">
+    <h3 ion-text color="light">This {{type}} is not ready for use yet.</h3>
+  </div>
+  <div [ngSwitch]="item?.pic">
+    <img *ngSwitchDefault [src]="item?.pic" [title]="'This '+type+' Being Created'" />
+    <div *ngSwitchCase="'' || null" class="broken-img">
+      <span>This {{type}} Being Created</span>
+    </div>
+  </div>
+</div>
+ <div *ngIf="item?.ready" #myItem [inlineSVG]="item?.media"></div>

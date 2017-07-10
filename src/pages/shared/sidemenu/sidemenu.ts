@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
 interface Page {
@@ -15,18 +15,21 @@ interface Page {
   templateUrl: 'sidemenu.html'
 })
 
-export class SideMenu {
-  pages: Array<Page>;
+export class SideMenu implements OnInit  {
+   pages: Array<Page> = [
+    { title: 'EBC Samples', component: 'samples' },
+    { title: 'My EBC', component: 'my-stuff' },
+    { title: 'My Profile', component: 'profile' },
+    { title: 'Templates', component: 'templates' },
+    { title: 'Submit Item', component: 'submit' }
+  ];
+  hom
   homePage: string = 'my-stuff';
 
-  constructor(public nav: NavController) {
-    this.pages = [
-      { title: 'EBC Samples', component: 'samples' },
-      { title: 'My EBC', component: 'my-stuff' },
-      { title: 'My Profile', component: 'profile' },
-      { title: 'Templates', component: 'templates' },
-      { title: 'Submit Item', component: 'submit' }
-    ];
+  constructor(public nav: NavController) { }
+
+  ngOnInit() {
+    this.nav.getActiveChildNav().id = 'side';
   }
 
   toPages(page) {

@@ -21,26 +21,31 @@ import { App, ViewController } from 'ionic-angular';
 
 export class PopoverMenu {
 
-  constructor(
-    private app: App,
-    private backand: BackandService,
-    private storage: Storage,
-    private view: ViewController) { }
+  constructor(private app: App, private backand: BackandService,
+    private storage: Storage, private view: ViewController) { }
   
   aboutHelp() {
-    let nav = this.app.getRootNav();
+    let nav = this.getRootNav();
     this.view.dismiss();
     nav.push('about-help');
   }
 
+  getRootNav() {
+    let appNavs = this.app.getRootNavs();
+    let rootNav = appNavs.find(nav => {
+      return nav ? nav['id'] === 'ebc': null;
+    });
+    return rootNav;
+  }
+
   settingPage() {
-    let nav = this.app.getRootNav();
+     let nav = this.getRootNav();
     this.view.dismiss();
     nav.push('settings');
   }
 
   signOut() {
-    let nav = this.app.getRootNav();
+     let nav = this.getRootNav();
 
     this.backand.signout();
     this.view.dismiss();

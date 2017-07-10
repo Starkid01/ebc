@@ -4,7 +4,7 @@ import { FCM } from '@ionic-native/fcm';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
-import { Platform, Nav, Events } from 'ionic-angular';
+import { App, Events, Nav, Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 
 
@@ -18,7 +18,7 @@ export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = 'login';
 
-  constructor(public platform: Platform, public backand: BackandService, public events: Events,
+  constructor(public app: App, public platform: Platform, public backand: BackandService, public events: Events,
     public fcm: FCM, public items: BackandItemService, public splashScreen: SplashScreen,
     public statusBar: StatusBar, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
@@ -45,6 +45,7 @@ export class MyApp implements OnInit {
     });
     this.authCheck();
     this.myEvents();
+    this.nav.id = 'ebc';
   }
 
   authCheck() {
@@ -77,9 +78,7 @@ export class MyApp implements OnInit {
   }
 
   myEvents() {
-    this.events.subscribe('myUser', (user) => {
-      this.user.myUser = user;
-    });
+    this.user.userData();
     this.events.subscribe('login', () => {
       this.items.buildList();
     });

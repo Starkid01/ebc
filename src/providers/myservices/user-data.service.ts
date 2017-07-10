@@ -26,13 +26,13 @@ export class UserService {
   }
 
   setUser(user) {
+    this.myUser = user;
     this.events.publish('myUser', user);
   }
 
   userData() {
     this.events.subscribe('myUser', (user) => {
       this.myUser = user;
-      console.log(user);
     });
   }
 }

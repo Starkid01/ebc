@@ -31,7 +31,7 @@ export class LoginPage {
   }
 
   aboutHelp() {
-    let nav = this.app.getRootNav();
+    let nav = this.app.getActiveNav();
     nav.push('about-help');
   }
 
@@ -40,12 +40,12 @@ export class LoginPage {
   }
 
   loggedIn() {
-    let nav = this.app.getRootNav();
+    let nav = this.app.getActiveNav();
     nav.setRoot('menu');
   }
 
   openPage(page) {
-    let nav = this.app.getRootNav();
+    let nav = this.app.getActiveNav();
     nav.push(page);
   }
 
