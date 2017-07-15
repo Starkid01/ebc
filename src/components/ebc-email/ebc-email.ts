@@ -1,6 +1,5 @@
 import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { Contacts, Contact } from '@ionic-native/contacts';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { ShareInput, FormHandler } from '../../providers/myservices';

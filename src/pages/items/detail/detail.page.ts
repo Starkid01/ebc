@@ -7,8 +7,7 @@ import { ShareInput } from '../../../providers/myservices';
 
 @IonicPage({
   name: 'detail',
-  segment: 'item/:id',
-  defaultHistory: ['my-cards']
+  segment: 'item'
 })
 @Component({
   selector: 'page-detail',
@@ -16,7 +15,7 @@ import { ShareInput } from '../../../providers/myservices';
 })
 
 export class DetailPage implements OnInit {
-  ebcUrl: string = 'http://ebc.beezleeart.com/card/';
+  ebcUrl: string = 'https://ebc.beezleeart.com/card/';
   emailShare: ShareInput;
   hide: boolean = false;
   item: BackandItem;
@@ -40,11 +39,7 @@ export class DetailPage implements OnInit {
   }
 
   isType() {
-    if (this.item['flyer']) {
-      this.type = 'Flyer';
-    } else {
-      this.type = 'Card';
-    }
+    this.type = this.item.flyer ? 'Flyer' : 'Card';
     this.setText();
   }
 

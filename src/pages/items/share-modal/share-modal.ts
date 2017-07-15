@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { Contacts, Contact } from '@ionic-native/contacts';
-import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { BackandItem } from '../../../providers';
 import { ShareInput } from '../../../providers/myservices';
@@ -15,7 +13,7 @@ import { ShareInput } from '../../../providers/myservices';
   templateUrl: 'share-modal.html'
 })
 export class ShareModalComponent implements OnInit {
-  ebcUrl: string = 'http://ebc.beezleeart.com/card/';
+  ebcUrl: string = 'https://ebc.beezleeart.com/card/';
   emailShare: ShareInput;
   hide: boolean = false;
   item: BackandItem;
@@ -52,6 +50,15 @@ export class ShareModalComponent implements OnInit {
     }
 
     this.setText();
+  }
+
+  sentMsg(type: string) {
+    let isSent = this.toast.create({
+      message: `Your ${type} as been Sent`,
+      duration: 5000
+    });
+
+    isSent.present();
   }
 
   setEmail(contact?: Contact) {

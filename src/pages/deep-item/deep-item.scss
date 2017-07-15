@@ -1,0 +1,7 @@
+page-deep-item {
+  @include page-body;
+  @include heading;
+  @include inputs;
+  @include broken;
+  @include not;
+}

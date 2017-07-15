@@ -1,0 +1,15 @@
+<ion-header>
+  <ebc-navbar color="favorite">{{item?.name}}</ebc-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+   <ebc-svg *ngIf="loaded" [style]="type" [ebc]="item"></ebc-svg>
+    <ion-card-content>
+      <ion-card-title>
+        <h2 ion-text color="favorite">{{item?.name}}</h2>
+        <p class="desc">{{item?.desc}}</p>
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

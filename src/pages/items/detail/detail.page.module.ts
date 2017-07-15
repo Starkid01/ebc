@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
 import { Contacts } from '@ionic-native/contacts';
 import { IonicPageModule } from 'ionic-angular';
 import { InlineSVGModule } from 'ng-inline-svg';

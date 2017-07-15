@@ -15,6 +15,5 @@ export class MyStuff {
   flyerTab: string = 'my-flyers';
   title: string = 'My';
 
-  constructor() {
-  }
+  constructor() { }
 }

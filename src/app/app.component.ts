@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BackandService } from '@backand/angular2-sdk';
+import { Deeplinks } from '@ionic-native/deeplinks';
 import { FCM } from '@ionic-native/fcm';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 import { App, Events, Nav, Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs';
-
 
 import { BackandItemService } from '../providers/backand';
 import { UserService } from '../providers/myservices';
@@ -18,8 +18,8 @@ export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = 'login';
 
-  constructor(public app: App, public platform: Platform, public backand: BackandService, public events: Events,
-    public fcm: FCM, public items: BackandItemService, public splashScreen: SplashScreen,
+  constructor(public app: App, public platform: Platform, public backand: BackandService, public deeplinks: Deeplinks,
+    public events: Events, public fcm: FCM, public items: BackandItemService, public splashScreen: SplashScreen,
     public statusBar: StatusBar, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -28,6 +28,12 @@ export class MyApp implements OnInit {
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#0d95bb');
       this.splashScreen.hide();
+
+      this.deeplinks.routeWithNavController(this.nav, {
+        '/card/:id': 'deep'
+      }).subscribe(
+        (match) => console.log('Successfully matched route', match),
+        (nomatch) => console.log('Successfully matched route', nomatch));
     });
   }
 
