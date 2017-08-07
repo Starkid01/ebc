@@ -1,5 +1,5 @@
 import { ErrorHandler, NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BackandService } from '@backand/angular2-sdk';
 import { AppRate } from '@ionic-native/app-rate';
@@ -42,8 +42,8 @@ const config = {
     EbcEmailComponentModule,
     EbcSmsComponentModule,
     EbcSvgComponentModule,
-    HttpModule,
-    InlineSVGModule.forRoot({baseUrl: 'https://cors-anywhere.herokuapp.com/'}),
+    HttpClientModule,
+    InlineSVGModule.forRoot({ baseUrl: 'https://cors-anywhere.herokuapp.com/' }),
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
     NavModule

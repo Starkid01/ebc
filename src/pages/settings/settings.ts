@@ -36,7 +36,7 @@ export class SettingsPage implements OnInit {
 
   setNotify() {
     this.storage.set('notify', this.notify.value);
-    //this.events.publish('notify', this.notify);
+    this.events.publish('notify', this.notify);
   }
 
   setSettings() {

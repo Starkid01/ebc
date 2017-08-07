@@ -29,10 +29,10 @@ export class SideMenu implements OnInit  {
   constructor(public nav: NavController) { }
 
   ngOnInit() {
-    this.nav.getActiveChildNav().id = 'side';
+    this.nav.getActiveChildNavs()[0].id = 'side';
   }
 
   toPages(page) {
-    this.nav.getActiveChildNav().setPages([page.component]);
+    this.nav.getActiveChildNavs()[0].setPages([page.component]);
   }
 }

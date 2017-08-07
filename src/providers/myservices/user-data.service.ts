@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Events } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk';
 
@@ -8,7 +9,7 @@ import { BackandUser } from '../backand';
 export class UserService {
   myUser: BackandUser;
 
-  constructor(public events: Events, public backand: BackandService) { }
+  constructor(public backand: BackandService, public events: Events, public http: HttpClient) { }
 
   getUser() {
     this.backand.query.post('CurrentUser')
@@ -22,7 +23,11 @@ export class UserService {
   }
 
   notifyEnroll(token) {
-    console.log(token);
+    let deviceData = {
+      device: this.myUser.email,
+      token: token
+    };
+    this.backand.object.create('equipment', deviceData)
   }
 
   setUser(user) {
