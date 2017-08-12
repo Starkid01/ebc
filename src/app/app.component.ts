@@ -56,8 +56,8 @@ export class MyApp implements OnInit {
 
   authCheck() {
     this.updateList();
-    this.storage.get('auth').then(
-      bool => {
+    this.storage.get('auth')
+      .then(bool => {
         if (bool) {
           this.user.getUser();
           this.items.buildList();
@@ -65,8 +65,10 @@ export class MyApp implements OnInit {
         } else {
           this.nav.setRoot('login');
         }
-      }
-    )
+      }).catch(err => console.log(err));
+    this.storage.get('notify')
+      .then(res => this.noitified(res))
+      .catch(err => console.log(err));
   }
 
   rebuildList(listArr: Array<any>) {
@@ -88,45 +90,52 @@ export class MyApp implements OnInit {
     this.events.subscribe('login', () => {
       this.items.buildList();
     });
-    this.events.subscribe('notify', (get) => {
-      this.registerDevice();
-      this.noitified(get);
+    this.events.subscribe('alerts', fire => {
+      if (fire) {
+        this.registerDevice();
+      }
+      this.noitified(fire);
     });
   }
 
   noitified(on) {
-    let push: Subscription;
-    let subbed: boolean = false;
+    let push: Subscription = this.fcm.onNotification()
+      .subscribe(data => {
+        if (data.wasTapped) {
+          console.log('Received in background');
+        } else {
+          console.log('Received in foreground');
+        };
+      });
 
-    if (on) {
-      push = this.fcm.onNotification()
-        .subscribe(data => {
-          subbed = true;
-          if (data.wasTapped) {
-            console.log('Received in background');
-          } else {
-            console.log('Received in foreground');
-          };
-        })
-    } else {
+    let refresh = this.fcm.onTokenRefresh().subscribe(
+      token => this.user.notifyUpdate(token),
+      err => console.log(err));
+
+    if (!on) {
       console.log('Notification Off');
-      if (subbed) {
-        push.unsubscribe();
-        subbed = false;
-      }
+      push.unsubscribe();
+      refresh.unsubscribe();
+      this.removeDevice();
     }
   }
 
   registerDevice() {
-    this.fcm.getToken()
-      .then(device => {
-        this.user.notifyEnroll(device);
+    this.storage.get('device')
+      .then(id => {
+        if (!id) {
+          this.fcm.getToken()
+            .then(device => this.user.notifyEnroll(device))
+            .catch(err => console.log(err));
+        }
       })
       .catch(err => console.log(err));
+  }
 
-    let refresh = this.fcm.onTokenRefresh().subscribe(
-      token => console.log(token),
-      err => console.log(err))
+  removeDevice() {
+    this.storage.get('device')
+      .then(id => this.user.notifyRemove(id))
+      .catch(err => console.log(err));
   }
 
   updateList() {
