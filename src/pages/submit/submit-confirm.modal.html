@@ -62,7 +62,7 @@
     </ion-row>
     <div class="btns">
       <button ion-button color="danger" (click)="close()">Cancel</button>
-      <button ion-button (click)="finalSubmit()">Confirm</button>
+      <button ion-button (click)="finalSubmit()" [disabled]="confirmed">Confirm</button>
     </div>
   </ion-grid>
 </ion-content>

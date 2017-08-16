@@ -36,17 +36,15 @@ interface Social {
 })
 
 export class SubmitConfirm implements OnInit {
+	confirmed: boolean = false;
 	contactData: Contact = {};
 	createData: Build = {};
 	extra: Object[];
 	formData: Form = {};
 	selectData: Object = {};
-	socialData: Social = {
-		social: []
-	};
+	socialData: Social = { social: [] };
 	tempData: PreMade = {};
 	template: boolean = false;
-
 
 	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
 
@@ -59,10 +57,11 @@ export class SubmitConfirm implements OnInit {
 	completeSubmit() {
 		let completed = this.toast.create({
 			message: 'Your Card/Flyer has been Submitted',
-			duration: 5000,
+			duration: 3000,
 		});
 
 		completed.onDidDismiss(() => {
+			completed.getNav().setRoot('submit');
 			this.close();
 		});
 		completed.present();
@@ -96,6 +95,7 @@ export class SubmitConfirm implements OnInit {
 		}
 		itemData['data'] = JSON.stringify(this.extra);
 
+		this.confirmed = true;
 		this.backand.object.create('items', itemData)
 			.then(res => {
 				this.completeSubmit();
