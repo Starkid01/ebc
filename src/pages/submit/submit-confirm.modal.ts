@@ -57,6 +57,7 @@ export class SubmitConfirm implements OnInit {
 	completeSubmit() {
 		let completed = this.toast.create({
 			message: 'Your Card/Flyer has been Submitted',
+			position: 'top',
 			duration: 3000,
 		});
 
