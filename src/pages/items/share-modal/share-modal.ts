@@ -55,6 +55,7 @@ export class ShareModalComponent implements OnInit {
   sentMsg(type: string) {
     let isSent = this.toast.create({
       message: `Your ${type} as been Sent`,
+      position: 'top',
       duration: 5000
     });
 

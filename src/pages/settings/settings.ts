@@ -61,6 +61,7 @@ export class SettingsPage implements OnInit {
   settingsSaved() {
     let saved = this.toast.create({
       message: 'Your Settings have been Saved',
+      position: 'top',
       duration: 5000,
     });
 

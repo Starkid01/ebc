@@ -50,6 +50,7 @@ export class ItemBase implements DoCheck, OnInit {
   deleteToast() {
     let del = this.toast.create({
       message: `The ${this.type} has been deleted.`,
+      position: 'top',
       duration: 5000
     })
 

@@ -107,6 +107,7 @@ export class PictureService {
   picSaved() {
     let myImg = this.toast.create({
       message: 'Your Profile Pic has been Saved',
+      position: 'top',
       duration: 2000
     });
     myImg.onDidDismiss(() => {

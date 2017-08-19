@@ -83,6 +83,7 @@ export class EditPage implements DoCheck {
   errorToast(message) {
     let errMess = this.toast.create({
       message: message,
+      position: 'top',
       duration: 5000
     });
 
@@ -92,6 +93,7 @@ export class EditPage implements DoCheck {
   profileUpdated(action: string) {
     let editSuccess = this.toast.create({
       message: `Your ${action} has been updated`,
+      position: 'top',
       duration: 5000
     });
 

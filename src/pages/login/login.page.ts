@@ -81,6 +81,7 @@ export class LoginPage {
   resetVerify() {
     let resVerify = this.toast.create({
       message: 'Check Your Email for Password Reset',
+      position: 'top',
       duration: 3000
     });
 

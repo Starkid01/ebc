@@ -41,6 +41,7 @@ export class CreatePage {
   accountMade(mess) {
     let made = this.toast.create({
       message: mess,
+      position: 'top',
       duration: 5000
     });
 
