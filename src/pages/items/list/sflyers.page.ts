@@ -6,7 +6,7 @@ import { BackandItemService } from '../../../providers';
 
 @IonicPage({
 	name: 'sample-flyers',
-	segment: 'sample-flyers'
+	segment: 'sf'
 })
 @Component({
 	selector: 'page-items',

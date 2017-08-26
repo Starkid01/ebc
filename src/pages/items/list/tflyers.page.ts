@@ -5,7 +5,8 @@ import { ItemBase } from './base.component';
 import { BackandItemService } from '../../../providers';
 
 @IonicPage({
-	name: 'template-flyers'
+	name: 'template-flyers',
+	segment: 'tf'
 })
 @Component({
 	selector: 'page-items',

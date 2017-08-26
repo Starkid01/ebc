@@ -6,7 +6,7 @@ import { BackandItemService } from '../../../providers';
 
 @IonicPage({
 	name: 'template-cards',
-	segment: ''
+	segment: 'tc'
 })
 @Component({
 	selector: 'page-items',

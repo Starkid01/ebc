@@ -3,7 +3,7 @@ import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
   name: 'templates',
-  segment: 'templates'
+  segment: 't3'
 })
 @Component({
   selector: 'tabs-templates',

@@ -3,7 +3,7 @@ import { IonicPage } from 'ionic-angular';
 
 @IonicPage({
   name: 'my-stuff',
-  segment: 'my-stuff'
+  segment: 'm1'
 })
 @Component({
   selector: 'tabs-user',
