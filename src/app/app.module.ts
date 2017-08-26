@@ -27,7 +27,6 @@ import { EbcEmailComponentModule } from '../components/ebc-email/ebc-email.modul
 import { EbcSmsComponentModule } from '../components/ebc-sms/ebc-sms.module';
 
 const config = {
-  mode: 'md',
   scrollAssist: false,
   tabsHighlight: true,
   tabsHideOnSubPages: true
