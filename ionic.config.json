@@ -1,6 +1,6 @@
 {
   "name": "EBC: Electonic Business Card",
-  "app_id": "ccb87aae",
+  "app_id": "f7da3aa5",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
