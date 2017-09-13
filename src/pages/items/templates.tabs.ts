@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, Tabs } from 'ionic-angular';
 
 @IonicPage({
   name: 'templates',
@@ -11,10 +11,15 @@ import { IonicPage } from 'ionic-angular';
 })
 
 export class Templates {
+  @ViewChild('tabs') tabNav: Tabs;
   cardTab: string = 'template-cards';
   flyerTab: string = 'template-flyers';
   title: string = 'Template';
 
-  constructor() {
+  constructor() { }
+
+  ionViewDidEnter() {
+    let tab = this.tabNav._tabs[0];
+    tab.setRoot('template-cards');
   }
 }

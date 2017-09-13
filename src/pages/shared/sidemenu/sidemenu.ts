@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 interface Page {
   title: string;
@@ -26,9 +26,9 @@ export class SideMenu  {
   hom
   homePage: string = 'my-stuff';
 
-  constructor(public nav: NavController) { }
+  constructor() { }
 
   toPages(page) {
-    this.nav.getActiveChildNavs()[0].setRoot(page.component);
+    this.homePage = page.component;
   }
 }
