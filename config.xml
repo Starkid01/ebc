@@ -68,6 +68,8 @@
         <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
+        <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
+        <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <preference name="WindowsStoreDisplayName" value="EBC: Electronic Business Card" />
     <preference name="webviewbounce" value="false" />
@@ -89,7 +91,7 @@
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <engine name="android" spec="^6.2.3" />
-    <engine name="ios" spec="^4.5.0" />
+    <engine name="ios" spec="^4.4.0" />
     <engine name="windows" spec="^5.0.0" />
     <plugin name="cordova-plugin-actionsheet" spec="^2.3.3" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
