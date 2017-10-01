@@ -47,7 +47,7 @@
         "@ionic/storage": "2.0.1",
         "@types/socket.io-client": "^1.4.29",
         "cordova-android": "^6.2.3",
-        "cordova-ios": "^4.4.0",
+        "cordova-ios": "^4.5.1",
         "cordova-plugin-actionsheet": "^2.3.3",
         "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-appavailability": "^0.4.2",
@@ -68,7 +68,8 @@
         "cordova-plugin-whitelist": "^1.3.2",
         "cordova-plugin-x-socialsharing": "^5.1.8",
         "cordova-windows": "^5.0.0",
-        "ionic-angular": "^3.6.1",
+        "es6-promise-plugin": "^4.1.1",
+        "ionic-angular": "^3.7.1",
         "ionic-plugin-deeplinks": "^1.0.15",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
@@ -81,7 +82,7 @@
         "zone.js": "0.8.16"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "2.1.4",
+        "@ionic/app-scripts": "^3.0.0",
         "ionic": "^3.12.0",
         "typescript": "2.4.2"
     },
@@ -110,22 +111,35 @@
             "cordova-plugin-actionsheet": {},
             "cordova-plugin-app-version": {},
             "cordova-plugin-appavailability": {},
-            "cordova-plugin-camera": {},
+            "cordova-plugin-camera": {
+                "CAMERA_USAGE_DESCRIPTION": " ",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+            },
             "cordova-plugin-console": {},
-            "cordova-plugin-contacts": {},
+            "cordova-plugin-contacts": {
+                "CONTACTS_USAGE_DESCRIPTION": " "
+            },
             "cordova-plugin-device": {},
             "cordova-plugin-dialogs": {},
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-media": {},
-            "cordova-plugin-media-capture": {},
+            "cordova-plugin-media": {
+                "MICROPHONE_USAGE_DESCRIPTION": " "
+            },
+            "cordova-plugin-media-capture": {
+                "CAMERA_USAGE_DESCRIPTION": " ",
+                "MICROPHONE_USAGE_DESCRIPTION": " ",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+            },
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "cordova-plugin-x-socialsharing": {},
             "ionic-plugin-keyboard": {},
-            "uk.co.workingedge.phonegap.plugin.launchnavigator": {},
+            "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+                "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+            },
             "ionic-plugin-deeplinks": {
                 "URL_SCHEME": "ebc",
                 "DEEPLINK_SCHEME": "https",
