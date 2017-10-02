@@ -11,7 +11,7 @@
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build",
+        "build": "ionic-app-scripts build && fcm.js",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve"
     },
@@ -107,7 +107,6 @@
     "description": "ebc: An Ionic project",
     "cordova": {
         "plugins": {
-            "cordova-plugin-fcm": {},
             "cordova-plugin-actionsheet": {},
             "cordova-plugin-app-version": {},
             "cordova-plugin-appavailability": {},
@@ -157,7 +156,8 @@
                 "DEEPLINK_4_HOST": " ",
                 "DEEPLINK_5_SCHEME": " ",
                 "DEEPLINK_5_HOST": " "
-            }
+            },
+            "cordova-plugin-fcm": {}
         },
         "platforms": [
             "android",

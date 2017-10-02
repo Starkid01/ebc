@@ -6,8 +6,7 @@ import { BackandService } from '@backand/angular2-sdk';
 import { FormHandler, UserService, PictureService } from '../../../providers/myservices';
 
 @IonicPage({
-  name: 'edit',
-  segment: ''
+  name: 'edit'
 })
 @Component({
   selector: 'page-edit',

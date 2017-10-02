@@ -5,8 +5,7 @@ import { PictureService } from '../../providers/myservices';
 import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 
 @IonicPage({
-  name: 'submit',
-  segment: 'submit'
+  name: 'submit'
 })
 @Component({
   selector: 'page-submit',

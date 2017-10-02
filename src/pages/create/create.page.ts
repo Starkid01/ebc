@@ -7,7 +7,7 @@ import { FormHandler } from '../../providers/myservices';
 
 @IonicPage({
   name: 'create-account',
-  segment: 'create-account'
+  segment: 'register'
 })
 @Component({
   selector: 'page-create',

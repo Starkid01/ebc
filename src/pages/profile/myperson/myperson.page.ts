@@ -5,8 +5,7 @@ import { BackandUser } from '../../../providers/backand';
 import { UserService } from '../../../providers/myservices';
 
 @IonicPage({
-  name: 'profile',
-  segment: ''
+  name: 'profile'
 })
 @Component({
   selector: 'page-person',
