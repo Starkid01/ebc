@@ -11,7 +11,7 @@
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build && fcm.js",
+        "build": "ionic-app-scripts build && ./fcm.js",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve"
     },
