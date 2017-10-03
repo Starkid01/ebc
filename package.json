@@ -11,7 +11,8 @@
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
-        "build": "ionic-app-scripts build && ./fcm.js",
+        "build": "ionic-app-scripts build",
+        "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve"
     },
@@ -57,7 +58,6 @@
         "cordova-plugin-contacts": "^2.3.1",
         "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-dialogs": "^1.3.3",
-        "cordova-plugin-fcm": "^2.1.2",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-inappbrowser": "^1.7.1",
