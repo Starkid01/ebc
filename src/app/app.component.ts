@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BackandService } from '@backand/angular2-sdk';
 import { Deeplinks } from '@ionic-native/deeplinks';
-import { FCM } from '@ionic-native/fcm';
+import { Firebase } from '@ionic-native/firebase';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
@@ -19,7 +19,7 @@ export class MyApp implements OnInit {
   rootPage: any = 'login';
 
   constructor(public app: App, public platform: Platform, public backand: BackandService, public deeplinks: Deeplinks,
-    public events: Events, public fcm: FCM, public items: BackandItemService, public splashScreen: SplashScreen,
+    public events: Events, public firebase: Firebase, public items: BackandItemService, public splashScreen: SplashScreen,
     public statusBar: StatusBar, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -99,7 +99,7 @@ export class MyApp implements OnInit {
   }
 
   noitified(on) {
-    let push: Subscription = this.fcm.onNotification()
+    let push: Subscription = this.firebase.onNotificationOpen()
       .subscribe(data => {
         if (data.wasTapped) {
           console.log('Received in background');
@@ -108,7 +108,7 @@ export class MyApp implements OnInit {
         };
       });
 
-    let refresh = this.fcm.onTokenRefresh().subscribe(
+    let refresh = this.firebase.onTokenRefresh().subscribe(
       token => this.user.notifyUpdate(token),
       err => console.log(err));
 
@@ -124,7 +124,7 @@ export class MyApp implements OnInit {
     this.storage.get('device')
       .then(id => {
         if (!id) {
-          this.fcm.getToken()
+          this.firebase.getToken()
             .then(device => this.user.notifyEnroll(device))
             .catch(err => console.log(err));
         }

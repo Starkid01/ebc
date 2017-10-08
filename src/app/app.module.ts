@@ -6,8 +6,8 @@ import { AppRate } from '@ionic-native/app-rate';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { Deeplinks } from '@ionic-native/deeplinks';
-import { FCM } from '@ionic-native/fcm';
 import { File } from '@ionic-native/file';
+import { Firebase } from '@ionic-native/firebase';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -57,8 +57,8 @@ const config = {
     AppVersion,
     Camera,
     Deeplinks,
-    FCM,
     File,
+    Firebase,
     BackandAuthService,
     BackandItemService,
     BackandService,
