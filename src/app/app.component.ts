@@ -106,6 +106,7 @@ export class MyApp implements OnInit {
         } else {
           console.log('Received in foreground');
         };
+        console.log('Hello World');
       });
 
     let refresh = this.firebase.onTokenRefresh().subscribe(
