@@ -66,10 +66,9 @@ export class EbcSvgComponent implements AfterViewInit {
   }
 
   isAvail(app: Object) {
-    let myApp = app;
-    let fb;
-    let dm;
-    let dom;
+    let myApp: Object = app;
+    let fb: string;
+    let dm: string;
 
     if (this.platform.is('ios')) {
       fb = 'fb://';
@@ -92,10 +91,10 @@ export class EbcSvgComponent implements AfterViewInit {
     this.appAvail.check(myApp['check'])
       .then(
       yes => {
-        dom = this.appBrowser.create(myApp['appLink'], '_system');
+        this.appBrowser.create(myApp['appLink'], '_system');
       },
       no => {
-        dom = this.appBrowser.create(myApp['url'], '_system');
+        this.appBrowser.create(myApp['url'], '_system');
       });
   }
 }
