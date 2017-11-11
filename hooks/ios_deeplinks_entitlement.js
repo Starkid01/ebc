@@ -7,7 +7,7 @@
 
 const fs = require('fs');[]
 const plist = require('plist');
-const xmlParser = require('libxmljs');
+const xmlParser = require('xml2js');
 
 const PlistKey = 'com.apple.developer.associated-domains';
 
