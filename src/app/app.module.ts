@@ -1,4 +1,5 @@
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BackandService } from '@backand/angular2-sdk';
@@ -11,7 +12,6 @@ import { Firebase } from '@ionic-native/firebase';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { Transfer } from '@ionic-native/transfer';
 import { IonicStorageModule } from '@ionic/storage';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -39,14 +39,15 @@ const config = {
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     EbcEmailComponentModule,
     EbcSmsComponentModule,
     EbcSvgComponentModule,
+    HttpClientModule,
+    HttpModule,
     InlineSVGModule.forRoot({ baseUrl: 'https://cors-anywhere.herokuapp.com/' }),
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
-    NavModule
+    NavModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +69,6 @@ const config = {
     StatusBar,
     SplashScreen,
     SocialSharing,
-    Transfer,
     UserService
   ]
 })

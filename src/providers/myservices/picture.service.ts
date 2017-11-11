@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { ActionSheetController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
 import 'rxjs';
 
 @Injectable()
@@ -13,9 +14,8 @@ export class PictureService {
   myLoader: Loading;
   myProg: number = 0;
 
-  constructor(public app: App, public camera: Camera,
-    public toast: ToastController, public action: ActionSheetController, public file: File,
-    public http: Http, public loader: LoadingController, public transfer: Transfer) { }
+  constructor(public app: App, public camera: Camera, public toast: ToastController, public action: ActionSheetController,
+    public file: File, public http: Http, public httpUpload: HttpClient, public loader: LoadingController) { }
 
   copyFile(imagePath: string) {
     let newName = `${this.randomName(10)}.jpg`;
@@ -42,7 +42,7 @@ export class PictureService {
           text: 'Take Picture',
           icon: 'camera',
           handler: () => {
-              let opts: CameraOptions = {
+            let opts: CameraOptions = {
               destinationType: 1,
               quality: 100,
               sourceType: 1,
@@ -99,7 +99,7 @@ export class PictureService {
     });
     let header = new Headers();
     header.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post('http://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
+    return this.http.post('https://ebc.beezleeart.com/upload/cloudinary_call.php', opt, {
       headers: header
     }).map(res => res);
   }
@@ -128,29 +128,20 @@ export class PictureService {
   }
 
   upload(signed: Object, onSuccess: any) {
-    const fileTransfer: TransferObject = this.transfer.create();
     this.newPic = false;
     this.uploading();
     let filename = this.picFile.substring(this.picFile.lastIndexOf('/') + 1);
     let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: filename,
-      mimeType: 'image/jpeg',
-      chunkedMode: false,
-      headers: {
-        'Content-Type': undefined
-      },
+    let data = {
+      file: filename,
       params: signed
-    };
-    fileTransfer.onProgress(this.progress);
-    fileTransfer.upload(this.picFile, url, options)
-      .then(result => {
-        onSuccess(result);
-      })
-      .catch(error => {
-        this.failed(error);
-      });
+    }
+
+    this.httpUpload.post(url, data, { reportProgress: true })
+      .subscribe(res => {
+        console.log(res);
+      },
+      err => console.log(err))
   }
 
   uploading() {
