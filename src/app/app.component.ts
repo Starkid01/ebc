@@ -111,7 +111,6 @@ export class MyApp implements OnInit {
     let refresh = this.firebase.onTokenRefresh().subscribe(
       token => this.user.notifyUpdate(token),
       err => console.log(err));
-
     if (!on) {
       console.log('Notification Off');
       push.unsubscribe();
@@ -123,9 +122,10 @@ export class MyApp implements OnInit {
   registerDevice() {
     this.storage.get('device')
       .then(id => {
+        console.log(id, 'something');
         if (!id) {
           this.firebase.getToken()
-            .then(device => this.user.notifyEnroll(device))
+            .then(token => this.user.notifyEnroll(token))
             .catch(err => console.log(err));
         }
       })
