@@ -131,6 +131,7 @@ export class EditPage implements DoCheck {
     let image = {
       pic: result
     };
+    this.saveUpdate(image);
     this.upFile = false;
   }
 }
