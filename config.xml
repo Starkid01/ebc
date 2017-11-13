@@ -92,8 +92,9 @@
     </feature>
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
-    <engine name="android" spec="6.4.0" />
+    <allow-navigation href="http://192.168.0.21:8100" />
     <engine name="ios" spec="4.5.2" />
+    <engine name="android" spec="6.4.0" />
     <plugin name="cordova-plugin-actionsheet" spec="^2.3.3" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />

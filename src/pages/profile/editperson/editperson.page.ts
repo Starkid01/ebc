@@ -15,7 +15,6 @@ import { FormHandler, UserService, PictureService } from '../../../providers/mys
 
 export class EditPage implements DoCheck {
   section: string = 'user';
-  signed: Object;
   upFile: boolean = false;
   passwordForm: FormGroup;
   oldPass: FormControl = new FormControl('', Validators.required);
@@ -102,14 +101,11 @@ export class EditPage implements DoCheck {
   savePic() {
     this.pic.getSigned('usersPic', this.user.myUser)
       .subscribe(
-      data => {
-        this.signed = JSON.parse(data['_body']);
+      signed => {
+        this.pic.upload(signed, this.success);
       },
       err => {
         console.log(err);
-      },
-      () => {
-        this.pic.upload(this.signed, this.success);
       });
   }
 
@@ -131,13 +127,10 @@ export class EditPage implements DoCheck {
       });
   }
 
-  success = (result: any) => {
-    let finish = JSON.parse(result.response);
+  success = (result: string) => {
     let image = {
-      pic: finish['url']
+      pic: result
     };
-    this.saveUpdate(image);
-    this.pic.picSaved();
     this.upFile = false;
   }
 }

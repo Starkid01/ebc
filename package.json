@@ -109,8 +109,8 @@
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

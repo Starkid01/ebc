@@ -22,23 +22,18 @@ export class PicForm implements DoCheck {
 	}
 
 	savePic() {
-		let signed;
     this.pic.getSigned('usersItem', this.user.myUser)
       .subscribe(
-			data => {
-				signed = JSON.parse(data['_body']);
+			signed => {
+				this.pic.upload(signed, this.success);
 			},
 			err => {
 				console.log(err);
-			},
-			() => {
-				this.pic.upload(signed, this.success);
 			});
   }
 
 	success = (result: any) => {
-    let finish = JSON.parse(result.response);
-    this.image = finish['url'];
+    this.image = result;
     this.pic.picSaved();
 		this.art = this.image;
 		this.notAdded = false;
