@@ -99,34 +99,24 @@ export class MyApp implements OnInit {
   }
 
   noitified(on) {
-    let push: Subscription = this.firebase.onNotificationOpen()
-      .subscribe(data => {
-        if (data.wasTapped) {
-          console.log('Received in background');
-        } else {
-          console.log('Received in foreground');
-        };
-      });
-
-    let refresh = this.firebase.onTokenRefresh().subscribe(
-      token => this.user.notifyUpdate(token),
-      err => console.log(err));
+    let push: Subscription = this.pushStream();
+    let refresh = this.refreshStream();
     if (!on) {
       console.log('Notification Off');
       push.unsubscribe();
       refresh.unsubscribe();
       this.removeDevice();
     }
+    this.firebase.hasPermission()
+      .then(enabled => console.log(enabled))
+      .catch(err => console.log(err));
   }
 
   registerDevice() {
     this.storage.get('device')
       .then(id => {
-        console.log(id, 'something');
         if (!id) {
-          this.firebase.getToken()
-            .then(token => this.user.notifyEnroll(token))
-            .catch(err => console.log(err));
+          this.registerPermissions();
         }
       })
       .catch(err => console.log(err));
@@ -136,6 +126,7 @@ export class MyApp implements OnInit {
     this.storage.get('device')
       .then(id => this.user.notifyRemove(id))
       .catch(err => console.log(err));
+    this.firebase.unregister();
   }
 
   updateList() {
@@ -153,5 +144,30 @@ export class MyApp implements OnInit {
         });
     });
   }
-}
 
+  private pushStream() {
+    return this.firebase.onNotificationOpen()
+      .subscribe(data => {
+        if (data.wasTapped) {
+          console.log('Received in background');
+        } else {
+          console.log('Received in foreground');
+        };
+      });
+  }
+
+  private refreshStream() {
+    return this.firebase.onTokenRefresh().subscribe(
+      token => this.user.notifyUpdate(token),
+      err => console.log(err));
+  }
+
+  private registerPermissions() {
+    this.firebase.grantPermission()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    this.firebase.getToken()
+      .then(token => this.user.notifyEnroll(token))
+      .catch(err => console.log(err));
+  }
+}
