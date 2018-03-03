@@ -24,7 +24,6 @@ export class ItemBase implements DoCheck, OnInit {
 
   ngOnInit() {
     this.myItems();
-    this.update();
   }
 
   delAlert(id: number) {
@@ -58,7 +57,8 @@ export class ItemBase implements DoCheck, OnInit {
   }
 
   ebcDel(id: number) {
-    this.backand.deleteItem(this.dbTable, id);
+    this.backand.deleteItem(this.dbTable, id)
+     .subscribe(() => this.deleteToast());
   }
 
   goTo(ebc: BackandItem) {
@@ -67,34 +67,14 @@ export class ItemBase implements DoCheck, OnInit {
 
 
   myItems() {
-    this.backand.getList(this.itemType)
-      .then(data => {
-        if(data) {
-          this.items = data;
-        } else {
-          this.myItems();
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.backand.getList(this.dbTable, this.type)
+      .subscribe((list: BackandItem[]) => this.items = list,
+        err => console.log(err));
   }
 
   share(ebc: BackandItem) {
     let shareMod = this.modal.create('share', ebc);
 
     shareMod.present();
-  }
-
-  update() {
-    this.backand.updateList().subscribe('set-items', type => {
-      this.backand.getList(this.itemType)
-        .then(data => {
-          this.items = data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
   }
 }

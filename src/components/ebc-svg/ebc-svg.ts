@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, Renderer, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Platform } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
@@ -15,11 +16,14 @@ export class EbcSvgComponent implements AfterViewInit {
   @Input('ebc') item: BackandItem;
   @Input('style') type: string;
 
-  constructor(private appAvail: AppAvailability, private appBrowser:InAppBrowser,
+  svg: SafeResourceUrl
+
+  constructor(private appAvail: AppAvailability, private appBrowser:InAppBrowser, private dom: DomSanitizer,
   private launch: LaunchNavigator, private platform: Platform, private render: Renderer) { }
 
  ngAfterViewInit() {
     this.clickCheck();
+    this.svg = this.dom.bypassSecurityTrustResourceUrl(this.item.media);
   }
 
   clickCheck() {

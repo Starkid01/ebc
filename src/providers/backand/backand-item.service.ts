@@ -1,42 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BackandService } from '@backand/angular2-sdk';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BackandItemService {
+  myApi: string = 'https://ebc.beezleeart.com';
 
-  constructor(private backand: BackandService, private events: Events, private storage: Storage) { }
-
-  buildList() {
-    let itemQuery = ['SampleCard', 'SampleFlyer', 'MyCard', 'MyFlyer', 'TempCard', 'TempFlyer'];
-
-    itemQuery.forEach(i => {
-      this.backand.query.post(i)
-        .then(res => {
-          this.storage.set(i, res['data'])
-          .then(() => {
-            this.events.publish('set-items', i);
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    });
+  constructor(private http: HttpClient, private events: Events, private storage: Storage) { }
+  
+  createItem(newItem) {
+    return this.http.post(`${this.myApi}/api/mobile/create`, newItem);
   }
-
+  
   deleteItem(obj, id) {
-    this.backand.object.remove(obj, id)
-    .then(res => {
-      this.backand.object.action.get('items', 'SendUpdatedList');
-    })
-    .catch(err =>{
-      console.log(err);
-    })
+    return this.http.delete(`${this.myApi}/api/obj/${obj}/${id}`)
   }
 
-  getList(name) {
-    return this.storage.get(name);
+  getList(table, type) {
+    let path: string = (table === 'items') ? `${type}s` : `${table}/${type}s`;
+    return this.http.get(`${this.myApi}/api/mobile/${path.toLowerCase()}`)
+  }
+
+  getOne(id) {
+    return this.http.get(`${this.myApi}/api/obj/items/${id}`);
   }
 
   updateList() {

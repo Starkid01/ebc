@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { BackandService } from '@backand/angular2-sdk';
 
-import { BackandItem } from '../../providers/backand';
+import { BackandItem, BackandItemService } from '../../providers/backand';
 
 @IonicPage({
   name: 'deep',
@@ -17,18 +16,11 @@ export class DeepItemPage implements OnInit {
   loaded: boolean = false;
   type: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userItems: BackandItemService) { }
 
   ngOnInit() {
     let id = this.navParams.get('id');
-    this.backand.object.getOne('items', id)
-      .then(ebc => {
-        console.log(ebc);
-        this.item = ebc['data'];
-        this.type = this.item.flyer ? 'Flyer' : 'Card';
-        this.loaded = true;
-        this.item.pic = this.item.pic === '' ? null : this.item.pic;
-      })
-      .catch(err => console.log(err));
+    this.userItems.getOne(id)
+      .subscribe((res: BackandItem) => this.item = res);
   }
 }

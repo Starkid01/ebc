@@ -1,6 +1,8 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
+import { AuthInterceptorProvider } from '../../../providers/auth-interceptor/auth-interceptor';
 import { EditPage } from './editperson.page';
 import { NavModule } from '../../shared/nav';
 

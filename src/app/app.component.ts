@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BackandService } from '@backand/angular2-sdk';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { Firebase } from '@ionic-native/firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
@@ -18,7 +18,7 @@ export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = 'login';
 
-  constructor(public app: App, public platform: Platform, public backand: BackandService, public deeplinks: Deeplinks,
+  constructor(public app: App, public fireAuth: AngularFireAuth, public platform: Platform, public deeplinks: Deeplinks,
     public events: Events, public firebase: Firebase, public items: BackandItemService, public splashScreen: SplashScreen,
     public statusBar: StatusBar, public storage: Storage, public user: UserService) {
     platform.ready().then(() => {
@@ -38,34 +38,28 @@ export class MyApp implements OnInit {
   }
 
   ngOnInit() {
-    this.backand.init({
-      appName: 'ebc2',
-      anonymousToken: '6755ec7e-3a7e-4dc7-a414-fd1acf8a51a1',
-      isMobile: true,
-      manageRefreshToken: true,
-      mobilePlatform: 'ionic',
-      runSocket: true,
-      signUpToken: 'dbaea0da-730d-4039-8f8a-77a507a3e908',
-      storagePrefix: 'ebc-',
-      useAnonymousTokenByDefault: false
-    });
     this.authCheck();
     this.myEvents();
     this.nav.id = 'ebc';
   }
 
   authCheck() {
-    this.updateList();
-    this.storage.get('auth')
-      .then(bool => {
-        if (bool) {
-          this.user.getUser();
-          this.items.buildList();
-          this.nav.setRoot('menu');
+    this.fireAuth.idToken.subscribe(
+      token => {
+        let user = this.fireAuth.auth.currentUser;
+        if (token) {
+          let authUser = {
+            displayName: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL
+          };
+          console.log(token)
+          this.setAuthState(true, token, authUser)
         } else {
-          this.nav.setRoot('login');
+          this.setAuthState(false)
         }
-      }).catch(err => console.log(err));
+      });
+
     this.storage.get('notify')
       .then(res => this.noitified(res))
       .catch(err => console.log(err));
@@ -86,9 +80,8 @@ export class MyApp implements OnInit {
   }
 
   myEvents() {
-    this.user.userData();
     this.events.subscribe('login', () => {
-      this.items.buildList();
+      //this.items.buildList();
     });
     this.events.subscribe('alerts', fire => {
       if (fire) {
@@ -130,19 +123,7 @@ export class MyApp implements OnInit {
   }
 
   updateList() {
-    this.backand.on('items_updated', (data) => {
-      let card = this.rebuildList(data[0]);
-      let flyer = this.rebuildList(data[1]);
 
-      this.storage.set('MyCard', card)
-        .then(() => {
-          this.events.publish('set-items', 'MyCard');
-        });
-      this.storage.set('MyFlyer', flyer)
-        .then(() => {
-          this.events.publish('set-items', 'MyFlyer');
-        });
-    });
   }
 
   private pushStream() {
@@ -169,5 +150,17 @@ export class MyApp implements OnInit {
     this.firebase.getToken()
       .then(token => this.user.notifyEnroll(token))
       .catch(err => console.log(err));
+  }
+
+  private setAuthState(status: boolean, authToken?, user?) {
+    if (status) {
+      this.nav.setRoot('menu');
+      this.storage.set('token', authToken);
+      this.storage.set('ebcUser', JSON.stringify(user));
+    } else {
+      this.nav.setRoot('login');
+      this.storage.remove('token')
+      this.storage.remove('ebcUser')
+    }
   }
 }

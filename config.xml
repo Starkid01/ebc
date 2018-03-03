@@ -114,8 +114,6 @@
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <allow-navigation href="http://192.168.0.21:8100" />
-    <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="~4.5.2" />
     <plugin name="cordova-plugin-actionsheet" spec="^2.3.3" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
@@ -139,4 +137,6 @@
     </plugin>
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.0.7" />
+    <engine name="android" spec="7.1.0" />
+    <engine name="ios" spec="4.5.4" />
 </widget>

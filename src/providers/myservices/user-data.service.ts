@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BackandService } from '@backand/angular2-sdk';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 
@@ -7,39 +7,32 @@ import { BackandUser } from '../backand';
 
 @Injectable()
 export class UserService {
+  myApi: string = 'https://ebc.beezleeart.com';
   myUser: BackandUser;
 
-  constructor(public backand: BackandService, public events: Events, public storage: Storage) { }
+  constructor(public events: Events, public http: HttpClient, public storage: Storage) { }
 
   getUser() {
-    this.backand.query.post('CurrentUser')
-      .then(res => {
-        let user = res['data'][0];
-        this.setUser(user);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    return this.storage.get('ebcUser')
+      .then(user => JSON.parse(user))
+      .catch(err => console.log(err))
   }
 
   notifyEnroll(token) {
     let deviceData = {
-      device: this.myUser.id,
       token: token
     };
-    this.backand.object.create('equipment', deviceData)
-      .then(dev => {
-        let id = dev.data['__metadata']['id'];
-        this.saveDev(id);
-      })
-      .catch(err => console.log(err));
+
+    this.http.post(`${this.myApi}/api/mobile/register`, deviceData)
+      .subscribe(id => this.saveDev(id),
+        err => console.log(err))
   }
 
   notifyRemove(id) {
-    this.backand.object.remove('equipment', id)
-      .then(res => {
-        console.log(res);
-        this.removeDev();
+    this.storage.get('device')
+      .then(id => {
+        this.http.delete(`${this.myApi}/api/obj/equipment/${id}`)
+          .subscribe(data => console.log(data))
       })
       .catch(err => console.log(err));
   }
@@ -50,15 +43,21 @@ export class UserService {
       .catch(err => console.log(err))
   }
 
-  setUser(user) {
-    this.myUser = user;
-    this.events.publish('myUser', user);
+  setUser(userUpdate) {
+    if (userUpdate) {
+      this.myUser = {
+        displayName: userUpdate.displayName,
+        email: userUpdate.email,
+        photoUrl: userUpdate.photoURL
+      }
+    }
+    this.storage.set('ebcUser', this.myUser);
+    this.events.publish('myUser');
   }
 
-  userData() {
-    this.events.subscribe('myUser', (user) => {
-      this.myUser = user;
-    });
+  updateUser(newUser) {
+    return this.http.post(`${this.myApi}/api/auth/update`, newUser)
+      .catch((err, caught) => { console.log(err); return caught })
   }
 
   private removeDev() {
@@ -77,8 +76,6 @@ export class UserService {
     let newToken = {
       token: data
     }
-    this.backand.object.update('equipment', id, newToken)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    console.log(newToken)
   }
 }

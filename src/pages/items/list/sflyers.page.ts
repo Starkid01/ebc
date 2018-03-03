@@ -14,7 +14,7 @@ import { BackandItemService } from '../../../providers';
 })
 
 export class SFlysPage extends ItemBase {
-	dbTable = 'samples';
+	dbTable = 'sample';
 	delete = false;
 	itemType = 'SampleFlyer';
 	title: string = 'Sample Flyers';

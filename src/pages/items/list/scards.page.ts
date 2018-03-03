@@ -14,7 +14,7 @@ import { BackandItemService } from '../../../providers';
 })
 
 export class SCardsPage extends ItemBase {
-	dbTable = 'samples';
+	dbTable = 'sample';
 	delete = false;
 	itemType = 'SampleCard';
 	title: string = 'Sample Cards';

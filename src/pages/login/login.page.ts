@@ -1,9 +1,8 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController, App, IonicPage, ToastController } from 'ionic-angular';
-import { BackandService } from '@backand/angular2-sdk';
 
-import { BackandAuthService } from '../../providers/backand';
 import { UserService, FormHandler } from '../../providers/myservices';
 
 @IonicPage({
@@ -16,14 +15,15 @@ import { UserService, FormHandler } from '../../providers/myservices';
 })
 
 export class LoginPage {
+  isAuthError: boolean = false;
   signUp: string = 'create-account';
   loginForm: FormGroup;
   username: FormControl = new FormControl('', [Validators.required, this.form.emailValidator]);
   password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 
-  constructor(public app: App,  public auth: BackandAuthService, public backand: BackandService,
-  public form: FormHandler, public user: UserService, private alert: AlertController, private toast: ToastController) {
+  constructor(public app: App, public fireAuth: AngularFireAuth, public form: FormHandler,
+    public user: UserService, private alert: AlertController, private toast: ToastController) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
@@ -31,21 +31,12 @@ export class LoginPage {
   }
 
   aboutHelp() {
-    let nav = this.app.getActiveNav();
+    let nav = this.getRootNav();
     nav.push('about-help');
   }
 
-  clearAll() {
-    this.form.clearForm(this.loginForm);
-  }
-
-  loggedIn() {
-    let nav = this.app.getActiveNav();
-    nav.setRoot('menu');
-  }
-
   openPage(page) {
-    let nav = this.app.getActiveNav();
+    let nav = this.getRootNav();
     nav.push(page);
   }
 
@@ -67,10 +58,8 @@ export class LoginPage {
         {
           text: 'Submit',
           handler: data => {
-            let e = data.username;
-            console.log(e);
-            this.backand.requestResetPassword(e)
-              .then(data => this.resetVerify());
+            let email = data.username;
+            this.sendReset(email);
           }
         }
       ]
@@ -78,9 +67,9 @@ export class LoginPage {
     sets.present();
   }
 
-  resetVerify() {
+  resetVerify(mess) {
     let resVerify = this.toast.create({
-      message: 'Check Your Email for Password Reset',
+      message: mess,
       position: 'top',
       duration: 3000
     });
@@ -93,17 +82,36 @@ export class LoginPage {
 
   signIn(login) {
     let auth = login.value;
-
-    this.backand.signin(auth['username'], auth['password'])
-      .then(res => {
-        this.auth.authGood(res);
-        this.user.getUser();
-        this.clearAll();
-        this.loggedIn();      
+    this.fireAuth.auth.signInAndRetrieveDataWithEmailAndPassword(auth.username, auth.password)
+      .then(auth => {
+        this.isAuthError = false;
+        this.loginForm.reset();
+        console.log(auth);
       })
       .catch(err => {
-        this.auth.authErr(err);
-        this.clearAll();
-      });
+        this.isAuthError = true;
+        this.loginForm.reset();
+        console.log(err)
+      })
+  }
+
+  private getRootNav() {
+    let appNavs = this.app.getRootNavs();
+    let rootNav = appNavs.find(nav => {
+      return nav ? nav['id'] === 'ebc' : null;
+    });
+    return rootNav;
+  }
+
+  private sendReset(email: string) {
+    this.fireAuth.auth.sendPasswordResetEmail(email)
+    .then(res => {
+      console.log(res);
+      this.resetVerify('Check Your Email for Password Reset');
+    })
+    .catch(err => {
+      this.resetVerify('That User does not exist. Please Try again.');
+      console.log(err)
+    });
   }
 }

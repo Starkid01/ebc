@@ -14,7 +14,7 @@ import { BackandItemService } from '../../../providers';
 })
 
 export class TFlysPage extends ItemBase {
-	dbTable = 'templates';
+	dbTable = 'temp';
 	delete = false;
 	itemType = 'TempFlyer';
 	title: string = 'Template Flyers';

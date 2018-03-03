@@ -23,13 +23,9 @@
             <p ion-text color="danger" *ngIf="createError">User Already Taken Please Try Again</p>
           </div>
           <div class="myName">
-            <ion-item>
-              <ion-label stacked>First Name</ion-label>
-              <ion-input clearInput formControlName="firstName" id="firstName" name="name" placeholder="John/Jane" type="text"></ion-input>
-            </ion-item>
             <ion-item class="last">
-              <ion-label stacked>Last Name</ion-label>
-              <ion-input clearInput formControlName="lastName" id="lastName" name="name" placeholder="Doe" type="text"></ion-input>
+              <ion-label stacked>Full Name</ion-label>
+              <ion-input clearInput formControlName="displayName" id="displayName" name="name" placeholder="John/Jane Doe" type="text"></ion-input>
             </ion-item>
           </div>
           <div formGroupName="verify" [class.myError]="verify.errors">

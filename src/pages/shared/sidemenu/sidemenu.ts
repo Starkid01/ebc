@@ -7,7 +7,8 @@ interface Page {
 }
 
 @IonicPage({
-  name: 'menu'
+  name: 'menu',
+  segment: 'menu'
 })
 @Component({
   selector: 'page-sidemenu',

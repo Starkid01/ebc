@@ -4,11 +4,10 @@
 
 <ion-content class="person">
   <ion-card>
-    <!--<ion-img class="userImg" [src]="services.myUser?.pic"></ion-img>-->
-    <div class="userImg"> <img [src]="user.myUser?.pic" /></div>
+    <div class="userImg"> <img [src]="userData?.photoUrl" /></div>
     <ion-card-content>
       <ion-card-title>
-        <h2 ion-text color="favorite">{{user.myUser?.firstName}} {{user.myUser?.lastName}}</h2>
+        <h2 ion-text color="favorite">{{userData?.displayName}}</h2>
       </ion-card-title>
     </ion-card-content>
     <ion-item>

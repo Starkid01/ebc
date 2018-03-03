@@ -14,7 +14,7 @@ import { BackandItemService } from '../../../providers';
 })
 
 export class TCardsPage extends ItemBase {
-	dbTable = 'templates';
+	dbTable = 'temp';
 	delete = false;
 	itemType = 'TempCard';
 	title: string = 'Template Cards';

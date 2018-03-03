@@ -17,19 +17,22 @@
           <ion-card-content>
             <hr>
             <ion-item class="myItem">
-              <ion-thumbnail item-left [ngSwitch]="i?.pic">
-                <img *ngSwitchDefault [src]="i?.pic" [title]="type+' is Being Created'">
+              <ion-thumbnail item-left [ngSwitch]="i?.pic">                
                 <div *ngSwitchCase="'' || null" class="broken-img">{{type}} is Being Created</div>
+                <img *ngSwitchDefault [src]="i?.pic" [title]="type+' is Being Created'">
               </ion-thumbnail>
               <p ion-text class="desc">{{i?.desc}}</p>
-              <span ion-text item-right color="primary"><ion-icon name="arrow-back"></ion-icon>&thinsp;Swipe&thinsp;<ion-icon *ngIf="delete" name="arrow-forward"></ion-icon></span>
+              <span ion-text item-right color="primary">
+                <ion-icon name="arrow-back"></ion-icon>&thinsp;Swipe&thinsp;
+                <ion-icon *ngIf="delete" name="arrow-forward"></ion-icon>
+              </span>
             </ion-item>
           </ion-card-content>
         </ion-item>
         <ion-item-options *ngIf="delete" side="left">
           <button ion-button icon-only color="danger" (click)="slideCard.close(); delAlert(i?.id)">
-             <ion-icon name="trash"></ion-icon>
-           </button>
+            <ion-icon name="trash"></ion-icon>
+          </button>
         </ion-item-options>
         <ion-item-options side="right">
           <button ion-button icon-only color="light" (click)="slideCard.close(); goTo(i)">

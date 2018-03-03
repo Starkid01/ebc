@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { BackandService } from '@backand/angular2-sdk';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { App, ViewController } from 'ionic-angular';
 
 @Component({
@@ -21,8 +21,7 @@ import { App, ViewController } from 'ionic-angular';
 
 export class PopoverMenu {
 
-  constructor(private app: App, private backand: BackandService,
-    private storage: Storage, private view: ViewController) { }
+  constructor(private app: App, private fireAuth: AngularFireAuth, private storage: Storage, private view: ViewController) { }
 
   aboutHelp() {
     let nav = this.getRootNav();
@@ -45,10 +44,8 @@ export class PopoverMenu {
   }
 
   signOut() {
-    let nav = this.getRootNav();
-    this.backand.signout();
+    this.fireAuth.auth.signOut();
     this.view.dismiss();
     this.storage.clear();
-    nav.setRoot('login');
   }
 }

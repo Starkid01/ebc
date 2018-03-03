@@ -12,7 +12,7 @@
       <h2 ion-text color="favorite">Login</h2>
     </ion-card-header>
     <ion-card-content>
-      <form [class.myError]="auth.isAuthError" [formGroup]="loginForm" (ngSubmit)="signIn(loginForm)">
+      <form [class.myError]="isAuthError" [formGroup]="loginForm" (ngSubmit)="signIn(loginForm)">
         <ion-list no-lines>
           <div class="field">
             <ion-item [class.myError]="!username.valid && username.touched">
@@ -28,7 +28,7 @@
                 type="password"></ion-input>
             </ion-item>
             <div class="passErr">
-              <p ion-text color="danger" *ngIf="auth.isAuthError">Username or Password is Incorrect</p>
+              <p ion-text color="danger" *ngIf="isAuthError">Username or Password is Incorrect</p>
             </div>
           </div>
           <span padding>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Contacts } from '@ionic-native/contacts';
 import { IonicPageModule } from 'ionic-angular';
-import { InlineSVGModule } from 'ng-inline-svg';
 
 import { DetailPage } from './detail.page';
 import { EbcEmailComponentModule } from '../../../components/ebc-email/ebc-email.module';
@@ -17,7 +16,6 @@ import { NavModule } from '../../shared/nav';
     EbcEmailComponentModule,
     EbcSmsComponentModule,
     EbcSvgComponentModule,
-    InlineSVGModule,
     IonicPageModule.forChild(DetailPage),
 		NavModule
   ],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
-import { BackandService } from '@backand/angular2-sdk';
+
+import { BackandItemService, BackandItem } from '../../providers';
 
 interface Build {
 	create?: string;
@@ -46,9 +47,7 @@ export class SubmitConfirm implements OnInit {
 	tempData: PreMade = {};
 	template: boolean = false;
 
-	constructor(private backand: BackandService, private toast: ToastController, private params: NavParams, private view: ViewController) {
-
-	}
+	constructor(private backand: BackandItemService, private toast: ToastController, private params: NavParams, private view: ViewController) { }
 
 	ngOnInit() {
 		this.dataParse();
@@ -96,14 +95,10 @@ export class SubmitConfirm implements OnInit {
 		}
 		itemData['data'] = JSON.stringify(this.extra);
 
-		this.confirmed = true;
-		this.backand.object.create('items', itemData)
-			.then(res => {
-				this.completeSubmit();
-				this.backand.object.action.get('items', 'SendUpdatedList');
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		this.backand.createItem(itemData)
+		.subscribe(() => {
+			this.completeSubmit();
+			this.confirmed = true;
+		})
 	}
 }

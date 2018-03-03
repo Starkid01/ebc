@@ -15,15 +15,9 @@ export interface BackandUrls {
 }
 
 export interface BackandUser {
-	id: number;
 	email: string;
-	firstName: string;
-	lastName: string;
-	pic: string;
-	since: Date;
-	subscribed: boolean;
-	items?: any;
-	user?: any;
+	displayName: string;
+	photoUrl: string;
 }
 
 export interface BackandItem {

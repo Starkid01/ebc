@@ -36,14 +36,11 @@ export class SelectForm implements DoCheck, OnInit {
   }
 
   getSamples() {
-     this.backand.getList('TempCard')
-     .then(data => {
-       this.tempCards = data;
-     });
-     this.backand.getList('TempFlyer')
-     .then(data => {
-       this.tempFlyers = data;
-     });
+     this.backand.getList('temp', 'card')
+     .subscribe((list: BackandItem[]) => this.tempCards = list)
+
+     this.backand.getList('temp', 'flyer')
+     .subscribe((list: BackandItem[]) => this.tempFlyers = list)
   }
 
   selectedValid() {

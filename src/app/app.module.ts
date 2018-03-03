@@ -1,8 +1,6 @@
 import { ErrorHandler, NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { BackandService } from '@backand/angular2-sdk';
 import { AppRate } from '@ionic-native/app-rate';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
@@ -13,8 +11,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { IonicStorageModule } from '@ionic/storage';
-import { InlineSVGModule } from 'ng-inline-svg';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule }from 'angularfire2/auth'; 
 import io from 'socket.io-client';
 window["io"] = io;
 
@@ -25,6 +24,8 @@ import { FormHandler, PictureService, UserService } from '../providers/myservice
 import { EbcSvgComponentModule } from '../components/ebc-svg/ebc-svg.module';
 import { EbcEmailComponentModule } from '../components/ebc-email/ebc-email.module';
 import { EbcSmsComponentModule } from '../components/ebc-sms/ebc-sms.module';
+import { creds } from './ebc-client';
+import { AuthInterceptorProvider } from '../providers/auth-interceptor/auth-interceptor';
 
 const config = {
   mode: 'md',
@@ -38,13 +39,13 @@ const config = {
     MyApp
   ],
   imports: [
+    AngularFireModule.initializeApp(creds),
+    AngularFireAuthModule,
     BrowserModule,
     EbcEmailComponentModule,
     EbcSmsComponentModule,
     EbcSvgComponentModule,
     HttpClientModule,
-    HttpModule,
-    InlineSVGModule.forRoot({ baseUrl: 'https://cors-anywhere.herokuapp.com/' }),
     IonicModule.forRoot(MyApp, config),
     IonicStorageModule.forRoot(),
     NavModule,
@@ -55,6 +56,7 @@ const config = {
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider,  multi: true },
     AppRate,
     AppVersion,
     Camera,
@@ -63,13 +65,13 @@ const config = {
     Firebase,
     BackandAuthService,
     BackandItemService,
-    BackandService,
     FormHandler,
     PictureService,
     StatusBar,
     SplashScreen,
     SocialSharing,
-    UserService
+    UserService,
+    AuthInterceptorProvider
   ]
 })
 export class AppModule { }
