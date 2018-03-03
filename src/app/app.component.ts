@@ -53,7 +53,6 @@ export class MyApp implements OnInit {
             email: user.email,
             photoUrl: user.photoURL
           };
-          console.log(token)
           this.setAuthState(true, token, authUser)
         } else {
           this.setAuthState(false)

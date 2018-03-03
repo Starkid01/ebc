@@ -33,6 +33,3 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-
-# FireBase Creds
-ebc-client.ts
