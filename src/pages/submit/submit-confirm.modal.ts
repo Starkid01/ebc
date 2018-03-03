@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
 
-import { BackandItemService, BackandItem } from '../../providers';
+import { BackandItemService } from '../../providers';
 
 interface Build {
 	create?: string;

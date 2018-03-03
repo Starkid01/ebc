@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BackandItemService {
   myApi: string = 'https://ebc.beezleeart.com';
 
-  constructor(private http: HttpClient, private events: Events, private storage: Storage) { }
+  constructor(private http: HttpClient, private events: Events) { }
   
   createItem(newItem) {
     return this.http.post(`${this.myApi}/api/mobile/create`, newItem);

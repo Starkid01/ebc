@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { Events, IonicPage, ToastController } from 'ionic-angular';
+import { Component, DoCheck } from '@angular/core';
+import { IonicPage, ToastController } from 'ionic-angular';
 import { UserInfo } from 'firebase';
 
 import { BackandUser } from '../../../providers/backand';
