@@ -45,6 +45,19 @@ export class MyApp implements OnInit {
   }
 
   authCheck() {
+    this.nativeStorage.getItem('message')
+      .then(message => {
+        if (message) {
+          alert(message);
+        } else {
+          alert('no');
+          this.nativeStorage.setItem('message', true);
+        }
+      })
+      .catch(err => {
+        alert(err);
+        console.log(err);
+      });
     this.fireAuth.idToken.subscribe(
       token => {
         let user = this.fireAuth.auth.currentUser;
@@ -56,7 +69,6 @@ export class MyApp implements OnInit {
           };
           this.setAuthState(true, token, authUser)
         } else {
-          this.storage.clear();
           this.setAuthState(false);
         }
       });
@@ -64,20 +76,6 @@ export class MyApp implements OnInit {
     this.storage.get('notify')
       .then(res => this.noitified(res))
       .catch(err => console.log(err));
-  }
-
-  rebuildList(listArr: Array<any>) {
-    let items: Array<any> = [];
-
-    listArr.forEach(res => {
-      let obj = {};
-
-      res.forEach(i => {
-        obj[i.Key] = i.Value;
-      })
-      items.push(obj);
-    });
-    return items;
   }
 
   myEvents() {
@@ -147,20 +145,13 @@ export class MyApp implements OnInit {
   }
 
   private setAuthState(status: boolean, authToken?, user?) {
-    this.nativeStorage.getItem('message')
-    .then(result => {
-      if (status && result) {
-        this.nav.setRoot('menu');
-        this.storage.set('token', authToken);
-        this.storage.set('ebcUser', JSON.stringify(user));
-      } else if (result) {
-        this.nav.setRoot('login');
-        this.storage.remove('token')
-        this.storage.remove('ebcUser')
-      } else {
-        this.nav.setRoot('migrate');
-        this.nativeStorage.setItem('message', true);
-      }
-    })
+    if (status) {
+      this.nav.setRoot('menu');
+      this.storage.set('token', authToken);
+      this.storage.set('ebcUser', JSON.stringify(user));
+    } else {
+      this.nav.setRoot('login');
+      this.storage.clear();
+    }
   }
 }
