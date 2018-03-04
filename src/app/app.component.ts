@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { Firebase } from '@ionic-native/firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
@@ -20,7 +21,7 @@ export class MyApp implements OnInit {
 
   constructor(public app: App, public fireAuth: AngularFireAuth, public platform: Platform, public deeplinks: Deeplinks,
     public events: Events, public firebase: Firebase, public items: BackandItemService, public splashScreen: SplashScreen,
-    public statusBar: StatusBar, public storage: Storage, public user: UserService) {
+    public statusBar: StatusBar, public storage: Storage, public user: UserService, public nativeStorage: NativeStorage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -55,7 +56,8 @@ export class MyApp implements OnInit {
           };
           this.setAuthState(true, token, authUser)
         } else {
-          this.setAuthState(false)
+          this.storage.clear();
+          this.setAuthState(false);
         }
       });
 
@@ -79,9 +81,6 @@ export class MyApp implements OnInit {
   }
 
   myEvents() {
-    this.events.subscribe('login', () => {
-      //this.items.buildList();
-    });
     this.events.subscribe('alerts', fire => {
       if (fire) {
         this.registerDevice();
@@ -121,10 +120,6 @@ export class MyApp implements OnInit {
     this.firebase.unregister();
   }
 
-  updateList() {
-
-  }
-
   private pushStream() {
     return this.firebase.onNotificationOpen()
       .subscribe(data => {
@@ -152,14 +147,20 @@ export class MyApp implements OnInit {
   }
 
   private setAuthState(status: boolean, authToken?, user?) {
-    if (status) {
-      this.nav.setRoot('menu');
-      this.storage.set('token', authToken);
-      this.storage.set('ebcUser', JSON.stringify(user));
-    } else {
-      this.nav.setRoot('login');
-      this.storage.remove('token')
-      this.storage.remove('ebcUser')
-    }
+    this.nativeStorage.getItem('message')
+    .then(result => {
+      if (status && result) {
+        this.nav.setRoot('menu');
+        this.storage.set('token', authToken);
+        this.storage.set('ebcUser', JSON.stringify(user));
+      } else if (result) {
+        this.nav.setRoot('login');
+        this.storage.remove('token')
+        this.storage.remove('ebcUser')
+      } else {
+        this.nav.setRoot('migrate');
+        this.nativeStorage.setItem('message', true);
+      }
+    })
   }
 }

@@ -16,7 +16,8 @@ export class EbcSvgComponent implements AfterViewInit {
   @Input('ebc') item: BackandItem;
   @Input('style') type: string;
 
-  svg: SafeResourceUrl
+  svg: SafeResourceUrl;
+  private isImg: RegExp = new RegExp('http*', 'i');
 
   constructor(private appAvail: AppAvailability, private appBrowser:InAppBrowser, private dom: DomSanitizer,
   private launch: LaunchNavigator, private platform: Platform, private render: Renderer) { }
@@ -24,6 +25,7 @@ export class EbcSvgComponent implements AfterViewInit {
  ngAfterViewInit() {
     this.clickCheck();
     this.svg = this.dom.bypassSecurityTrustResourceUrl(this.item.media);
+    console.log(this.isImg);
   }
 
   clickCheck() {

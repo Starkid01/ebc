@@ -5,7 +5,8 @@ import { IonicPage, ViewController } from 'ionic-angular';
 import { info } from './policy';
 
 @IonicPage({
-  name: 'private-policy'
+  name: 'private-policy',
+  segment: 'private-policy'
 })
 @Component({
   selector: 'page-private-policy',

@@ -10,6 +10,7 @@ export class ItemBase implements DoCheck, OnInit {
   public items: Array<BackandItem>;
   public none: boolean;
   public type: string;
+  private checkImg: RegExp = new RegExp('http*', 'i');
 
   constructor(public alert: AlertController, public backand: BackandItemService,
     public modal: ModalController, public nav: NavController, public toast: ToastController) { }
@@ -24,6 +25,7 @@ export class ItemBase implements DoCheck, OnInit {
 
   ngOnInit() {
     this.myItems();
+    console.log(this.checkImg);
   }
 
   delAlert(id: number) {

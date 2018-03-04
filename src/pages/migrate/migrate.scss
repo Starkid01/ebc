@@ -1,0 +1,24 @@
+page-migrate {
+  background: map-get($colors, light);
+	
+	.message-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 90vh;
+		
+		.message-text {
+      color: map-get($colors, dark);
+      font-size: 2rem;
+		 
+			.logo {
+        text-align: center;
+			 
+				img {
+          height: auto;
+          width: 25vw;
+        }
+      }
+    }
+  }
+}

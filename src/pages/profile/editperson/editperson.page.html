@@ -37,10 +37,14 @@
       <form [formGroup]="editForm" (ngSubmit)="editInfo(editForm)">
         <ion-list class="editForm" no-lines>
           <div class="field">
-            <ion-item class="last">
+            <ion-item>
               <ion-label stacked for="displayName">Full Name</ion-label>
-              <ion-input clearInput formControlName="displayName" id="displayName" name="displayName" [placeholder]="userData?.displayName" type="text"></ion-input>
+              <ion-input clearInput formControlName="displayName" id="displayName" name="displayName" [placeholder]="userData?.displayName"
+                type="text"></ion-input>
             </ion-item>
+            <div class="passErr">
+              <p ion-text color="danger" *ngIf="editForm.errors">Something is Wrong Please Double Check</p>
+            </div>
           </div>
           <ion-item>
             <button block ion-button [disabled]="!editForm.dirty" class="formBtn" type="submit">Confirm Change</button>
@@ -55,11 +59,13 @@
             <div [class.myError]="passwordForm.errors">
               <ion-item>
                 <ion-label stacked for="password">Password</ion-label>
-                <ion-input clearInput formControlName="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+                <ion-input clearInput formControlName="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  type="password"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label stacked for="confirm">Confirm Password</ion-label>
-                <ion-input clearInput formControlName="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"></ion-input>
+                <ion-input clearInput formControlName="confirm" id="confirm" name="confirm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  type="password"></ion-input>
               </ion-item>
               <div class="passErr">
                 <p ion-text color="danger" *ngIf="passwordForm.errors">Passwords Don't Match</p>

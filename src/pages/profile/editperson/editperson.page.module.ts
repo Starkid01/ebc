@@ -1,4 +1,3 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
