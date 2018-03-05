@@ -17,7 +17,7 @@ import { UserService } from '../providers/myservices';
 })
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = 'login';
+  rootPage: string;
 
   constructor(public app: App, public fireAuth: AngularFireAuth, public platform: Platform, public deeplinks: Deeplinks,
     public events: Events, public firebase: Firebase, public items: BackandItemService, public splashScreen: SplashScreen,
