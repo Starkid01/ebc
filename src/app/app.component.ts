@@ -145,9 +145,12 @@ export class MyApp implements OnInit {
   private checkFirstOpen(appPage) {
     this.appPreferences.fetch('ebc', 'message')
     .then(wasLoaded => {
+      alert('Pref');
       if (wasLoaded) {
+        alert(wasLoaded);
        this.nav.setRoot(appPage);
       } else {
+        alert('Show iOS');
         this.nav.setRoot('migrate');
         this.appPreferences.store('ebc', 'message', true);
       }
