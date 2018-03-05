@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AppPreferences } from '@ionic-native/app-preferences';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { Firebase } from '@ionic-native/firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
@@ -21,7 +21,7 @@ export class MyApp implements OnInit {
 
   constructor(public app: App, public fireAuth: AngularFireAuth, public platform: Platform, public deeplinks: Deeplinks,
     public events: Events, public firebase: Firebase, public items: BackandItemService, public splashScreen: SplashScreen,
-    public statusBar: StatusBar, public storage: Storage, public user: UserService, public nativeStorage: NativeStorage) {
+    public statusBar: StatusBar, public storage: Storage, public user: UserService, public appPreferences: AppPreferences) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -45,19 +45,6 @@ export class MyApp implements OnInit {
   }
 
   authCheck() {
-    this.nativeStorage.getItem('message')
-      .then(message => {
-        if (message) {
-          alert(message);
-        } else {
-          alert('no');
-          this.nativeStorage.setItem('message', true);
-        }
-      })
-      .catch(err => {
-        alert(err);
-        console.log(err);
-      });
     this.fireAuth.idToken.subscribe(
       token => {
         let user = this.fireAuth.auth.currentUser;
@@ -146,12 +133,25 @@ export class MyApp implements OnInit {
 
   private setAuthState(status: boolean, authToken?, user?) {
     if (status) {
-      this.nav.setRoot('menu');
       this.storage.set('token', authToken);
       this.storage.set('ebcUser', JSON.stringify(user));
+      this.checkFirstOpen('menu');
     } else {
-      this.nav.setRoot('login');
       this.storage.clear();
+      this.checkFirstOpen('login');
     }
+  }
+
+  private checkFirstOpen(appPage) {
+    this.appPreferences.fetch('ebc', 'message')
+    .then(wasLoaded => {
+      if (wasLoaded) {
+       this.nav.setRoot(appPage);
+      } else {
+        this.nav.setRoot('migrate');
+        this.appPreferences.store('ebc', 'message', true);
+      }
+    })
+    .catch(err => console.log(err))
   }
 }

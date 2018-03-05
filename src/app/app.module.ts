@@ -1,13 +1,13 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppPreferences } from '@ionic-native/app-preferences';
 import { AppRate } from '@ionic-native/app-rate';
 import { AppVersion } from '@ionic-native/app-version';
 import { Camera } from '@ionic-native/camera';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { File } from '@ionic-native/file';
 import { Firebase } from '@ionic-native/firebase';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -58,6 +58,7 @@ const config = {
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider,  multi: true },
+    AppPreferences,
     AppRate,
     AppVersion,
     Camera,
@@ -67,7 +68,6 @@ const config = {
     BackandAuthService,
     BackandItemService,
     FormHandler,
-    NativeStorage,
     PictureService,
     StatusBar,
     SplashScreen,
