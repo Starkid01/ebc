@@ -110,16 +110,13 @@ export class LoginPage implements OnInit {
   }
 
   private checkRun() {
-    console.log('checking');
     this.appPreferences.fetch('ebc', 'message')
      .then(hasRan => {
        if(hasRan) {
          this.newRun = false;
-         console.log('First Run', hasRan, this.newRun);
        } else {
-         console.log(false, this.newRun);
          this.newRun = true;
-         console.log('newRun', this.newRun);
+         this.messageAlert();
        }
      })
   }
