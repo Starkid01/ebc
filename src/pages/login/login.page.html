@@ -40,7 +40,16 @@
       </form>
       <button ion-button clear block (click)="openPage(signUp)" type="button">or Create an Account</button>
       <ion-note>
-        <button ion-button clear color="danger" (click)="resetPass()"><ion-icon name="unlock"></ion-icon>&ensp;Reset</button>
+        <button ion-button clear color="danger" (click)="resetPass()">
+          <ion-icon name="unlock"></ion-icon>&ensp;Reset</button>
+        <ion-chip *ngIf="newRun" class="update-alert" color="secondary" (click)="messageAlert()">
+          <ion-label>
+            <span>Update Message</span>
+          </ion-label>
+          <button ion-button clear>
+            <ion-icon color="secondary" name="alert"></ion-icon>
+          </button>
+        </ion-chip>
       </ion-note>
     </ion-card-content>
   </ion-card>

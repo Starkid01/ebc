@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppPreferences } from '@ionic-native/app-preferences';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage({
@@ -11,9 +12,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MigratePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private appPreferences: AppPreferences) { }
 
   gotoLogin() {
+    this.appPreferences.store('ebc', 'message', true);
     this.navCtrl.setRoot('login');
   }
 }

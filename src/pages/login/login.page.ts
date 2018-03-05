@@ -1,7 +1,8 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppPreferences } from '@ionic-native/app-preferences';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AlertController, App, IonicPage, ToastController } from 'ionic-angular';
+import { AlertController, App, IonicPage, Platform, ToastController } from 'ionic-angular';
 
 import { UserService, FormHandler } from '../../providers/myservices';
 
@@ -14,25 +15,38 @@ import { UserService, FormHandler } from '../../providers/myservices';
   templateUrl: 'login.page.html'
 })
 
-export class LoginPage {
+export class LoginPage implements OnInit {
   isAuthError: boolean = false;
+  newRun: boolean = true;
   signUp: string = 'create-account';
   loginForm: FormGroup;
   username: FormControl = new FormControl('', [Validators.required, this.form.emailValidator]);
   password: FormControl = new FormControl('', Validators.required);
   signed: boolean;
 
-  constructor(public app: App, public fireAuth: AngularFireAuth, public form: FormHandler,
-    public user: UserService, private alert: AlertController, private toast: ToastController) {
+  constructor(public app: App, public appPreferences: AppPreferences, public fireAuth: AngularFireAuth, public form: FormHandler,
+    public user: UserService, private alert: AlertController, private platform: Platform, private toast: ToastController) {
     this.loginForm = new FormGroup({
       username: this.username,
       password: this.password
     });
   }
 
+  ngOnInit() {
+    let mobile = this.platform.is('mobile');
+    if (mobile) {
+      this.checkRun();
+    }
+  }
+
   aboutHelp() {
     let nav = this.getRootNav();
     nav.push('about-help');
+  }
+
+  messageAlert() {
+    let nav = this.getRootNav();
+    nav.push('migrate');
   }
 
   openPage(page) {
@@ -93,6 +107,21 @@ export class LoginPage {
         this.loginForm.reset();
         console.log(err)
       })
+  }
+
+  private checkRun() {
+    console.log('checking');
+    this.appPreferences.fetch('ebc', 'message')
+     .then(hasRan => {
+       if(hasRan) {
+         this.newRun = false;
+         console.log('First Run', hasRan, this.newRun);
+       } else {
+         console.log(false, this.newRun);
+         this.newRun = true;
+         console.log('newRun', this.newRun);
+       }
+     })
   }
 
   private getRootNav() {

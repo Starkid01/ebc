@@ -17,7 +17,7 @@ import { UserService } from '../providers/myservices';
 })
 export class MyApp implements OnInit {
   @ViewChild(Nav) nav: Nav;
-  rootPage: string;
+  rootPage: string = 'login';
 
   constructor(public app: App, public fireAuth: AngularFireAuth, public platform: Platform, public deeplinks: Deeplinks,
     public events: Events, public firebase: Firebase, public items: BackandItemService, public splashScreen: SplashScreen,
@@ -143,18 +143,21 @@ export class MyApp implements OnInit {
   }
 
   private checkFirstOpen(appPage) {
-    this.appPreferences.fetch('ebc', 'message')
-    .then(wasLoaded => {
-      alert('Pref');
-      if (wasLoaded) {
-        alert(wasLoaded);
-       this.nav.setRoot(appPage);
-      } else {
-        alert('Show iOS');
-        this.nav.setRoot('migrate');
-        this.appPreferences.store('ebc', 'message', true);
-      }
-    })
-    .catch(err => console.log(err))
+    this.nav.setRoot(appPage);
+    // let mobile = this.platform.is('mobile');
+    // if (!mobile) {
+    //   this.nav.setRoot(appPage);
+    // } else {
+    //   this.appPreferences.fetch('ebc', 'message')
+    //     .then(wasLoaded => {
+    //       if (wasLoaded) {
+    //         this.nav.setRoot(appPage);
+    //       } else {
+    //         this.nav.setRoot('migrate');
+    //         this.appPreferences.store('ebc', 'message', true);
+    //       }
+    //     })
+    //     .catch(err => console.log(err))
+    // }
   }
 }
