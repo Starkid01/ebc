@@ -52,7 +52,7 @@ export class UserService {
       }
     }
     this.storage.set('ebcUser', this.myUser);
-    this.events.publish('myUser');
+    this.events.publish('myUser', this.myUser);
   }
 
   updateUser(newUser) {

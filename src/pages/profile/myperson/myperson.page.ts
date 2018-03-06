@@ -30,8 +30,8 @@ export class PersonPage implements OnInit {
   }
 
   private watchUpdate() {
-    this.events.subscribe('myUser', () => {
-      this.parseUser();
-    })
+    this.events.subscribe('myUser', user => {
+      this.userData = user
+    });
   }
 }

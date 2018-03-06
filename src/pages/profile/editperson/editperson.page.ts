@@ -1,6 +1,6 @@
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { Component, DoCheck } from '@angular/core';
-import { IonicPage, ToastController } from 'ionic-angular';
+import { Events, IonicPage, ToastController } from 'ionic-angular';
 import { UserInfo } from 'firebase';
 
 import { BackandUser } from '../../../providers/backand';
@@ -25,7 +25,7 @@ export class EditPage implements DoCheck {
   editForm: FormGroup;
   displayName: FormControl = new FormControl('');
 
-  constructor(public form: FormHandler, public user: UserService,
+  constructor(public events: Events, public form: FormHandler, public user: UserService,
     public pic: PictureService, public toast: ToastController) {
     this.editForm = new FormGroup({
       displayName: this.displayName
@@ -45,6 +45,7 @@ export class EditPage implements DoCheck {
 
   ngOnInit() {
     this.ebcUser();
+    this.watchUpdate();
   }
 
   editInfo(info) {
@@ -119,5 +120,11 @@ export class EditPage implements DoCheck {
   private ebcUser() {
     this.user.getUser()
       .then(user => this.userData = user);
+  }
+
+  private watchUpdate() {
+    this.events.subscribe('myUser', user => {
+      this.userData = user
+    });
   }
 }
