@@ -66,7 +66,7 @@ export class EditPage implements DoCheck {
       .subscribe(() => {
         this.profileUpdated('Password');
         this.passwordForm.reset();
-    });
+      });
   }
 
   errorToast(message) {
@@ -102,11 +102,10 @@ export class EditPage implements DoCheck {
 
   saveUpdate(pic) {
     this.user.updateUser(pic)
-      .subscribe(() => {
+      .subscribe(data => {
         this.profileUpdated('Profile');
-        this.passwordForm.reset();
-    });
-
+        this.user.setUser(data);
+      });
   }
 
   success = (result: string) => {
