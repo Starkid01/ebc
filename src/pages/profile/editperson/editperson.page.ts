@@ -90,7 +90,7 @@ export class EditPage implements DoCheck {
   }
 
   savePic() {
-    this.pic.getSigned('usersPic', this.user.myUser)
+    this.pic.getSigned('usersPic', this.userData)
       .subscribe(
         signed => {
           this.pic.upload(signed, this.success);

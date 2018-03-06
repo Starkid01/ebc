@@ -53,7 +53,7 @@ export class PictureService {
   getSigned(preset: string, user: Object) {
     let opt = JSON.stringify({
       preset: preset,
-      tag: `${user['firstName']} ${user['lastName']}`
+      tag: `${user['displayName']}`
     });
     let header = new HttpHeaders();
     header.append('Content-Type', 'application/x-www-form-urlencoded');
