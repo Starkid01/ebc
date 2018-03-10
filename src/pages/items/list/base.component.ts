@@ -60,7 +60,10 @@ export class ItemBase implements DoCheck, OnInit {
 
   ebcDel(id: number) {
     this.backand.deleteItem(this.dbTable, id)
-     .subscribe(() => this.deleteToast());
+     .subscribe(() => { 
+       this.deleteToast();
+       this.myItems();
+    });
   }
 
   goTo(ebc: BackandItem) {

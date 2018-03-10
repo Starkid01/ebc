@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
+import { Events, IonicPage, NavParams, ToastController, ViewController } from 'ionic-angular';
 
 import { BackandItemService } from '../../providers';
 
@@ -47,7 +47,7 @@ export class SubmitConfirm implements OnInit {
 	tempData: PreMade = {};
 	template: boolean = false;
 
-	constructor(private backand: BackandItemService, private toast: ToastController, private params: NavParams, private view: ViewController) { }
+	constructor(private backand: BackandItemService, private events: Events, private toast: ToastController, private params: NavParams, private view: ViewController) { }
 
 	ngOnInit() {
 		this.dataParse();
@@ -61,7 +61,7 @@ export class SubmitConfirm implements OnInit {
 		});
 
 		completed.onDidDismiss(() => {
-			completed.getNav().setRoot('submit');
+			this.events.publish('ebc-submit');
 			this.close();
 		});
 		completed.present();
@@ -94,11 +94,17 @@ export class SubmitConfirm implements OnInit {
 			this.formData.pic = this.tempData.selImg;
 		}
 		itemData['data'] = JSON.stringify(this.extra);
+		itemData.flyer = itemData.flyer ? true : false;
+		itemData['ready'] = false;
+		itemData['disable'] = true;
+		delete itemData['opts'];
+		delete itemData['component'];
 
 		this.backand.createItem(itemData)
-		.subscribe(() => {
+		.subscribe(item => {
+			console.log(item);
 			this.completeSubmit();
 			this.confirmed = true;
-		})
+		});
 	}
 }

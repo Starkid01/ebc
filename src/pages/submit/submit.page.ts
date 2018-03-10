@@ -5,7 +5,8 @@ import { PictureService } from '../../providers/myservices';
 import { FormBase, PicForm, SampleForm, SelectForm, SocialForm } from './forms';
 
 @IonicPage({
-  name: 'submit'
+  name: 'submit',
+  segment: 'submit'
 })
 @Component({
   selector: 'page-submit',
@@ -28,7 +29,7 @@ export class SubmitPage implements AfterViewChecked, OnInit, DoCheck {
   loaded: boolean = false;
   subform: string;
 
-  constructor(private detect: ChangeDetectorRef, private modal: ModalController, public pic: PictureService) { }
+  constructor(private detect: ChangeDetectorRef, private modal: ModalController, private pic: PictureService) { }
 
   ngAfterViewChecked() {
     this.steps.lockSwipes(true);

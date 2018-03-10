@@ -122,10 +122,7 @@ export class LoginPage implements OnInit {
   }
 
   private getRootNav() {
-    let appNavs = this.app.getRootNavs();
-    let rootNav = appNavs.find(nav => {
-      return nav ? nav['id'] === 'ebc' : null;
-    });
+    let rootNav = this.app.getRootNavs().find(nav => nav['id'] === 'ebc');
     return rootNav;
   }
 

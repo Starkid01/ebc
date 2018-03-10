@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { Events, IonicPage } from 'ionic-angular';
 
 interface Page {
   title: string;
@@ -15,18 +15,23 @@ interface Page {
   templateUrl: 'sidemenu.html'
 })
 
-export class SideMenu  {
-   pages: Array<Page> = [
+export class SideMenu {
+  pages: Array<Page> = [
     { title: 'EBC Samples', component: 'samples' },
     { title: 'My EBC', component: 'my-stuff' },
     { title: 'My Profile', component: 'profile' },
     { title: 'Templates', component: 'templates' },
     { title: 'Submit Item', component: 'submit' }
   ];
-  hom
   homePage: string = 'my-stuff';
 
-  constructor() { }
+  constructor(private events: Events) { }
+
+  ngOnInit() {
+    this.events.subscribe('ebc-submit', () => {
+      this.homePage = 'my-stuff';
+    })
+  }
 
   toPages(page) {
     this.homePage = page.component;

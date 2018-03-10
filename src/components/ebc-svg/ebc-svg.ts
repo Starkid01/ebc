@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, Renderer, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Platform } from 'ionic-angular';
@@ -11,7 +11,7 @@ import { BackandItem } from '../../providers/backand';
   selector: 'ebc-svg',
   templateUrl: 'ebc-svg.html'
 })
-export class EbcSvgComponent implements AfterViewInit {
+export class EbcSvgComponent implements AfterViewInit, OnInit {
   @ViewChild('myItem') myItem: ElementRef;
   @Input('ebc') item: BackandItem;
   @Input('style') type: string;
@@ -22,9 +22,12 @@ export class EbcSvgComponent implements AfterViewInit {
   constructor(private appAvail: AppAvailability, private appBrowser:InAppBrowser, private dom: DomSanitizer,
   private launch: LaunchNavigator, private platform: Platform, private render: Renderer) { }
 
+  ngOnInit() {
+    this.svg = this.dom.bypassSecurityTrustResourceUrl(this.item.media);
+  }
+
  ngAfterViewInit() {
     this.clickCheck();
-    this.svg = this.dom.bypassSecurityTrustResourceUrl(this.item.media);
     console.log(this.isImg);
   }
 
