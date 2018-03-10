@@ -1,6 +1,7 @@
 import { Component, DoCheck } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
 
-import { PictureService, UserService } from '../../../providers/myservices';
+import { PictureService } from '../../../providers/myservices';
 
 @Component({
 	selector: 'ebc-pic-form',
@@ -11,7 +12,7 @@ export class PicForm implements DoCheck {
 	image: string;
 	notAdded: boolean = true;
 
-	constructor(public pic: PictureService, public user: UserService) { }
+	constructor(private fireAuth: AngularFireAuth, private pic: PictureService) { }
 
 	ngDoCheck() {
 		this.art = this.pic.picFile;
@@ -22,7 +23,7 @@ export class PicForm implements DoCheck {
 	}
 
 	savePic() {
-    this.pic.getSigned('usersItem', this.user.myUser)
+    this.pic.getSigned('usersItem', this.fireAuth.auth.currentUser)
       .subscribe(
 			signed => {
 				this.pic.upload(signed, this.success);
