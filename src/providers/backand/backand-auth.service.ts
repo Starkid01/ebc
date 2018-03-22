@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
@@ -6,9 +7,10 @@ import { Events } from 'ionic-angular';
 export class BackandAuthService {
   authStatus: string = null;
   authType: string = 'N/A';
+  backandUrl: string = 'https://ebc.beezleeart.com';
   isAuthError: boolean = false;
 
-  constructor(private events: Events, private storage: Storage) { }
+  constructor(private events: Events, private http: HttpClient, private storage: Storage) { }
 
   authGood(res) {
     this.authStatus = res['statusText'];
@@ -23,5 +25,11 @@ export class BackandAuthService {
     this.authType = 'Fail';
     this.isAuthError = true;
     this.storage.set('auth', false);
+  }
+
+  createUser(userData) {
+    let call = this.http.post(`${this.backandUrl}/api/auth/signup`, userData)
+    call.catch((err, caught) => { console.log(err); return caught });
+    return call;
   }
 }

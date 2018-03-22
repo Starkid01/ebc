@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { FormHandler } from '../../providers/myservices';
+import { BackandAuthService } from '../../providers/backand';
 
 @IonicPage({
   name: 'create-account',
@@ -22,8 +23,8 @@ export class CreatePage {
   password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   confirmPassword: FormControl = new FormControl('', Validators.required);
 
-  constructor(private form: FormHandler, 
-  private nav: NavController, private toast: ToastController) {
+  constructor(private authService: BackandAuthService, private form: FormHandler,
+    private nav: NavController, private toast: ToastController) {
     this.verify = new FormGroup({
       password: this.password,
       confirmPassword: this.confirmPassword
@@ -59,6 +60,16 @@ export class CreatePage {
       password: pass.password,
       photoUrl: 'https://ebc.beezleeart.com/assets/img/user.svg'
     };
-    console.log(user);
+    this.authService.createUser(user)
+      .subscribe(res => {
+        console.log(res);
+        this.createForm.reset();
+        this.accountMade('Congrats your account has been Created!')
+      },
+        err => {
+          console.log(err);
+          this.createForm.reset();
+          this.accountMade(err.errror.message)
+        })
   }
 }
