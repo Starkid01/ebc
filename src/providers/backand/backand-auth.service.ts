@@ -7,7 +7,7 @@ import { Events } from 'ionic-angular';
 export class BackandAuthService {
   authStatus: string = null;
   authType: string = 'N/A';
-  backandUrl: string = 'https://ebc.beezleeart.com';
+  myApi: string = 'https://ebc.beezleeart.com';
   isAuthError: boolean = false;
 
   constructor(private events: Events, private http: HttpClient, private storage: Storage) { }
@@ -28,8 +28,6 @@ export class BackandAuthService {
   }
 
   createUser(userData) {
-    let call = this.http.post(`${this.backandUrl}/api/auth/signup`, userData)
-    call.catch((err, caught) => { console.log(err); return caught });
-    return call;
+    return this.http.post(`${this.myApi}/api/auth/signup`, userData);
   }
 }
