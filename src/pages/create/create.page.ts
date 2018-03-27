@@ -60,6 +60,7 @@ export class CreatePage {
       password: pass.password,
       photoUrl: 'https://ebc.beezleeart.com/assets/img/user.svg'
     };
+    alert(`hey: ${user}`)
     this.authService.createUser(user)
       .subscribe(res => {
         console.log(res);
