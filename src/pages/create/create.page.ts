@@ -62,15 +62,16 @@ export class CreatePage {
     };
     this.authService.createUser(user)
       .subscribe(res => {
+        alert('dued')
+        this.accountMade('Congrats your account has been Created!');
         console.log(res);
-        alert(`Some ${res}`);
         this.createForm.reset();
-        this.accountMade('Congrats your account has been Created!')
       },
         err => {
+          alert('naw')
+          this.accountMade(err.errror.message);
           console.log(err);
           this.createForm.reset();
-          this.accountMade(err.errror.message)
         })
   }
 }

@@ -95,16 +95,16 @@ export class SubmitConfirm implements OnInit {
 		}
 		itemData['data'] = JSON.stringify(this.extra);
 		itemData.flyer = itemData.flyer ? true : false;
-		itemData['ready'] = false;
+		itemData['ready'] = false;0
 		itemData['disable'] = true;
 		delete itemData['opts'];
 		delete itemData['component'];
 
 		this.backand.createItem(itemData)
-		.subscribe(item => {
-			console.log(item);
-			this.completeSubmit();
-			this.confirmed = true;
-		});
+			.subscribe(item => {
+				console.log(item);
+				this.completeSubmit();
+				this.confirmed = true;
+			});
 	}
 }
