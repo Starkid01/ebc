@@ -28,6 +28,7 @@ export class BackandAuthService {
   }
 
   createUser(userData) {
+    alert('Bom');
     return this.http.post(`${this.myApi}/api/auth/signup`, userData);
   }
 }
