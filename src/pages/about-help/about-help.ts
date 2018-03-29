@@ -13,7 +13,7 @@ import { AlertController, IonicPage, ModalController } from 'ionic-angular';
 export class AboutHelpPage implements OnInit {
   appName: string = 'EBC';
   appVer: string = '2.1.0';
-  appVerCode: number = 20100;
+  appVerCode: string = '20100';
 
   constructor(private alert: AlertController, private appVersion: AppVersion,
     private modal: ModalController, private social: SocialSharing) { }
