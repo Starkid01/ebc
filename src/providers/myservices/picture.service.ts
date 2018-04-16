@@ -10,6 +10,7 @@ import 'rxjs';
 export class PictureService {
   newPic: boolean = false;
   picFile: string = '';
+  myApi: string = 'https://ebc.beezleeart.com';
   myLoader: Loading;
   myProg: number = 0;
 
@@ -57,7 +58,7 @@ export class PictureService {
     });
     let header = new HttpHeaders();
     header.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post('https://ebc.beezleeart.com/upload/cloudinary_call.php', opt, { headers: header });
+    return this.http.post(`${this.myApi}/upload/cloudinary_call.php`, opt, { headers: header });
   }
 
   picReturn(src: number) {
