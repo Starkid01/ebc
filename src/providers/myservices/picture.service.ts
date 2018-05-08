@@ -67,11 +67,12 @@ export class PictureService {
       destinationType: 0,
       quality: 100,
       sourceType: src,
-      saveToPhotoAlbum: true,
+      saveToPhotoAlbum: true, 
+      encodingType: 1
     };
     this.camera.getPicture(opts).then((imageData) => {
       this.newPic = true;
-      this.picFile = `data:image/jpeg;base64,${imageData}`;
+      this.picFile = `data:image/png;base64,${imageData}`;
     }, (err) => {
       console.log(err);
     });
