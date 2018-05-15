@@ -1,7 +1,7 @@
 import { Component, DoCheck } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { PictureService } from '../../../providers/myservices';
+import { PictureService, UploadOpts } from '../../../providers/myservices';
 
 @Component({
 	selector: 'ebc-pic-form',
@@ -18,25 +18,27 @@ export class PicForm implements DoCheck {
 		this.art = this.pic.picFile;
 	}
 
-	getArt() {;
+	getArt() {
+		;
 		return this.image;
 	}
 
 	savePic() {
-    this.pic.getSigned('usersItem', this.fireAuth.auth.currentUser)
-      .subscribe(
-			signed => {
-				this.pic.upload(signed, this.success);
-			},
-			err => {
-				console.log(err);
-			});
-  }
-
-	success = (result: any) => {
-    this.image = result;
-    this.pic.picSaved();
-		this.art = this.image;
-		this.notAdded = false;
-  }
+		let picOpt: UploadOpts = {
+			upload_preset: 'usersPic',
+			tags: [this.fireAuth.auth.currentUser.displayName]
+		}
+		this.pic.uploadImg(picOpt)
+			.subscribe(
+				data => {
+					this.image = data['secure_url'];
+					this.pic.picSaved();
+					this.art = this.image;
+					this.notAdded = false;
+				},
+				err => {
+					this.pic.picSaved();
+					console.log(err);
+				});
+	}
 }

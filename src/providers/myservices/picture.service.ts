@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActionSheetController, App, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-
 import 'rxjs';
+
+import { UploadImg, UploadOpts } from './ebc-types';
 
 @Injectable()
 export class PictureService {
@@ -51,28 +52,18 @@ export class PictureService {
     actionPics.present();
   }
 
-  getSigned(preset: string, user: Object) {
-    let opt = JSON.stringify({
-      preset: preset,
-      tag: `${user['displayName']}`
-    });
-    let header = new HttpHeaders();
-    header.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post(`${this.myApi}/upload/cloudinary_call.php`, opt, { headers: header });
-  }
-
   picReturn(src: number) {
     let opts: CameraOptions = {
       allowEdit: true,
       destinationType: 0,
       quality: 100,
       sourceType: src,
-      saveToPhotoAlbum: true, 
+      saveToPhotoAlbum: true,
       encodingType: 1
     };
     this.camera.getPicture(opts).then((imageData) => {
       this.newPic = true;
-      this.picFile = `data:image/png;base64,${imageData}`;
+      this.picFile = `data:${this.getMimeType(imageData)};base64,${imageData}`;
     }, (err) => {
       console.log(err);
     });
@@ -90,18 +81,15 @@ export class PictureService {
     myImg.present();
   }
 
-  upload(signed: Object, successUpload: Function) {
+  uploadImg(opts: UploadOpts) {
     this.newPic = false;
+    let data: UploadImg = {
+      img: this.picFile,
+      opts: opts
+    };
     this.uploading();
-    let url = 'https://api.cloudinary.com/v1_1/ebccloud/image/upload';
-    signed['file'] = this.picFile;
-    this.http.request('POST', url, { body: signed, reportProgress: true })
-      .subscribe(res => {
-        console.log(res);
-        successUpload(res['url']);
-        this.picSaved();
-      },
-      err => console.log(err));
+    console.log(data);
+    return this.http.request('POST', `${this.myApi}/api/upload`, { body: data })
   }
 
   uploading() {
@@ -110,5 +98,20 @@ export class PictureService {
     });
 
     this.myLoader.present();
+  }
+
+  private getMimeType(base64: string) {
+    let startChar = base64.charAt(0);
+
+    switch (startChar) {
+      case '/':
+        return 'image/jpeg';
+      case 'R':
+        return 'image/gif';
+      case 'i':
+        return 'image/png';
+      default:
+        return 'image/png';
+    }
   }
 }

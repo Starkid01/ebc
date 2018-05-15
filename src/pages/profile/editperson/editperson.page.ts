@@ -4,7 +4,7 @@ import { Events, IonicPage, ToastController } from 'ionic-angular';
 import { UserInfo } from 'firebase';
 
 import { BackandUser } from '../../../providers/backand';
-import { FormHandler, UserService, PictureService } from '../../../providers/myservices';
+import { FormHandler, UserService, PictureService, UploadOpts } from '../../../providers/myservices';
 
 @IonicPage({
   name: 'edit',
@@ -91,12 +91,22 @@ export class EditPage implements DoCheck {
   }
 
   savePic() {
-    this.pic.getSigned('usersPic', this.userData)
+    let picOpt: UploadOpts = {
+      upload_preset: 'usersPic',
+      tags: [this.userData.displayName]
+    }
+    this.pic.uploadImg(picOpt)
       .subscribe(
-        signed => {
-          this.pic.upload(signed, this.success);
+        data => {
+          let image = {
+            photoUrl: data['secure_url']
+          };
+          this.saveUpdate(image);
+          this.upFile = false;
+          this.pic.picSaved();
         },
         err => {
+          this.pic.picSaved();
           console.log(err);
         });
   }
@@ -107,14 +117,6 @@ export class EditPage implements DoCheck {
         this.profileUpdated('Profile');
         this.user.setUser(data);
       });
-  }
-
-  success = (result: string) => {
-    let image = {
-      photoUrl: result
-    };
-    this.saveUpdate(image);
-    this.upFile = false;
   }
 
   private ebcUser() {

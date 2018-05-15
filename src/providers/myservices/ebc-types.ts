@@ -8,3 +8,13 @@ export interface ShareInput {
 	contacts?: IContactField[];
 	name?: IContactName;
 }
+
+export interface UploadImg {
+	img: string;
+	opts: UploadOpts;
+}
+
+export interface UploadOpts {
+	upload_preset: string;
+	tags: Array<string>;
+}

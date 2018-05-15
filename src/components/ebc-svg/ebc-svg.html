@@ -9,4 +9,4 @@
     </div>
   </div>
 </div>
-<object *ngIf="item?.ready" #myItem [attr.data]="svg"></object>
+<div *ngIf="item?.ready" #myItem [innerHTML]="svg"></div>

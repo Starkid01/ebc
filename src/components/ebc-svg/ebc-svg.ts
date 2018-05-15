@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Platform } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
-import { BackandItem } from '../../providers/backand';
+import { BackandItem, BackandItemService } from '../../providers/backand';
 
 @Component({
   selector: 'ebc-svg',
@@ -16,14 +16,16 @@ export class EbcSvgComponent implements AfterViewInit, OnInit {
   @Input('ebc') item: BackandItem;
   @Input('style') type: string;
 
-  svg: SafeResourceUrl;
+  svg: SafeHtml;
   private isImg: RegExp = new RegExp('http*', 'i');
 
-  constructor(private appAvail: AppAvailability, private appBrowser:InAppBrowser, private dom: DomSanitizer,
+  constructor(private appAvail: AppAvailability, private itemService: BackandItemService, private appBrowser:InAppBrowser, private dom: DomSanitizer,
   private launch: LaunchNavigator, private platform: Platform, private render: Renderer) { }
 
   ngOnInit() {
-    this.svg = this.dom.bypassSecurityTrustResourceUrl(this.item.media);
+    this.itemService.getMedia(this.item.media)
+      .subscribe(svgItem => this.svg = this.dom.bypassSecurityTrustHtml(svgItem['media']),
+      err => console.log(err));
   }
 
  ngAfterViewInit() {

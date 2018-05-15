@@ -21,7 +21,7 @@ export class DeepItemPage implements OnInit {
   ngOnInit() {
     let id = this.navParams.get('id');
     this.userItems.getOne(id)
-      .subscribe((res: BackandItem) => this.item = res,
+      .subscribe((res: BackandItem) => this.item = res[0],
         err => console.log(err),
         () => this.loaded = true);
   }

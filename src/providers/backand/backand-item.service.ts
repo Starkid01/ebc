@@ -25,6 +25,10 @@ export class BackandItemService {
     return this.http.get(`${this.myApi}/api/obj/items/${id}`);
   }
 
+  getMedia(path: string) {
+    return this.http.get(`${this.myApi}/api/media`, { params: { url: path } });
+  }
+
   updateList() {
     return this.events;
   }
