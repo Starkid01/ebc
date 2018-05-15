@@ -25,7 +25,7 @@ export class PicForm implements DoCheck {
 
 	savePic() {
 		let picOpt: UploadOpts = {
-			upload_preset: 'usersPic',
+			upload_preset: 'usersItem',
 			tags: [this.fireAuth.auth.currentUser.displayName]
 		}
 		this.pic.uploadImg(picOpt)
